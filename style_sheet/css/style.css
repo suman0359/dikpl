@@ -1,0 +1,211 @@
+.margin_padding{margin: 0px ; padding: 0px;}
+.marginpadding{ margin: 0px 0px 5px 0px ; padding: 0px;}
+
+.search_error{margin: 5px 0px 0px 0px ; padding: 10px 15x 10px 0px;}
+.hidepassword{ display:none}
+.showpassword{ display:inline} 
+.department{ top: 25% !important ;}
+#hpassword{margin-top: 2px; padding: 5px;}
+.company_info{ text-align: center;}
+.company_info h2,p{ margin: 0; padding: 0px;}
+.company_info h2{font-size: 25px}
+
+/* start : Dashboard StyleSheet; */
+
+.image_group .image_grid a{
+    height: 100px;
+    background: #fff;
+    padding: 10px;
+    display: block;
+    border: 10px solid;
+    margin-bottom: 25px;
+}
+
+.image_group .image_grid a img{
+  width: 100%;
+  height: 100%;
+}
+
+/* By default, we tilt all our images -2 degrees */
+.image_group .image_grid a {
+  -webkit-transform: rotate(-2deg);
+  -moz-transform: rotate(-2deg);
+}
+ 
+/* Rotate all even images 2 degrees */
+.image_group .image_grid:nth-child(even) a {
+  -webkit-transform: rotate(2deg);
+  -moz-transform: rotate(2deg);
+}
+ 
+/* Don't rotate every third image, but offset its position */
+.image_group .image_grid:nth-child(3n) a {
+  -webkit-transform: none;
+  -moz-transform: none;
+  position: relative;
+  top: -5px;
+}
+ 
+/* Rotate every fifth image by 5 degrees and offset it */
+.image_group .image_grid:nth-child(5n) a {
+  -webkit-transform: rotate(5deg);
+  -moz-transform: rotate(5deg);
+  position: relative;
+  right: 5px;
+}
+ 
+/* Keep default rotate for every eighth, but offset it */
+.image_group .image_grid:nth-child(8n) a {
+  position: relative;
+  top: 8px;
+  right: 5px;
+}
+ 
+/* Keep default rotate for every eleventh, but offset it */
+.image_group .image_grid:nth-child(11n) a {
+  position: relative;
+  top: 3px;
+  left: -5px;
+}
+
+.image_group .image_grid a:hover {
+  -webkit-transform: scale(1.25);
+  -moz-transform: scale(1.25);
+  position: relative;
+  z-index: 5;
+}
+
+
+/* Add drop shadows and smooth out the transition (Safari only) */
+.image_group .image_grid a {
+  -webkit-transition: -webkit-transform .15s linear;
+  -webkit-box-shadow: 0 3px 6px rgba(0,0,0,.25);
+  -moz-box-shadow: 0 3px 6px rgba(0,0,0,.25);
+}
+ 
+/* On hover, darken the shadows a bit */
+.image_group .image_grid a {
+  -webkit-box-shadow: 0 3px 6px rgba(0,0,0,.5);
+  -moz-box-shadow: 0 3px 6px rgba(0,0,0,.5);
+}
+/* ---------------- end: Dashboard StyleSheet ----------------- */
+
+.voucher_memo_area{}
+
+.voucher_memo_area h3{text-align: center;border: 1px solid red; border-radius:3px; padding:5px; }
+
+
+.voucher_item_area{margin-top:10px;}
+
+.voucher_header{font-size: 18px; }
+.voucher_item{font-size: 16px;}
+.voucher_item{border-bottom: 1px solid #DDDDDD;}
+.voucher_total{border-bottom: 1px solid #DDDDDD; font-size: 18px;}
+.voucher_bottom_area{margin-top: 15px;}
+.voucher_bottom_left{line-height: 28px;}
+
+.link_pagination{
+border: 2px solid #e6e6e3;
+    border-radius: 5px;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 5px;
+   
+    padding: 2px 10px;
+}
+
+.link_pagination a, .active_pagiction a{
+  padding: 5px 10px;
+}
+
+.active_pagiction{border: 2px solid #3c8dbc;
+    border-radius: 5px;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 5px;
+    padding: 2px 10px;
+}
+.inventory_history_modal{top:1%}
+.purchase_report_form{padding: 5px 0px 0px 25px; font-size: 20px;}
+
+.report_view{margin-top: 8px;}
+
+.report_item{}
+.report_item li{ background-color: #357CA5; width: 20%; padding: 8px 0px 8px 5px; float: left; margin: 0px 5px 5px 0px; border-radius:1px;}
+.report_item li a{color: #ffffff;font-size: 18px;}
+.report_item li:hover{background-color:#3C8DBC ; 	
+                             -moz-transition: all 0.9s linear .1s;
+		             -webkit-transition:  all 0.9s linear .1s;}
+.report_item li a:hover{ color: black ;
+                          -moz-transition: all 0.9s linear .1s;
+			  -webkit-transition:  all 0.9s linear .1s;}
+
+
+.old_form
+{
+    margin-top: 3px
+}
+.new_form
+{
+    margin-top: 3px;
+    border: 1px solid #3C8DBC;padding: 2px;
+    
+}
+.home-icon 
+{
+    margin-bottom: 25px;
+}
+.home_menu
+{
+    margin: 10px;
+    margin-top: 50px;
+}
+.home_menu ul 
+{
+      
+     
+    width : 100%;
+}
+.home_menu li
+{
+   
+    margin-bottom: 25px;
+    
+    margin: 10px;
+    list-style: none;
+     
+}
+.home_menu li a
+{
+  background: #357CA5 ; 
+  display: block; 
+ padding: 25px;
+ color: #f7e1b5 ;
+  font-weight: bold;
+  border: #357CA5 solid 2px;
+}
+ .home_menu li a:hover 
+ {
+     color: #fff;
+     border-radius: 10px;
+     border: #ff851b solid 2px;
+ }
+
+   .sidebar-menu .title
+{
+    background: #ff851b  ;
+    color: #fff;
+    padding: 15px !important;
+}
+
+@media (min-width: 768px) {
+    
+       .home_menu ul 
+    {
+        float: left ; 
+        width : 45%;
+    } 
+}
+
