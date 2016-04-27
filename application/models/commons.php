@@ -343,4 +343,7 @@ class Commons extends CI_Model {
       $this->db->where('id', $id);
       return $this->db->update($table);
       } */
+    public function generate_invocie_no($table_name, $invoice, $id){
+        $this->db->query("UPDATE $table_name SET invoice_no='$invoice' WHERE id=$id");
+    }
 }

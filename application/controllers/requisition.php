@@ -19,16 +19,6 @@ class Requisition extends MY_Controller{
     }
     public function add(){
 
-      // echo "<pre>";
-      // print_r($_POST);
-      // print_r($this->input->post('book_name'));
-      // echo "<br>";
-      // print_r($this->input->post('department_id'));
-      // echo "<br>";
-      // print_r($this->input->post('group_id'));
-      // exit();
-      
-         
         
        $data['pro_list']=$this->CM->getAll('books');
        $data['dep_list']=$this->CM->getAll('department');
@@ -41,12 +31,9 @@ class Requisition extends MY_Controller{
         $data['amount']="";
         $data['quantity']="";
       
-       $jid = $this->session->userdata('jonal_id');
+      
        $user_id = $this->session->userdata('uid');
 
-        // $data['college_list'] = $this->CM->getAllWhere('college', array('jonal_id'=>$jid), 'name ASC') ; 
-        // $data['department_list'] = $this->CM->getAll('department', 'name ASC') ;
-        
           
         $this->load->library('form_validation');
 
@@ -60,68 +47,77 @@ class Requisition extends MY_Controller{
            //purchase table operation
             $this->db->trans_start();
 
-            $invoice = date('Y')."-".date("m")."-".sprintf('%03d', $ord_id);
-                   
-            $requisition['comments']=  $this->input->post('comments');
-            $requisition['status']= 1;
+            // This is for check and merge book id and book quantity
+            /* ************************************* */
+            $book_id = $this->input->post('book_name');
+            $book_quantity = $this->input->post('book_quantity');
 
-            $requisition['requisition_by']=$this->_uid;   
+            for ($i=0; $i < count($book_id); $i++) {
+              $book_info = $this->CM->getInfo('books', $book_id[$i]);
+              $book_rate = $book_info->rate;
 
-            $requisition['book_name']="";
-            $requisition['department_id']="";
-            $requisition['group_id']="";
-            $requisition['amount']="";
-            $requisition['quantity']="";
+              $book[] = array('book_id' => $book_id[$i], 'book_quantity' => $book_quantity[$i]);
+              $requisition_details[] = array('book_id' => $book_id[$i], 'qutantity' => $book_quantity[$i], 'price' => $book_rate);
+            }
+            /* ************************************* */
             
-            $purchase_date= strtotime( $this->input->post('date'));  
-
-            $this->db->insert('tbl_requisition', $requisition);
-            $requisition_id = $this->db->insert_id();
+            // This option for get total book rate 
             
-            $this->CM->generate_invocie_no('tbl_requisition', $invoice, $requisition_id);
-                            
-            $requisition_id=$this->CM->insert('requisition',$pur_info);
-             
-             $order=count($pid);
-                if(!empty($requisition_id))
-                    {
-                        for($i=0;$i<$order;$i++)
-                        {
-                            $product_id=$pid[$i];
-                            $book_info=$this->CM->getwhere('books',array('id'=>$product_id));
-                            $datas['requisition_id']=$requisition_id; //purchase item table start
-                            $datas['book_id']=$pid[$i];
-                            
-                            
-                            $datas['price']=$cost[$i];
-                            $datas['quantity']=$quantity[$i];
-                            
-                            $datas['line_no']=$i;
-                            $datas['status']=1;
-                            $this->CM->insert('requisition_books',$datas);
-                                
-                            }
-                            
-                        }
+            $total_amount = 0;
+            
+            foreach ($book as $key => $value) {
+              
+              $book_info = $this->CM->getInfo('books', $value['book_id']);
+              $book_rate = $book_info->rate;
+              
+              $total_amount +=$book_rate*$value['book_quantity'];
+            }
+            /* ************************************************** */
+
+            // This option for get total order of book quantity 
+            // $book_quantity = $this->input->post('book_quantity');
+            $total_book_quantity = array_sum($book_quantity);
+
+            
+            
+            /* ************************************************** */
                    
-                        
-                    $this->db->trans_complete();
-                     
-                    if($this->db->trans_status() === TRUE)
-                       {
-                           $msg = "Operation Successfull!!";
-                           $this->session->set_flashdata('success', $msg); 
-                           redirect('report/requisition/');
-                           
-                       }
-                       else 
-                       {
-                           $msg = "There is an error, Please try again!!";
-                           $this->session->set_flashdata('error', $msg); 
-                            redirect('requisition/add');
-                       }
+            $requisition['comment']             =  $this->input->post('comment');
+            $requisition['status']              = 1;
+            $requisition['type']                = 1;
+            $requisition['requisition_status']  = 1;
+            $requisition['requisition_by']      = $this->_uid;   
+            $requisition['total_amount']        = $total_amount;
+            $requisition['total_quantity']      = $total_book_quantity;
+
+            $requisition_id = $this->CM->insert('tbl_requisition', $requisition);
+
+            
+            $invoice = date('Y')."-".date("m")."-".sprintf('%03d', $requisition_id);
+            $this->CM->update('tbl_requisition', array('invoice_no' => $invoice), $requisition_id);
+            /* ************************************************************* */        
+            for ($i=0; $i < count($book_id); $i++) {
+              $book_info = $this->CM->getInfo('books', $book_id[$i]);
+              $book_rate = $book_info->rate;
+
+              $book_requisition_details[] = array('requisition_id' => $requisition_id, 'book_id' => $book_id[$i], 'qutantity' => $book_quantity[$i], 'price' => $book_rate);
+              
+            }
+
+            foreach ($book_requisition_details as $key => $value) {
+              $this->CM->insert('tbl_requisition_details', $value);
+            }
+            
+            /* *************************************************************** */
+            $this->db->trans_complete();
+            
+
+            $msg = "Operation Successfull!!";
+            $this->session->set_flashdata('success', $msg); 
+            redirect('report/requisition/');
+                
                        
-        }        
+            }        
           
         }
      
