@@ -86,6 +86,7 @@ class Subject extends CI_Controller
 
             $insert = $this->CM->insert('tbl_subject',$datas) ; 
             $subject_id = $this->db->insert_id();
+
             $department_list = $this->input->post('department_list');
             
             if ($department_list) 
@@ -145,13 +146,13 @@ class Subject extends CI_Controller
             $datas['subject_code'] = $this->input->post('subject_code'); 
             //$datas['status'] = $this->input->post('status');
             //$datas['entryby']=$this->session->userdata('uid');       
-      if($this->CM->update('tbl_subject', $datas, $id)){
+            if($this->CM->update('tbl_subject', $datas, $id)){
             $this->CM->delete('tbl_subject_group', array('subject_id' => $id));
                 $department_info = $this->input->post('department_list');
                 if ($department_info) 
                                 
                     foreach ($department_info as $value) {
-                    $insert = $this->CM->insert('tbl_subject_group', array('subject_id' => $id, 'department_id' => $value));
+                        $insert = $this->CM->insert('tbl_subject_group', array('subject_id' => $id, 'department_id' => $value));
                     }
 
                     $msg = "Operation Successfull!!";

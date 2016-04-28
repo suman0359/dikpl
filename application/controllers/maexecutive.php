@@ -61,6 +61,7 @@ class Maexecutive extends CI_Controller
         $data['email'] ="";
         $data['password'] ="";
         $data['division_id'] ="";
+        $data['district_id'] ="";
         $data['jonal_id'] ="";
         
       
@@ -141,6 +142,7 @@ class Maexecutive extends CI_Controller
         $data['image'] = $content->image;
         $data['division_id'] = $content->division_id;
         $data['jonal_id'] = $content->jonal_id;
+        $data['district_id'] = $content->district_id;
    
         $password = $content->password;
         

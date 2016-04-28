@@ -162,6 +162,18 @@ class Report_model extends CI_Model{
         return $result->result_array() ; 
         
     }
+
+    public function getRequisitionReportForMPO($start_date, $end_date, $user_id){
+      $this->db->select("*");
+      $this->db->from('tbl_requisition');
+      $this->db->where('requisition_by', $user_id);
+      $this->db->where('date >=', $start_date);
+      $this->db->where('date <=', $end_date);
+
+      $query_result = $this->db->get();
+      $result = $query_result->result();
+      return $result;
+    }
     
 
     

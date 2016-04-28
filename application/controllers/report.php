@@ -214,6 +214,12 @@ class Report extends MY_Controller
              } ; 
         
         $data['content_list'] = $this->RM->requisitionReport($data['sdate'], $data['edate'], $jid); 
+        $start_date = '2016-04-27';
+        $end_date = '2016-04-28';
+        $data['report_details'] = $this->RM->getRequisitionReportForMPO($start_date, $end_date, $this->uid);
+             echo "<pre>";
+             print_r($data['report_details']);
+             exit();
              
         
             $this->load->view('report/requisition', $data );

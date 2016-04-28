@@ -310,6 +310,36 @@
            <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>dik_dorshon/srijon prokash.png" alt=""></a>
           </div>
         </div>
+
+        <div class="plane seven">
+          <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>dik_dorshon/dik dorshon.png" alt=""></a>
+        </div>
+        <div class="plane eight">
+          <div class="image_grid">
+            <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>dik_dorshon/grontho kutir.png" alt=""></a>
+          </div>
+        </div>
+        <div class="plane nine">
+          <div class="image_grid">
+            <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>dik_dorshon/knoledge share.png" alt=""></a>
+          </div>
+        </div>
+        <div class="plane ten">
+          <div class="image_grid">
+            <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>dik_dorshon/m.c paul.png" alt=""></a>
+          </div>
+        </div>
+        <div class="plane eleven">
+          <div class="image_grid">
+           <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>dik_dorshon/golden future.png" alt=""></a>
+          </div>
+        </div>
+
+        <div class="plane twelve">
+          <div class="image_grid">
+           <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>dik_dorshon/srijon prokash.png" alt=""></a>
+          </div>
+        </div>
  
       </div>
     </div>

@@ -49,6 +49,12 @@
                                 <i class="fa fa-university"></i> <span>College</span>
                             </a>
                         </li>
+
+                        <li class="<?php if($c=='year')echo "active"  ?>">
+                            <a href="<?php echo base_url(); ?>year">
+                                <i class="fa fa-puzzle-piece"></i> <span>Year</span>
+                            </a>
+                        </li>
                         
                         <li class="<?php if($c=='department')echo "active"  ?>">
                             <a href="<?php echo base_url(); ?>department">
