@@ -32,7 +32,7 @@ class Report_model extends CI_Model{
     {
         $sql = "SELECT 
                     rb.requisition_id, rb.book_id , rb.quantity, rb.price, rb.line_no  , 
-                    b.id as bookid, b.book_code, b.book_name
+                    b.id as bookid, b.name
                     FROM 
                     requisition_books as rb, books as b
                     WHERE 

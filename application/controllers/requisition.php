@@ -94,6 +94,7 @@ class Requisition extends MY_Controller{
             $requisition['requisition_by']      = $this->_uid;   
             $requisition['total_amount']        = $total_amount;
             $requisition['total_quantity']      = $total_book_quantity;
+            $requisition['date']                = date("Y-m-d");
 
 
             $requisition_id = $this->CM->insert('tbl_requisition', $requisition);
@@ -192,8 +193,11 @@ class Requisition extends MY_Controller{
         
         public function view($id)
         {
-              $data['requisition_info']=$this->CM->getwhere('requisition',array('id'=>$id));
+              $data['requisition_info']=$this->CM->getwhere('tbl_requisition',array('id'=>$id));
               $data['book_list']=$this->RM->getRequisitionBooks($id); 
+              // echo "<pre>";
+              // print_r($data['requisition_info']);
+              // exit();
               
               
             if(empty ($id) || empty ($data['purchase_info']))
