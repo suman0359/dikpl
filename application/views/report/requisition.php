@@ -76,7 +76,14 @@ $this->load->view('common/sidebar');
         <?php if(!empty ($jonal_info)) { ?>
         <h4> <?php echo $jonal_info->name ?>   </h4>
            
-          <?php } if(!empty ($content_list)) {  ?> 
+          <?php }  ?> 
+     
+        <div class="clearfix"></div>
+   </div> 
+    
+
+    <!-- ************************************************************** -->
+    <?php  if(!empty ($report_details)) {  ?> 
      
         <div class="clearfix"></div>
    </div> 
@@ -85,30 +92,31 @@ $this->load->view('common/sidebar');
         
     <table class="table table-bordered table-hover" >
         <tr>
-            <th >TID</th>
-            
+            <th >SL</th>
+            <th>Invoice No</th>
             <th >Date </th>
             
-            <th >For College </th>
-            <th >Send By </th>
-            <th > Total Book </th>
-            <th >Comment </th>
+            <th >Requistion Status </th>
+            <th >Total Amount </th>
+            <th > Total Quantity</th>
+            <th > Comment </th>
             <th></th>
          </tr>
    
          <?php 
- foreach ($content_list as $content) { 
+ foreach ($report_details as $content) { 
          ?> 
          
          <tr>
-             <td> <?php echo $content['tid'] ?>  </td>
+             <td> <?php echo $content->id; ?>  </td>
             
-             <td> <?php echo date( "d-m-Y" , strtotime($content['requisition_date'] )) ; ?>  </td>
-             <td> <?php echo $content['cname'] ?>  </td>
-             <td> <?php echo $content['empname'] ?>  </td>
-             <td> <?php echo $content['bookqty'] ?>  </td>
-             <td> <?php echo $content['comments'] ?>  </td>
-             <td> <div class="no-print"> <a href="<?php echo site_url() ?>index.php/requisition/view/<?php echo $content['tid']?>" class="btn btn-link"> view </a> </div> </td>
+             <td> <?php echo $content->invoice_no; ?>  </td>
+             <td> <?php echo $content->date; ?>  </td>
+             <td> <?php echo $content->requisition_status; ?>  </td>
+             <td> <?php echo $content->total_amount; ?>  </td>
+             <td> <?php echo $content->total_quantity; ?>  </td>
+             <td> <?php echo $content->comment; ?>  </td>
+             <td> <div class="no-print"> <a href="<?php echo site_url() ?>/requisition/view/<?php echo $content->id; ?>" class="btn btn-link"> view </a> </div> </td>
          </tr>
          
          <?php } ?> 
@@ -127,6 +135,8 @@ $this->load->view('common/sidebar');
     </div>
     
     <?php } ?>
+    <!-- ************************************************************** -->
+
     <script> 
     
        $(document).ready(function() {
