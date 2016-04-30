@@ -163,10 +163,12 @@ class Report_model extends CI_Model{
         
     }
 
-    public function getRequisitionReportForMPO($start_date, $end_date, $user_id){
+    public function getRequisitionReportForMPO($start_date, $end_date, $user_id = NULL){
       $this->db->select("*");
       $this->db->from('tbl_requisition');
-      $this->db->where('requisition_by', $user_id);
+      if($user_id !=NULL){
+          $this->db->where('requisition_by', $user_id);
+      }
       $this->db->where('date >=', $start_date);
       $this->db->where('date <=', $end_date);
 
@@ -175,6 +177,13 @@ class Report_model extends CI_Model{
       return $result;
     }
     
+//    public function getRequisitionReportForMPO($admin=NULL, $divisionHead=NULL, $jonalHead=NULL, $marketingExecutive=NULL, $startDate=NULL, $endDate=NULL){
+//        if($admin == NULL && $divisionHead == NULL && $jonalHead == NULL && $marketingExecutive == NULL && $startDate == NULL && $endDate == NULL){
+//            $startDate = date("Y-m-d");
+//            $endDate = date("Y-m-d");
+//        }
+//        
+//    }
 
     
         

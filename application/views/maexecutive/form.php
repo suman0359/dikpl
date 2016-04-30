@@ -144,7 +144,7 @@ $this->load->view('common/sidebar');
     
 </div> 
 
-<div class="form-group col-md-4">
+<div class="form-group col-md-3">
     
     <label>Division  </label>
     <div>
@@ -166,7 +166,7 @@ $this->load->view('common/sidebar');
     </div>
 </div>
 
-<div class="form-group col-md-4">
+<div class="form-group col-md-3">
     
     <label> Jonal  </label>
   
@@ -190,7 +190,7 @@ $this->load->view('common/sidebar');
    
 </div>
 
-<div class="form-group col-md-4">
+<div class="form-group col-md-3">
     <label for="district">District</label>
     <div>
         <select name="district_id" class="form-group form-control" id="district_id">
@@ -202,6 +202,23 @@ $this->load->view('common/sidebar');
         <option value="<?php echo $district->id?>" ><?php echo $district->name; ?> </option>
         <?php } else {?>
         <option value="0" >select Jonal First </option>
+             <?php } ?>
+        </select>
+    </div>
+</div>
+    
+    <div class="form-group col-md-3">
+    <label for="thana">Thana</label>
+    <div>
+        <select name="thana_id" class="form-group form-control" id="thana_id">
+        <?php 
+        if($thana_id !== ''){
+        $thana = $this->CM->getInfo('thana', $thana_id); 
+
+        ?>
+        <option value="<?php echo $thana->id?>" ><?php echo $thana->name; ?> </option>
+        <?php } else {?>
+        <option value="0" >select District First </option>
              <?php } ?>
         </select>
     </div>
@@ -285,6 +302,27 @@ $this->load->view('common/sidebar');
 
        });
      }); 
+     
+     // start getThana_list
+     $(".main-mid-area").on('change', '#district_id', function(){
+
+        var district_id = $(this).val() ; 
+        console.log(district_id);
+        $.ajax({
+          url: "<?php echo base_url() ?>index.php/home/getthana/"+district_id,
+
+          beforeSend: function( xhr ) {
+            xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
+            $("#thana_id").html("<option>Loading .... </option>") ; 
+
+          }
+        })
+      .done(function( data ) {
+       
+         $("#thana_id").html(data);
+       });
+     }); 
+     // End getThana_list
 
 
     }); 
