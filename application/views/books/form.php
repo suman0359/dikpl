@@ -16,14 +16,14 @@ $this->load->view('common/sidebar');
             </h1>
             <ol class="breadcrumb">
                 <li><a href="<?php echo base_url()?>home"><i class="fa fa-home"></i> Home</a></li>
-                <li class="active"><a href="<?php echo base_url()?>college">Books</a></li>
-                <li class="active"><a href="<?php echo base_url()?>college/add">Add Books</a></li>
+                <li class="active"><a href="<?php echo base_url()?>books">Books</a></li>
+                <li class="active"><a href="<?php echo base_url()?>books/add">Add Books</a></li>
             </ol>
         </section>
     <br/>
 
     <!-- Start Working area --> 
-<div class="col-md-10 main-mid-area"> 
+<div class="col-md-12 main-mid-area"> 
    <?php $this->load->view('common/error_show') ?>
     <h2> Add New Books </h2>
     
@@ -33,12 +33,12 @@ $this->load->view('common/sidebar');
     ?>
 
 <div class="row">
-	<div class="col-md-4">
+	<div class="col-md-2">
 		<div class="form-group">
 		    <label> Books Name </label>
 		    <?php 
 		    $form_input = array(
-		        'name' => 'book_name',
+		        'name' => 'name',
 		        'class' =>'form-control ', 
 		        'value' => $name, 
 		        'required' => 'required',
@@ -50,64 +50,59 @@ $this->load->view('common/sidebar');
 		</div>
 	</div>
 
-    <div class="col-md-3">
+    <div class="col-md-2">
         <div class="form-group">
-       
+            <label>Comapany Name </label>
             
-            <label>Group Name </label>
-            <div>
-            <select name="group_id" class="form-group form-control" id="group_id">
-            <option value="0" >select Option</option>
-                <?php foreach ($group_list as $group) { ?>
-                
-                <option value="<?php echo $group["id"]; ?>" <?php if($group["id"]==$group_id){echo 'selected';} ?> >
-                    <?php echo $group["name"]; ?>
-                </option>
-
-                <?php }?>
+            <select name="company_id" class="form-group form-control" id="company_id">
+                <option value="0" >select Company</option>
+                <option <?php if($company_id==1) echo "selected"; ?> value="1">Text Book</option>
+                <option <?php if($company_id==2) echo "selected"; ?>value="2">Guide Book</option>
             </select>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-3">
-        <div class="form-group">
-            <label> Book Code </label>
-            <?php 
-            $form_input = array(
-                'name' => 'book_code',
-                'class' =>'form-control ', 
-                'value' => $book_code, 
-                'required' => 'required',
-                'placeholder'=>'Book Code',
-                'size' => '50'
-            );
-            echo form_input($form_input); 
-            ?>
-        </div>
-    </div>
-
-    <div class="col-md-3">
-        <div class="form-group">
-       
             
-            <label>Subject Name </label>
-            <div>
-            <select name="subject_id" class="form-group form-control" id="subject_id">
-            <option value="0" >select Option</option>
-                <?php foreach ($subject_list as $subject) { ?>
-                
-                <option value="<?php echo $subject["id"]; ?>" <?php if($subject["id"]==$subject_id){echo 'selected';} ?> >
-                    <?php echo $subject["name"]; ?>
-                </option>
-
-                <?php }?>
-            </select>
-            </div>
         </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-2">
+        <div class="form-group">
+            <label for="className">Class Name</label>
+            <select name="class_id" id="class_id" class="form-group form-control">
+                <option value="">Select Class </option>
+                <?php 
+                    foreach ($class_list as $value) { ?>
+                        <option <?php if($class_id==$value['id']) echo "selected"; ?> value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
+                    <?php } ?>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="form-group">
+            <label for="className">Subject Name</label>
+            <select name="subject_id" id="subject_id" class="form-control">
+                <option value="">Select subject </option>
+                <?php 
+                    foreach ($subject_list as $value) { ?>
+                        <option <?php if($subject_id==$value['id']) echo "selected"; ?> value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
+                    <?php } ?>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="form-group">
+            <label for="className">Department Name</label>
+            <select name="department_id" id="department_id" class="form-control">
+                <option value="">Select Department </option>
+                <?php 
+                    foreach ($department_list as $value) { ?>
+                        <option <?php if($department_id==$value['id']) echo "selected"; ?> value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
+                    <?php } ?>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-md-2">
         <div class="form-group">
             <label> Book Rate </label>
             <?php 
@@ -126,24 +121,7 @@ $this->load->view('common/sidebar');
     </div>
 
 
-
-	<!-- <div class="col-md-4">
-		<label> Publication Status </label><br>
-		<label class="radio-inline">
-		  <input type="radio" name="status" id="inlineRadio1" <?php if ($status==1) {
-              echo "checked";
-          } ?>  value="1"> Published
-		</label>
-		<label class="radio-inline">
-		  <input type="radio" name="status" id="inlineRadio2" <?php if ($status==0) {
-            echo  "checked";
-          } ?>  value="0"> Unpublished
-		</label>
-
-	</div>
-     -->
-
-		<div class="col-md-2"><br>
+		<div class="col-md-12"><br>
 		<div class="pull-right"> 
 
     <?php 

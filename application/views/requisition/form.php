@@ -32,21 +32,7 @@ $this->load->view('common/sidebar');
         <div id="type_container">
             <div class="row" id="edit-0">
                 
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="book_name">Book Name</label>
-                        <select name="book_name[]" id="book_name" class="form-control">
-                            <option value="">Select Book Name</option>
-                            <?php 
-                            foreach ($pro_list as $value) { ?>
-                                <option value="<?php echo $value['id']; ?>"><?php echo $value['book_name']; ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                    
-                </div>
-
-                <div class="col-md-3">
+                <div class="col-md-2">
                     
                     <div class="form-group">
                         <label for="book_name">Department Name</label>
@@ -64,17 +50,44 @@ $this->load->view('common/sidebar');
                 <div class="col-md-2">
                    
                     <div class="form-group">
-                        <label for="book_group">Group Name</label>
-                        <select name="group_id[]" id="group_id" class="form-control">
-                            <option value="">Select Group Name</option>
+                        <label for="book_group">Clsas Name</label>
+                        <select name="class_id[]" id="class_id" class="form-control">
+                            <option value="">Select Class Name</option>
+                           <!--  <?php 
+                            foreach ($class_list as $value) { ?>
+                                
+                                <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option> 
+                            <?php } ?> -->
+                        </select>
+                    </div>
+                    
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="">Book Type</label>
+                        <select name="book_type" id="book_type_id" class="form-control">
+                            <option value="">Select Book Type..</option>
+                            <option value="2">Guid Book</option>
+                            <option value="1">Text Book</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="book_name">Book Name</label>
+                        <select name="book_name[]" id="book_name" class="form-control">
+                            <option value="">Select Book Name</option>
                             <?php 
-                            foreach ($group_list as $value) { ?>
+                            foreach ($pro_list as $value) { ?>
                                 <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
                             <?php } ?>
                         </select>
                     </div>
                     
                 </div>
+
 
                 <div class="col-md-2">
                    
@@ -107,10 +120,49 @@ $this->load->view('common/sidebar');
         
         <div id="type-container" class="hide">
             <div class="row form-group type-row" id="">
-           
-                <div class="col-md-3">
+                
+                 <div class="col-md-2">
+                    
                     <div class="form-group">
-                        <label for="book_name">Book Name</label>
+                        <!-- <label for="book_name">Department Name</label> -->
+                        <select name="department_id[]" id="department_id" class="form-control">
+                            <!-- <option value="">Select Department Name</option> -->
+                            <?php 
+                            foreach ($dep_list as $value) { ?>
+                                <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    
+                </div>
+                
+
+                <div class="col-md-2">
+                   
+                    <div class="form-group">
+                        <!-- <label for="book_name">Class Name</label> -->
+                        <select name="class_id[]" id="class_id" class="form-control">
+                            <option value="">Select Class Name</option>
+                            
+                        </select>
+                    </div>
+                    
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <!-- <label for="">Book Type</label> -->
+                        <select name="book_type" id="book_type_id" class="form-control">
+                            <option value="">Select Book Type..</option>
+                            <option value="2">Guid Book</option>
+                            <option value="1">Text Book</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <!-- <label for="book_name">Book Name</label> -->
                         <select name="book_name[]" id="book_name" class="form-control">
                             <option value="">Select Book Name</option>
                             <?php 
@@ -122,41 +174,11 @@ $this->load->view('common/sidebar');
                     
                 </div>
 
-                <div class="col-md-3">
-                    
-                    <div class="form-group">
-                        <label for="book_name">Department Name</label>
-                        <select name="department_id[]" id="department_id" class="form-control">
-                            <option value="">Select Department Name</option>
-                            <?php 
-                            foreach ($dep_list as $value) { ?>
-                                <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                    
-                </div>
-
-                <div class="col-md-2">
-                   
-                    <div class="form-group">
-                        <label for="book_name">Group Name</label>
-                        <select name="group_id[]" id="group_id" class="form-control">
-                            <option value="">Select Group Name</option>
-                            <?php 
-                            foreach ($group_list as $value) { ?>
-                                <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                    
-                </div>
-
               
                 <div class="col-md-2">
                    
                     <div class="form-group">
-                        <label for="book_name">Book Quantity</label>
+                        <!-- <label for="book_name">Book Quantity</label> -->
                         <input type="number" maxlength ='5' min="1" class="form-control input-sm" name="book_quantity[]" value="1"/>
                     </div>
                     
@@ -164,7 +186,7 @@ $this->load->view('common/sidebar');
 
                 <div class="col-md-2">
                     <div class="form-group">
-                    <label for="">&nbsp;</label>
+                    <!-- <label for="">&nbsp;</label> -->
                         <a class="btn btn-primary remove-type pull-right form-control " targetDiv="" data-id="0" href="javascript: void(0)"><i class="glyphicon glyphicon-trash" style="margin-right: 8px"></i>Remvoe This Row</a>
                     </div>
                 </div>
@@ -271,7 +293,9 @@ $this->load->view('common/sidebar');
                         for (var i = 0; i < 1; i++) {
                             element = content.clone();
                             var type_div = 'teams_' + jQuery.now();
+                            var id = 'class_id' + jQuery.now();
                             element.attr('id', type_div);
+                            $(this)
                             element.find('.remove-type').attr('targetDiv', type_div);
                             element.appendTo('#type_container');
 
@@ -370,33 +394,29 @@ $this->load->view('common/sidebar');
             $.noConflict();
             jQuery(document).ready(function () {
                 //Teacher Select 
-                $(".main-mid-area").on('change', '#college_id', function () {
-                    var college_id = $(this).val();
-                    $(".main-mid-area").on('change', '#department_id', function () {
+            
+            $("#type_container").on('click', '#department_id', function(){
+                var department_id = $(this).val() ; 
 
-                        var department_id = $(this).val();
-                        $.ajax({
-                            url: "<?php echo base_url() ?>index.php/home/getteacherbycollegeanddepartment/" + college_id + "/" + department_id,
-                            beforeSend: function (xhr) {
-                                xhr.overrideMimeType("text/plain; charset=x-user-defined");
-                                $("#teacher_id").html("<option>Loading .... </option>");
+                    console.log(department_id);
+            })
 
-                            }
-                        })
-                                .done(function (data) {
+            $("#type_container").on('change', '#department_id', function(){
+                    var department_id = $(this).val() ; 
 
-                                    $("#teacher_id").html("<option value=''>Select a Teacher </option>");
-                                    data = JSON.parse(data);
-                                    $.each(data, function (key, val) {
-                                        $("#teacher_id").append("<option value='" + val.id + "'>" + val.name + "</option>");
+                    console.log(department_id);
+                    $.ajax({
+                      url: "<?php echo base_url() ?>index.php/home/getclass/"+department_id,
 
-                                    });
-
-
-                                });
-                    });
-                });
-
+                      beforeSend: function( xhr ) {
+                        xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
+                        $("#class_id").html("<option>Loading .... </option>") ; 
+                      }
+                    })
+                  .done(function( data ) {
+                     $("#class_id").html(data); 
+               });
+             });
                 //-----------------------------------
 
                 $(".new_form").hide();

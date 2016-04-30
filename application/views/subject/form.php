@@ -140,6 +140,7 @@ $this->load->view('common/sidebar');
                 </script>
                 
             </div>
+            <!-- end : MultiSelect Bos -->
 
     <!-- <div class="col-md-4">
         <label> Publication Status </label><br>

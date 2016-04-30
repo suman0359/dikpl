@@ -182,7 +182,8 @@ class Report extends MY_Controller
     {
       if (!$this->CM->checkpermissiontype($this->module, 'requisition', $this->user_type))
             redirect('error/accessdeny');
-
+        $start_date = NULL;
+        $end_date   = NULL;
         $data['sdate'] = date("Y-m-d") ; 
         $data['edate'] = date("Y-m-d") ; 
         $data['did'] = 'all' ; 
@@ -211,10 +212,15 @@ class Report extends MY_Controller
          else { 
              $jid =  $data['jid'] ;
              $data['jonal_info'] = $this->CM->getInfo('jonal', $jid) ; 
-             } ; 
-        
+             } 
+        if($start_date ==NULL) {$start_date=date("Y-m-d");} 
+        if($end_date ==NULL) $end_date=date("Y-m-d") ; 
+
         $data['content_list'] = $this->RM->requisitionReport($data['sdate'], $data['edate'], $jid); 
-             
+
+        
+        $data['report_details'] = $this->RM->getRequisitionReportForMPO($start_date, $end_date, $this->uid);
+                          
         
             $this->load->view('report/requisition', $data );
          

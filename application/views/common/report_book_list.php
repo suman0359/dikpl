@@ -21,11 +21,11 @@
                 <td><?php echo $i; ?></td>
                 
                  <td>
-                    <?php echo  $book['book_name']           ?>
+                    <?php echo  $book['name']           ?>
                 </td>
-                 <td>
-                    <?php echo $book['book_code']           ?>
-                </td>
+                 <!-- <td>
+                    <?php //echo $book['book_code']           ?>
+                </td> -->
                 
                 
                 <td><?php echo $book['quantity'] ;?></td>

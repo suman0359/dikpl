@@ -55,6 +55,7 @@ class Join_model extends CI_Model {
         return $result->result();
     }
 
+    /* *********** Subject Section ********************* */
     public function get_all_department_where_subject_info($subject_id){
         $sql="SELECT dep.id as department_id, dep.name as department_name FROM tbl_subject_group as tsg inner join department as dep on tsg.department_id=dep.id where tsg.subject_id=$subject_id";
 
@@ -65,6 +66,41 @@ class Join_model extends CI_Model {
     public function get_all_department_where_subject_group_info($subject_id){
         
         $sql="SELECT dep.id as department_id, dep.name as department_name FROM tbl_subject_group as tsg inner join department as dep on tsg.department_id=dep.id where tsg.subject_id=$subject_id";
+
+        $result = $this->db->query($sql);
+        return $result->result();
+    }
+
+    /* ********** Department Section **************** */
+    public function get_all_class_where_department_info($department_id){
+        $sql="SELECT cls.id as class_id, cls.name as class_name FROM tbl_department_class_group as dcg inner join tbl_class as cls on dcg.class_id=cls.id where dcg.department_id=$department_id";
+
+        $result = $this->db->query($sql);
+        return $result->result();
+    }
+
+    public function get_all_department_where_class_group_info($department_id){
+        $sql="SELECT cls.id as class_id, cls.name as class_name FROM tbl_department_class_group as dcg inner join tbl_class as cls on dcg.class_id=cls.id where dcg.department_id=$department_id";
+
+        $result = $this->db->query($sql);
+        return $result->result();
+    }
+
+    public function select_all_books($from = NULL, $limit = NULL){
+        // $sql = "SELECT bo.id as book_id, bo.name as book_name, if(bo.company_id=1, 'Text Book', 'Other Books') as company_name, if(bo.company_id=2, 'Guide Book', 'Other Books') as company_name, bo.rate as book_rate, cls.name as class_name, dep.name as department_name, sub.name as subject_name FROM books as bo left join tbl_class as cls on bo.class_id=cls.id left join tbl_subject as sub on bo.subject_id=sub.id left join department as dep on bo.department_id=dep.id order by bo.id DESC"; 
+
+        $sql = "SELECT bo.id as book_id, bo.name as book_name, bo.company_id as company_name, bo.rate as book_rate, cls.name as class_name, dep.name as department_name, sub.name as subject_name FROM books as bo left join tbl_class as cls on bo.class_id=cls.id left join tbl_subject as sub on bo.subject_id=sub.id left join department as dep on bo.department_id=dep.id order by bo.id DESC"; 
+
+        if (empty($from)) {
+            $sql .= " LIMIT 0, 15 ";
+        } else {
+            $sql .= " LIMIT $from,$limit ";
+        }
+
+        // echo "<pre>";
+        // print_r($sql);
+        // exit();
+        
 
         $result = $this->db->query($sql);
         return $result->result();

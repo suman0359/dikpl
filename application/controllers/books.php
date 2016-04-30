@@ -21,8 +21,8 @@ class Books extends CI_Controller {
     public function index() {
         if (!$this->CM->checkpermissiontype($this->module, 'index', $this->user_type))
             redirect('error/accessdeny');
-
-        $data['books_list'] = $this->CM->getTotalALL('books');
+        $this->load->model('join_model');
+        $data['books_list'] = $this->join_model->select_all_books($from = NULL, $limit = NULL);
 
 
         $no_rows = $this->CM->getTotalRow('books');
@@ -47,7 +47,8 @@ class Books extends CI_Controller {
         $config['first_link'] = 'First';
         $this->pagination->initialize($config);
 
-        $data['books_list'] = $this->CM->getTotalALL('books', $this->uri->segment(3), $config['per_page']);
+        $data['books_list'] = $this->join_model->select_all_books($this->uri->segment(3), $config['per_page']);
+        // $data['books_list'] = $this->CM->getTotalALL('books', $this->uri->segment(3), $config['per_page']);
         $this->load->view('books/index', $data);
     }
 
@@ -55,19 +56,15 @@ class Books extends CI_Controller {
         if (!$this->CM->checkpermissiontype($this->module, 'add', $this->user_type))
             redirect('error/accessdeny');
 
-
-
-        $data['group_list'] = $this->CM->getAll('group', 'name ASC');
+        $data['class_list'] = $this->CM->getAll('tbl_class', 'name ASC');
         $data['subject_list'] = $this->CM->getAll('tbl_subject', 'name ASC');
-
-//        echo '<pre>';
-//        print_r($data['subject_list']);
-//        exit();
+        $data['department_list'] = $this->CM->getAll('department', 'name ASC');
 
         $data['name'] = "";
-        $data['group_id'] = "";
-        $data['book_code'] = "";
-        $data['subject_name'] = "";
+        $data['subject_id'] = "";
+        $data['class_id'] = "";
+        $data['department_id'] = "";
+        $data['company_id'] = "";
         $data['book_rate'] = "";
 
 
@@ -80,16 +77,14 @@ class Books extends CI_Controller {
             $this->load->view('books/form', $data);
         } else {
 
-            $datas['book_name'] = $this->input->post('book_name');
-            $datas['group_id'] = $this->input->post('group_id');
-            $datas['book_code'] = $this->input->post('book_code');
-            $datas['subject_id'] = $this->input->post('subject_id');
-            $datas['rate'] = $this->input->post('rate');
-
+            $datas['name']          = $this->input->post('name');
+            $datas['subject_id']    = $this->input->post('subject_id');
+            $datas['class_id']      = $this->input->post('class_id');
+            $datas['department_id'] = $this->input->post('department_id');
+            $datas['company_id']    = $this->input->post('company_id');
+            $datas['rate']          = $this->input->post('rate');
 
             $datas['status'] = 1;
-            //$datas['entryby']=$this->session->userdata('uid');       
-
 
             $insert = $this->CM->insert('books', $datas);
             if ($insert) {
@@ -110,13 +105,15 @@ class Books extends CI_Controller {
             redirect('error/accessdeny');
 
         $content = $this->CM->getInfo('books', $id);
-        $data['group_list'] = $this->CM->getAll('group', 'name ASC');
+        $data['class_list'] = $this->CM->getAll('tbl_class', 'name ASC');
         $data['subject_list'] = $this->CM->getAll('tbl_subject', 'name ASC');
+        $data['department_list'] = $this->CM->getAll('department', 'name ASC');
 
-        $data['name'] = $content->book_name;
-        $data['group_id'] = $content->group_id;
-        $data['book_code'] = $content->book_code;
-        $datas['subject_id'] = $this->input->post('subject_id');
+        $data['name'] = $content->name;
+        $data['class_id'] = $content->class_id;
+        $data['department_id'] = $content->department_id;
+        $data['company_id'] = $content->company_id;
+        $data['subject_id'] = $content->subject_id;
         $data['book_rate'] = $content->rate;
         //$data['status'] = $content->status;
 
@@ -125,13 +122,12 @@ class Books extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('books/form', $data);
         } else {
-            $datas['book_name'] = $this->input->post('book_name');
-            $datas['group_id'] = $this->input->post('group_id');
-            $datas['book_code'] = $this->input->post('book_code');
-            $datas['subject_id'] = $this->input->post('subject_id');
-            $datas['rate'] = $this->input->post('rate');
-            //$datas['status'] = $this->input->post('status');
-            //$datas['entryby']=$this->session->userdata('uid');       
+            $datas['name']     = $this->input->post('name');
+            $datas['subject_id']    = $this->input->post('subject_id');
+            $datas['class_id']      = $this->input->post('class_id');
+            $datas['department_id'] = $this->input->post('department_id');
+            $datas['company_id']    = $this->input->post('company_id');
+            $datas['rate']          = $this->input->post('rate');    
 
             if ($this->CM->update('books', $datas, $id)) {
                 $msg = "Operation Successfull!!";

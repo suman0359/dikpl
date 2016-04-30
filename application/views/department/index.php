@@ -25,7 +25,7 @@ $this->load->view('common/sidebar');
 
 
 <!-- Start Working area --> 
-<div class="col-md-8 main-mid-area"> 
+<div class="col-md-9 main-mid-area"> 
    <?php $this->load->view('common/error_show') ?>
    
     <div class="searchbar " >
@@ -33,7 +33,7 @@ $this->load->view('common/sidebar');
     </div>
         
         <div class="pull-right"> 
-          <a href="<?php echo base_url()?>department/add" class="btn btn-info pull-right" > <i class="fa fa-plus-square gap">  </i> Add division</a> 
+          <a href="<?php echo base_url()?>department/add" class="btn btn-info pull-right" > <i class="fa fa-plus-square gap">  </i> Add Department</a> <br><br>
         </div>
         <div class="clearfix"></div>
    </div> 
@@ -44,7 +44,7 @@ $this->load->view('common/sidebar');
         <tr>
             <th id="action_btn_align">SL</th>
             <th id="action_btn_align">Department Name</th>
-            
+            <th id="action_btn_align">Class Name</th>
             <th id="action_btn_align">Action</th>
            
          </tr>
@@ -55,13 +55,25 @@ $this->load->view('common/sidebar');
          <?php 
        		//  var_dump($company_list) ; 
          	foreach ($content_list as $content){
+            $department_id =$content['id'];
+            
+            $class_list = $this->join_model->get_all_class_where_department_info($department_id);
+            
          ?>
          
          
       <tr id="action_btn_align">
           <td> <?php echo $content['id'] ?></td>
           <td> <?php echo $content['name'] ?></td>
-         
+          <td> 
+            <?php if ($class_list) {
+                            foreach ($class_list as $value) {
+                                // print_r($value);
+                                echo "<div style=\"background: #9E9E9E; padding: 3px; margin-bottom: 3px;\">".$value->class_name."</div>" ;
+                            }
+                            
+                        } ?>
+          </td>
           <td>     
                 <a class="btn btn-primary btn-flat" href="<?php echo base_url(); ?>department/edit/<?php echo $content['id'] ?>">
                 <i class="fa fa-pencil-square-o" ></i> Edit </a>

@@ -12,7 +12,7 @@ $this->load->view('common/sidebar');
         <h1>Dashboard<small>Control panel</small></h1>
         <ol class="breadcrumb">
             <li><a href="<?php echo base_url() ?>home"><i class="fa fa-home"></i> Home</a></li>
-            <li class="active"><a href="<?php echo base_url() ?>jonal">Books</a></li>
+            <li class="active"><a href="<?php echo base_url() ?>books">Books</a></li>
         </ol>
     </section>
     <br/>
@@ -39,10 +39,11 @@ $this->load->view('common/sidebar');
                 <tr>
                     <th id="action_btn_align">SL</th>
                     <th id="action_btn_align">Books Name</th>
-                    <th id="action_btn_align">Books Code</th>
-                    <th id="action_btn_align">Subject Name</th>
-                    <th id="action_btn_align">Books Rate</th>
-                    <th id="action_btn_align">Books Group</th>
+                    <th id="action_btn_align">Department </th>
+                    <th id="action_btn_align">Subject</th>
+                    <th id="action_btn_align">Class</th>
+                    <th id="action_btn_align">Company Name</th>
+                    <th id="action_btn_align">Rate</th>
                     <th id="action_btn_align">Action</th>
 
                 </tr>
@@ -51,24 +52,28 @@ $this->load->view('common/sidebar');
 
                 <?php
                 //var_dump($college_list) ; 
-                foreach ($books_list as $books) {
-                    $group = $this->CM->getInfo('group', $books['group_id']);
-                    $subject = $this->CM->getInfo('tbl_subject', $books['subject_id']);
+                foreach ($books_list as $books) { 
+                    $company_name = $books->company_name;
+                    if(!empty($company_name)){
+                        if ($company_name==1){ $company_name = "Text Book"; }
+                        if ($company_name==2){ $company_name = "Guide Book"; }
+                    }
                     ?>
 
 
                     <tr id="action_btn_align">
-                        <td> <?php echo $books['group_id']; ?></td>
-                        <td> <?php echo $books['book_name'] ?></td>
-                        <td> <?php echo $books['book_code'] ?></td>
-                        <td> <?php echo $subject->name; ?></td>
-                        <td> <?php echo $books['rate'] ?></td>
-                        <td> <?php echo $group->name; ?></td>
+                        <td> <?php echo $books->book_id; ?></td>
+                        <td> <?php echo $books->book_name; ?></td>
+                        <td> <?php echo $books->department_name; ?></td>
+                        <td> <?php echo $books->subject_name; ?></td>
+                        <td> <?php echo $books->class_name; ?></td>
+                        <td> <?php echo $company_name; ?></td>
+                        <td> <?php echo $books->book_rate; ?></td>
 
                         <td>     
-                            <a class="btn btn-primary btn-flat" href="<?php echo base_url(); ?>books/edit/<?php echo $books['id'] ?>">
+                            <a class="btn btn-primary btn-flat" href="<?php echo base_url(); ?>books/edit/<?php echo $books->book_id; ?>">
                             <i class="fa fa-pencil-square-o" ></i> Edit </a>
-                            <a class="btn btn-danger btn-flat "  onclick="return confirm('Are you sure want to delete');" href="<?php echo base_url(); ?>books/delete/<?php echo $books['id'] ?>">
+                            <a class="btn btn-danger btn-flat "  onclick="return confirm('Are you sure want to delete');" href="<?php echo base_url(); ?>books/delete/<?php echo $books->book_id; ?>">
                             <i class="fa fa-pencil-square-o" ></i> Delete </a>
                         </td>     
                     </tr>

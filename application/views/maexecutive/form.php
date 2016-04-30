@@ -144,7 +144,7 @@ $this->load->view('common/sidebar');
     
 </div> 
 
-<div class="form-group col-md-6">
+<div class="form-group col-md-4">
     
     <label>Division  </label>
     <div>
@@ -166,28 +166,45 @@ $this->load->view('common/sidebar');
     </div>
 </div>
 
-<div class="form-group col-md-6">
+<div class="form-group col-md-4">
     
     <label> Jonal  </label>
   
-    
+     
       
             <div>
-            <select name="jonal_id" class="form-group form-control" id="jonal_id">
-            <?php 
-            if($jonal_id !== ''){
-            $jonal = $this->CM->getInfo('jonal', $jonal_id); 
+                <select name="jonal_id" class="form-group form-control" id="jonal_id">
+                <?php 
+                if($jonal_id !== ''){
+                $jonal = $this->CM->getInfo('jonal', $jonal_id); 
 
-            ?>
-            <option value="<?php echo $jonal->id?>" ><?php echo $jonal->name; ?> </option>
-            <?php } else {?>
-            <option value="0" >select Division First </option>
-                 <?php } ?>
-            </select>
+                ?>
+                <option value="<?php echo $jonal->id?>" ><?php echo $jonal->name; ?> </option>
+                <?php } else {?>
+                <option value="0" >select Division First </option>
+                     <?php } ?>
+                </select>
             </div>
         
         
    
+</div>
+
+<div class="form-group col-md-4">
+    <label for="district">District</label>
+    <div>
+        <select name="district_id" class="form-group form-control" id="district_id">
+        <?php 
+        if($district_id !== ''){
+        $district = $this->CM->getInfo('district', $district_id); 
+
+        ?>
+        <option value="<?php echo $district->id?>" ><?php echo $district->name; ?> </option>
+        <?php } else {?>
+        <option value="0" >select Jonal First </option>
+             <?php } ?>
+        </select>
+    </div>
 </div>
 
     
@@ -237,8 +254,37 @@ $this->load->view('common/sidebar');
             });  
             
 
-   });
- }); 
+       });
+     }); 
+
+        $(".main-mid-area").on('change', '#jonal_id', function(){
+
+        var jonal_id = $(this).val() ; 
+        console.log(jonal_id);
+        $.ajax({
+          url: "<?php echo base_url() ?>index.php/home/getdistrict/"+jonal_id,
+
+          beforeSend: function( xhr ) {
+            xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
+            $("#district_id").html("<option>Loading .... </option>") ; 
+
+          }
+        })
+      .done(function( data ) {
+       /* if ( console && console.log ) {
+          console.log( "Sample of data:", data.slice( 0, 100 ) );
+        }*/
+      
+         $("#district_id").html("<option value=''>Select a District </option>"); 
+            data=JSON.parse(data);
+        $.each(data, function(key, val) {
+              $("#district_id").append("<option value='"+val.id+"'>"+val.name+"</option>");
+              
+            });  
+            
+
+       });
+     }); 
 
 
     }); 

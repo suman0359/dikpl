@@ -26,6 +26,7 @@ class Home extends MY_Controller {
         $did = trim($did);
         $thanalist = $this->CM->getAllWhere('thana', array('district_id' => $did));
         // echo json_encode($thanalist) ; 
+        
         $html = "<option value=''>Select a thana</option>";
         foreach ($thanalist as $key => $value) {
             $html.="<option value='{$value['id']}'>{$value['name']}</option>";
@@ -39,6 +40,12 @@ class Home extends MY_Controller {
         $did = trim($did);
         $jonallist = $this->CM->getAllWhere('jonal', array('div_id' => $did));
         echo json_encode($jonallist);
+    }
+
+    public function getdistrict($jonal_id) {
+        $jonal_id = trim($jonal_id);
+        $districtlist = $this->CM->getAllWhere('district', array('jonal_id' => $jonal_id));
+        echo json_encode($districtlist);
     }
 
     public function getcollege($jid) {
@@ -83,6 +90,19 @@ class Home extends MY_Controller {
 //         exit();
 
         echo json_encode($teacherlist);
+    }
+
+    public function getclass($department_id) {
+        $department_id = trim($department_id);
+        $this->load->model('join_model');
+        $class_list = $this->join_model->get_all_class_where_department_info($department_id);
+
+        $html = "<option value=''>Select a Class</option>";
+        foreach ($class_list as $key => $value) {
+            $html.="<option value='{$value->class_id}'>{$value->class_name}</option>";
+        }
+
+        echo $html;
     }
 
 }

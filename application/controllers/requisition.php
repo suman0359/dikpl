@@ -22,7 +22,7 @@ class Requisition extends MY_Controller{
         
        $data['pro_list']=$this->CM->getAll('books');
        $data['dep_list']=$this->CM->getAll('department');
-       $data['group_list']=$this->CM->getAll('group');
+       $data['class_list']=$this->CM->getAll('tbl_class');
   
         $data['id']="";
         $data['book_name']="";
@@ -49,15 +49,18 @@ class Requisition extends MY_Controller{
 
             // This is for check and merge book id and book quantity
             /* ************************************* */
-            $book_id = $this->input->post('book_name');
-            $book_quantity = $this->input->post('book_quantity');
+            $book_id        = $this->input->post('book_name');
+            $book_quantity  = $this->input->post('book_quantity');
+            $department_id  =  $this->input->post('department_id');
+            $class_id       =  $this->input->post('class_id');
+            $type           = $this->input->post('book_type');
 
             for ($i=0; $i < count($book_id); $i++) {
               $book_info = $this->CM->getInfo('books', $book_id[$i]);
               $book_rate = $book_info->rate;
 
               $book[] = array('book_id' => $book_id[$i], 'book_quantity' => $book_quantity[$i]);
-              $requisition_details[] = array('book_id' => $book_id[$i], 'qutantity' => $book_quantity[$i], 'price' => $book_rate);
+              $requisition_details[] = array('book_id' => $book_id[$i], 'qutantity' => $book_quantity[$i], 'price' => $book_rate, 'department_id' => $department_id);
             }
             /* ************************************* */
             
@@ -83,12 +86,16 @@ class Requisition extends MY_Controller{
             /* ************************************************** */
                    
             $requisition['comment']             =  $this->input->post('comment');
+            
+            
             $requisition['status']              = 1;
-            $requisition['type']                = 1;
+            
             $requisition['requisition_status']  = 1;
             $requisition['requisition_by']      = $this->_uid;   
             $requisition['total_amount']        = $total_amount;
             $requisition['total_quantity']      = $total_book_quantity;
+            $requisition['date']                = date("Y-m-d");
+
 
             $requisition_id = $this->CM->insert('tbl_requisition', $requisition);
 
@@ -100,9 +107,25 @@ class Requisition extends MY_Controller{
               $book_info = $this->CM->getInfo('books', $book_id[$i]);
               $book_rate = $book_info->rate;
 
-              $book_requisition_details[] = array('requisition_id' => $requisition_id, 'book_id' => $book_id[$i], 'qutantity' => $book_quantity[$i], 'price' => $book_rate);
+              $book_requisition_details[] = array(
+                'requisition_id'  => $requisition_id, 
+                'book_id'         => $book_id[$i], 
+                'qutantity'       => $book_quantity[$i], 
+                'price'           => $book_rate, 
+                'department_id'   => $department_id[$i],
+                'class_id'        => $class_id[$i],
+                'book_type'       => $type[$i],
+                );
               
             }
+
+            // echo "<pre>";
+            // print_r($_POST);
+            // print_r($requisition);
+            // print_r($book_requisition_details);
+            
+            // exit();
+            
 
             foreach ($book_requisition_details as $key => $value) {
               $this->CM->insert('tbl_requisition_details', $value);
@@ -170,8 +193,11 @@ class Requisition extends MY_Controller{
         
         public function view($id)
         {
-              $data['requisition_info']=$this->CM->getwhere('requisition',array('id'=>$id));
+              $data['requisition_info']=$this->CM->getwhere('tbl_requisition',array('id'=>$id));
               $data['book_list']=$this->RM->getRequisitionBooks($id); 
+              // echo "<pre>";
+              // print_r($data['requisition_info']);
+              // exit();
               
               
             if(empty ($id) || empty ($data['purchase_info']))

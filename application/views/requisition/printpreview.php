@@ -60,21 +60,23 @@ $this->load->view('common/sidebar');
             <table >
                 <tr>
                     <td >Id :</td>
-                    <td><?php echo $requisition_info->id; ?></td>
+                    <td><?php echo $requisition_info->requisition_by; ?></td>
                 </tr>
                 <tr>
                     <td>Requested  By :</td>
                     <td> <?php 
                     $emp=$this->CM->getwhere('user',array('id'=>$requisition_info->requisition_by)); 
+                    // echo "<pre>";
+                    // print_r($emp);
+                    // exit();
+                    
                     echo $emp->name ; 
                      ?> </td>
                 </tr>
                 <tr>
                     <td>Request Date :</td>
                     <td>
-                    <?php  $requisition_date=strtotime($requisition_info->requisition_date); 
-                   echo date('d-m-Y',$requisition_date);        
-                    ?>
+                    <?php echo $requisition_info->date; ?>
                     </td>
                 </tr>
                 
@@ -134,7 +136,7 @@ $this->load->view('common/sidebar');
         ?>
         
         <u>  Sender Comment :  </u> <br />
-        <?php echo $requisition_info->comments ; ?>
+        <?php echo $requisition_info->comment ; ?>
     </div>
     
       
@@ -184,7 +186,7 @@ $this->load->view('common/sidebar');
      </div >
     
      
-       <?php if($requisition_info->accept == 1) { ?>
+       <?php if($requisition_info->requisition_status == 1) { ?>
          <div class="clearfix"></div>
      <div class="alert alert-info text-center"> This requisition already accept and send book according on this. </div>
      <?php } ?>
@@ -196,7 +198,7 @@ $this->load->view('common/sidebar');
      
          <a href="JavaScript:history.back(-1)" class="btn btn-warning"> Back </a>
          <?php 
-         if(($requisition_info->accept != '1') AND ($this->session->userdata('user_type')=='1')) { ?>
+         if(($requisition_info->requisition_status != '1') AND ($this->session->userdata('user_type')=='1')) { ?>
          <a href="<?php echo base_url() ?>index.php/purchase/add/<?php echo $requisition_info->id ?>" class="btn btn-success"> Make it Chalan  </a>
       <?php } ?>
      </div>

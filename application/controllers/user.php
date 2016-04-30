@@ -134,6 +134,7 @@ class User extends MY_Controller {
         $data['user_type'] = $content->user_type;
         $data['pdepartment'] = $content->pdepartment;
         $data['division_id'] = $content->division_id;
+        $data['jonal_id'] = $content->jonal_id;
 
         $password = $content->password;
         $data['user_type'] = $content->user_type;
@@ -151,6 +152,7 @@ class User extends MY_Controller {
             $datas['user_type'] = $this->input->post('user_type');
             $datas['pdepartment'] = $this->input->post('pdepartment');
             $datas['division_id'] = $this->input->post('division_id');
+            $datas['jonal_id'] = $this->input->post('jonal_id');
             $datas['entryby'] = $this->session->userdata('uid');
 
             if ($this->input->post('password') != "") {
