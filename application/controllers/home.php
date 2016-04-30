@@ -59,6 +59,13 @@ class Home extends MY_Controller {
         $collegelist = $this->CM->getAllWhere('user', array('jonal_id' => $jid));
         echo json_encode($collegelist);
     }
+    
+    public function getmpo($thana_id) {
+        // mpo_list = marketing promotion officer / marketing executive
+        $thana_id = trim($thana_id);
+        $mpo_list = $this->CM->getAllWhere('user', array('thana_id' => $thana_id));
+        echo json_encode($mpo_list);
+    }
 
     public function getteacher($jid) {
         $jid = trim($jid);

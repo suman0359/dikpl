@@ -84,6 +84,9 @@ class Maexecutive extends CI_Controller
             $datas['user_type'] = '5' ;
             $datas['division_id'] =$this->input->post('division_id') ;
             $datas['jonal_id'] =$this->input->post('jonal_id') ;
+            
+            $datas['district_id'] = $this->input->post('district_id');
+            $datas['thana_id'] = $this->input->post('thana_id');
             $datas['status'] = 1;
             $datas['entryby']=$this->session->userdata('uid');       
             
@@ -143,6 +146,7 @@ class Maexecutive extends CI_Controller
         $data['division_id'] = $content->division_id;
         $data['jonal_id'] = $content->jonal_id;
         $data['district_id'] = $content->district_id;
+        $data['thana_id'] = $content->thana_id;
    
         $password = $content->password;
         
@@ -161,6 +165,8 @@ class Maexecutive extends CI_Controller
             $datas['email'] = $this->input->post('email'); 
              
             $datas['division_id'] =$this->input->post('division_id') ;
+            $datas['district_id'] =$this->input->post('district_id') ;
+            $datas['thana_id'] =$this->input->post('thana_id') ;
             $datas['jonal_id'] =$this->input->post('jonal_id') ;
             $datas['entryby']=$this->session->userdata('uid');       
             
