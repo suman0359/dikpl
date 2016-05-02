@@ -64,6 +64,7 @@ class Teachers extends CI_Controller {
 
 
         $data['name'] = "";
+        $data['designation'] = "";
         $data['phone'] = "";
         $data['department_id'] = "";
         $data['college_id'] = "";
@@ -77,6 +78,7 @@ class Teachers extends CI_Controller {
         } else {
 
             $datas['name'] = $this->input->post('name');
+            $datas['designation'] = $this->input->post('designation');
             $datas['phone'] = $this->input->post('phone');
             $datas['college_id'] = $this->input->post('college_id');
             $datas['dep_id'] = $this->input->post('department_id');
@@ -109,6 +111,7 @@ class Teachers extends CI_Controller {
         $data['college_list'] = $this->CM->getAll('college', 'name', 'ASC');
 
         $data['name'] = $content->name;
+        $data['designation'] = $content->designation;
         $data['phone'] = $content->phone;
         $data['address'] = $content->address;
         $data['college_id'] = $content->college_id;
@@ -123,6 +126,7 @@ class Teachers extends CI_Controller {
             $this->load->view('teachers/form', $data);
         } else {
             $datas['name'] = $this->input->post('name');
+            $datas['designation'] = $this->input->post('designation');
             $datas['phone'] = $this->input->post('phone');
             $datas['college_id'] = $this->input->post('college_id');
             $datas['dep_id'] = $this->input->post('department_id');

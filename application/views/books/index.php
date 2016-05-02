@@ -37,13 +37,14 @@ $this->load->view('common/sidebar');
 
             <table class="table table-bordered table-hover ">
                 <tr>
-                    <th id="action_btn_align">SL</th>
-                    <th id="action_btn_align">Books Name</th>
-                    <th id="action_btn_align">Department </th>
-                    <th id="action_btn_align">Subject</th>
-                    <th id="action_btn_align">Class</th>
-                    <th id="action_btn_align">Company Name</th>
-                    <th id="action_btn_align">Rate</th>
+                    <th id="action_btn_align">#</th>
+                    <th id="action_btn_align">বইয়ের নাম</th>
+                    <th id="action_btn_align">লেখকের নাম</th>
+                    <th id="action_btn_align">বিষয় / বিভাগ </th>
+                    <th id="action_btn_align">শ্রেণী</th>
+                    <th id="action_btn_align">বইয়ের ধরন</th>
+                    <th id="action_btn_align">গায়ের মূল্য</th>
+                    <th id="action_btn_align">বিক্রয় মূল্য</th>
                     <th id="action_btn_align">Action</th>
 
                 </tr>
@@ -55,8 +56,8 @@ $this->load->view('common/sidebar');
                 foreach ($books_list as $books) { 
                     $company_name = $books->company_name;
                     if(!empty($company_name)){
-                        if ($company_name==1){ $company_name = "Text Book"; }
-                        if ($company_name==2){ $company_name = "Guide Book"; }
+                        if ($company_name==1){ $company_name = "গ্রন্থ কুটির"; }
+                        if ($company_name==2){ $company_name = "দিকদর্শন "; }
                     }
                     ?>
 
@@ -64,11 +65,12 @@ $this->load->view('common/sidebar');
                     <tr id="action_btn_align">
                         <td> <?php echo $books->book_id; ?></td>
                         <td> <?php echo $books->book_name; ?></td>
-                        <td> <?php echo $books->department_name; ?></td>
+                        <td> <?php echo $books->writter_name; ?></td>
                         <td> <?php echo $books->subject_name; ?></td>
                         <td> <?php echo $books->class_name; ?></td>
                         <td> <?php echo $company_name; ?></td>
-                        <td> <?php echo $books->book_rate; ?></td>
+                        <td> <?php echo $books->regular_price; ?></td>
+                        <td> <?php echo $books->sell_price; ?></td>
 
                         <td>     
                             <a class="btn btn-primary btn-flat" href="<?php echo base_url(); ?>books/edit/<?php echo $books->book_id; ?>">

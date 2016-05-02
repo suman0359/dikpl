@@ -89,7 +89,7 @@ class Join_model extends CI_Model {
     public function select_all_books($from = NULL, $limit = NULL){
         // $sql = "SELECT bo.id as book_id, bo.name as book_name, if(bo.company_id=1, 'Text Book', 'Other Books') as company_name, if(bo.company_id=2, 'Guide Book', 'Other Books') as company_name, bo.rate as book_rate, cls.name as class_name, dep.name as department_name, sub.name as subject_name FROM books as bo left join tbl_class as cls on bo.class_id=cls.id left join tbl_subject as sub on bo.subject_id=sub.id left join department as dep on bo.department_id=dep.id order by bo.id DESC"; 
 
-        $sql = "SELECT bo.id as book_id, bo.name as book_name, bo.company_id as company_name, bo.rate as book_rate, cls.name as class_name, dep.name as department_name, sub.name as subject_name FROM books as bo left join tbl_class as cls on bo.class_id=cls.id left join tbl_subject as sub on bo.subject_id=sub.id left join department as dep on bo.department_id=dep.id order by bo.id DESC"; 
+        $sql = "SELECT bo.id as book_id, bo.book_name as book_name, bo.writter_name as writter_name, bo.company_id as company_name, bo.regular_price as regular_price, bo.sell_price as sell_price, cls.name as class_name, dep.name as department_name, sub.name as subject_name FROM books as bo left join tbl_class as cls on bo.class_id=cls.id left join tbl_subject as sub on bo.subject_id=sub.id left join department as dep on bo.department_id=dep.id order by bo.id DESC"; 
 
         if (empty($from)) {
             $sql .= " LIMIT 0, 15 ";

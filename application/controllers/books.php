@@ -60,12 +60,14 @@ class Books extends CI_Controller {
         $data['subject_list'] = $this->CM->getAll('tbl_subject', 'name ASC');
         $data['department_list'] = $this->CM->getAll('department', 'name ASC');
 
-        $data['name'] = "";
+        $data['book_name'] = "";
+        $data['writter_name'] = "";
         $data['subject_id'] = "";
         $data['class_id'] = "";
         $data['department_id'] = "";
         $data['company_id'] = "";
-        $data['book_rate'] = "";
+        $data['regular_price'] = "";
+        $data['sell_price'] = "";
 
 
         $this->load->library('form_validation');
@@ -77,12 +79,14 @@ class Books extends CI_Controller {
             $this->load->view('books/form', $data);
         } else {
 
-            $datas['name']          = $this->input->post('name');
-            $datas['subject_id']    = $this->input->post('subject_id');
-            $datas['class_id']      = $this->input->post('class_id');
-            $datas['department_id'] = $this->input->post('department_id');
-            $datas['company_id']    = $this->input->post('company_id');
-            $datas['rate']          = $this->input->post('rate');
+            $datas['book_name']             = $this->input->post('book_name');
+            $datas['writter_name']          = $this->input->post('writter_name');
+            $datas['subject_id']            = $this->input->post('subject_id');
+            $datas['class_id']              = $this->input->post('class_id');
+            $datas['department_id']         = $this->input->post('department_id');
+            $datas['company_id']            = $this->input->post('company_id');
+            $datas['regular_price']         = $this->input->post('regular_price');
+            $datas['sell_price']            = $this->input->post('sell_price');
 
             $datas['status'] = 1;
 
@@ -109,12 +113,14 @@ class Books extends CI_Controller {
         $data['subject_list'] = $this->CM->getAll('tbl_subject', 'name ASC');
         $data['department_list'] = $this->CM->getAll('department', 'name ASC');
 
-        $data['name'] = $content->name;
+        $data['book_name'] = $content->book_name;
+        $data['writter_name'] = $content->writter_name;
         $data['class_id'] = $content->class_id;
         $data['department_id'] = $content->department_id;
         $data['company_id'] = $content->company_id;
         $data['subject_id'] = $content->subject_id;
-        $data['book_rate'] = $content->rate;
+        $data['regular_price'] = $content->regular_price;
+        $data['sell_price'] = $content->sell_price;
         //$data['status'] = $content->status;
 
         $this->load->library('form_validation');
@@ -122,12 +128,14 @@ class Books extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('books/form', $data);
         } else {
-            $datas['name']     = $this->input->post('name');
-            $datas['subject_id']    = $this->input->post('subject_id');
-            $datas['class_id']      = $this->input->post('class_id');
-            $datas['department_id'] = $this->input->post('department_id');
-            $datas['company_id']    = $this->input->post('company_id');
-            $datas['rate']          = $this->input->post('rate');    
+            $datas['book_name']         = $this->input->post('book_name');
+            $datas['writter_name']      = $this->input->post('writter_name');
+            $datas['subject_id']        = $this->input->post('subject_id');
+            $datas['class_id']          = $this->input->post('class_id');
+            $datas['department_id']     = $this->input->post('department_id');
+            $datas['company_id']        = $this->input->post('company_id');
+            $datas['regular_price']     = $this->input->post('regular_price');    
+            $datas['sell_price']        = $this->input->post('sell_price');    
 
             if ($this->CM->update('books', $datas, $id)) {
                 $msg = "Operation Successfull!!";

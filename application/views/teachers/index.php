@@ -56,10 +56,11 @@ $this->load->view('common/sidebar');
             <table class="table table-bordered table-hover ">
                 <tr>
                     <th id="action_btn_align">SL</th>
-                    <th id="action_btn_align">Teachers Name</th>
-                    <th id="action_btn_align">Phone No</th>
-                    <th id="action_btn_align">Department Name</th>
-                    <th id="action_btn_align">College Name</th>
+                    <th id="action_btn_align">শিক্ষকের নাম </th>
+                    <th id="action_btn_align">পদবি</th>
+                    <th id="action_btn_align">মোবাইল</th>
+                    <th id="action_btn_align">বিষয় / বিভাগ</th>
+                    <th id="action_btn_align">কলেজের নাম  </th>
                     <th id="action_btn_align">Action</th>
 
                 </tr>
@@ -77,6 +78,7 @@ $this->load->view('common/sidebar');
                     <tr id="action_btn_align">
                         <td> <?php echo $teachers['id'] ?></td>
                         <td> <?php echo $teachers['name'] ?></td>
+                        <td> <?php echo $teachers['designation'] ?></td>
                         <td> <?php echo $teachers['phone'] ?></td>
                         <td> <?php
                 if (isset($department->name)) {

@@ -35,14 +35,14 @@ $this->load->view('common/sidebar');
 <div class="row">
 	<div class="col-md-4">
 		<div class="form-group">
-		    <label> Teacher Name </label>
+		    <label> শিক্ষকের নাম  </label>
 		    <?php 
 		    $form_input = array(
 		        'name' => 'name',
 		        'class' =>'form-control ', 
 		        'value' => $name, 
 		        'required' => 'required',
-		        'placeholder'=>'Teacher Name',
+		        'placeholder'=>'শিক্ষকের নাম ',
 		        'size' => '50'
 		    );
 		    echo form_input($form_input); 
@@ -52,14 +52,14 @@ $this->load->view('common/sidebar');
 
     <div class="col-md-4">
         <div class="form-group">
-            <label> Phone No </label>
+            <label> পদবি </label>
             <?php 
             $form_input = array(
-                'name' => 'phone',
+                'name' => 'designation',
                 'class' =>'form-control ', 
-                'value' => $phone, 
+                'value' => $designation, 
                 'required' => 'required',
-                'placeholder'=>'Phone No',
+                'placeholder'=>'পদবি',
                 'size' => '50'
             );
             echo form_input($form_input); 
@@ -67,11 +67,30 @@ $this->load->view('common/sidebar');
         </div>
     </div>
 
+    <div class="col-md-4">
+        <div class="form-group">
+            <label> মোবাইল </label>
+            <?php 
+            $form_input = array(
+                'name' => 'phone',
+                'class' =>'form-control ', 
+                'value' => $phone, 
+                'required' => 'required',
+                'placeholder'=>'মোবাইল',
+                'size' => '50'
+            );
+            echo form_input($form_input); 
+            ?>
+        </div>
+    </div>
+
+    
+
     <div class="col-md-3">
         <div class="form-group">
        
             
-            <label>Department Name </label>
+            <label>বিষয় / বিভাগ </label>
             <div>
             <select name="department_id" class="form-group form-control" id="department_id">
             <option value="0" >select Option</option>
@@ -92,7 +111,7 @@ $this->load->view('common/sidebar');
         <div class="form-group">
        
             
-            <label>College Name </label>
+            <label>কলেজের নাম  </label>
             <div>
             <select name="college_id" class="form-group form-control" id="college_id">
             <option value="0" >select Option</option>
