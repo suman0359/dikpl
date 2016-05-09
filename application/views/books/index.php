@@ -66,7 +66,7 @@ $this->load->view('common/sidebar');
                         <td> <?php echo $books->book_id; ?></td>
                         <td> <?php echo $books->book_name; ?></td>
                         <td> <?php echo $books->writter_name; ?></td>
-                        <td> <?php echo $books->subject_name; ?></td>
+                        <td> <?php echo $books->department_name; ?></td>
                         <td> <?php echo $books->class_name; ?></td>
                         <td> <?php echo $company_name; ?></td>
                         <td> <?php echo $books->regular_price; ?></td>

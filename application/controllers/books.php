@@ -57,12 +57,11 @@ class Books extends CI_Controller {
             redirect('error/accessdeny');
 
         $data['class_list'] = $this->CM->getAll('tbl_class', 'name ASC');
-        $data['subject_list'] = $this->CM->getAll('tbl_subject', 'name ASC');
         $data['department_list'] = $this->CM->getAll('department', 'name ASC');
 
         $data['book_name'] = "";
         $data['writter_name'] = "";
-        $data['subject_id'] = "";
+        $data['percent'] = "";
         $data['class_id'] = "";
         $data['department_id'] = "";
         $data['company_id'] = "";
@@ -73,15 +72,17 @@ class Books extends CI_Controller {
         $this->load->library('form_validation');
 
 
-        $this->form_validation->set_rules('name', 'required', 'address');
-        $this->form_validation->set_rules('subject_name', 'required', 'address');
+        $this->form_validation->set_rules('book_name', 'Book Name', 'required');
+        $this->form_validation->set_rules('company_id', 'Company Name', 'required');
+        $this->form_validation->set_rules('department_id', 'Department Name', 'required');
+        $this->form_validation->set_rules('class_id', 'Class Name', 'required');
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('books/form', $data);
         } else {
 
             $datas['book_name']             = $this->input->post('book_name');
             $datas['writter_name']          = $this->input->post('writter_name');
-            $datas['subject_id']            = $this->input->post('subject_id');
+            $datas['percent']               = $this->input->post('percent');
             $datas['class_id']              = $this->input->post('class_id');
             $datas['department_id']         = $this->input->post('department_id');
             $datas['company_id']            = $this->input->post('company_id');
@@ -110,27 +111,29 @@ class Books extends CI_Controller {
 
         $content = $this->CM->getInfo('books', $id);
         $data['class_list'] = $this->CM->getAll('tbl_class', 'name ASC');
-        $data['subject_list'] = $this->CM->getAll('tbl_subject', 'name ASC');
         $data['department_list'] = $this->CM->getAll('department', 'name ASC');
 
         $data['book_name'] = $content->book_name;
         $data['writter_name'] = $content->writter_name;
+        $data['percent'] = $content->percent;
         $data['class_id'] = $content->class_id;
         $data['department_id'] = $content->department_id;
         $data['company_id'] = $content->company_id;
-        $data['subject_id'] = $content->subject_id;
         $data['regular_price'] = $content->regular_price;
         $data['sell_price'] = $content->sell_price;
         //$data['status'] = $content->status;
 
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('name', 'required', 'address');
+        $this->form_validation->set_rules('book_name', 'Book Name', 'required');
+        $this->form_validation->set_rules('company_id', 'Company Name', 'required');
+        $this->form_validation->set_rules('department_id', 'Department Name', 'required');
+        $this->form_validation->set_rules('class_id', 'Class Name', 'required');
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('books/form', $data);
         } else {
             $datas['book_name']         = $this->input->post('book_name');
             $datas['writter_name']      = $this->input->post('writter_name');
-            $datas['subject_id']        = $this->input->post('subject_id');
+            $datas['percent']           = $this->input->post('percent');
             $datas['class_id']          = $this->input->post('class_id');
             $datas['department_id']     = $this->input->post('department_id');
             $datas['company_id']        = $this->input->post('company_id');
@@ -149,7 +152,7 @@ class Books extends CI_Controller {
         if (!$this->CM->checkpermissiontype($this->module, 'delete', $this->user_type))
             redirect('error/accessdeny');
 
-        if ($this->CM->delete_db('books', $id)) {
+        if ($this->CM->delete('books', array('id' => $id))) {
             $msg = "Operation Successfull!!";
             $this->session->set_flashdata('success', $msg);
         } else {

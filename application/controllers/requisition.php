@@ -57,23 +57,23 @@ class Requisition extends MY_Controller{
 
             for ($i=0; $i < count($book_id); $i++) {
               $book_info = $this->CM->getInfo('books', $book_id[$i]);
-              $book_rate = $book_info->rate;
+              $book_sell_price = $book_info->sell_price;
 
               $book[] = array('book_id' => $book_id[$i], 'book_quantity' => $book_quantity[$i]);
-              $requisition_details[] = array('book_id' => $book_id[$i], 'qutantity' => $book_quantity[$i], 'price' => $book_rate, 'department_id' => $department_id);
+              $requisition_details[] = array('book_id' => $book_id[$i], 'qutantity' => $book_quantity[$i], 'sell_price' => $sell_price, 'department_id' => $department_id);
             }
             /* ************************************* */
             
-            // This option for get total book rate 
+            // This option for get total book sell_price 
             
             $total_amount = 0;
             
             foreach ($book as $key => $value) {
               
               $book_info = $this->CM->getInfo('books', $value['book_id']);
-              $book_rate = $book_info->rate;
+              $book_sell_price = $book_info->sell_price;
               
-              $total_amount +=$book_rate*$value['book_quantity'];
+              $total_amount +=$book_sell_price*$value['book_quantity'];
             }
             /* ************************************************** */
 
@@ -105,13 +105,13 @@ class Requisition extends MY_Controller{
             /* ************************************************************* */        
             for ($i=0; $i < count($book_id); $i++) {
               $book_info = $this->CM->getInfo('books', $book_id[$i]);
-              $book_rate = $book_info->rate;
+              $book_sell_price = $book_info->sell_price;
 
               $book_requisition_details[] = array(
                 'requisition_id'  => $requisition_id, 
                 'book_id'         => $book_id[$i], 
                 'qutantity'       => $book_quantity[$i], 
-                'price'           => $book_rate, 
+                'sell_price'           => $book_sell_price, 
                 'department_id'   => $department_id[$i],
                 'class_id'        => $class_id[$i],
                 'book_type'       => $type[$i],

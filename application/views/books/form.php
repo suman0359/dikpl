@@ -33,7 +33,7 @@ $this->load->view('common/sidebar');
     ?>
 
 <div class="row">
-	<div class="col-md-2">
+	<div class="col-md-2 col-sm-4 col-xs-6">
 		<div class="form-group">
 		    <label for="বইয়ের নাম "> বইয়ের নাম  </label>
 		    <?php 
@@ -41,7 +41,7 @@ $this->load->view('common/sidebar');
 		        'name' => 'book_name',
 		        'class' =>'form-control ', 
 		        'value' => $book_name, 
-		        'required' => 'required',
+		        // 'required' => 'required',
 		        'placeholder'=>'বইয়ের নাম ',
 		        'size' => '50'
 		    );
@@ -50,7 +50,7 @@ $this->load->view('common/sidebar');
 		</div>
 	</div>
 
-    <div class="col-md-2">
+    <div class="col-md-2 col-sm-4 col-xs-6">
         <div class="form-group">
             <label for="বইয়ের নাম "> লেখকের নাম  </label>
             <?php 
@@ -58,7 +58,7 @@ $this->load->view('common/sidebar');
                 'name' => 'writter_name',
                 'class' =>'form-control ', 
                 'value' => $writter_name, 
-                'required' => 'required',
+                // 'required' => 'required',
                 'placeholder'=>'লেখকের নাম ',
                 'size' => '50'
             );
@@ -67,20 +67,20 @@ $this->load->view('common/sidebar');
         </div>
     </div>
 
-    <div class="col-md-2">
+    <div class="col-md-2 col-sm-4 col-xs-6">
         <div class="form-group">
             <label for="className">বিষয় / বিভাগ </label>
-            <select name="subject_id" id="subject_id" class="form-control">
+            <select name="department_id" id="department_id" class="form-control">
                 <option value="">সিলেক্ট বিষয় / বিভাগ  </option>
                 <?php 
-                    foreach ($subject_list as $value) { ?>
-                        <option <?php if($subject_id==$value['id']) echo "selected"; ?> value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
+                    foreach ($department_list as $value) { ?>
+                        <option <?php if($department_id==$value['id']) echo "selected"; ?> value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
                     <?php } ?>
             </select>
         </div>
     </div>
 
-    <div class="col-md-2">
+    <div class="col-md-2 col-sm-4 col-xs-6">
         <div class="form-group">
             <label for="className">শ্রেণী</label>
             <select name="class_id" id="class_id" class="form-group form-control">
@@ -93,12 +93,12 @@ $this->load->view('common/sidebar');
         </div>
     </div>
     
-    <div class="col-md-2">
+    <div class="col-md-2 col-sm-4 col-xs-6">
         <div class="form-group">
             <label for="বইয়ের ধরন ">বইয়ের ধরন  </label>
             
             <select name="company_id" class="form-group form-control" id="company_id">
-                <option value="0" >সিলেক্ট  বইয়ের ধরন </option>
+                <option value="" >সিলেক্ট  বইয়ের ধরন </option>
                 <option <?php if($company_id==1) echo "selected"; ?> value="1">গ্রন্থ কুটির </option>
                 <option <?php if($company_id==2) echo "selected"; ?>value="2">দিকদর্শন </option>
             </select>
@@ -106,30 +106,17 @@ $this->load->view('common/sidebar');
         </div>
     </div>
 
-
-    <!-- <div class="col-md-2">
-        <div class="form-group">
-            <label for="className">Department Name</label>
-            <select name="department_id" id="department_id" class="form-control">
-                <option value="">Select Department </option>
-                <?php 
-                    foreach ($department_list as $value) { ?>
-                        <option <?php if($department_id==$value['id']) echo "selected"; ?> value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
-                    <?php } ?>
-            </select>
-        </div>
-    </div>
- -->
-    <div class="col-md-2">
+    <div class="col-md-4 col-sm-4 col-xs-6">
         <div class="form-group">
             <label> গায়ের মূল্য </label>
             <?php 
             $form_input = array(
-                'type' => 'number',
+                'type' => 'text',
                 'name' => 'regular_price',
+                'id' => 'regular_price',
                 'class' =>'form-control ', 
                 'value' => $regular_price, 
-                'required' => 'required',
+                // 'required' => 'required',
                 'placeholder'=>'গায়ের মূল্য',
                 'size' => '50'
             );
@@ -138,16 +125,35 @@ $this->load->view('common/sidebar');
         </div>
     </div>
 
-    <div class="col-md-2">
+    <div class="col-md-4 col-sm-4 col-xs-6">
+        <div class="form-group">
+            <label> Percent </label>
+            <?php 
+            $form_input = array(
+                'type' => 'text',
+                'name' => 'percent',
+                'id'    => 'percent',
+                'class' =>'form-control ', 
+                'value' => $percent, 
+                // 'required' => 'required',
+                'placeholder'=>'%',
+                'size' => '50'
+            );
+            echo form_input($form_input); 
+            ?>
+        </div>
+    </div>
+
+    <div class="col-md-4 col-sm-4 col-xs-6">
         <div class="form-group">
             <label> বিক্রয় মূল্য </label>
             <?php 
             $form_input = array(
-                'type' => 'number',
+                'type' => 'text',
                 'name' => 'sell_price',
+                'id' => 'sell_price',
                 'class' =>'form-control ', 
                 'value' => $sell_price, 
-                'required' => 'required',
                 'placeholder'=>'বিক্রয় মূল্য',
                 'size' => '50'
             );
@@ -176,7 +182,17 @@ $this->load->view('common/sidebar');
 </div>
 
 
-
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".main-mid-area").on("keyup", '#regular_price, #percent', function(){
+            var regular_price = $("#regular_price").val();
+            var percent = $("#percent").val();
+            
+            var sell_price = regular_price-(regular_price/100*percent);
+            $("#sell_price").val(sell_price);
+        })
+    });
+</script>
 
 
 <!-- End  Working area --> 
