@@ -54,7 +54,7 @@ $this->load->view('common/sidebar');
 	<div class="col-md-3 col-sm-4 home-icon" > 
 	    <a class=" btn-primary   btn-lg btn-block text-center " href="<?php echo base_url(); ?>report/donation"> 
 		<i class="fa fa-user fa-3x"></i>  <br/>
-		Book Donation Report </a>
+		Book Donation Request </a>
 	</div>
 
 	<?php if ($this->session->userdata('user_type') == 1) { ?> 

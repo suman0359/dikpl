@@ -222,97 +222,101 @@ class Report extends MY_Controller {
     }
     
      public function donation() {
-        if (!$this->CM->checkpermissiontype($this->module, 'requisition', $this->user_type))
-            redirect('error/accessdeny');
-        $data['division_list'] = $this->CM->getAllWhere('division', array('status' => '1'));
-//        $data['mpo_list'] = $this->CM->getAllWhere('user', array('user_type' => '5'));
-        $start_date = $this->input->post('start_date');
-        $end_date = $this->input->post('end_date');
-        $data['sdate'] = date("Y-m-d");
-        $data['edate'] = date("Y-m-d");
-
-        $data['content_list'] = array();
-        $data['division_info'] = array();
-
-        if ($this->input->post()) {
-            $data['start_date'] = $this->input->post('start_date');
-            $data['end_date'] = $this->input->post('end_date');
-        }
-
-        $query_data = array();
-        $admin = NULL;
-        $divisionHead = NULL;
-        $jonalHead = NULL;
-        $marketingExecutive = NULL;
-        $startDate = NULL;
-        $endDate = NULL;
-
-        if ($this->input->post('admin') != '') {
-            $admin = $query_data['admin'] = $this->input->post('admin');
-        }
-        if ($this->input->post('divisionHead') != '') {
-            $divisionHead = $query_data['divisionHead'] = $this->input->post('divisionHead');
-        }
-        if ($this->input->post('jonalHead') != '') {
-            $jonalHead = $query_data['jonalHead'] = $this->input->post('jonalHead');
-        }
-        if ($this->input->post('marketingExecutive') != '') {
-            $marketingExecutive = $query_data['marketingExecutive'] = $this->input->post('marketingExecutive');
-        }
-        if ($this->input->post('startDate') != '') {
-            $startDate = $query_data['startDate'] = $this->input->post('startDate');
-        }
-        if ($this->input->post('endDate') != '') {
-            $endDate = $query_data['endDate'] = $this->input->post('endDate');
-        }
-//        $sub_data['requisition'] = $this->RM->getRequisitionReportForMPO($admin, $divisionHead, $jonalHead, $marketingExecutive, $startDate, $endDate);
-
-        if ($start_date == '') {
-            $start_date = date("Y-m-d");
-        }
-        if ($end_date == '') {
-            $end_date = date("Y-m-d");
-        }
-        $requisition_by = $this->uid;
-        if ($this->uid == 1) {
-            $requisition_by = NULL;
-        }
-        $data['report_details'] = $this->RM->getRequisitionReportForMPO($start_date, $end_date, $requisition_by);
-
-
-        $this->load->view('report/requisition', $data);
-    }
-
-    public function transfer() {
-        if (!$this->CM->checkpermissiontype($this->module, 'transfer', $this->user_type))
-            redirect('error/accessdeny');
-
-        $data['sdate'] = date("Y-m-d");
-        $data['edate'] = date("Y-m-d");
-        $data['did'] = 'all';
-        $data['jid'] = 'all';
-        $data['cid'] = 'all';
-        $data['content_list'] = array();
-        $data['division_info'] = array();
-        $data['div_list'] = $this->CM->getAll('division');
-
-        if ($this->input->post()) {
-            $data['sdate'] = $this->input->post('sdate');
-            $data['edate'] = $this->input->post('edate');
-            $data['did'] = $this->input->post('did');
-        }
-        if ($data['did'] == 'all') {
-            $did = NULL;
-        } else {
-            $did = $data['did'];
-            $data['division_info'] = $this->CM->getInfo('division', $did);
-        };
-
-        $data['content_list'] = $this->RM->transferReport($data['sdate'], $data['edate'], $did);
-
-
-
-        $this->load->view('report/transfer', $data);
+//        if (!$this->CM->checkpermissiontype($this->module, 'requisition', $this->user_type))
+//            redirect('error/accessdeny');
+//        $data['division_list'] = $this->CM->getAllWhere('division', array('status' => '1'));
+////        $data['mpo_list'] = $this->CM->getAllWhere('user', array('user_type' => '5'));
+//        $start_date = $this->input->post('start_date');
+//        $end_date = $this->input->post('end_date');
+//        $data['sdate'] = date("Y-m-d");
+//        $data['edate'] = date("Y-m-d");
+//
+//        $data['content_list'] = array();
+//        $data['division_info'] = array();
+//
+//        if ($this->input->post()) {
+//            $data['start_date'] = $this->input->post('start_date');
+//            $data['end_date'] = $this->input->post('end_date');
+//        }
+//
+//        $query_data = array();
+//        $admin = NULL;
+//        $divisionHead = NULL;
+//        $jonalHead = NULL;
+//        $marketingExecutive = NULL;
+//        $startDate = NULL;
+//        $endDate = NULL;
+//
+//        if ($this->input->post('admin') != '') {
+//            $admin = $query_data['admin'] = $this->input->post('admin');
+//        }
+//        if ($this->input->post('divisionHead') != '') {
+//            $divisionHead = $query_data['divisionHead'] = $this->input->post('divisionHead');
+//        }
+//        if ($this->input->post('jonalHead') != '') {
+//            $jonalHead = $query_data['jonalHead'] = $this->input->post('jonalHead');
+//        }
+//        if ($this->input->post('marketingExecutive') != '') {
+//            $marketingExecutive = $query_data['marketingExecutive'] = $this->input->post('marketingExecutive');
+//        }
+//        if ($this->input->post('startDate') != '') {
+//            $startDate = $query_data['startDate'] = $this->input->post('startDate');
+//        }
+//        if ($this->input->post('endDate') != '') {
+//            $endDate = $query_data['endDate'] = $this->input->post('endDate');
+//        }
+////        $sub_data['requisition'] = $this->RM->getRequisitionReportForMPO($admin, $divisionHead, $jonalHead, $marketingExecutive, $startDate, $endDate);
+//
+//        if ($start_date == '') {
+//            $start_date = date("Y-m-d");
+//        }
+//        if ($end_date == '') {
+//            $end_date = date("Y-m-d");
+//        }
+//        $requisition_by = $this->uid;
+//        if ($this->uid == 1) {
+//            $requisition_by = NULL;
+//        }
+//        $data['report_details'] = $this->RM->getRequisitionReportForMPO($start_date, $end_date, $requisition_by);
+//
+//
+//        $this->load->view('report/requisition', $data);
+//    }
+//
+//    public function transfer() {
+//        if (!$this->CM->checkpermissiontype($this->module, 'transfer', $this->user_type))
+//            redirect('error/accessdeny');
+//
+//        $data['sdate'] = date("Y-m-d");
+//        $data['edate'] = date("Y-m-d");
+//        $data['did'] = 'all';
+//        $data['jid'] = 'all';
+//        $data['cid'] = 'all';
+//        $data['content_list'] = array();
+//        $data['division_info'] = array();
+//        $data['div_list'] = $this->CM->getAll('division');
+//
+//        if ($this->input->post()) {
+//            $data['sdate'] = $this->input->post('sdate');
+//            $data['edate'] = $this->input->post('edate');
+//            $data['did'] = $this->input->post('did');
+//        }
+//        if ($data['did'] == 'all') {
+//            $did = NULL;
+//        } else {
+//            $did = $data['did'];
+//            $data['division_info'] = $this->CM->getInfo('division', $did);
+//        };
+//
+//        $data['content_list'] = $this->RM->transferReport($data['sdate'], $data['edate'], $did);
+//
+//
+//
+//        $this->load->view('report/transfer', $data);
+	 $data = array();
+	$this->load->model('join_model');
+	$data['donation_list'] = $this->join_model->getAllMpoDonationList($this->uid);
+	$this->load->view('donation/index', $data);
     }
 
     public function jonaltransfer() {

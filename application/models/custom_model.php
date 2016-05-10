@@ -29,5 +29,16 @@ class Custom_model extends CI_Model{
         ->count_all_results($table_name);
     }
     
+    public function get_donation_info($tbl_name, $id, $uid){
+	$this->db->select('*');
+	$this->db->where('id', $id);
+	$this->db->where('requisition_by', $uid);
+	$this->db->from($tbl_name);
+	
+	$query_result = $this->db->get();
+	$result = $query_result->row();
+	return $result;
+    }
+    
         
 }
