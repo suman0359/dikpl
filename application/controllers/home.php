@@ -81,6 +81,12 @@ class Home extends MY_Controller {
 
         echo json_encode($teacherlist);
     }
+    public function get_book_id_by_department($department_id) {
+        $department_id = trim($department_id);
+        $book_list = $this->CM->getAllWhere('books', array('department_id' => $department_id));
+      
+	echo json_encode($book_list);
+    }
 
     public function getdepartmentidbyid($teacher_id) {
         $teacher_id = trim($teacher_id);
@@ -109,5 +115,6 @@ class Home extends MY_Controller {
 
         echo $html;
     }
+
 
 }
