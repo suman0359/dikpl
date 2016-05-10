@@ -8,6 +8,7 @@ class Donation extends MY_Controller {
     public function __construct() {
 	parent::__construct();
 	$this->uid = $this->session->userdata('uid');
+	$this->load->model('custom_model');
     }
 
     public function add() {
@@ -42,7 +43,8 @@ class Donation extends MY_Controller {
 	    $datas['possible_book'] = $this->input->post('possible_book');
 	    $datas['book_id'] = $this->input->post('book_id');
 	    $datas['money_amount'] = $this->input->post('money_amount');
-
+	    
+	    $datas['requisition_by'] = $this->uid;
 	    $this->db->insert('tbl_donation', $datas);
 	    redirect('donation/index');
 //		$msg = "Operation Successfully!!";
@@ -72,7 +74,7 @@ class Donation extends MY_Controller {
 	$data = array();
 	$data['college_list'] = $this->CM->getAll('college');
 	$data['class_list'] = $this->CM->getAll('tbl_class');
-	$donation_info = $this->CM->getInfo('tbl_donation', $id);
+	$donation_info = $this->custom_model->get_donation_info('tbl_donation', $id, $this->uid);
 
 	$data['val'] = "Submit Request Donation";
 	$data['college_id'] = $donation_info->college_id;
@@ -98,6 +100,8 @@ class Donation extends MY_Controller {
 	    $datas['possible_book'] = $this->input->post('possible_book');
 	    $datas['book_id'] = $this->input->post('book_id');
 	    $datas['money_amount'] = $this->input->post('money_amount');
+	    
+	    $datas['requisition_by'] = $this->uid;
 
 	    $this->CM->update('tbl_donation', $datas, $id);
 	    redirect('donation/index');
