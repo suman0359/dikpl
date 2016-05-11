@@ -125,7 +125,7 @@ class Join_model extends CI_Model {
     }
     
     public function getAllMpoDonationList($mpo_id){
-	$sql = "SELECT do.id,co.name as college_name,t.name as teacher_name,de.name as department_name,cl.name as class_name,do.student_quantity,do.possible_book,b.book_name,do.money_amount FROM tbl_donation as do INNER JOIN college as co ON do.college_id = co.id INNER JOIN teachers as t ON do.teacher_id = t.id LEFT JOIN department as de ON do.department_id = de.id LEFT JOIN tbl_class as cl ON do.class_id = cl.id LEFT JOIN books as b ON do.book_id = b.id WHERE do.requisition_by = $mpo_id";
+	$sql = "SELECT do.id,co.name as college_name,t.name as teacher_name,de.name as department_name,cl.name as class_name,do.student_quantity,do.possible_book,b.book_name,do.money_amount FROM tbl_donation as do INNER JOIN college as co ON do.college_id = co.id INNER JOIN teachers as t ON do.teacher_id = t.id LEFT JOIN department as de ON do.department_id = de.id LEFT JOIN tbl_class as cl ON do.class_id = cl.id LEFT JOIN books as b ON do.book_id = b.id WHERE do.requisition_by = $mpo_id AND do.status!=13";
 	$result_query = $this->db->query($sql);
 	return $result_query->result_array();
 	
