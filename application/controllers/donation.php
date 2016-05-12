@@ -9,13 +9,14 @@ class Donation extends MY_Controller {
 	parent::__construct();
 	$this->uid = $this->session->userdata('uid');
 	$this->load->model('custom_model');
+	$this->load->model('join_model');
     }
 
     public function add() {
-	
+
 //	if (!$this->CM->checkpermissiontype($this->module, 'add', $this->user_type))
 //            redirect('error/accessdeny');
-	
+
 	$data = array();
 	$data['college_list'] = $this->CM->getAll('college');
 	$data['class_list'] = $this->CM->getAll('tbl_class');
@@ -43,7 +44,7 @@ class Donation extends MY_Controller {
 	    $datas['possible_book'] = $this->input->post('possible_book');
 	    $datas['book_id'] = $this->input->post('book_id');
 	    $datas['money_amount'] = $this->input->post('money_amount');
-	    
+
 	    $datas['requisition_by'] = $this->uid;
 	    $this->db->insert('tbl_donation', $datas);
 	    redirect('donation/index');
@@ -64,19 +65,19 @@ class Donation extends MY_Controller {
 	$this->load->model('join_model');
 	$user_role = $this->session->userdata('user_type');
 	$data['user_role'] = $user_role;
-	if($user_role==1){
+	if ($user_role == 1) {
 	    $data['donation_list'] = $this->join_model->getAllAdminList();
-	}elseif ($user_role!=1) {
+	} elseif ($user_role != 1) {
 	    $data['donation_list'] = $this->join_model->getAllMpoDonationList($this->uid);
 	}
 	$this->load->view('donation/index', $data);
     }
 
     public function edit($id) {
-	
+
 //	if (!$this->CM->checkpermissiontype($this->module, 'edit', $this->user_type))
 //            redirect('error/accessdeny');
-	
+
 	$data = array();
 	$data['college_list'] = $this->CM->getAll('college');
 	$data['class_list'] = $this->CM->getAll('tbl_class');
@@ -106,7 +107,7 @@ class Donation extends MY_Controller {
 	    $datas['possible_book'] = $this->input->post('possible_book');
 	    $datas['book_id'] = $this->input->post('book_id');
 	    $datas['money_amount'] = $this->input->post('money_amount');
-	    
+
 	    $datas['requisition_by'] = $this->uid;
 
 	    $this->CM->update('tbl_donation', $datas, $id);
@@ -114,8 +115,8 @@ class Donation extends MY_Controller {
 //		$msg = "Operation Successfully!!";
 //		$this->session->set_flashdata('success', $msg);
 //		redirect('donation/index');
-	    }
 	}
+    }
 
     public function delete($id) {
 
@@ -130,6 +131,31 @@ class Donation extends MY_Controller {
 	    $this->session->set_flashdata('error', $msg);
 	}
 	redirect('donation/index');
+    }
+
+    public function search() {
+//	if (!$this->CM->checkpermissiontype($this->module, 'index', $this->user_type))
+//	    redirect('error/accessdeny');
+
+	$user_role = $this->session->userdata('user_type');
+	$data['user_role'] = $user_role;
+
+	$search = $this->input->post('search');
+
+	$data['search'] = $search;
+//	print_r($this->uid);
+//	exit();
+	if ($user_role == 1) {
+	    $data['donation_list'] = $this->join_model->get_all_search_donation_info($search);
+	} elseif ($user_role != 1) {
+	    $data['donation_list'] = $this->join_model->get_all_search_donation_info($search, $this->uid);
+	}
+	
+
+	// $data['jonal_list']=$this->CM->search('jonal', $search);
+
+
+	$this->load->view('donation/search', $data);
     }
 
 }
