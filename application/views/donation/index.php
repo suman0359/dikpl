@@ -31,6 +31,10 @@ $this->load->view('common/sidebar');
 
 		<tr>
 		    <th style="text-align: center">#</th>
+		    <?php
+			if($user_role==1){?>
+			    <th style="text-align: center">এমপিও এর নাম </th>
+			<?php } ?>
 		    <th style="text-align: center">প্রতিষ্ঠানের নাম</th>
 		    <th style="text-align: center">শিক্ষকের নাম</th>
 		    <th style="text-align: center">বিষয়ের নাম</th>
@@ -51,6 +55,10 @@ $this->load->view('common/sidebar');
     		    <tr align="center">
 
     			<td><?php echo $serialNo; ?></td>
+			<?php
+			if($user_role==1){?>
+			    <td><?php echo $value['user_name']; ?></td>
+			<?php } ?>
     			<td><?php echo $value['college_name']; ?></td>
     			<td><?php echo $value['teacher_name']; ?></td>
     			<td><?php echo $value['department_name']; ?></td>

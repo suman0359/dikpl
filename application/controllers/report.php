@@ -224,7 +224,14 @@ class Report extends MY_Controller {
     public function donation() {
 	$data = array();
 	$this->load->model('join_model');
-	$data['donation_list'] = $this->join_model->getAllMpoDonationList($this->uid);
+	$user_role = $this->session->userdata('user_type');
+	$data['user_role'] = $user_role;
+	if($user_role==1){
+	    $data['donation_list'] = $this->join_model->getAllAdminList();
+	}elseif ($user_role!=1) {
+	    $data['donation_list'] = $this->join_model->getAllMpoDonationList($this->uid);
+	}
+	    
 	$this->load->view('donation/index', $data);
     }
 
