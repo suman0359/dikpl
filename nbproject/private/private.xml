@@ -5,8 +5,10 @@
         <group>
             <file>file:/C:/xampp/htdocs/dikpl/application/views/donation/index.php</file>
             <file>file:/C:/xampp/htdocs/dikpl/application/views/donation/search.php</file>
+            <file>file:/C:/xampp/htdocs/dikpl/application/controllers/teachers.php</file>
             <file>file:/C:/xampp/htdocs/dikpl/application/controllers/donation.php</file>
             <file>file:/C:/xampp/htdocs/dikpl/application/views/teachers/index.php</file>
+            <file>file:/C:/xampp/htdocs/dikpl/application/models/report_module.php</file>
             <file>file:/C:/xampp/htdocs/dikpl/application/models/join_model.php</file>
         </group>
     </open-files>

@@ -328,5 +328,9 @@ class Report extends MY_Controller {
 
 	$this->load->view('report/distribute', $data);
     }
+    
+    public function donation_distribution(){
+	$this->load->view('report/donation_distribution');
+    }
 
 }
