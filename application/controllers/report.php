@@ -226,12 +226,12 @@ class Report extends MY_Controller {
 	$this->load->model('join_model');
 	$user_role = $this->session->userdata('user_type');
 	$data['user_role'] = $user_role;
-	if($user_role==1){
+	if ($user_role == 1) {
 	    $data['donation_list'] = $this->join_model->getAllAdminList();
-	}elseif ($user_role!=1) {
+	} elseif ($user_role != 1) {
 	    $data['donation_list'] = $this->join_model->getAllMpoDonationList($this->uid);
 	}
-	    
+
 	$this->load->view('donation/index', $data);
     }
 
@@ -328,9 +328,67 @@ class Report extends MY_Controller {
 
 	$this->load->view('report/distribute', $data);
     }
-    
-    public function donation_distribution(){
-	$this->load->view('report/donation_distribution');
+
+    public function donation_distribution() {
+	$data = array();
+	$data['sdate'] = date("Y-m-d");
+	$data['edate'] = date("Y-m-d");
+	$data['division_id'] = 'all';
+	$data['jonal_id'] = 'all';
+	$data['district_id'] = 'all';
+	$data['thana_id'] = 'all';
+	$data['college_id'] = 'all';
+
+	$data['division_list'] = $this->CM->getAll('division');
+
+	if ($this->input->post()) {
+	    if($this->input->post('sdate')!=NULL) $data['sdate'] = $this->input->post('sdate');
+	    if($this->input->post('edate')!=NULL) $data['edate'] = $this->input->post('edate');
+	    $data['division_id'] = $this->input->post('division_id');
+	    $data['jonal_id'] = $this->input->post('jonal_id');
+	    $data['district_id'] = $this->input->post('district_id');
+	    $data['thana_id'] = $this->input->post('thana_id');
+	    $data['college_id'] = $this->input->post('college_id');
+	}
+
+	if ($data['division_id'] == 'all') {
+	    $division_id = NULL;
+	} else {
+	    $division_id = $data['division_id'];
+	    $data['division_info'] = $this->CM->getInfo('division', $division_id);
+	}
+
+	if ($data['jonal_id'] == 'all') {
+	    $jonal_id = NULL;
+	} else {
+	    $jonal_id = $data['jonal_id'];
+	    $data['jonal_info'] = $this->CM->getInfo('jonal', $jonal_id);
+	}
+
+	if ($data['district_id'] == 'all') {
+	    $district_id = NULL;
+	} else {
+	    $district_id = $data['district_id'];
+	    $data['district_info'] = $this->CM->getInfo('district', $district_id);
+	}
+
+	if ($data['thana_id'] == 'all') {
+	    $thana_id = NULL;
+	} else {
+	    $thana_id = $data['thana_id'];
+	    $data['thana_info'] = $this->CM->getInfo('thana', $thana_id);
+	}
+
+	if ($data['college_id'] == 'all') {
+	    $college_id = NULL;
+	} else {
+	    $college_id = $data['college_id'];
+	    $data['college_info'] = $this->CM->getInfo('college', $college_id);
+	}
+
+
+	$data['content_list'] = $this->RM->donation_distribution($data['sdate'], $data['edate'], $division_id, $jonal_id, $district_id, $thana_id, $college_id);
+	$this->load->view('report/donation_distribution', $data);
     }
 
 }

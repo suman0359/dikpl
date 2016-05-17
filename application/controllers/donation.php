@@ -44,19 +44,16 @@ class Donation extends MY_Controller {
 	    $datas['possible_book'] = $this->input->post('possible_book');
 	    $datas['book_id'] = $this->input->post('book_id');
 	    $datas['money_amount'] = $this->input->post('money_amount');
+	    
+	    $datas['date'] = date('Y-m-d');
+	    $datas['division_id'] = $this->session->userdata('division_id');
+	    $datas['jonal_id'] = $this->session->userdata('jonal_id');
+	    $datas['district_id'] = $this->session->userdata('district_id');
+	    $datas['thana_id'] = $this->session->userdata('thana_id');
 
 	    $datas['requisition_by'] = $this->uid;
 	    $this->db->insert('tbl_donation', $datas);
 	    redirect('donation/index');
-//		$msg = "Operation Successfully!!";
-//		$this->session->set_flashdata('success', $msg);
-//		redirect('donation');
-//	    }else{
-//		$msg = "There is an error, Please try again!!";
-//                $this->session->set_flashdata('error', $msg);
-//                $this->load->view('donation/index', $data);
-//	    }
-//	    redirect('donation', 'refresh');
 	}
     }
 
@@ -74,9 +71,13 @@ class Donation extends MY_Controller {
     }
 
     public function edit($id) {
+	
 
 //	if (!$this->CM->checkpermissiontype($this->module, 'edit', $this->user_type))
 //            redirect('error/accessdeny');
+//	echo '<pre>';
+//	print_r();
+//	exit();
 
 	$data = array();
 	$data['college_list'] = $this->CM->getAll('college');
@@ -107,6 +108,14 @@ class Donation extends MY_Controller {
 	    $datas['possible_book'] = $this->input->post('possible_book');
 	    $datas['book_id'] = $this->input->post('book_id');
 	    $datas['money_amount'] = $this->input->post('money_amount');
+	    
+	    $datas['date'] = date('Y-m-d');
+	    $datas['division_id'] = $this->session->userdata('division_id');
+	    $datas['jonal_id'] = $this->session->userdata('jonal_id');
+	    $datas['district_id'] = $this->session->userdata('district_id');
+	    $datas['thana_id'] = $this->session->userdata('thana_id');
+	    
+	    
 
 	    $datas['requisition_by'] = $this->uid;
 
