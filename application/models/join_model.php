@@ -10,15 +10,15 @@ class Join_model extends CI_Model {
     }
 
     public function get_thana_info($from = NULL, $limit = NULL){
-    	$sql="SELECT th.id, th.name as thana_name, dis.name as district_name, di.name as division_name, us.name as executive_name FROM thana as th left join district as dis on th.district_id=dis.id left join division as di on th.division_id=di.id left join user as us on th.executive_id=us.id";
+        $sql="SELECT th.id, th.name as thana_name, dis.name as district_name, di.name as division_name, us.name as executive_name FROM thana as th left join district as dis on th.district_id=dis.id left join division as di on th.division_id=di.id left join user as us on th.executive_id=us.id";
 
-    	if (empty($from)) {
+        if (empty($from)) {
             $sql .= " LIMIT 0, 15 ";
         } else {
             $sql .= " LIMIT $from,$limit ";
         }
 
-    	$result = $this->db->query($sql);
+        $result = $this->db->query($sql);
         return $result->result_array();
     }
 
@@ -43,6 +43,23 @@ class Join_model extends CI_Model {
         } else {
             $sql .= " LIMIT $from,$limit ";
         }
+
+        $result = $this->db->query($sql);
+        return $result->result_array();
+    }
+    
+    public function get_all_search_donation_info($college_name, $user_id=NULL){
+    $sql="SELECT do.id,u.name as user_name,co.name as college_name,t.name as teacher_name,de.name as department_name,cl.name as class_name,do.student_quantity,do.possible_book,b.book_name,do.money_amount FROM tbl_donation as do INNER JOIN college as co ON do.college_id = co.id INNER JOIN teachers as t ON do.teacher_id = t.id LEFT JOIN department as de ON do.department_id = de.id LEFT JOIN tbl_class as cl ON do.class_id = cl.id LEFT JOIN books as b ON do.book_id = b.id LEFT JOIN user as u ON do.requisition_by = u.id WHERE co.name like '%$college_name%'";
+    if($user_id!=NULL){ 
+        $sql .= " and u.id= $user_id";
+    }
+    $sql .= " and do.status!=13";
+
+//        if (empty($from)) {
+//            $sql .= " LIMIT 0, 15 ";
+//        } else {
+//            $sql .= " LIMIT $from,$limit ";
+//        }
 
         $result = $this->db->query($sql);
         return $result->result_array();
@@ -125,10 +142,16 @@ class Join_model extends CI_Model {
     }
     
     public function getAllMpoDonationList($mpo_id){
-	$sql = "SELECT do.id,co.name as college_name,t.name as teacher_name,de.name as department_name,cl.name as class_name,do.student_quantity,do.possible_book,b.book_name,do.money_amount FROM tbl_donation as do  LEFT JOIN college as co ON do.college_id = co.id  LEFT JOIN teachers as t ON do.teacher_id = t.id  LEFT JOIN department as de ON do.department_id = de.id  LEFT JOIN tbl_class as cl ON do.class_id = cl.id  LEFT JOIN books as b ON do.book_id = b.id WHERE do.requisition_by = $mpo_id";
-	$result_query = $this->db->query($sql);
-	return $result_query->result_array();
-	
+    $sql = "SELECT do.id,co.name as college_name,t.name as teacher_name,de.name as department_name,cl.name as class_name,do.student_quantity,do.possible_book,b.book_name,do.money_amount FROM tbl_donation as do INNER JOIN college as co ON do.college_id = co.id INNER JOIN teachers as t ON do.teacher_id = t.id LEFT JOIN department as de ON do.department_id = de.id LEFT JOIN tbl_class as cl ON do.class_id = cl.id LEFT JOIN books as b ON do.book_id = b.id WHERE do.requisition_by = $mpo_id AND do.status!=13 ORDER BY do.id DESC";
+    $result_query = $this->db->query($sql);
+    return $result_query->result_array();
+    
+    }
+    
+    public function getAllAdminList(){
+    $sql = "SELECT do.id,u.name as user_name,co.name as college_name,t.name as teacher_name,de.name as department_name,cl.name as class_name,do.student_quantity,do.possible_book,b.book_name,do.money_amount FROM tbl_donation as do INNER JOIN college as co ON do.college_id = co.id INNER JOIN teachers as t ON do.teacher_id = t.id LEFT JOIN department as de ON do.department_id = de.id LEFT JOIN tbl_class as cl ON do.class_id = cl.id LEFT JOIN books as b ON do.book_id = b.id LEFT JOIN user as u ON do.requisition_by = u.id WHERE do.status!=13 ORDER BY do.id DESC";
+    $result_query = $this->db->query($sql);
+    return $result_query->result_array();
     }
 
    

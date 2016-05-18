@@ -172,7 +172,6 @@ class Commons extends CI_Model {
 
     public function delete_db($table, $id) {
         $data = array('status' => 13);
-
         $this->db->where('id', $id);
         return $this->db->update($table, $data);
     }

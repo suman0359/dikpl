@@ -1,3 +1,4 @@
+
 .margin_padding{margin: 0px ; padding: 0px;}
 .marginpadding{ margin: 0px 0px 5px 0px ; padding: 0px;}
 
@@ -172,7 +173,6 @@ border: 2px solid #e6e6e3;
 {
    
     margin-bottom: 25px;
-    
     margin: 10px;
     list-style: none;
      
@@ -182,6 +182,7 @@ border: 2px solid #e6e6e3;
   background: #357CA5 ; 
   display: block; 
  padding: 25px;
+ 
  color: #f7e1b5 ;
   font-weight: bold;
   border: #357CA5 solid 2px;
