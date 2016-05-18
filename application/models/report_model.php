@@ -138,9 +138,9 @@ class Report_model extends CI_Model {
 	return $result->result_array();
     }
 
-    public function donation_distribution($start_date, $end_date, $division_id=NULL, $jonal_id=NULL, $district_id=NULL, $thana_id=NULL, $college_id=NULL) {
+    public function donation_distribution($start_date=NULL, $end_date=NULL, $division_id=NULL, $jonal_id=NULL, $district_id=NULL, $thana_id=NULL, $college_id=NULL) {
 
-	$sql = "SELECT u.name as user_name,c.name as college_name, te.name as teacher_name, d.name as department_name,cl.name as class_name,do.student_quantity,do.possible_book,bo.book_name as book_name,do.money_amount "
+	$sql = "SELECT do.date,u.name as user_name,c.name as college_name, te.name as teacher_name, d.name as department_name,cl.name as class_name,do.student_quantity,do.possible_book,bo.book_name as book_name,do.money_amount "
 		. "FROM "
 		. "tbl_donation as do INNER JOIN department as d ON do.department_id=d.id "
 		. "INNER JOIN user as u ON do.requisition_by = u.id "
@@ -148,7 +148,12 @@ class Report_model extends CI_Model {
 		. "INNER JOIN teachers as te ON do.teacher_id = te.id "
 		. "INNER JOIN tbl_class as cl ON do.class_id = cl.id "
 		. "INNER JOIN books as bo ON do.book_id = bo.id "
-		. "WHERE do.date >= '$start_date' and do.date  <= '$end_date'";
+		. "WHERE ";
+	
+		if ($start_date!=NULL AND $end_date!=NULL) {
+		    $sql .="do.date >= '$start_date' and do.date  <= '$end_date'";
+		}
+		
 		 if ($division_id!=NULL) {
 		    $sql .="AND do.division_id = '{$division_id}'";
 		}

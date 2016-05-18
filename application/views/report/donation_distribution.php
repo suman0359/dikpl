@@ -73,61 +73,70 @@ $this->load->view('common/sidebar');
 	    <?php echo form_close() ?>
 	</div>
 	<div class="text-center">
-	    <h3> Chalan/Shipment Report </h3>
+	    <h3> Donation Distribution Report </h3>
 	    <div> From <?php echo date('d-m-y', strtotime($sdate)) ?>  to <?php echo date('d-m-y', strtotime($edate)) ?>  </div>
-	    <h4> Jonal :   </h4>
+	    <?php if (!empty($division_info)) { ?>
+    	    <h4> Division :  <?php echo $division_info->name ?>  </h4>
+	    <?php } else echo "<div> All Division </div>"; ?> 
+	    <?php if (!empty($jonal_info)) { ?>
+    	    <h4> Jonal :  <?php echo $jonal_info->name ?>  </h4>
+	    <?php } else echo "<div> All Jonal </div>"; ?> 
 	</div>
-	<div class="clearfix"></div>
-	<br><br>
-	<table class="table table-bordered table-hover">
-	    <thead>
-		<tr>
-		    <th  style="text-align: center">#</th>
-		    
+	<?php if (!empty($content_list)) { ?> 
+    	<div class="clearfix"></div>
+    	<br><br>
+    	<table class="table table-bordered table-hover">
+    	    <thead>
+    		<tr>
+    		    <th  style="text-align: center">#</th>
+    		    <th  style="text-align: center">তারিখ</th>
     		    <th style="text-align: center">এমপিও এর নাম </th>
-		    
-		    <th  style="text-align: center">প্রতিষ্ঠানের নাম</th>
-		    <th  style="text-align: center">শিক্ষকের নাম</th>
-		    <th  style="text-align: center">বিষয়ের নাম</th>
-		    <th  style="text-align: center">শ্রেনীর নাম</th>
-		    <th  style="text-align: center">ছাত্র ছাত্রীর সংখ্যা</th>
-		    <th  style="text-align: center">সম্ভাব্য বই চলবে</th>
-		    <th  style="text-align: center">বইয়ের নাম</th>
-		    <th  style="text-align: center">টাকার পরিমান</th>
-		    
+    		    <th  style="text-align: center">প্রতিষ্ঠানের নাম</th>
+    		    <th  style="text-align: center">শিক্ষকের নাম</th>
+    		    <th  style="text-align: center">বিষয়ের নাম</th>
+    		    <th  style="text-align: center">শ্রেনীর নাম</th>
+    		    <th  style="text-align: center">ছাত্র ছাত্রীর সংখ্যা</th>
+    		    <th  style="text-align: center">সম্ভাব্য বই চলবে</th>
+    		    <th  style="text-align: center">বইয়ের নাম</th>
+    		    <th  style="text-align: center">টাকার পরিমান</th>
 
-		</tr>
-	    </thead>
-	    <tbody>
-		<?php
-		$serialNo = 1;
-		foreach ($content_list as $value) {
-		    ?>
-    		<tr  style="text-align: center">
-    		    <td><?php echo $serialNo; ?></td>
-			
-			    <td><?php echo $value['user_name']; ?></td>
-			
-    		    <td><?php echo $value['college_name']; ?></td>
-    		    <td><?php echo $value['teacher_name']; ?></td>
-    		    <td><?php echo $value['department_name']; ?></td>
-    		    <td><?php echo $value['class_name']; ?></td>
-    		    <td><?php echo $value['student_quantity']; ?></td>
-    		    <td><?php echo $value['possible_book']; ?></td>
-    		    <td><?php echo $value['book_name']; ?></td>
-    		    <td><?php echo $value['money_amount']; ?></td>
+
     		</tr>
-		    <?php $serialNo++;
-		} ?>
-	    </tbody>
-	</table>
-	<br/> 
-	<br/> 
-	<br/> 
-	<br/> 
-	<div class="alert alert-danger text-center">
-	    No data Found! 
-	</div>
+    	    </thead>
+    	    <tbody>
+		    <?php
+		    $serialNo = 1;
+		    foreach ($content_list as $value) {
+			?>
+			<tr  style="text-align: center">
+			    <td><?php echo $serialNo; ?></td>
+			    <td><?php echo $value['date']; ?></td>
+			    <td><?php echo $value['user_name']; ?></td>
+			    <td><?php echo $value['college_name']; ?></td>
+			    <td><?php echo $value['teacher_name']; ?></td>
+			    <td><?php echo $value['department_name']; ?></td>
+			    <td><?php echo $value['class_name']; ?></td>
+			    <td><?php echo $value['student_quantity']; ?></td>
+			    <td><?php echo $value['possible_book']; ?></td>
+			    <td><?php echo $value['book_name']; ?></td>
+			    <td><?php echo $value['money_amount']; ?></td>
+			</tr>
+			<?php
+			$serialNo++;
+		    }
+		    ?>
+    	    </tbody>
+
+    	</table>
+	<?php } else { ?>
+    	<br/> 
+    	<br/> 
+    	<br/> 
+    	<br/> 
+    	<div class="alert alert-danger text-center">
+    	    No data Found! 
+    	</div>
+	<?php } ?>
     </div>
 
     <!-- End  Working area -->
@@ -135,15 +144,15 @@ $this->load->view('common/sidebar');
     <script>
 
 
-	$(document).ready(function(){
-	    $('.datepicker').datepicker({
-                             KeyboardNavigation: false,
-                              todayHighlight: true,
-                               format: 'yyyy-mm-dd',
-                                autoclose: true
-                
+        $(document).ready(function () {
+            $('.datepicker').datepicker({
+                KeyboardNavigation: false,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd',
+                autoclose: true
+
             });
-	})
+        })
 
         $(document).ready(function () {
             $(".main-mid-area").on('change', '#division_id', function () {
@@ -228,4 +237,4 @@ $this->load->view('common/sidebar');
     </script>
 
 
-<?php $this->load->view('common/footer') ?>
+    <?php $this->load->view('common/footer') ?>
