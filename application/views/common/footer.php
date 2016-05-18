@@ -29,7 +29,7 @@
        <!--  <script src="<?php echo base_url(); ?>style_sheet/js/AdminLTE/dashboard.js" type="text/javascript"></script> -->
 
         <!-- AdminLTE for demo purposes -->
-        <script src="<?php echo base_url(); ?>style_sheet/js/AdminLTE/demo.js" type="text/javascript"></script>
+        <!--<script src="<?php echo base_url(); ?>style_sheet/js/AdminLTE/demo.js" type="text/javascript"></script>-->
         <script src="<?php echo base_url(); ?>style_sheet/js/multiselect.js" type="text/javascript"></script>
   
 

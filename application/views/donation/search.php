@@ -2,6 +2,7 @@
 $this->load->view('common/css_link');
 $this->load->view('common/header');
 $this->load->view('common/sidebar');
+//$this->load->view('common/control_panel');
 ?> 
 
 <!-- Right side column. Contains the navbar and content of the page -->
@@ -21,36 +22,43 @@ $this->load->view('common/sidebar');
 
 
 
-    <div class="col-md-12 main-mid-area">
-	<form action="<?php echo base_url() . "donation/search/"; ?>" method="POST" >
+
+    <div class="col-md-12 main-mid-area"> 
+	<?php $this->load->view('common/error_show') ?>
+
+	<div class="searchbar " >
+	    <div class="col-md-8"  >
+	    </div>
+
+
+	</div> 
+
+	<form action="<?php echo base_url() . "donation/search/"; ?>" method="POST">
 	    <div class="col-md-8">
 		<div class="search_bar">
 		    <div class="form-group">
-			<input type="search" name="search" placeholder="Search college name" class="form-control">
+
+			<input type="search" name="search" placeholder="Search By College Name" class="form-control">
+
+
 		    </div>
 		</div>
 	    </div>
-
 	    <div class="col-md-4">
 		<div class="form-group">
 		    <input type="submit" value="Search" class="btn btn-primary">
-		    <div class="pull-right"> 
-			<a href="<?php echo base_url() ?>donation/index" class="btn btn-info pull-right" > <i class="fa fa-plus-square gap">  </i> View All</a> 
-		    </div>
-		    <div class="clearfix"></div>
-		</div>
 
-
-
+		  </div>
 	    </div>
 
 	</form>
 
-        <div class="col-md-12">
 
 
-            <table class="table table-bordered table-hover ">
 
+	<div class="col-md-12">
+
+	    <table class="table table-bordered table-hover ">
 		<tr>
 		    <th style="text-align: center">#</th>
 		    <?php if ($user_role == 1) { ?>
@@ -60,8 +68,7 @@ $this->load->view('common/sidebar');
 		    <th style="text-align: center">শিক্ষকের নাম</th>
 		    <th style="text-align: center">বিষয়ের নাম</th>
 		    <th style="text-align: center">শ্রেনীর নাম</th>
-		    <th>
-			ছাত্র ছাত্রীর সংখ্যা</th>
+		    <th style="text-align: center">ছাত্র ছাত্রীর সংখ্যা</th>
 		    <th style="text-align: center">সম্ভাব্য বই চলবে</th>
 		    <th style="text-align: center">বইয়ের নাম</th>
 		    <th style="text-align: center">টাকার পরিমান</th>
@@ -98,10 +105,9 @@ $this->load->view('common/sidebar');
 		    }
 		    ?>
 		</tbody>
-            </table> 
-        </div>
 
-    </div>      
+	    </table> 
+	</div>
 
-    <!-- End  Working area --> 
-    <?php $this->load->view('common/footer') ?>
+	<!-- End  Working area --> 
+	<?php $this->load->view('common/footer') ?>

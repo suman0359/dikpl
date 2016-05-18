@@ -9,13 +9,14 @@ class Donation extends MY_Controller {
 	parent::__construct();
 	$this->uid = $this->session->userdata('uid');
 	$this->load->model('custom_model');
+	$this->load->model('join_model');
     }
 
     public function add() {
-	
+
 //	if (!$this->CM->checkpermissiontype($this->module, 'add', $this->user_type))
 //            redirect('error/accessdeny');
-	
+
 	$data = array();
 	$data['college_list'] = $this->CM->getAll('college');
 	$data['class_list'] = $this->CM->getAll('tbl_class');
@@ -44,33 +45,40 @@ class Donation extends MY_Controller {
 	    $datas['book_id'] = $this->input->post('book_id');
 	    $datas['money_amount'] = $this->input->post('money_amount');
 	    
+	    $datas['date'] = date('Y-m-d');
+	    $datas['division_id'] = $this->session->userdata('division_id');
+	    $datas['jonal_id'] = $this->session->userdata('jonal_id');
+	    $datas['district_id'] = $this->session->userdata('district_id');
+	    $datas['thana_id'] = $this->session->userdata('thana_id');
+
 	    $datas['requisition_by'] = $this->uid;
 	    $this->db->insert('tbl_donation', $datas);
 	    redirect('donation/index');
-//		$msg = "Operation Successfully!!";
-//		$this->session->set_flashdata('success', $msg);
-//		redirect('donation');
-//	    }else{
-//		$msg = "There is an error, Please try again!!";
-//                $this->session->set_flashdata('error', $msg);
-//                $this->load->view('donation/index', $data);
-//	    }
-//	    redirect('donation', 'refresh');
 	}
     }
 
     public function index() {
 	$data = array();
 	$this->load->model('join_model');
-	$data['donation_list'] = $this->join_model->getAllMpoDonationList($this->uid);
+	$user_role = $this->session->userdata('user_type');
+	$data['user_role'] = $user_role;
+	if ($user_role == 1) {
+	    $data['donation_list'] = $this->join_model->getAllAdminList();
+	} elseif ($user_role != 1) {
+	    $data['donation_list'] = $this->join_model->getAllMpoDonationList($this->uid);
+	}
 	$this->load->view('donation/index', $data);
     }
 
     public function edit($id) {
 	
+
 //	if (!$this->CM->checkpermissiontype($this->module, 'edit', $this->user_type))
 //            redirect('error/accessdeny');
-	
+//	echo '<pre>';
+//	print_r();
+//	exit();
+
 	$data = array();
 	$data['college_list'] = $this->CM->getAll('college');
 	$data['class_list'] = $this->CM->getAll('tbl_class');
@@ -101,6 +109,14 @@ class Donation extends MY_Controller {
 	    $datas['book_id'] = $this->input->post('book_id');
 	    $datas['money_amount'] = $this->input->post('money_amount');
 	    
+	    $datas['date'] = date('Y-m-d');
+	    $datas['division_id'] = $this->session->userdata('division_id');
+	    $datas['jonal_id'] = $this->session->userdata('jonal_id');
+	    $datas['district_id'] = $this->session->userdata('district_id');
+	    $datas['thana_id'] = $this->session->userdata('thana_id');
+	    
+	    
+
 	    $datas['requisition_by'] = $this->uid;
 
 	    $this->CM->update('tbl_donation', $datas, $id);
@@ -108,8 +124,8 @@ class Donation extends MY_Controller {
 //		$msg = "Operation Successfully!!";
 //		$this->session->set_flashdata('success', $msg);
 //		redirect('donation/index');
-	    }
 	}
+    }
 
     public function delete($id) {
 
@@ -124,6 +140,31 @@ class Donation extends MY_Controller {
 	    $this->session->set_flashdata('error', $msg);
 	}
 	redirect('donation/index');
+    }
+
+    public function search() {
+//	if (!$this->CM->checkpermissiontype($this->module, 'index', $this->user_type))
+//	    redirect('error/accessdeny');
+
+	$user_role = $this->session->userdata('user_type');
+	$data['user_role'] = $user_role;
+
+	$search = $this->input->post('search');
+
+	$data['search'] = $search;
+//	print_r($this->uid);
+//	exit();
+	if ($user_role == 1) {
+	    $data['donation_list'] = $this->join_model->get_all_search_donation_info($search);
+	} elseif ($user_role != 1) {
+	    $data['donation_list'] = $this->join_model->get_all_search_donation_info($search, $this->uid);
+	}
+	
+
+	// $data['jonal_list']=$this->CM->search('jonal', $search);
+
+
+	$this->load->view('donation/search', $data);
     }
 
 }

@@ -47,6 +47,23 @@ class Join_model extends CI_Model {
         $result = $this->db->query($sql);
         return $result->result_array();
     }
+    
+    public function get_all_search_donation_info($college_name, $user_id=NULL){
+	$sql="SELECT do.id,u.name as user_name,co.name as college_name,t.name as teacher_name,de.name as department_name,cl.name as class_name,do.student_quantity,do.possible_book,b.book_name,do.money_amount FROM tbl_donation as do INNER JOIN college as co ON do.college_id = co.id INNER JOIN teachers as t ON do.teacher_id = t.id LEFT JOIN department as de ON do.department_id = de.id LEFT JOIN tbl_class as cl ON do.class_id = cl.id LEFT JOIN books as b ON do.book_id = b.id LEFT JOIN user as u ON do.requisition_by = u.id WHERE co.name like '%$college_name%'";
+	if($user_id!=NULL){ 
+	    $sql .= " and u.id= $user_id";
+	}
+	$sql .= " and do.status!=13";
+
+//        if (empty($from)) {
+//            $sql .= " LIMIT 0, 15 ";
+//        } else {
+//            $sql .= " LIMIT $from,$limit ";
+//        }
+
+        $result = $this->db->query($sql);
+        return $result->result_array();
+    }
 
     public function get_all_district_where_zonal_info($jonal_id){
         $sql="SELECT dis.id as district_id, dis.name as district_name FROM zonal_group as zo inner join district as dis on zo.district_id=dis.id where zo.zonal_id=$jonal_id";
@@ -125,10 +142,10 @@ class Join_model extends CI_Model {
     }
     
     public function getAllMpoDonationList($mpo_id){
-	$sql = "SELECT do.id,co.name as college_name,t.name as teacher_name,de.name as department_name,cl.name as class_name,do.student_quantity,do.possible_book,b.book_name,do.money_amount FROM tbl_donation as do  LEFT JOIN college as co ON do.college_id = co.id  LEFT JOIN teachers as t ON do.teacher_id = t.id  LEFT JOIN department as de ON do.department_id = de.id  LEFT JOIN tbl_class as cl ON do.class_id = cl.id  LEFT JOIN books as b ON do.book_id = b.id WHERE do.requisition_by = $mpo_id";
-	$result_query = $this->db->query($sql);
-	return $result_query->result_array();
-	
+    $sql = "SELECT do.id,co.name as college_name,t.name as teacher_name,de.name as department_name,cl.name as class_name,do.student_quantity,do.possible_book,b.book_name,do.money_amount FROM tbl_donation as do INNER JOIN college as co ON do.college_id = co.id INNER JOIN teachers as t ON do.teacher_id = t.id LEFT JOIN department as de ON do.department_id = de.id LEFT JOIN tbl_class as cl ON do.class_id = cl.id LEFT JOIN books as b ON do.book_id = b.id WHERE do.requisition_by = $mpo_id AND do.status!=13 ORDER BY do.id DESC";
+    $result_query = $this->db->query($sql);
+    return $result_query->result_array();
+    
     }
 
    
