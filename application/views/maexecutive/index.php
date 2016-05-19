@@ -61,7 +61,7 @@ $this->load->view('common/sidebar');
 		 $serialNo = $this->uri->segment(3);
 		 if($serialNo == FALSE) $serialNo=1;
 		 else $serialNo +=1;
-                 foreach ($user_info as $user){
+                 foreach ($user_info  as $user){
                  ?>
                  
                  
@@ -71,8 +71,10 @@ $this->load->view('common/sidebar');
                   <td> <?php echo $user['address'] ?></td>
                   <td> <?php echo $user['phone'] ?></td>
                   <td> <?php echo $user['email'] ?></td>
-                  <td> <?php echo $division = $this->CM->getInfo('division', $user['division_id'])->name ?></td>
-                  <td> <?php echo $jonal = $this->CM->getInfo('jonal', $user['jonal_id'])->name ?></td>
+<!--                  <td> <?php echo $division = $this->CM->getInfo('division', $user['division_id'])->name ?></td>
+                  <td> <?php echo $jonal = $this->CM->getInfo('jonal', $user['jonal_id'])->name ?></td>-->
+		  <td><?php echo $user['division_id'];?></td>
+		  <td><?php echo $user['jonal_id'];?></td>
                    
                   <td>     
                             <a class="btn btn-primary btn-flat" href="<?php echo base_url(); ?>maexecutive/edit/<?php echo $user['id'] ?>"><i class="fa fa-pencil-square-o" ></i> Edit </a>

@@ -25,6 +25,7 @@ class Join_model extends CI_Model {
     public function get_mexecutive_info($from = NULL, $limit = NULL){
 //        $sql="SELECT th.id, th.name as thana_name, dis.name as district_name, di.name as division_name, us.name as executive_name FROM thana as th left join district as dis on th.district_id=dis.id left join division as di on th.division_id=di.id left join user as us on th.executive_id=us.id";
 	  $sql = "SELECT u.name,u.address,u.phone,u.email,div.name as division_name,jo.name as jonal_name FROM user as u LEFT JOIN division as div ON u.division_id = div.id LEFT JOIN jonal as jo ON u.jonal_id = jo.id";
+//	  $sql = "SELECT u.name,u.address,u.phone,u.email, FROM user as u";
         if (empty($from)) {
             $sql .= " LIMIT 0, 15 ";
         } else {
