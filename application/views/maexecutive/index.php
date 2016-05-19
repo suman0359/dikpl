@@ -58,12 +58,15 @@ $this->load->view('common/sidebar');
                  
                  <?php 
                //  var_dump($company_list) ; 
+		 $serialNo = $this->uri->segment(3);
+		 if($serialNo == FALSE) $serialNo=1;
+		 else $serialNo +=1;
                  foreach ($user_list as $user){
                  ?>
                  
                  
               <tr id="action_btn_align">
-                  <td> <?php echo $user['id'] ?></td>
+                  <td> <?php echo $serialNo;?></td>
                   <td> <?php echo $user['name'] ?></td>
                   <td> <?php echo $user['address'] ?></td>
                   <td> <?php echo $user['phone'] ?></td>
@@ -78,7 +81,7 @@ $this->load->view('common/sidebar');
                          </div>
                     </td>     
                </tr>
-              <?php } ?>
+              <?php $serialNo++; } ?>
                     
              </table> 
 </div>

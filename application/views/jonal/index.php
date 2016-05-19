@@ -67,7 +67,9 @@ $this->load->view('common/sidebar');
                 <?php
 		
 		
-		$serialNo = 1; 
+		$serialNo = $this->uri->segment(3);
+		if($serialNo==FALSE) $serialNo=1;
+		else $serialNo +=1;
                 foreach ($jonal_list as $jonal) {
                     $jonal_id = $jonal['jonal_id'];
                     $district_list = $this->join_model->get_all_district_where_zonal_info($jonal_id);

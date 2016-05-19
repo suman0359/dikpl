@@ -54,7 +54,9 @@ $this->load->view('common/sidebar');
          
          <?php 
           //  var_dump($company_list) ; 
-	 $serialNo = 1;
+	 $serialNo = $this->uri->segment(3);
+	 if($serialNo == false) $serialNo=1;
+	 else $serialNo +=1;
           foreach ($district_list as $district){
               $jonal = $this->CM->getInfo('jonal', $district['jonal_id'] );
               

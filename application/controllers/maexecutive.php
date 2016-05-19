@@ -22,7 +22,7 @@ class Maexecutive extends CI_Controller
         
                 $no_rows= count($this->CM->getAllWhere('user', array('user_type' => '5')));
                 $this->load->library('pagination');
-                $config['base_url'] = base_url().'user/index/';
+                $config['base_url'] = base_url().'maexecutive/index/';
                
                 $config['total_rows'] = $no_rows ;
                 $config['per_page'] = 15;
