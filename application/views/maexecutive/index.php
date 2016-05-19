@@ -61,7 +61,7 @@ $this->load->view('common/sidebar');
 		 $serialNo = $this->uri->segment(3);
 		 if($serialNo == FALSE) $serialNo=1;
 		 else $serialNo +=1;
-                 foreach ($user_list as $user){
+                 foreach ($user_info as $user){
                  ?>
                  
                  

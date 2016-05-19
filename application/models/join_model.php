@@ -21,6 +21,19 @@ class Join_model extends CI_Model {
         $result = $this->db->query($sql);
         return $result->result_array();
     }
+    
+    public function get_mexecutive_info($from = NULL, $limit = NULL){
+//        $sql="SELECT th.id, th.name as thana_name, dis.name as district_name, di.name as division_name, us.name as executive_name FROM thana as th left join district as dis on th.district_id=dis.id left join division as di on th.division_id=di.id left join user as us on th.executive_id=us.id";
+	  $sql = "SELECT u.name,u.address,u.phone,u.email,div.name as division_name,jo.name as jonal_name FROM user as u LEFT JOIN division as div ON u.division_id = div.id LEFT JOIN jonal as jo ON u.jonal_id = jo.id";
+        if (empty($from)) {
+            $sql .= " LIMIT 0, 15 ";
+        } else {
+            $sql .= " LIMIT $from,$limit ";
+        }
+
+        $result = $this->db->query($sql);
+        return $result->result_array();
+    }
 
     public function get_all_jonal_info($from = NULL, $limit = NULL){
         $sql="SELECT jo.id as jonal_id, jo.name as jonal_name, di.id as division_id, di.name as division_name, us.id as user_id, us.name as jonal_head_name FROM jonal as jo left join division as di on jo.div_id=di.id left join user as us on jo.jonal_head_id=us.id";

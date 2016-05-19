@@ -17,33 +17,67 @@ class Maexecutive extends CI_Controller
     
     public function index()
     {
-        if (!$this->CM->checkpermissiontype($this->module, 'index', $this->user_type))
+//        if (!$this->CM->checkpermissiontype($this->module, 'index', $this->user_type))
+//            redirect('error/accessdeny');
+//        
+//                $no_rows= count($this->CM->getAllWhere('user', array('user_type' => '5')));
+//                $this->load->library('pagination');
+//                $config['base_url'] = base_url().'maexecutive/index/';
+//               
+//                $config['total_rows'] = $no_rows ;
+//                $config['per_page'] = 15;
+//                $config['full_tag_open'] = '<div class=" text-center"><ul class=" list-inline list-unstyled " id="listpagiction">';
+//                $config['full_tag_close'] = '</ul></div>';
+//                $config['prev_link'] = '&lt; Prev';
+//                $config['prev_tag_open'] = '<li class="link_pagination">';
+//                $config['prev_tag_close'] = '</li>';
+//                $config['next_link'] = 'Next &gt;';
+//                $config['next_tag_open'] = '<li class="link_pagination">';
+//                $config['next_tag_close'] = '</li>';
+//                $config['cur_tag_open'] = '<li class="active_pagiction"><a href="#">';
+//                $config['cur_tag_close'] = '</a></li>';
+//                $config['num_tag_open'] = '<li class="link_pagination">';
+//                $config['num_tag_close'] = '</li>';
+//                $config['last_link'] = 'Last';
+//                $config['first_link'] = 'First';
+//                $this->pagination->initialize($config);     
+//        
+//        $data['user_list']=$this->CM->getAllWhere('user', array('user_type' => '5'),   $this->uri->segment(3), $config['per_page']);
+//        $this->load->view('maexecutive/index',$data);                 
+	
+	if (!$this->CM->checkpermissiontype($this->module, 'index', $this->user_type))
             redirect('error/accessdeny');
+
+    	$data['user_list']=$this->CM->getTotalALL('thana');
+        $this->load->model('join_model');
+	
+
+        // $data['thana_info']= $this->join_model->get_thana_info();
         
-                $no_rows= count($this->CM->getAllWhere('user', array('user_type' => '5')));
-                $this->load->library('pagination');
-                $config['base_url'] = base_url().'maexecutive/index/';
-               
-                $config['total_rows'] = $no_rows ;
-                $config['per_page'] = 15;
-                $config['full_tag_open'] = '<div class=" text-center"><ul class=" list-inline list-unstyled " id="listpagiction">';
-                $config['full_tag_close'] = '</ul></div>';
-                $config['prev_link'] = '&lt; Prev';
-                $config['prev_tag_open'] = '<li class="link_pagination">';
-                $config['prev_tag_close'] = '</li>';
-                $config['next_link'] = 'Next &gt;';
-                $config['next_tag_open'] = '<li class="link_pagination">';
-                $config['next_tag_close'] = '</li>';
-                $config['cur_tag_open'] = '<li class="active_pagiction"><a href="#">';
-                $config['cur_tag_close'] = '</a></li>';
-                $config['num_tag_open'] = '<li class="link_pagination">';
-                $config['num_tag_close'] = '</li>';
-                $config['last_link'] = 'Last';
-                $config['first_link'] = 'First';
-                $this->pagination->initialize($config);     
+    	$no_rows= $this->CM->getTotalRow('user');
+        $this->load->library('pagination');
+        $config['base_url'] = base_url().'maexecutive/index/';
+       
+        $config['total_rows'] = $no_rows ;
+        $config['per_page'] = 15;
+        $config['full_tag_open'] = '<div class=" text-center"><ul class=" list-inline list-unstyled " id="listpagiction">';
+        $config['full_tag_close'] = '</ul></div>';
+        $config['prev_link'] = '&lt; Prev';
+        $config['prev_tag_open'] = '<li class="link_pagination">';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = 'Next &gt;';
+        $config['next_tag_open'] = '<li class="link_pagination">';
+        $config['next_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active_pagiction"><a href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['num_tag_open'] = '<li class="link_pagination">';
+        $config['num_tag_close'] = '</li>';
+        $config['last_link'] = 'Last';
+        $config['first_link'] = 'First';
+        $this->pagination->initialize($config);     
         
-        $data['user_list']=$this->CM->getAllWhere('user', array('user_type' => '5'),   $this->uri->segment(3), $config['per_page']);
-        $this->load->view('maexecutive/index',$data);                 
+        $data['user_info']= $this->join_model->get_mexecutive_info($this->uri->segment(3), $config['per_page']);
+        $this->load->view('maexecutive/index',$data);    
     }
     
     public function add()
