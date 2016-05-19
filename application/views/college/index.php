@@ -67,7 +67,9 @@ $this->load->view('common/sidebar');
          
          <?php 
        		//  var_dump($college_list) ; 
-		$serialNo = 1;
+		$serialNo = $this->uri->segment(3);
+                if($serialNo==FALSE) $serialNo=1;
+                else $serialNo += 1;
          	foreach ($college_list as $college){
             $district = $this->CM->getInfo('district', $college['district_id'] );
           $thana = $this->CM->getInfo('thana', $college['thana_id'] );

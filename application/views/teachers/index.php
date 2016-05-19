@@ -69,7 +69,10 @@ $this->load->view('common/sidebar');
 
 		<?php
 		//var_dump($college_list) ; 
-		$serialNo = 1;
+		$serialNo = $this->uri->segment(3);
+		if($serialNo==FALSE)$serialNo = 1;
+else $serialNo +=1;
+		
 		foreach ($teachers_list as $teachers) {
 		    $department = $this->CM->getInfo('department', $teachers['dep_id']);
 		    $college = $this->CM->getInfo('college', $teachers['college_id']);
