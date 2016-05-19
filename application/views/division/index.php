@@ -54,12 +54,12 @@ $this->load->view('common/sidebar');
          
          <?php 
           
-         	foreach ($division_list as $division){
+         	$serialNo = 1; foreach ($division_list as $division){
          ?>
          
          
       <tr id="action_btn_align">
-          <td> <?php echo $division['id'] ?></td>
+          <td> <?php echo $serialNo; ?></td>
           <td> <?php echo $division['division_name'] ?></td>
          <td> <?php echo $division['user_name'] ?></td>
           <td>     
@@ -70,7 +70,7 @@ $this->load->view('common/sidebar');
                 
           </td>     
        </tr>
-      <?php } ?>
+      <?php $serialNo++; } ?>
             
      </table> 
 </div>

@@ -54,11 +54,11 @@ $this->load->view('common/sidebar');
 
 
                 <?php
-                
+                $serialNo = 1;
                 foreach ($thana_info as $thana) { ?>
 
                     <tr id="action_btn_align">
-                        <td> <?php echo $thana['id'] ?></td>
+                        <td> <?php echo $serialNo; ?></td>
                         <td> <?php echo $thana['thana_name'] ?></td>
                         <td> <?php echo $thana['district_name'] ?></td>
                         <td> <?php echo $thana['division_name'] ?></td>
@@ -70,7 +70,7 @@ $this->load->view('common/sidebar');
                                 <i class="fa fa-pencil-square-o" ></i> Delete </a>
                         </td>     
                     </tr>
-                <?php } ?>
+                <?php $serialNo ++;} ?>
 
                 <div class="pagination">
                     <?php echo $this->pagination->create_links(); ?>

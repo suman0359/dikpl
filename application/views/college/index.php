@@ -67,6 +67,7 @@ $this->load->view('common/sidebar');
          
          <?php 
        		//  var_dump($college_list) ; 
+		$serialNo = 1;
          	foreach ($college_list as $college){
             $district = $this->CM->getInfo('district', $college['district_id'] );
           $thana = $this->CM->getInfo('thana', $college['thana_id'] );
@@ -74,7 +75,7 @@ $this->load->view('common/sidebar');
          
          
       <tr id="action_btn_align">
-          <td> <?php echo $college['id'] ?></td>
+          <td> <?php echo $serialNo; ?></td>
           <td> <?php echo $college['name'] ?></td>
           <td> <?php echo $district->name; ?></td>
           <td> <?php echo $thana->name; ?></td>
@@ -91,7 +92,7 @@ $this->load->view('common/sidebar');
                 <i class="fa fa-pencil-square-o" ></i> Delete </a>
           </td>     
        </tr>
-      <?php } ?>
+      <?php $serialNo++;} ?>
             
      </table> 
 </div>
