@@ -50,7 +50,7 @@ $user_type = $this->session->userdata('user_type');
 
     <li class="<?php if ($c == 'year') echo "active" ?>">
 	<a href="<?php echo base_url(); ?>year">
-	    <i class="fa fa-puzzle-piece"></i> <span>Year</span>
+	    <i class="fa fa-puzzle-piece"></i> <span>Year/Class</span>
 	</a>
     </li>
 
@@ -66,11 +66,11 @@ $user_type = $this->session->userdata('user_type');
 	</a>
     </li>
 
-    <li class="<?php if ($c == 'subject') echo "active" ?>">
+<!--    <li class="<?php if ($c == 'subject') echo "active" ?>">
 	<a href="<?php echo base_url(); ?>subject">
 	    <i class="fa fa-puzzle-piece"></i> <span>Subject</span>
 	</a>
-    </li>
+    </li>-->
 
 
     <li class="<?php if ($c == 'books') echo "active" ?>">

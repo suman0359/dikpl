@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -42,10 +42,16 @@
 
     #container {
       width: 100%;
-      height: 350px;
+      height: 235px;
       -webkit-perspective: 800; /* For compatibility with iPhone 3.0, we leave off the units here */
       -webkit-perspective-origin: 50% 225px;
     }
+
+    .jumbotron{
+      padding: 0;
+      margin-bottom: 10px;
+    }
+
     #stage {
       width: 100%;
       height: 100%;
@@ -55,7 +61,7 @@
     
     #shape {
       position: relative;
-      top: 90px;
+      top: 50px;
       margin: 0 auto;
       height: 200px;
       width: 200px;
@@ -351,7 +357,7 @@
 		<h1>প্রকাশনা গ্রুপ </h1>
 		<p><strong>শোরুম ও বিক্রয় কেন্দ্র : </strong> ২৬, আলী রেজা মার্কেট, বাংলাবাজার, ঢাকা-১১০০। </p>
 
-		<p><strong>কর্পোরেট অফিস  : </strong> ১/২/৩/৪, চিত্তরঞ্জন এভিনিউ, সদরঘাট, ঢাকা-১১০০। </p>
+		<p><strong>কর্পোরেট অফিস  : </strong> ৩/১,৩/২,৩/৩, চিত্তরঞ্জন এভিনিউ, সদরঘাট, ঢাকা-১১০০। </p>
 		<p>
 			<strong>Web : </strong> www.dik-grantha.com 
 			<strong style="margin-left: 20px;">Email : </strong> dikdorshan@yahoo.com 
