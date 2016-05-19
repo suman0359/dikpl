@@ -54,7 +54,8 @@ class Maexecutive extends CI_Controller
 
         // $data['thana_info']= $this->join_model->get_thana_info();
         
-    	$no_rows= $this->CM->getTotalRow('user');
+    	   $no_rows= count($this->CM->getAllWhere('user', array('user_type' => '5')));
+         
         $this->load->library('pagination');
         $config['base_url'] = base_url().'maexecutive/index/';
        
