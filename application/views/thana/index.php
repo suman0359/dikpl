@@ -54,7 +54,10 @@ $this->load->view('common/sidebar');
 
 
                 <?php
-                $serialNo = 1;
+
+                $serialNo = $this->uri->segment(3);
+                if($serialNo==FALSE) $serialNo=1;
+                else $serialNo += 1;
                 foreach ($thana_info as $thana) { ?>
 
                     <tr id="action_btn_align">
