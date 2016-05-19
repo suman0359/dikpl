@@ -351,6 +351,7 @@ class Report extends MY_Controller {
 	    $data['college_id'] = $this->input->post('college_id');
 	}
 
+
 	if ($data['division_id'] == 'all') {
 	    $division_id = NULL;
 	} else {
