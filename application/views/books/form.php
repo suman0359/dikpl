@@ -80,6 +80,7 @@ $this->load->view('common/sidebar');
         </div>
     </div>
 
+        
     <div class="col-md-2 col-sm-4 col-xs-6">
         <div class="form-group">
             <label for="className">শ্রেণী</label>
@@ -181,6 +182,14 @@ $this->load->view('common/sidebar');
 	</div>
 </div>
 
+<!-- Select Plugin Call for College -->
+        <script type="text/javascript">
+        $(document).ready(function() {
+          $("#department_id").select2();
+          $("#class_id").select2();
+        });
+        </script>
+        <!-- ******************************** -->
 
 <script type="text/javascript">
     $(document).ready(function(){

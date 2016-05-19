@@ -30,40 +30,85 @@ $this->load->view('common/sidebar');
 
 	<div class="row">
 	    <?php echo form_open() ?>
-	    <label class="col-md-3">Start Date
-		<input type="text" class="datepicker form-control" id="sdate" name="sdate" placeholder="yyyy-mm-dd"   />
-	    </label>
-	    <label class="col-md-3">End Date
-		<input type="text" class="datepicker form-control" id="edate" name="edate" placeholder="yyyy-mm-dd"  />
-	    </label>
-	    <label class="col-md-3">Division
-		<select class="form-control" id="division_id" name="division_id" required="">
-		    <option value="all">All Division</option>
-		    <?php foreach ($division_list as $value) { ?>
-    		    <option value="<?php echo $value['id']; ?>"> <?php echo $value['name']; ?></option>>
-		    <?php } ?>
-		</select>
-	    </label>
-	    <label class="col-md-3">Jonal
-		<select class="form-control" id="jonal_id" name="jonal_id" >
-		    <option value="all">All Jonal</option>
-		</select>
-	    </label>
-	    <label class="col-md-3">District
-		<select class="form-control" id="district_id" name="district_id" >
-		    <option value="all">All District</option>
-		</select>
-	    </label>
-	    <label class="col-md-3">Thana
-		<select class="form-control" id="thana_id" name="thana_id" >
-		    <option value="all">All Thana</option>
-		</select>
-	    </label>
-	    <label class="col-md-3">College
-		<select class="form-control" id="college_id" name="college_id" >
-		    <option value="all">All College</option>
-		</select>
-	    </label>
+        <div class="col-md-3 col-sm-3 col-xs-4">
+            <div class="form-group">
+                <label for="Start Date" class="control-label">Start Date</label>
+                <input type="text" class="datepicker form-control" id="sdate" name="sdate" placeholder="yyyy-mm-dd"   />
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-3 col-xs-4">
+            <div class="form-group">
+                <label for="End Date" class="control-label">End Date</label>
+                <input type="text" class="datepicker form-control" id="edate" name="edate" placeholder="yyyy-mm-dd"  />
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-3 col-xs-4">
+            <div class="form-group">
+                <label for="Division" class="control-label">Division</label>
+                <select class="form-control" id="division_id" name="division_id" required="">
+                    <option value="all">All Division</option>
+                    <?php foreach ($division_list as $value) { ?>
+                        <option value="<?php echo $value['id']; ?>"> <?php echo $value['name']; ?></option>>
+                    <?php } ?>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-3 col-xs-4">
+            <div class="form-group">
+                <label for="Jonal" class="control-label">Jonal</label>
+                <select class="form-control" id="jonal_id" name="jonal_id" >
+                    <option value="all">All Jonal</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-3 col-xs-4">
+            <div class="form-group">
+                <label for="District" class="control-label">District</label>
+                <select class="form-control" id="district_id" name="district_id" >
+                    <option value="all">All District</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-3 col-xs-4">
+            <div class="form-group">
+                <label for="Thana" class="control-label">Thana</label>
+                <select class="form-control college_id" id="thana_id" name="thana_id" >
+                    <option value="all">All Thana</option>
+                </select>
+            </div>
+        </div>
+
+	    <div class="col-md-3 col-sm-3 col-xs-4">
+         <div class="form-group">
+             <label for="College" class="control-label">College</label>
+             <select class="form-control" id="college_id" name="college_id" >
+                <option value="all">All College</option>
+            </select>
+         </div>   
+        </div>
+
+	   
+		
+
+        <!-- Select Plugin Call for College -->
+        <script type="text/javascript">
+        $(document).ready(function() {
+          $("#division_id").select2();
+          $("#jonal_id").select2();
+          $("#district_id").select2();
+          $("#thana_id").select2();
+          $("#college_id").select2();
+        });
+        </script>
+
+        <!-- ******************************** -->
+
+	
 	    <label class="col-md-2">
 		&nbsp;
 		<input type="submit" name="sumbit" value="Search" class="btn btn-primary form-control" />

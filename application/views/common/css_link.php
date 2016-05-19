@@ -20,6 +20,8 @@
         <link href="<?php echo base_url(); ?>style_sheet/css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
         <!-- bootstrap wysihtml5 - text editor -->
         <link href="<?php echo base_url(); ?>style_sheet/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
+        <!-- Select Plugin -->
+        <link href="<?php echo base_url(); ?>assets/plugins/select/select2.css" rel="stylesheet" />
         <!-- Theme style -->
         <link href="<?php echo base_url(); ?>style_sheet/css/jQueryUI/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>style_sheet/css/AdminLTE.css" rel="stylesheet" type="text/css" />
