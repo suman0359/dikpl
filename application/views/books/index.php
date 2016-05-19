@@ -20,7 +20,7 @@ $this->load->view('common/sidebar');
 
 
     <div class="col-md-12 main-mid-area"> 
-        <?php $this->load->view('common/error_show') ?>
+	<?php $this->load->view('common/error_show') ?>
 
         <div class="searchbar " >
             <div class="col-md-8"  >
@@ -51,42 +51,48 @@ $this->load->view('common/sidebar');
 
 
 
-                <?php
-                //var_dump($college_list) ; 
-                foreach ($books_list as $books) { 
-                    $company_name = $books->company_name;
-                    if(!empty($company_name)){
-                        if ($company_name==1){ $company_name = "গ্রন্থ কুটির"; }
-                        if ($company_name==2){ $company_name = "দিকদর্শন "; }
-                    }
-                    ?>
+		<?php
+		//var_dump($college_list) ; 
+		$serialNo = 1;
+		foreach ($books_list as $books) {
+		    $company_name = $books->company_name;
+		    if (!empty($company_name)) {
+			if ($company_name == 1) {
+			    $company_name = "গ্রন্থ কুটির";
+			}
+			if ($company_name == 2) {
+			    $company_name = "দিকদর্শন ";
+			}
+		    }
+		    ?>
 
 
-                    <tr id="action_btn_align">
-                        <td> <?php echo $books->book_id; ?></td>
-                        <td> <?php echo $books->book_name; ?></td>
-                        <td> <?php echo $books->writter_name; ?></td>
-                        <td> <?php echo $books->department_name; ?></td>
-                        <td> <?php echo $books->class_name; ?></td>
-                        <td> <?php echo $company_name; ?></td>
-                        <td> <?php echo $books->regular_price; ?></td>
-                        <td> <?php echo $books->sell_price; ?></td>
+    		<tr id="action_btn_align">
+    		    <td> <?php echo $serialNo; ?></td>
+    		    <td> <?php echo $books->book_name; ?></td>
+    		    <td> <?php echo $books->writter_name; ?></td>
+    		    <td> <?php echo $books->department_name; ?></td>
+    		    <td> <?php echo $books->class_name; ?></td>
+    		    <td> <?php echo $company_name; ?></td>
+    		    <td> <?php echo $books->regular_price; ?></td>
+    		    <td> <?php echo $books->sell_price; ?></td>
 
-                        <td>     
-                            <a class="btn btn-primary btn-flat" href="<?php echo base_url(); ?>books/edit/<?php echo $books->book_id; ?>">
-                            <i class="fa fa-pencil-square-o" ></i> Edit </a>
-                            <a class="btn btn-danger btn-flat "  onclick="return confirm('Are you sure want to delete');" href="<?php echo base_url(); ?>books/delete/<?php echo $books->book_id; ?>">
-                            <i class="fa fa-pencil-square-o" ></i> Delete </a>
-                        </td>     
-                    </tr>
-<?php } ?>
+    		    <td>     
+    			<a class="btn btn-primary btn-flat" href="<?php echo base_url(); ?>books/edit/<?php echo $books->book_id; ?>">
+                                <i class="fa fa-pencil-square-o" ></i> Edit </a>
+    			<a class="btn btn-danger btn-flat "  onclick="return confirm('Are you sure want to delete');" href="<?php echo base_url(); ?>books/delete/<?php echo $books->book_id; ?>">
+                                <i class="fa fa-pencil-square-o" ></i> Delete </a>
+    		    </td>     
+    		</tr>
+    <?php $serialNo++;
+} ?>
 
             </table> 
         </div>
 
         <div>         
-<?php echo $this->pagination->create_links();
-?>  
+	<?php echo $this->pagination->create_links();
+	?>  
         </div>
 
         <!-- End  Working area --> 

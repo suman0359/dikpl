@@ -54,6 +54,7 @@ $this->load->view('common/sidebar');
          
          <?php 
           //  var_dump($company_list) ; 
+	 $serialNo = 1;
           foreach ($district_list as $district){
               $jonal = $this->CM->getInfo('jonal', $district['jonal_id'] );
               
@@ -64,7 +65,7 @@ $this->load->view('common/sidebar');
          
          
       <tr id="action_btn_align">
-          <td> <?php echo $district['id'] ?></td>
+          <td> <?php echo $serialNo; ?></td>
           <td> <?php echo $district['name'] ?></td>
          <td> <?php echo $jonal->name; ?></td>
           <td>     
@@ -74,7 +75,7 @@ $this->load->view('common/sidebar');
                 <i class="fa fa-pencil-square-o" ></i> Delete </a>
           </td>     
        </tr>
-      <?php } ?>
+      <?php $serialNo++; } ?>
 
       <div class="pagination">
         <?php echo $this->pagination->create_links(); ?>

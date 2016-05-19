@@ -53,6 +53,7 @@ $this->load->view('common/sidebar');
                      
          
          <?php 
+	 $serialNo = 1;
        		//  var_dump($company_list) ; 
          	foreach ($content_list as $content){
             $department_id =$content['id'];
@@ -63,7 +64,7 @@ $this->load->view('common/sidebar');
          
          
       <tr id="action_btn_align">
-          <td> <?php echo $content['id'] ?></td>
+          <td> <?php echo $serialNo;?></td>
           <td> <?php echo $content['name'] ?></td>
           <td> 
             <?php if ($class_list) {
@@ -81,7 +82,7 @@ $this->load->view('common/sidebar');
                 <i class="fa fa-pencil-square-o" ></i> Delete </a>
           </td>     
        </tr>
-      <?php } ?>
+      <?php $serialNo++;} ?>
             
      </table> 
 </div>

@@ -65,14 +65,16 @@ $this->load->view('common/sidebar');
                 </tr>
 
                 <?php
-
+		
+		
+		$serialNo = 1; 
                 foreach ($jonal_list as $jonal) {
                     $jonal_id = $jonal['jonal_id'];
                     $district_list = $this->join_model->get_all_district_where_zonal_info($jonal_id);
                     ?>
 
                     <tr id="action_btn_align">
-                        <td> <?php echo $jonal['jonal_id'] ?></td>
+                        <td> <?php echo $serialNo; ?></td>
                         <td> <?php echo $jonal['jonal_name'] ?></td>
                         <td> <?php echo $jonal['jonal_head_name'] ?> </td>
                         <td> <?php if ($district_list) {
@@ -93,7 +95,7 @@ $this->load->view('common/sidebar');
 
                         </td>     
                     </tr>
-                <?php } ?>
+                <?php $serialNo++; } ?>
 
             </table> 
         </div>
