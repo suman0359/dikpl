@@ -21,17 +21,7 @@ $this->load->view('common/sidebar');
 
 
 
-    <div class="col-md-12 home-page"> 
-
-
-
-
-
-
-
-
-
-
+    <div class="col-md-12 home-page">
 	<div class="col-md-3 col-sm-4 home-icon" > 
 	    <a class=" btn-primary   btn-lg btn-block text-center " href="<?php echo base_url(); ?>report/requisition"> 
 		<i class="fa fa-user fa-3x"></i>  <br/>
@@ -52,20 +42,21 @@ $this->load->view('common/sidebar');
 	</div>
 	
 	<div class="col-md-3 col-sm-4 home-icon" > 
-	    <a class=" btn-primary   btn-lg btn-block text-center " href="<?php echo base_url(); ?>report/donation"> 
+	    <a class=" btn-primary   btn-lg btn-block text-center " href="<?php echo base_url(); ?>report/donation_requisition"> 
 		<i class="fa fa-user fa-3x"></i>  <br/>
-		Book Donation Request </a>
+		Donation Requisition Request</a>
 	</div>
 	
 	<div class="col-md-3 col-sm-4 home-icon" > 
-	    <a class=" btn-primary   btn-lg btn-block text-center " href="<?php echo base_url(); ?>report/donation_distribution"> 
+	    <a class=" btn-primary   btn-lg btn-block text-center " href="<?php echo base_url(); ?>report/donation"> 
 		<i class="fa fa-user fa-3x"></i>  <br/>
-		Donation Distribution Report</a>
+		Donation Distribution  Report </a>
 	</div>
+	
 
 	<?php if ($this->session->userdata('user_type') == 1) { ?> 
 
-    	<div class="col-md-3 col-sm-4 home-icon" > 
+<!--    	<div class="col-md-3 col-sm-4 home-icon" > 
     	    <a class=" btn-primary   btn-lg btn-block text-center " href="<?php echo base_url(); ?>report/transfer"> 
     		<i class="fa fa-user fa-3x"></i>  <br/>
     		Shipment   Report </a>
@@ -77,7 +68,7 @@ $this->load->view('common/sidebar');
     	    <a class=" btn-primary   btn-lg btn-block text-center " href="<?php echo base_url(); ?>report/collegeinventory"> 
     		<i class="fa fa-user fa-3x"></i>  <br/>
     		College Inventory </a>
-    	</div>
+    	</div>-->
 
 	<?php } ?>
 

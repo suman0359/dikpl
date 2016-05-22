@@ -16,6 +16,7 @@ class Report extends MY_Controller {
 	$this->uid = $this->session->userdata('uid');
 	$this->user_type = $this->session->userdata('user_type');
 	$this->load->Model('Report_model', 'RM');
+	$this->load->model('custom_model');
     }
 
     public function index() {
@@ -329,7 +330,7 @@ class Report extends MY_Controller {
 	$this->load->view('report/distribute', $data);
     }
 
-    public function donation_distribution() {
+    public function donation_requisition() {
 	$data = array();
 	$data['sdate'] = date("Y-m-d");
 	$data['edate'] = date("Y-m-d");
@@ -342,8 +343,10 @@ class Report extends MY_Controller {
 	$data['division_list'] = $this->CM->getAll('division');
 
 	if ($this->input->post()) {
-	    if($this->input->post('sdate')!=NULL) $data['sdate'] = $this->input->post('sdate');
-	    if($this->input->post('edate')!=NULL) $data['edate'] = $this->input->post('edate');
+	    if ($this->input->post('sdate') != NULL)
+		$data['sdate'] = $this->input->post('sdate');
+	    if ($this->input->post('edate') != NULL)
+		$data['edate'] = $this->input->post('edate');
 	    $data['division_id'] = $this->input->post('division_id');
 	    $data['jonal_id'] = $this->input->post('jonal_id');
 	    $data['district_id'] = $this->input->post('district_id');
@@ -388,8 +391,36 @@ class Report extends MY_Controller {
 	}
 
 
-	$data['content_list'] = $this->RM->donation_distribution($data['sdate'], $data['edate'], $division_id, $jonal_id, $district_id, $thana_id, $college_id);
-	$this->load->view('report/donation_distribution', $data);
+	$data['content_list'] = $this->RM->donation_requisition($data['sdate'], $data['edate'], $division_id, $jonal_id, $district_id, $thana_id, $college_id);
+	$this->load->view('report/donation_requisition', $data);
+    }
+
+    public function view_details($id) {
+	$data = array();
+	$this->load->library('form_validation');
+	$this->form_validation->set_rules('student_quantity', 'possible_book', 'money_amount', 'required');
+	if ($this->form_validation->run() == FALSE) {
+	    $details_info = $this->custom_model->get_details_info($id);
+	    $data['college_id'] = $details_info->college_name;
+	    $data['teacher_id'] = $details_info->teacher_name;
+	    $data['department_id'] = $details_info->department_name;
+	    $data['class_id'] = $details_info->class_name;
+	    $data['student_quantity'] = $details_info->student_quantity;
+	    $data['possible_book'] = $details_info->possible_book;
+	    $data['book_id'] = $details_info->book_name;
+	    $data['money_amount'] = $details_info->money_amount;
+	    $this->load->view('report/view_all_requisition', $data);
+	}else{
+	    $datas = array();
+	    $datas['student_quantity'] = $this->input->post('student_quantity');
+	    $datas['possible_book'] = $this->input->post('possible_book');
+	    $datas['money_amount'] = $this->input->post('money_amount');
+	    $datas['comment'] = $this->input->post('comment');
+	    $datas['requisition_by'] = $this->uid;
+	    $datas['donation_id'] = $id;
+	    $datas['date'] = date("Y-m-d");
+	    $this->db->insert('tbl_donation_distribution', $datas);
+	}
     }
 
 }

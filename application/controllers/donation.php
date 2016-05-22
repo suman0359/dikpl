@@ -166,7 +166,7 @@ class Donation extends MY_Controller {
 
 	$this->load->view('donation/search', $data);
     }
-
+    
 }
 
 ?>
