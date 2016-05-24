@@ -27,6 +27,7 @@ $this->load->view('common/sidebar');
 		প্রতিষ্ঠানের নাম 
 		<div class="form-group">
 		    <input disabled="" type="text"  class="form-control" value="<?php echo $college_id; ?>" />
+		    <input  type="hidden" name="requisition_by"  class="form-control" value="<?php echo $requisition_by; ?>" />
 		</div>
 	    </label>
 	</div>
@@ -91,13 +92,13 @@ $this->load->view('common/sidebar');
     <div class="col-md-12">
 	<div class="col-md-6">
 	    <label class="radio-inline">
-		<input type="radio" name="optradio">  Pending
+		<input type="radio" name="optradio" value="0">  Pending
 	    </label>
 	    <label class="radio-inline">
-		<input type="radio" name="optradio"> Accepted
+		<input type="radio" name="optradio" value="1"> Accepted
 	    </label>
 	    <label class="radio-inline">
-		<input type="radio" name="optradio"> Decline
+		<input type="radio" name="optradio" value="2"> Decline
 	    </label>
 	</div>
 

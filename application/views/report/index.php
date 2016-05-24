@@ -48,7 +48,7 @@ $this->load->view('common/sidebar');
 	</div>
 	
 	<div class="col-md-3 col-sm-4 home-icon" > 
-	    <a class=" btn-primary   btn-lg btn-block text-center " href="<?php echo base_url(); ?>report/donation"> 
+	    <a class=" btn-primary   btn-lg btn-block text-center " href="<?php echo base_url(); ?>report/show_report"> 
 		<i class="fa fa-user fa-3x"></i>  <br/>
 		Donation Distribution  Report </a>
 	</div>
