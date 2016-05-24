@@ -39,6 +39,12 @@ class Custom_model extends CI_Model{
 	$result = $query_result->row();
 	return $result;
     }
+    public function get_details_info($id){
+
+	$sql = "SELECT do.requisition_by,co.name as college_name, te.name as teacher_name, de.name as department_name, cl.name as class_name, do.student_quantity, do.possible_book, bo.book_name as book_name, do.money_amount FROM tbl_donation as do INNER JOIN college as co ON do.college_id=co.id INNER JOIN teachers as te ON do.teacher_id=te.id INNER JOIN department as de ON do.department_id=de.id INNER JOIN tbl_class as cl ON do.class_id=cl.id INNER JOIN books as bo ON do.book_id=bo.id WHERE do.id= $id";
+	$result = $this->db->query($sql);
+	return $result->row();
+    }
     
         
 }
