@@ -20,13 +20,13 @@ $user_type = $this->session->userdata('user_type');
 
     <li class="<?php if ($c == 'division') echo "active" ?>">
 	<a href="<?php echo base_url(); ?>division">
-	    <i class="fa fa-sitemap"></i> <span>Division</span>
+	    <i class="fa fa-sitemap"></i> <span>Division/Zone</span>
 	</a>
     </li>
 
     <li class="<?php if ($c == 'jonal') echo "active" ?>">
 	<a href="<?php echo base_url(); ?>jonal">
-	    <i class="fa fa-share-alt-square"></i> <span>Jone or Jonal</span>
+	    <i class="fa fa-share-alt-square"></i> <span>Re-Zone</span>
 	</a>
     </li>
 
