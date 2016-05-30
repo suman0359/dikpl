@@ -7,6 +7,12 @@ $user_type = $this->session->userdata('user_type');
 <ul class="sidebar-menu"> 
     <li class="title">  Setup Form </li>
 
+    <li>
+        <a href="<?php echo base_url(); ?>settings/home/index">
+            <i class="fa fa-cogs"></i> 
+            Settings
+        </a>
+    </li>
 
 
     <li class="<?php if ($c == 'user') echo "active" ?>">
@@ -14,7 +20,6 @@ $user_type = $this->session->userdata('user_type');
             <i class="fa fa-user"></i> <span>User</span>
         </a>
     </li>         
-
 
 
 
@@ -124,6 +129,13 @@ $user_type = $this->session->userdata('user_type');
         </a>
     </li>
 
+    <li>
+        <a href="<?php echo base_url(); ?>requisition/index"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i>Requisition</a>
+    </li>
+    
+    <li>
+        <a href="<?php echo base_url(); ?>"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>Distribution</a>
+    </li>
 
 
 </ul>

@@ -1,7 +1,7 @@
 <?php
 $this->load->view('common/css_link');
 $this->load->view('common/header');
-$this->load->view('common/sidebar');
+$this->load->view('settings/common/sidebar');
 //$this->load->view('common/control_panel');
 ?>
    
@@ -30,7 +30,7 @@ $this->load->view('common/sidebar');
        
         <h4 class=" alert alert-info text text-success text-center">Select The Option</h4>
         
-        <?php echo form_open('user/permissionset');
+        <?php echo form_open('settings/permission/permissionset');
             
 //            echo '<pre>';
 //            print_r($plist);

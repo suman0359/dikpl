@@ -32,14 +32,14 @@
                 <ul class="sidebar-menu"> 
 
                     <li class="">
-                        <a href="<?php echo base_url(); ?>home">
+                        <a href="<?php echo base_url(); ?>home/dashboard">
                             <i class="fa fa-home"></i> <span>Home</span>
                         </a>
                     </li>
                 </ul>
 
                 <?php
-                $this->load->view('common/menu_administration')
+                $this->load->view('settings/common/menu')
                 ?>
             </div>
         </section>

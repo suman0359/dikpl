@@ -9,22 +9,22 @@ $user_type = $this->session->userdata('user_type');
 
 
 
-    <li class="<?php if ($c == 'user') echo "active" ?>">
-        <a href="<?php echo base_url(); ?>user">
-            <i class="fa fa-user"></i> <span>User</span>
+    <li class="<?php if ($c == 'user_role') echo "active" ?>">
+        <a href="<?php echo base_url(); ?>settings/user_role/index">
+            <i class="fa fa-user"></i> <span>User Role</span>
         </a>
     </li>         
 
 
 
 
-    <li class="<?php if ($c == 'division') echo "active" ?>">
-        <a href="<?php echo base_url(); ?>division">
-            <i class="fa fa-sitemap"></i> <span>Division/Zone</span>
+    <li class="<?php if ($c == 'module') echo "active" ?>">
+        <a href="<?php echo base_url(); ?>settings/permission_content/index">
+            <i class="fa fa-sitemap"></i> <span>Module Permission</span>
         </a>
     </li>
 
-    <li class="<?php if ($c == 'jonal') echo "active" ?>">
+<!--    <li class="<?php if ($c == 'jonal') echo "active" ?>">
         <a href="<?php echo base_url(); ?>jonal">
             <i class="fa fa-share-alt-square"></i> <span>Re-Zone</span>
         </a>
@@ -66,11 +66,11 @@ $user_type = $this->session->userdata('user_type');
         </a>
     </li>
 
-<!--    <li class="<?php if ($c == 'subject') echo "active" ?>">
+    <li class="<?php if ($c == 'subject') echo "active" ?>">
         <a href="<?php echo base_url(); ?>subject">
             <i class="fa fa-puzzle-piece"></i> <span>Subject</span>
         </a>
-    </li>-->
+    </li>
 
 
     <li class="<?php if ($c == 'books') echo "active" ?>">
@@ -122,7 +122,7 @@ $user_type = $this->session->userdata('user_type');
         <a href="<?php echo base_url(); ?>report">
             <i class="fa fa-bar-chart-o"></i> <span>Reports  </span>
         </a>
-    </li>
+    </li>-->
 
 
 

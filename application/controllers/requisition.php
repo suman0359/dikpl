@@ -13,8 +13,9 @@ class Requisition extends MY_Controller{
     {
       
         
-        $data ; 
-        $this->load->view('purchase/index',$data);
+        
+//        $this->load->view('purchase/index');
+        $this->load->view('requisition/report');
         
     }
     public function add(){

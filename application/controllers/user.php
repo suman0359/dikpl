@@ -7,7 +7,7 @@ class User extends MY_Controller {
 
     public $uid;
     public $module;
-    public $user_type;
+    
 
     public function __construct() {
         parent::__construct();
@@ -16,7 +16,7 @@ class User extends MY_Controller {
         $this->load->model('Commons', 'CM');
         $this->module = 'user';
         $this->uid = $this->session->userdata('uid');
-        $this->user_type = $this->session->userdata('user_type');
+        
     }
 
     public function index() {

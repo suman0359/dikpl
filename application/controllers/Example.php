@@ -23,13 +23,12 @@
     function index()
     {
         // show error if they dont have access to this page
-        if (!in_array('access_to_index', $this->permissions))
-        {
+        if (!in_array('access_to_index', $this->permissions)){
             show_error('You do not have access to this page!');
         }
 
         // they got in...
-        echo 'hello!'
+        echo 'hello!';
     }
 
     function add_permissions()

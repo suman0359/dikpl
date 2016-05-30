@@ -16,6 +16,7 @@ class MY_Controller extends CI_Controller {
 
         $this->load->library('Encrypt');
         $uid = $this->session->userdata('uid');
+        $this->user_type = $this->session->userdata('user_type');
     }
 
     public function checklogin() {
