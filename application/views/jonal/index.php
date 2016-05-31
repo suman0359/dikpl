@@ -56,8 +56,8 @@ $this->load->view('common/sidebar');
 
                 <tr>
                     <th id="action_btn_align">SL</th>
-                    <th id="action_btn_align">Jone/Jonal Name</th>
-                    <th id="action_btn_align">Jone/Jonal Head Name</th>
+                    <th id="action_btn_align">Area/Rezone Name</th>
+                    <th id="action_btn_align">Area/Rezone Head Name</th>
                     <th id="action_btn_align"> District Name </th>
                     <th id="action_btn_align">Division Name</th>
                     <th id="action_btn_align">Action</th>

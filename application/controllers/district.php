@@ -22,9 +22,7 @@ class District extends CI_Controller {
         if (!$this->CM->checkpermissiontype($this->module, 'index', $this->user_type))
             redirect('error/accessdeny');
 
-
-        $data['district_list'] = $this->CM->getTotalALL('district');
-
+        $this->load->model('district_model');
        
         $no_rows = $this->CM->getTotalRow('district');
         $this->load->library('pagination');
@@ -48,7 +46,7 @@ class District extends CI_Controller {
         $config['first_link'] = 'First';
         $this->pagination->initialize($config);
 
-        $data['district_list'] = $this->CM->getTotalALL('district', $this->uri->segment(3), $config['per_page']);
+        $data['district_list'] = $this->district_model->get_all_district_info($this->uri->segment(3), $config['per_page']);
         $this->load->view('district/index', $data);
     }
 

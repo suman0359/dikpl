@@ -53,27 +53,23 @@ $this->load->view('common/sidebar');
                      
          
          <?php 
-          //  var_dump($company_list) ; 
-	 $serialNo = $this->uri->segment(3);
-	 if($serialNo == false) $serialNo=1;
-	 else $serialNo +=1;
+          
+        	 $serialNo = $this->uri->segment(3);
+        	 if($serialNo == false) $serialNo=1;
+        	 else $serialNo +=1;
           foreach ($district_list as $district){
-              $jonal = $this->CM->getInfo('jonal', $district['jonal_id'] );
               
-//              echo '<pre>';
-//              print_r($district);
-//              exit();
          ?>
          
          
       <tr id="action_btn_align">
           <td> <?php echo $serialNo; ?></td>
-          <td> <?php echo $district['name'] ?></td>
-         <td> <?php echo $jonal->name; ?></td>
+          <td> <?php echo $district['district_name']; ?></td>
+         <td> <?php echo $district['jonal_name']; ?></td>
           <td>     
-                <a class="btn btn-primary btn-flat" href="<?php echo base_url(); ?>district/edit/<?php echo $district['id'] ?>">
+                <a class="btn btn-primary btn-flat" href="<?php echo base_url(); ?>district/edit/<?php echo $district['district_id'] ?>">
                 <i class="fa fa-pencil-square-o" ></i> Edit </a>
-                <a class="btn btn-danger btn-flat "  onclick="return confirm('Are you sure want to delete');" href="<?php echo base_url(); ?>district/delete/<?php echo $district['id'] ?>">
+                <a class="btn btn-danger btn-flat "  onclick="return confirm('Are you sure want to delete');" href="<?php echo base_url(); ?>district/delete/<?php echo $district['district_id'] ?>">
                 <i class="fa fa-pencil-square-o" ></i> Delete </a>
           </td>     
        </tr>

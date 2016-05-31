@@ -88,7 +88,7 @@ class Jonal extends CI_Controller
             $datas['status'] = 1;
             
             $jonal_id = $insert = $this->CM->insert('jonal',$datas) ; 
-            $district_list= $this->input->post('district_list');
+            $district_list      = $this->input->post('district_list');
            
             if ($district_list) 
                 
