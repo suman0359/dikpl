@@ -9,50 +9,12 @@ $user_type = $this->session->userdata('user_type');
 
 
 
-    <li class="<?php if ($c == 'user') echo "active" ?>">
-        <a href="<?php echo base_url(); ?>user">
-            <i class="fa fa-user"></i> <span>User</span>
-        </a>
-    </li>         
-
-
-
-
-    <li class="<?php if ($c == 'division') echo "active" ?>">
-        <a href="<?php echo base_url(); ?>division">
-            <i class="fa fa-sitemap"></i> <span>Division/Zone</span>
-        </a>
-    </li>
-
-    <li class="<?php if ($c == 'jonal') echo "active" ?>">
-        <a href="<?php echo base_url(); ?>jonal">
-            <i class="fa fa-share-alt-square"></i> <span>Re-Zone</span>
-        </a>
-    </li>
-
-    <li class="<?php if ($c == 'district') echo "active" ?>">
-        <a href="<?php echo base_url(); ?>district">
-            <i class="fa fa-share-alt-square"></i> <span>District</span>
-        </a>
-    </li>
-
-    <li class="<?php if ($c == 'thana') echo "active" ?>">
-        <a href="<?php echo base_url(); ?>thana">
-            <i class="fa fa-share-alt-square"></i> <span>Thana</span>
-        </a>
-    </li>
-
     <li class="<?php if ($c == 'college') echo "active" ?>">
         <a href="<?php echo base_url(); ?>college">
             <i class="fa fa-university"></i> <span>College</span>
         </a>
     </li>
 
-    <li class="<?php if ($c == 'year') echo "active" ?>">
-        <a href="<?php echo base_url(); ?>year">
-            <i class="fa fa-puzzle-piece"></i> <span>Year/Class</span>
-        </a>
-    </li>
 
     <li class="<?php if ($c == 'department') echo "active" ?>">
         <a href="<?php echo base_url(); ?>department">

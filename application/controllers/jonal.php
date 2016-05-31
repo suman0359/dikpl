@@ -4,29 +4,29 @@ class Jonal extends CI_Controller
 {
 	public $uid;
 	public $module;
-        public $user_type;
+    public $user_type;
         
 	public function __construct() {
 	parent::__construct();
 
 	$this->load->model('Commons', 'CM') ;  
 	$this->module='jonal';
-	$this->uid=$this->session->userdata('uid');
-        $this->user_type = $this->session->userdata('user_type');
+	$this->uid = $this->session->userdata('uid');
+    $this->user_type = $this->session->userdata('user_type');
         
         
     }
 
     public function index(){
+        
         if (!$this->CM->checkpermissiontype($this->module, 'index', $this->user_type))
             redirect('error/accessdeny');
         
-    	// $data['jonal_list']=$this->CM->getTotalALL('jonal');
         $this->load->model('join_model');
-        
-        
+        $this->load->model('rezonal_model');
 
-        $no_rows= $this->CM->getTotalRow('jonal');
+
+        $no_rows= $this->rezonal_model->getTotalRow('jonal');
         $this->load->library('pagination');
         $config['base_url'] = base_url().'jonal/index/';
        
@@ -51,7 +51,7 @@ class Jonal extends CI_Controller
         // $data['jonal_list']=$this->CM->getTotalALL('jonal',$this->uri->segment(3), $config['per_page']);
 
 
-        $data['jonal_list']= $this->join_model->get_all_jonal_info($this->uri->segment(3), $config['per_page']);
+        $data['jonal_list']= $this->rezonal_model->get_all_jonal_info($this->uri->segment(3), $config['per_page']);
 
     	$this->load->view('jonal/index', $data);
     }

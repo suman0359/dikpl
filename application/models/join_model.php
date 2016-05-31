@@ -39,18 +39,7 @@ class Join_model extends CI_Model {
 	return $result->result_array();
     }
 
-    public function get_all_jonal_info($from = NULL, $limit = NULL) {
-	$sql = "SELECT jo.id as jonal_id, jo.name as jonal_name, di.id as division_id, di.name as division_name, us.id as user_id, us.name as jonal_head_name FROM jonal as jo left join division as di on jo.div_id=di.id left join user as us on jo.jonal_head_id=us.id";
-
-	if (empty($from)) {
-	    $sql .= " LIMIT 0, 15 ";
-	} else {
-	    $sql .= " LIMIT $from,$limit ";
-	}
-
-	$result = $this->db->query($sql);
-	return $result->result_array();
-    }
+    
 
     public function get_all_search_jonal_info($from = NULL, $limit = NULL, $search) {
 	$sql = "SELECT jo.id as jonal_id, jo.name as jonal_name, di.id as division_id, di.name as division_name, us.id as user_id, us.name as jonal_head_name FROM jonal as jo left join division as di on jo.div_id=di.id left join user as us on jo.jonal_head_id=us.id WHERE jo.name like '%$search%'";

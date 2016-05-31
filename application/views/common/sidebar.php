@@ -39,7 +39,8 @@
                 </ul>
 
                 <?php
-                $this->load->view('common/menu_administration')
+                if($user_type==5) $this->load->view('common/menu_mpo');
+                if($user_type!=5) $this->load->view('common/menu_administration')
                 ?>
             </div>
         </section>

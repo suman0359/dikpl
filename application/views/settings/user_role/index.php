@@ -55,7 +55,7 @@ $this->load->view('settings/common/sidebar');
                     <td>     
                         <a class="btn btn-primary btn-flat" href="<?php echo base_url(); ?>settings/user_role/edit/<?php echo $value->id; ?>">
                         <i class="fa fa-pencil-square-o" ></i> Edit </a>
-                        <a class="btn btn-primary btn-flat" onclick="return confirm('Do you want to allow him to');" href="<?php echo base_url(); ?>settings/permission/<?php echo $value->id; ?>"><i class="fa fa-pencil-square-o" ></i> Permission </a>
+                        <a class="btn btn-primary btn-flat" onclick="return confirm('Do you want to allow him to');" href="<?php echo base_url(); ?>settings/permission/<?php echo $value->value; ?>"><i class="fa fa-pencil-square-o" ></i> Permission </a>
                         <a class="btn btn-danger btn-flat "  onclick="return confirm('Are you sure want to delete');" href="<?php echo base_url(); ?>settings/user_role/delete/<?php echo $value->id;?>">
                         <i class="fa fa-pencil-square-o" ></i> Delete </a>
                     </td>   

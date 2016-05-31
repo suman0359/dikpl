@@ -29,7 +29,7 @@ class User_role extends MY_Controller{
     }
     
     public function index(){
-        $data['user_role_list'] = $this->db->get('tbl_user_role')->result();
+        $data['user_role_list'] = $this->CM->selectAll('tbl_user_role', 'value ASC');
         $this->load->view('settings/user_role/index', $data);
     }
     

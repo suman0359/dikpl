@@ -2,6 +2,18 @@
 
 class Commons extends CI_Model {
 
+    public function selectAll($table_name, $order_by= NULL){
+        $this->db->select('*');
+        $this->db->from($table_name);
+
+        if($order_by !=NULL)
+            $this->db->order_by($order_by);
+
+        $query_result = $this->db->get();
+        $result = $query_result->result();
+        return $result;
+    }
+
     public function getEncrytedUrl($back_track) {
         $bc = str_replace("/", "-", $back_track);
         $bcl = strrev($bc);

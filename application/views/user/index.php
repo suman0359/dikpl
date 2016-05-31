@@ -48,6 +48,7 @@ $this->load->view('common/sidebar');
                     <th id="action_btn_align">Phone</th>
                     <th id="action_btn_align">Email</th>
                     <th id="action_btn_align">User Type </th>
+                    <th id="action_btn_align">User Status</th>
                     <th id="action_btn_align">Action</th>
 
                 </tr>
@@ -67,13 +68,12 @@ $this->load->view('common/sidebar');
                         <td> <?php echo $user['address'] ?></td>
                         <td> <?php echo $user['phone'] ?></td>
                         <td> <?php echo $user['email'] ?></td>
+                        <td> <?php echo $user['role_name'] ?></td>
                         <td>
-
-                            <?php if ($user['user_type'] == 1) echo 'Administrator'; ?>   
-                            <?php if ($user['user_type'] == 2) echo 'Manager'; ?>   
-                            <?php if ($user['user_type'] == 3) echo 'Resional Manager'; ?>
-                            <?php if ($user['user_type'] == 4) echo 'MPO'; ?>    
-
+                            <?php 
+                            if($user['status'] == 1) echo '<span class="label label-success">Published</span>'; 
+                            if($user['status'] != 1) echo '<span class="label label-danger">Unpublished</span>'; 
+                            ?>
                         </td>
                         <td >     
                                 <a class="btn btn-primary btn-flat" href="<?php echo base_url(); ?>user/edit/<?php echo $user['id'] ?>"><i class="fa fa-pencil-square-o" ></i> Edit </a>
