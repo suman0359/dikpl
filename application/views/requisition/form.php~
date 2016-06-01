@@ -29,8 +29,8 @@ $this->load->view('common/sidebar');
 
         <!-- ************************************************* -->
         <?php echo form_open(); ?>
-        <div class="requisition">
-            <div class="row " id="edit-0">
+        <div id="type_container">
+            <div class="row" id="edit-0">
                 
                 <div class="col-md-2">
                     
@@ -118,8 +118,8 @@ $this->load->view('common/sidebar');
 
         <!-- ********************************************************************** -->
         
-        <div  class="requisition hide ">
-            <div class="row  form-group type-row" id="">
+        <div id="type-container" class="hide">
+            <div class="row form-group type-row" id="">
                 
                  <div class="col-md-2">
                     
@@ -214,7 +214,7 @@ $this->load->view('common/sidebar');
                     var doc = $(document);
                     jQuery('a.add-type').die('click').live('click', function (e) {
                         e.preventDefault();
-                        var content = jQuery('.requisition .type-row'),
+                        var content = jQuery('#type-container .type-row'),
                                 element = null;
                         for (var i = 0; i < 1; i++) {
                             element = content.clone();
@@ -223,7 +223,7 @@ $this->load->view('common/sidebar');
                             element.attr('id', type_div);
                             $(this)
                             element.find('.remove-type').attr('targetDiv', type_div);
-                            element.appendTo('.requisition');
+                            element.appendTo('#type_container');
 
                         }
                     });
@@ -263,16 +263,16 @@ $this->load->view('common/sidebar');
             jQuery(document).ready(function () {
                 //Teacher Select 
             
-            $(".requisition").on('click', '.department_id', function(){
+            $("#type_container").on('click', '.department_id', function(){
                 var department_id = $(this).val() ; 
-                var id = $(this).parents().html();
+                    var id = $("this").closest(".test").attr("id");
                     console.log(id);
             })
 
-            $(".requisitionn").on('change', '.department_id', function(){
+            $("#type_container").on('change', '.department_id', function(){
                     var department_id = $(this).val() ; 
-                    var id = $('.requisition').attr('id');
-                    console.log(id);
+
+                    console.log(department_id);
                     $.ajax({
                       url: "<?php echo base_url() ?>index.php/home/getclass/"+department_id,
 

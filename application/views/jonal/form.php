@@ -103,7 +103,7 @@ $this->load->view('common/sidebar');
                         <label for="DiscritName">Select District Name FROM</label>
                         <select name="from[]" id="search" class="form-control" size="8" multiple="multiple">
                             <?php foreach ($district_list as $value) { ?>
-                                <option value="<?php echo $value['id'] ?>"><?php echo $value['name']; ?></option>
+                                <option value="<?php echo $value->id; ?>"><?php echo $value->name; ?></option>
                             <?php } ?>
                             <!-- 
                             <option value="2">Item 5</option>

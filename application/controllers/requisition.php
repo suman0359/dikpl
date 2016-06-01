@@ -22,15 +22,18 @@ class Requisition extends MY_Controller{
 
         
        $data['pro_list']=$this->CM->getAll('books');
+
+       
        $data['dep_list']=$this->CM->getAll('department');
        $data['class_list']=$this->CM->getAll('tbl_class');
-  
-        $data['id']="";
-        $data['book_name']="";
-        $data['department_id']="";
-        $data['group_id']="";
-        $data['amount']="";
-        $data['quantity']="";
+
+        
+        $data['id']           = "";
+        $data['book_name']    = "";
+        $data['department_id']= "";
+        $data['group_id']     = "";
+        $data['amount']       = "";
+        $data['quantity']     = "";
       
       
        $user_id = $this->session->userdata('uid');
@@ -41,7 +44,7 @@ class Requisition extends MY_Controller{
         $this->form_validation->set_rules('book_name', 'department_id', 'group_id',  'required');
         if ($this->form_validation->run() == FALSE)
         {
-            $this->load->view('requisition/form', $data); 
+            $this->load->view('requisition/form2', $data); 
         }
         else
         {
@@ -196,6 +199,11 @@ class Requisition extends MY_Controller{
         {
               $data['requisition_info']=$this->CM->getwhere('tbl_requisition',array('id'=>$id));
               $data['book_list']=$this->RM->getRequisitionBooks($id); 
+
+              // echo "<pre>";
+              // print_r($data['book_list']);
+              // exit();
+              
               // echo "<pre>";
               // print_r($data['requisition_info']);
               // exit();

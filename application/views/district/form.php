@@ -82,9 +82,7 @@ $this->load->view('common/sidebar');
                             <?php foreach ($jonal_list as $jonal) { ?>
 
                                 <option value="<?php echo $jonal["id"]; ?>" 
-                                        <?php if ($jonal["id"] == $jonal_id) {
-                                            echo 'selected';
-                                        } ?> >
+                                        <?php if ($jonal["id"] == $jonal_id) { echo 'selected'; } ?> >
                                 <?php echo $jonal["name"]; ?>
                                 </option>
 

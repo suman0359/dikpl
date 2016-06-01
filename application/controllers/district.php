@@ -23,8 +23,19 @@ class District extends CI_Controller {
             redirect('error/accessdeny');
 
         $this->load->model('district_model');
+        $this->load->model('custom_model');
+
+        $select_rezonal_id = $this->custom_model->get_rezonal_id_for_district();
+        
+        $rezonal_id = [];
+            foreach ($select_rezonal_id as $value) {    
+                array_push($rezonal_id, $value['id']);               
+            }
+
+        // $rezonal_id = rtrim(implode(',', $rezonal_id), ',');
+                
        
-        $no_rows = $this->CM->getTotalRow('district');
+        $no_rows = $this->district_model->getTotalRow('district', $rezonal_id);
         $this->load->library('pagination');
         $config['base_url'] = base_url() . 'district/index/';
 
@@ -46,15 +57,13 @@ class District extends CI_Controller {
         $config['first_link'] = 'First';
         $this->pagination->initialize($config);
 
-        $data['district_list'] = $this->district_model->get_all_district_info($this->uri->segment(3), $config['per_page']);
+        $data['district_list'] = $this->district_model->get_all_district_info($this->uri->segment(3), $config['per_page'], $rezonal_id);
         $this->load->view('district/index', $data);
     }
 
     public function add() {
         if (!$this->CM->checkpermissiontype($this->module, 'add', $this->user_type))
             redirect('error/accessdeny');
-
-        // $data['id'] = $this->CM->getMaxID('user'); 
 
         $data['subject_user'] = $this->CM->getAllWhere('user', array('user_type' => '3'));
         $data['jonal_list'] = $this->CM->getALL('jonal');
@@ -99,11 +108,11 @@ class District extends CI_Controller {
             redirect('error/accessdeny');
 
         $content = $this->CM->getInfo('district', $id);
-        //$data['division_user']=$this->CM->getAllWhere('user', array('user_type' => '3'));
+        
         $data['jonal_list'] = $this->CM->getALL('jonal');
 
         $data['name'] = $content->name;
-        //$data['status'] = $content->status;
+        $data['jonal_id']= $content->jonal_id;
 
         $this->load->library('form_validation');
         $this->form_validation->set_rules('name', 'required');
@@ -112,9 +121,7 @@ class District extends CI_Controller {
         } else {
             $datas['name'] = $this->input->post('name');
             $datas['jonal_id'] = $this->input->post('jonal_id');
-
-            //$datas['status'] = $this->input->post('status');
-            //$datas['entryby']=$this->session->userdata('uid');       
+    
             if ($this->CM->update('district', $datas, $id)) {
                 $msg = "Operation Successfull!!";
                 $this->session->set_flashdata('success', $msg);

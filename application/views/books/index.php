@@ -52,8 +52,9 @@ $this->load->view('common/sidebar');
 
 
 		<?php
-		//var_dump($college_list) ; 
-		$serialNo = 1;
+		$serialNo = $this->uri->segment(3);
+        if($serialNo==FALSE) $serialNo=1;
+        else $serialNo +=1;
 		foreach ($books_list as $books) {
 		    $company_name = $books->company_name;
 		    if (!empty($company_name)) {

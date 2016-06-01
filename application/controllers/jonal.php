@@ -62,13 +62,14 @@ class Jonal extends CI_Controller
             redirect('error/accessdeny');
 
         $data['division_list']=$this->CM->getTotalALL('division');
-        $data['district_list']=$this->CM->getTotalALL('district');
+        $data['district_list']=$this->CM->selectAll('district');
         $data['jonal_head_list']=$this->CM->getAllwhere('user', array('user_type' => 4)); // Here Jonal Head User Type ID is 4
 
-        
+                
         $data['division_id']="";
 
         $data['name'] = "";
+        $data['jonal_head_id'] = "";
       
         $this->load->library('form_validation');
 
@@ -91,24 +92,13 @@ class Jonal extends CI_Controller
             $district_list      = $this->input->post('district_list');
            
             if ($district_list) 
-                
                 foreach ($district_list as $value) {
                    $insert = $this->CM->insert('zonal_group', array('zonal_id' => $jonal_id, 'district_id' => $value, 'division_id' => $division_id));
                 }
-            
-            if($insert)
-            {
-                $msg = "Operation Successfull!!";
-        		$this->session->set_flashdata('success', $msg);
-                redirect('jonal'); 
-            }
-            else 
-            {
-                $msg = "There is an error, Please try again!!";
-        		$this->session->set_flashdata('error', $msg);
-        		$this->load->view('jonal/form', $data); 
-            }
-              redirect('jonal','refresh'); 
+
+            $msg = "Operation Successfull!!";
+            $this->session->set_flashdata('success', $msg);
+            redirect('jonal'); 
         }
         
     }
@@ -125,7 +115,7 @@ class Jonal extends CI_Controller
         $data['district_info'] = $this->join_model->get_all_district_where_zonal_info( $jonal_id);
         
         $data['division_list']=$this->CM->getTotalALL('division');
-        $data['district_list']=$this->CM->getTotalALL('district');
+        $data['district_list']=$this->CM->selectAll('district');
         $data['jonal_head_list']=$this->CM->getAllwhere('user', array('user_type' => 4)); // Here Jonal Head User Type ID is 4
         
         $data['name'] = $content->name;
@@ -242,15 +232,16 @@ class Jonal extends CI_Controller
         if (!$this->CM->checkpermissiontype($this->module, 'delete', $this->user_type))
             redirect('error/accessdeny');
 
-        if ($this->CM->delete_db('jonal', $id)) {
-            $msg = "Operation Successfull!!";
-            $this->session->set_flashdata('success', $msg);
-        } else {
-            $msg = "There is an error, Please try again!!";
-            $this->session->set_flashdata('error', $msg);
+        if ($this->user_type==1) {
+            $this->CM->delete('zonal_group', array('zonal_id' => $id));
+            $this->CM->delete('jonal', array('id' => $id));
+        }else{
+            $this->CM->delete_db('jonal', $id);
         }
-
-        redirect('jonal');
+        
+        $msg = "Operation Successfull!!";
+        $this->session->set_flashdata('success', $msg);
+        redirect($_SERVER['HTTP_REFERER'], 'refresh'); 
     }
     
     

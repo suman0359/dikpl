@@ -36,7 +36,7 @@ $this->load->view('common/sidebar');
         echo form_open() ; 
         ?>
         <label class="col-md-2"> Start Date 
-         <input type="text" id="sdate" class="datepicker  form-control " name="sdate" value="<?php echo $sdate ;?>" placeholder="dd-mm-yyyy" required/>
+         <input type="text" id="sdate" class="dp  form-control " name="sdate" value="<?php echo $sdate ;?>" placeholder="dd-mm-yyyy" required/>
              </label>
          <label class="col-md-2"> End Date 
           <input type="text" id="edate" class="datepicker  form-control " name="edate" value="<?php echo $edate ;?>" placeholder="DD-MM-YYY" required/>

@@ -1,6 +1,11 @@
 <?php
 
 class Commons extends CI_Model {
+    public function __construct(){
+        parent::__construct();
+        $this->user_type = $this->session->userdata('user_type');
+        $this->division_id = $this->session->userdata('division_id');
+    }
 
     public function selectAll($table_name, $order_by= NULL){
         $this->db->select('*');
@@ -154,10 +159,16 @@ class Commons extends CI_Model {
 
 
     public function getInfo($table, $id) {
+        
         $this->db->from($table);
-        $this->db->where('status !=', 13);
+
+        if($this->user_type!=1){
+            $this->db->where('status !=', 13);    
+        }
+        
         $this->db->where('id', $id);
         $query = $this->db->get()->row();
+        
         return $query;
     }
 

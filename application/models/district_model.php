@@ -14,7 +14,7 @@ class District_model extends CI_Model{
     * Select all District information
     * Author : Tasfir Hossain Suman
     */
-    public function get_all_district_info($from = NULL, $limit = NULL) {
+    public function get_all_district_info($from = NULL, $limit = NULL, $rezonal_id = NULL) {
         $user_type = $this->user_type;
         $this->db->select("di.id as district_id, di.name as district_name, jo.name as jonal_name");
         $this->db->from('district as di');
@@ -22,6 +22,11 @@ class District_model extends CI_Model{
         $this->db->limit($limit, $from);
         
         $this->db->join('jonal as jo', 'jo.id = di.jonal_id','left');
+
+        if ($user_type==4 || $user_type==5 || $user_type==6) {
+           $this->db->where_in('di.jonal_id', $rezonal_id);
+        }
+        
 
         $query_result = $this->db->get();
         return $query_result->result_array();
@@ -31,16 +36,17 @@ class District_model extends CI_Model{
     * Only For Counting Selected Row for Pagination
     * Author : Tasfir Hossain Suman
     */
-    function getTotalRow($table) {
+    function getTotalRow($table, $rezonal_id) {
         $user_type = $this->user_type;
-        $sql = "SELECT * FROM $table WHERE status  = 1 ";
-
+        $this->db->from($table);
+        
         if ($user_type==4 || $user_type==5 || $user_type==6) {
-            $sql .= " and div_id=$this->division_id";
+            $this->db->where_in('jonal_id', $rezonal_id);
         }
 
-        $query = $this->db->query($sql);
-        return $query->num_rows();
+        $result = $this->db->get()->num_rows();
+
+        return $result;
     }
 
 }

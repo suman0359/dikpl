@@ -25,19 +25,22 @@ class Report_model extends CI_Model {
 	return $result->result_array();
     }
 
+    /**
+    * Show Requisitin Book from Requisition Table
+    */
     public function getRequisitionBooks($rid) {
-	$sql = "SELECT 
-                    rb.requisition_id, rb.book_id , rb.quantity, rb.price, rb.line_no  , 
-                    b.id as bookid, b.name
-                    FROM 
-                    requisition_books as rb, books as b
-                    WHERE 
-                    rb.requisition_id = {$rid} 
-                    AND rb.book_id =  b.id  
-                    ORDER BY rb.line_no ASC
-                    ";
-	$result = $this->db->query($sql);
-	return $result->result_array();
+		$sql = "SELECT 
+            rb.requisition_id, rb.book_id , rb.quantity, rb.price, rb.line_no  , 
+            b.id as bookid, b.book_name
+            FROM 
+            requisition_books as rb, books as b
+            WHERE 
+            rb.requisition_id = {$rid} 
+            AND rb.book_id =  b.id  
+            ORDER BY rb.line_no ASC
+            ";
+		$result = $this->db->query($sql);
+		return $result->result_array();
     }
 
     public function transferReport($sdate, $edate, $did = NULL) {

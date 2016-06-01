@@ -19,7 +19,7 @@
             <td><?php echo $i; ?></td>
 
             <td>
-    <?php echo $book['name'] ?>
+    <?php echo $book['book_name'] ?>
             </td>
              <!-- <td>
     <?php //echo $book['book_code']            ?>
