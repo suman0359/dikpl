@@ -29,14 +29,14 @@ $this->load->view('common/sidebar');
 
         <!-- ************************************************* -->
         <?php echo form_open(); ?>
-        <div class="requisition">
-            <div class="row " id="edit-0">
+        <div id="type_container">
+            <div class="row" id="edit-0">
                 
                 <div class="col-md-2">
                     
                     <div class="form-group">
                         <label for="book_name">Department Name</label>
-                        <select name="department_id[]" class="form-control department_id">
+                        <select name="department_id[]" id="department_id" class="form-control">
                             <option value="">Select Department Name</option>
                             <?php 
                             foreach ($dep_list as $value) { ?>
@@ -118,7 +118,7 @@ $this->load->view('common/sidebar');
 
         <!-- ********************************************************************** -->
         
-        <div  class="requisition hide ">
+        <div id="type_container" class="hide ">
             <div class="row  form-group type-row" id="">
                 
                  <div class="col-md-2">
@@ -263,13 +263,13 @@ $this->load->view('common/sidebar');
             jQuery(document).ready(function () {
                 //Teacher Select 
             
-            $(".requisition").on('click', '.department_id', function(){
+            $("#type_container").on('click', '.department_id', function(){
                 var department_id = $(this).val() ; 
                 var id = $(this).parents().html();
                     console.log(id);
             })
 
-            $(".requisitionn").on('change', '.department_id', function(){
+            $("#type_container").on('change', '.department_id', function(){
                     var department_id = $(this).val() ; 
                     var id = $('.requisition').attr('id');
                     console.log(id);
@@ -292,173 +292,10 @@ $this->load->view('common/sidebar');
              });
                 //-----------------------------------
 
-                $(".new_form").hide();
-
-
-                $("#term").autocomplete({
-                    source: '<?php echo base_url(); ?>index.php/requisition/suggation',
-                    minLength: 1,
-                    select: function (event, ui)
-                    {
-                        $("#item").val(ui.item.value.name);
-                        additemrow(ui.item.value);
-
-                    }
-                });
-
-                $("#term").focus(function () {
-                    $("#term").val('');
-
-                });
-
-
-                $("#term").keypress(function (event) {
-                    if (event.which == 13) {
-                        var id = $(this).val();
-                        additemrow(id);
-                    } else
-                    {
-                        // auto complete 
-                    }
-
-                });
+              
 
 
 
-
-                /* $('#sandbox-container input').datepicker({
-                 KeyboardNavigation: false,
-                 todayHighlight: true,
-                 format: 'dd-mm-yyyy',
-                 autoclose: true
-                 });*/
-
-                $("#add").click(function () {
-                    var row = "<tr class='frow'>" + $(".frow").html() + "</tr>";
-                    $(".tableproduct tr:last-child").last().after(row);
-                });
-
-
-                $("#remove").click(function () {
-                    $(".tableproduct tr:last-child").last().remove();
-                    call_all();
-                });
-
-
-
-            });
-
-
-            function additemrow(id)
-            {
-                var id = id;
-                getproduct(id);
-
-            }
-
-
-            function getproduct(id)
-            {
-
-                var id = parseInt(id);
-
-                var flag = true;
-
-                $(".pid").each(function (index) {
-                    // console.log( $( this ).val() );
-                    var d = parseInt($(this).val());
-                    // alert(id+"-"+d) ;
-                    if (id == d)
-                    {
-                        var cv = parseInt($(".q_" + id).val());
-
-                        $(".q_" + id).val(cv + 1);
-                        call_all();
-                        flag = false;
-                    }
-                });
-
-                if (flag) {
-                    $.ajax({
-                        type: "GET",
-                        url: "<?php echo base_url(); ?>requisition/getproduct/" + id,
-                        dataType: "json",
-                        success: function (books) {
-
-                            if (books != "")
-                            {
-
-                                $('.tableproduct').append('<tr id="line_' + books.id + '" >\n\
-                                                                  <td  ><i   class="remove_item glyphicon glyphicon-minus-sign btn btn-warning btn-xs "  itemid="' + books.id + '" ></i></td>\n\
-                                                                  <td><input name="pid[]" class=" pid"  value="' + books.id + '" type="hidden" >' + books.book_name + '</td>\n\
-                                                                  <td>' + books.book_code + ' </td>\n\
-                                                                  <td><input name="price[]" class=" "  value="' + books.rate + '" type="hidden" > ' + books.rate + '</td>\n\
-                                                                  <td> <input type="number" name="qty[]"   id="qty" min="1" value="1" class="q_' + books.id + ' qty form-control "  onChange="call_all()" /></td>\n\
-                                                            </tr>');
-
-                            } else
-                            {
-                                alert("Item Not Fount By This Id " + id);
-                            }
-                        }
-                    });
-                }
-            }
-
-            $(document.body).on('click', '.remove_item', function () {
-                var id = $(this).attr("itemid");
-                $("#line_" + id).remove();
-                call_all();
-            });
-
-
-            $('.table').on("change", call_all);
-
-
-            function toatalquantity() {
-                var sum = 0;
-                // or $( 'input[name^="ingredient"]' )
-                $('input[name^="qty"]').each(function (i, e) {
-                    var v = parseInt($(e).val());
-                    if (!isNaN(v))
-                        sum += v;
-                });
-
-                // alert(sum) ; 
-                $(".t_qty").val(sum);
-            }
-
-
-            function toatalcost() {
-                var sum = 0;
-                // or $( 'input[name^="ingredient"]' )
-                $('input[name^="total"]').each(function (i, e) {
-                    var v = parseInt($(e).val());
-                    if (!isNaN(v))
-                        sum += v;
-                });
-
-                // alert(sum) ; 
-                $(".t_price").val(sum);
-            }
-
-
-
-
-            function WO() {
-                var table = document.getElementById("plateVolumes");
-
-
-
-            }
-
-            function call_all()
-            {
-                WO();
-                toatalcost();
-                toatalquantity();
-
-            }
 
         </script>
 

@@ -44,7 +44,7 @@ class Requisition extends MY_Controller{
         $this->form_validation->set_rules('book_name', 'department_id', 'group_id',  'required');
         if ($this->form_validation->run() == FALSE)
         {
-            $this->load->view('requisition/form2', $data); 
+            $this->load->view('requisition/form', $data); 
         }
         else
         {
