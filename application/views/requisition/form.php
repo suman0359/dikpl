@@ -118,14 +118,14 @@ $this->load->view('common/sidebar');
 
         <!-- ********************************************************************** -->
         
-        <div id="type_container" class="hide ">
-            <div class="row  form-group type-row" id="">
+        <div id="type-container" class="hide">
+            <div class="row form-group type-row" id="">
                 
                  <div class="col-md-2">
                     
                     <div class="form-group">
                         <!-- <label for="book_name">Department Name</label> -->
-                        <select name="department_id[]" class="form-control department_id">
+                        <select name="department_id[]" id="department_id[]" class="form-control">
                             <!-- <option value="">Select Department Name</option> -->
                             <?php 
                             foreach ($dep_list as $value) { ?>
@@ -198,10 +198,6 @@ $this->load->view('common/sidebar');
         </div>
 
 
-        <!-- ********************************************************************** -->
-        
-
-
 
             <script type="text/javascript" charset="utf8" src="<?php echo base_url(); ?>assets/plugins/jquery-1.8.2.min.js"></script> 
 
@@ -214,7 +210,7 @@ $this->load->view('common/sidebar');
                     var doc = $(document);
                     jQuery('a.add-type').die('click').live('click', function (e) {
                         e.preventDefault();
-                        var content = jQuery('.requisition .type-row'),
+                        var content = jQuery('#type-container .type-row'),
                                 element = null;
                         for (var i = 0; i < 1; i++) {
                             element = content.clone();
@@ -223,7 +219,7 @@ $this->load->view('common/sidebar');
                             element.attr('id', type_div);
                             $(this)
                             element.find('.remove-type').attr('targetDiv', type_div);
-                            element.appendTo('.requisition');
+                            element.appendTo('#type_container');
 
                         }
                     });
@@ -249,8 +245,7 @@ $this->load->view('common/sidebar');
             <!-- ************************************************* -->
 
 
-                <?php echo form_close() ?>      
-
+           
             </div>
         </div>
         <!-- End  Working area --> 
@@ -263,38 +258,34 @@ $this->load->view('common/sidebar');
             jQuery(document).ready(function () {
                 //Teacher Select 
             
-            $("#type_container").on('click', '.department_id', function(){
-                var department_id = $(this).val() ; 
-                var id = $(this).parents().html();
-                    console.log(id);
-            })
+                $("#type_container").on('click', '#department_id[]', function(){
+                    var department_id = $(this).attr('id') ; 
 
-            $("#type_container").on('change', '.department_id', function(){
-                    var department_id = $(this).val() ; 
-                    var id = $('.requisition').attr('id');
-                    console.log(id);
-                    $.ajax({
-                      url: "<?php echo base_url() ?>index.php/home/getclass/"+department_id,
+                        console.log(department_id);
+                })
 
-                      beforeSend: function( xhr ) {
-                        xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
-                        $("#class_id").html("<option>Loading .... </option>") ; 
-                      }
-                    })
-                  .done(function( data ) {
-                     $("#class_id").html("<option value=''>Select a Class </option>"); 
+                $("#type_container").on('change', '#department_id', function(){
+                        var department_id = $(this).val() ; 
+
+                        console.log(department_id);
+                        $.ajax({
+                          url: "<?php echo base_url() ?>index.php/home/getclass/"+department_id,
+
+                          beforeSend: function( xhr ) {
+                            xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
+                            $("#class_id").html("<option>Loading .... </option>") ; 
+                          }
+                        })
+                      .done(function( data ) {
+                        $("#class_id").html("<option value=''>Select a Jone </option>"); 
                         data=JSON.parse(data);
-                    $.each(data, function(key, val) {
-                          $("#class_id").append("<option value='"+val.class_id+"'>"+val.class_name+"</option>");
-                        });  
-                        
-                    }); 
-             });
+                            $.each(data, function(key, val) {
+                              $("#class_id").append("<option value='"+val.class_id+"'>"+val.class_name+"</option>");
+                            });  
+                        });
+                 });
+            });
                 //-----------------------------------
-
-              
-
-
 
 
         </script>

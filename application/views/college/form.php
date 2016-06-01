@@ -382,12 +382,12 @@ $this->load->view('common/sidebar');
             $("#jonal_id").html("<option>Loading .... </option>") ; 
           }
         })
-      .done(function( data ) {
-         $("#jonal_id").html("<option value=''>Select a Jone </option>"); 
+            .done(function( data ) {
+            $("#jonal_id").html("<option value=''>Select a Jone </option>"); 
             data=JSON.parse(data);
-        $.each(data, function(key, val) {
-              $("#jonal_id").append("<option value='"+val.id+"'>"+val.name+"</option>");
-            });  
+                $.each(data, function(key, val) {
+                  $("#jonal_id").append("<option value='"+val.id+"'>"+val.name+"</option>");
+                });  
             });
         }); 
         
