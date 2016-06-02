@@ -41,18 +41,13 @@ class Requisition extends MY_Controller{
         $this->load->library('form_validation');
 
         // $this->form_validation->set_rules('book_name', 'Book Name', '|required|min_length[1]|max_length[12]');
-        // $this->form_validation->set_rules('book_namee', 'department_id', 'group_id',  'required');
+        $this->form_validation->set_rules('book_name', 'department_id', 'group_id',  'required');
         if ($this->form_validation->run() == FALSE)
         {
             $this->load->view('requisition/form', $data); 
         }
         else
         {
-
-          echo "<pre>";
-          print_r($_POST['book_name']);
-          exit();
-          
           
            //purchase table operation
             $this->db->trans_start();
