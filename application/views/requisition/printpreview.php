@@ -66,10 +66,7 @@ $this->load->view('common/sidebar');
                     <td>Requested  By :</td>
                     <td> <?php 
                     $emp=$this->CM->getwhere('user',array('id'=>$requisition_info->requisition_by)); 
-                    // echo "<pre>";
-                    // print_r($emp);
-                    // exit();
-                    
+                                        
                     echo $emp->name ; 
                      ?> </td>
                 </tr>

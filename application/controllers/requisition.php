@@ -19,8 +19,7 @@ class Requisition extends MY_Controller{
         
     }
     public function add(){
-
-        
+              
        $data['pro_list']=$this->CM->getAll('books');
 
        
@@ -41,13 +40,20 @@ class Requisition extends MY_Controller{
           
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('book_name', 'department_id', 'group_id',  'required');
+        // $this->form_validation->set_rules('book_name', 'Book Name', '|required|min_length[1]|max_length[12]');
+        // $this->form_validation->set_rules('book_namee', 'department_id', 'group_id',  'required');
         if ($this->form_validation->run() == FALSE)
         {
             $this->load->view('requisition/form', $data); 
         }
         else
         {
+
+          echo "<pre>";
+          print_r($_POST['book_name']);
+          exit();
+          
+          
            //purchase table operation
             $this->db->trans_start();
 
@@ -55,19 +61,31 @@ class Requisition extends MY_Controller{
             /* ************************************* */
             $book_id        = $this->input->post('book_name');
             $book_quantity  = $this->input->post('book_quantity');
-            $department_id  =  $this->input->post('department_id');
-            $class_id       =  $this->input->post('class_id');
+            $department_id  = $this->input->post('department_id');
+            $class_id       = $this->input->post('class_id');
             $type           = $this->input->post('book_type');
 
             for ($i=0; $i < count($book_id); $i++) {
               $book_info = $this->CM->getInfo('books', $book_id[$i]);
               $book_sell_price = $book_info->sell_price;
+              $regular_price = $book_info->regular_price;
 
-              $book[] = array('book_id' => $book_id[$i], 'book_quantity' => $book_quantity[$i]);
-              $requisition_details[] = array('book_id' => $book_id[$i], 'qutantity' => $book_quantity[$i], 'sell_price' => $sell_price, 'department_id' => $department_id);
+              $book[] = array(
+                'book_id' => $book_id[$i], 
+                'book_quantity' => $book_quantity[$i]
+                );
+
+              $requisition_details[] = array(
+                'book_id'       => $book_id[$i], 
+                'qutantity'     => $book_quantity[$i], 
+                'price'         => $regular_price, 
+                'sell_price'    => $book_sell_price, 
+                'department_id' => $department_id
+                );
             }
             /* ************************************* */
             
+
             // This option for get total book sell_price 
             
             $total_amount = 0;
@@ -79,6 +97,7 @@ class Requisition extends MY_Controller{
               
               $total_amount +=$book_sell_price*$value['book_quantity'];
             }
+           
             /* ************************************************** */
 
             // This option for get total order of book quantity 
@@ -99,8 +118,7 @@ class Requisition extends MY_Controller{
             $requisition['total_amount']        = $total_amount;
             $requisition['total_quantity']      = $total_book_quantity;
             $requisition['date']                = date("Y-m-d");
-
-
+            
             $requisition_id = $this->CM->insert('tbl_requisition', $requisition);
 
             
@@ -110,27 +128,25 @@ class Requisition extends MY_Controller{
             for ($i=0; $i < count($book_id); $i++) {
               $book_info = $this->CM->getInfo('books', $book_id[$i]);
               $book_sell_price = $book_info->sell_price;
+              $regular_price  = $book_info->sell_price;
 
+              if($regular_price ==NULL){ $regular_price = 0;}
+              if($book_sell_price ==NULL){ $book_sell_price = 0;}
+                            
               $book_requisition_details[] = array(
                 'requisition_id'  => $requisition_id, 
                 'book_id'         => $book_id[$i], 
-                'qutantity'       => $book_quantity[$i], 
-                'sell_price'           => $book_sell_price, 
+                'quantity'        => $book_quantity[$i], 
+                'price'           => $regular_price, 
+                'sell_price'      => $book_sell_price, 
                 'department_id'   => $department_id[$i],
                 'class_id'        => $class_id[$i],
-                'book_type'       => $type[$i],
+                'book_type'       => $type
                 );
               
             }
 
-            // echo "<pre>";
-            // print_r($_POST);
-            // print_r($requisition);
-            // print_r($book_requisition_details);
-            
-            // exit();
-            
-
+           
             foreach ($book_requisition_details as $key => $value) {
               $this->CM->insert('tbl_requisition_details', $value);
             }
@@ -195,22 +211,12 @@ class Requisition extends MY_Controller{
         }
        
         
-        public function view($id)
-        {
+        public function view($id){
               $data['requisition_info']=$this->CM->getwhere('tbl_requisition',array('id'=>$id));
               $data['book_list']=$this->RM->getRequisitionBooks($id); 
-
-              // echo "<pre>";
-              // print_r($data['book_list']);
-              // exit();
+             
               
-              // echo "<pre>";
-              // print_r($data['requisition_info']);
-              // exit();
-              
-              
-            if(empty ($id) || empty ($data['purchase_info']))
-            {
+            if(empty ($id) || empty ($data['purchase_info'])){
               //  redirect('report/report_item');
             }
            

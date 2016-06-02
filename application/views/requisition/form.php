@@ -30,13 +30,13 @@ $this->load->view('common/sidebar');
         <!-- ************************************************* -->
         <?php echo form_open(); ?>
         <div id="type_container">
-            <div class="row" id="edit-0">
+            <div class="row type-row" id="edit-0">
                 
                 <div class="col-md-2">
                     
                     <div class="form-group">
                         <label for="book_name">Department Name</label>
-                        <select name="department_id[]" id="department_id" class="form-control">
+                        <select name="department_id[]" class="form-control department_id">
                             <option value="">Select Department Name</option>
                             <?php 
                             foreach ($dep_list as $value) { ?>
@@ -51,13 +51,9 @@ $this->load->view('common/sidebar');
                    
                     <div class="form-group">
                         <label for="book_group">Clsas Name</label>
-                        <select name="class_id[]" id="class_id" class="form-control">
+                        <select name="class_id[]" id="class_id" class="form-control class_id">
                             <option value="">Select Class Name</option>
-                           <!--  <?php 
-                            foreach ($class_list as $value) { ?>
-                                
-                                <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option> 
-                            <?php } ?> -->
+                           
                         </select>
                     </div>
                     
@@ -125,8 +121,8 @@ $this->load->view('common/sidebar');
                     
                     <div class="form-group">
                         <!-- <label for="book_name">Department Name</label> -->
-                        <select name="department_id[]" id="department_id[]" class="form-control">
-                            <!-- <option value="">Select Department Name</option> -->
+                        <select name="department_id[]" class="form-control department_id">
+                            <option value="">Select Department Name</option>
                             <?php 
                             foreach ($dep_list as $value) { ?>
                                 <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
@@ -141,7 +137,7 @@ $this->load->view('common/sidebar');
                    
                     <div class="form-group">
                         <!-- <label for="book_name">Class Name</label> -->
-                        <select name="class_id[]" id="class_id" class="form-control">
+                        <select name="class_id[]" id="class_id" class="form-control class_id">
                             <option value="">Select Class Name</option>
                             
                         </select>
@@ -220,6 +216,7 @@ $this->load->view('common/sidebar');
                             $(this)
                             element.find('.remove-type').attr('targetDiv', type_div);
                             element.appendTo('#type_container');
+                            
 
                         }
                     });
@@ -258,29 +255,37 @@ $this->load->view('common/sidebar');
             jQuery(document).ready(function () {
                 //Teacher Select 
             
-                $("#type_container").on('click', '#department_id[]', function(){
-                    var department_id = $(this).attr('id') ; 
+                // $("#type_container").on('click', '#department_id', function(){
+                //     var department_id = $(this).attr('name') ; 
+                //     var teams_id = $(this).closest('.type-row').attr('id');
+                //     $(this).addClass( 'red-class' );
+                //         // console.log(teams_id);
+                // })
 
-                        console.log(department_id);
-                })
-
-                $("#type_container").on('change', '#department_id', function(){
+                $("#type_container").on('change', '.department_id', function(){
                         var department_id = $(this).val() ; 
 
-                        console.log(department_id);
+                        var teams_id = $(this).closest('.type-row').attr('id');
+
+                        var teams_id = '#'+ teams_id;
+
+                        console.log(teams_id);
+
                         $.ajax({
                           url: "<?php echo base_url() ?>index.php/home/getclass/"+department_id,
 
                           beforeSend: function( xhr ) {
                             xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
-                            $("#class_id").html("<option>Loading .... </option>") ; 
+                            $(teams_id).find('#class_id').html("<option>Loading .... </option>") ; 
                           }
                         })
-                      .done(function( data ) {
-                        $("#class_id").html("<option value=''>Select a Jone </option>"); 
-                        data=JSON.parse(data);
+                        .done(function( data ) {
+                            
+                        
+                        $(teams_id).find('#class_id').html("<option value=''>Select a Jone </option>"); 
+                            data=JSON.parse(data);
                             $.each(data, function(key, val) {
-                              $("#class_id").append("<option value='"+val.class_id+"'>"+val.class_name+"</option>");
+                              $(teams_id).find('#class_id').append("<option value='"+val.class_id+"'>"+val.class_name+"</option>");
                             });  
                         });
                  });

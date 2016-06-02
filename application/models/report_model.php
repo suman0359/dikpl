@@ -30,16 +30,16 @@ class Report_model extends CI_Model {
     */
     public function getRequisitionBooks($rid) {
 		$sql = "SELECT 
-            rb.requisition_id, rb.book_id , rb.quantity, rb.price, rb.line_no  , 
-            b.id as bookid, b.book_name
+            trd.requisition_id, trd.book_id , trd.quantity, trd.price, trd.id, b.id as bookid, b.book_name
             FROM 
-            requisition_books as rb, books as b
+            tbl_requisition_details as trd, books as b
             WHERE 
-            rb.requisition_id = {$rid} 
-            AND rb.book_id =  b.id  
-            ORDER BY rb.line_no ASC
+            trd.requisition_id = {$rid} 
+            AND trd.book_id =  b.id  
+            ORDER BY trd.id ASC
             ";
 		$result = $this->db->query($sql);
+		
 		return $result->result_array();
     }
 

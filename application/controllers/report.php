@@ -160,6 +160,9 @@ class Report extends MY_Controller {
 	$this->load->view('report/collegeinventory', $data);
     }
 
+    /**
+    * For Requisition Report 
+    */
     public function requisition() {
 	if (!$this->CM->checkpermissiontype($this->module, 'requisition', $this->user_type))
 	    redirect('error/accessdeny');
