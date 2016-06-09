@@ -207,39 +207,72 @@ $this->load->view('common/sidebar');
     </div>
 </div>
     
-    <div class="form-group col-md-3">
-    <label for="thana">Thana</label>
-    <div>
-        <select name="thana_id" class="form-group form-control" id="thana_id">
-        <?php 
-        if($thana_id !== ''){
-        $thana = $this->CM->getInfo('thana', $thana_id); 
 
-        ?>
-        <option value="<?php echo $thana->id?>" ><?php echo $thana->name; ?> </option>
-        <?php } else {?>
-        <option value="0" >select District First </option>
-             <?php } ?>
-        </select>
-    </div>
-</div>
+    <!-- Start: Multi Select Start From Here  -->
+            <div class="col-md-12">
+                 
+                <div class="row">
+                    <div class="col-xs-5">
+                        <label for="DiscritName">Select Thana Name FROM</label>
+                        <select name="from[]" id="search" class="form-control" size="8" multiple="multiple">
+                            <?php foreach ($thana_list as $value) { ?>
+                                <option value="<?php echo $value->id; ?>"><?php echo $value->name; ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    
+                    <div class="col-xs-2">
+                        <br><br><br>
+                        <button type="button" id="search_rightAll" class="btn btn-block"><i class="glyphicon glyphicon-forward"></i></button>
+                        <button type="button" id="search_rightSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                        <button type="button" id="search_leftSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-left"></i></button>
+                        <button type="button" id="search_leftAll" class="btn btn-block"><i class="glyphicon glyphicon-backward"></i></button>
+                    </div>
+                    
+                    <div class="col-xs-5">
+                        <label for="DiscritName">Select Thana Name To</label>
+                        <select name="thana_list[]" id="search_to" class="form-control" size="8" multiple="multiple">
+                            
+                            <?php if (!empty($thana_info)) {
+                                foreach ($thana_info as $value) { ?>
+                                   <option value="<?php echo $value->thana_id ?>"><?php echo $value->thana_name; ?></option> 
+                              <?php  }
+                            } ?>
+
+                        </select>
+                    </div>
+                </div>
+                
+
+                <script type="text/javascript">
+                    jQuery(document).ready(function($) {
+                        $('#search').multiselect({
+                            search: {
+                                left: '<input autocomplete="off" type="text" name="q" class="form-control" placeholder="Search..." />',
+                                right: '<input autocomplete="off" type="text" name="q" class="form-control" placeholder="Search..." />',
+                            }
+                        });
+                    });
+                </script>
+                
+            </div>
+            <!-- End: Multi Select Start From Here -->
 
     
-    
-<div class=" text-center">
-     
+    <div class="clearfix"></div>
+    <br>
+<div class="col-md-12 text-right">
     <?php 
-    $form_input = array(
-        'name' => 'submit',
-        'class' =>'btn btn-lg btn-success ', 
-        'value' => 'Add User'
-        
-       
-    );
-    echo form_submit($form_input); 
+        $form_input = array(
+            'name' => 'submit',
+            'class' =>'btn btn-lg btn-success ', 
+            'value' => 'Add User'
+        );
+
+        echo form_submit($form_input); 
     ?>
-    
 </div>
+
    <?php echo form_close() ?> 
     
     <script>
@@ -313,13 +346,13 @@ $this->load->view('common/sidebar');
 
           beforeSend: function( xhr ) {
             xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
-            $("#thana_id").html("<option>Loading .... </option>") ; 
+            $("#search").html("<option>Loading .... </option>") ; 
 
           }
         })
       .done(function( data ) {
        
-         $("#thana_id").html(data);
+         $("#search").html(data);
        });
      }); 
      // End getThana_list

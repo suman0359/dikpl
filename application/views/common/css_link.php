@@ -27,13 +27,13 @@
         <link href="<?php echo base_url(); ?>style_sheet/css/AdminLTE.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>style_sheet/css/style.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>style_sheet/css/responsive-table.css" rel="stylesheet" type="text/css" />
-        
-             <!-- jQuery 2.0.2 -->
-        
+
+        <!-- jQuery 2.0.2 -->
+
         <!-- jQuery UI 1.10.3 -->
         <script src="<?php echo base_url(); ?>style_sheet/js/jquery-1.10.2.js" type="text/javascript"></script>
         <script src="<?php echo base_url(); ?>style_sheet/js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
-        
+
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>

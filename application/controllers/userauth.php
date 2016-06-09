@@ -44,9 +44,9 @@ class Userauth extends MY_Controller {
                     'user_type' => $checkdata->user_type,
                     'division_id' => $checkdata->division_id,
                     'jonal_id' => $checkdata->jonal_id,
-		    'district_id' => $checkdata->district_id,
-		    'thana_id' => $checkdata->thana_id,
-		    'college_id' => $checkdata->college_id,
+        		    'district_id' => $checkdata->district_id,
+        		    'thana_id' => $checkdata->thana_id,
+        		    'college_id' => $checkdata->college_id,
                     'user_logged' => TRUE
                 );
 

@@ -31,10 +31,7 @@ $this->load->view('common/sidebar');
         <h4 class=" alert alert-info text text-success text-center">Select The Option</h4>
         
         <?php echo form_open('user/permissionset');
-            
-//            echo '<pre>';
-//            print_r($plist);
-//            exit();
+        
             
             foreach($plist as $list){
         ?>
@@ -113,7 +110,7 @@ $this->load->view('common/sidebar');
         <hr/>
            <?php } ?> 
             
-             <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
+             <input type="hidden" name="uid" value="<?php echo $this->uid; ?>" />
              <input type="hidden" name="user_type" value="<?php echo $user_type; ?>" />
            <input class="btn btn-lg btn-success " onclick="return confirm('Are you sure want to allow him ');" type="submit" value="Allow Permission" name="submit"/>
            <a href="<?php echo base_url()?>user"  class="btn btn-lg btn-danger"  >Cancel</a>

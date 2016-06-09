@@ -145,7 +145,7 @@ if ($image) {
              <select name="user_type" class="form-group form-control">
                     <option>Setting User Role</option>
                 <?php foreach ($user_role_list as $user_role) { ?>
-                        <option value="<?php echo $user_role['id'] ?>" ><?php echo $user_role['role_name']; ?></option>
+                        <option value="<?php echo $user_role['value'] ?>" ><?php echo $user_role['name']; ?></option>
                 <?php } ?>
 
                 </select>

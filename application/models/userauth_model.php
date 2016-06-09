@@ -29,4 +29,16 @@ class Userauth_model extends CI_Model{
             return NULL;
         }
     }
+
+    function check_username($username){
+        $this->db->select('1', FALSE);
+        $this->db->where('LOWER(username)=', strtolower($username));
+        return $this->db->get('user')->num_rows;
+    }
+
+    function check_email($email){
+        $this->db->select('1', FALSE);
+        $this->db->where('LOWER(email)=', strtolower($email));
+        return $this->db->get('user')->num_rows;
+    }
 }

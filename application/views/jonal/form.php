@@ -37,15 +37,15 @@ $this->load->view('common/sidebar');
                 <div class="form-group">
                     <label> jonal Name </label>
                     <?php
-                    $form_input = array(
-                        'name' => 'name',
-                        'class' => 'form-control ',
-                        'value' => $name,
-                        'required' => 'required',
-                        'placeholder' => 'Jone/Jonal Name',
-                        'size' => '50'
-                    );
-                    echo form_input($form_input);
+                        $form_input     = array(
+                        'name'          => 'name',
+                        'class'         => 'form-control ',
+                        'value'         => $name,
+                        'required'      => 'required',
+                        'placeholder'   => 'Jone/Jonal Name',
+                        'size'          => '50'
+                        );
+                        echo form_input($form_input);
                     ?>
                 </div>
             </div>
@@ -103,13 +103,8 @@ $this->load->view('common/sidebar');
                         <label for="DiscritName">Select District Name FROM</label>
                         <select name="from[]" id="search" class="form-control" size="8" multiple="multiple">
                             <?php foreach ($district_list as $value) { ?>
-                                <option value="<?php echo $value['id'] ?>"><?php echo $value['name']; ?></option>
+                                <option value="<?php echo $value->id; ?>"><?php echo $value->name; ?></option>
                             <?php } ?>
-                            <!-- 
-                            <option value="2">Item 5</option>
-                            <option value="2">Item 2</option>
-                            <option value="2">Item 4</option>
-                            <option value="3">Item 3</option> -->
                         </select>
                     </div>
                     
@@ -140,8 +135,8 @@ $this->load->view('common/sidebar');
                     jQuery(document).ready(function($) {
                         $('#search').multiselect({
                             search: {
-                                left: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
-                                right: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
+                                left: '<input autocomplete="off" type="text" name="q" class="form-control" placeholder="Search..." />',
+                                right: '<input autocomplete="off" type="text" name="q" class="form-control" placeholder="Search..." />',
                             }
                         });
                     });
@@ -149,23 +144,7 @@ $this->load->view('common/sidebar');
                 
             </div>
             <!-- End: Multi Select Start From Here -->
-            <!-- <div class="col-md-3">
-                    <label> Publication Status </label><br>
-            <label class="radio-inline">
-              <input type="radio" name="status" id="inlineRadio1" <?php
-if ($status == 1) {
-    echo "checked";
-}
-?>  value="1"> Published
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="status" id="inlineRadio2" <?php
-if ($status == 0) {
-    echo "checked";
-}
-?>  value="0"> Unpublished
-            </label>
-            </div> -->
+           
             <div class="col-md-2"><br>
                 <div class="pull-right"> 
 

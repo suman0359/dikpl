@@ -14,7 +14,7 @@ class Home extends MY_Controller {
 
         $datav = "";
         // $this->load->view('home/index', $datav);
-        $this->load->view('welcome_page');
+        $this->load->view('welcome_page_administration');
     }
 
     public function dashboard(){
@@ -90,15 +90,8 @@ class Home extends MY_Controller {
 
     public function getdepartmentidbyid($teacher_id) {
         $teacher_id = trim($teacher_id);
-        //Selector Column Name || Where(Column Name) || Where Passed value || From(Table Name)
         $department_id = $this->CM->getIdWhere('dep_id', 'id', $teacher_id, 'teachers');
         $teacherlist = $this->CM->getAllWhere('department', array('id' => $department_id->dep_id));
-//         $department_name = $this->CM->getIdWhere('name', 'id', $department_id->dep_id, 'department');
-//
-//         echo '<pre>';
-//         print_r($department_id);
-//         print_r($department_name);
-//         exit();
 
         echo json_encode($teacherlist);
     }
@@ -108,12 +101,8 @@ class Home extends MY_Controller {
         $this->load->model('join_model');
         $class_list = $this->join_model->get_all_class_where_department_info($department_id);
 
-        $html = "<option value=''>Select a Class</option>";
-        foreach ($class_list as $key => $value) {
-            $html.="<option value='{$value->class_id}'>{$value->class_name}</option>";
-        }
+        echo json_encode($class_list);
 
-        echo $html;
     }
 
 

@@ -7,19 +7,20 @@ class User extends MY_Controller {
 
     public $uid;
     public $module;
-    public $user_type;
+    
 
     public function __construct() {
         parent::__construct();
         $this->checklogin();
 
-        $this->load->model('Commons', 'CM');
+        $this->load->model('user_model');
         $this->module = 'user';
         $this->uid = $this->session->userdata('uid');
         $this->user_type = $this->session->userdata('user_type');
     }
 
     public function index() {
+        $this->user_model->select_all_user();
         if (!$this->CM->checkpermissiontype($this->module, 'index', $this->user_type))
             redirect('error/accessdeny');
 
@@ -45,12 +46,15 @@ class User extends MY_Controller {
         $config['first_link'] = 'First';
         $this->pagination->initialize($config);
 
-        $data['user_list'] = $this->CM->getAllWhere('user', array('user_type !=' => '5'), $this->uri->segment(3), $config['per_page']);
+        // $data['user_list'] = $this->CM->getAllWhere('user', array('user_type !=' => '5'), $this->uri->segment(3), $config['per_page']);
+
+        $data['user_list'] = $this->user_model->select_all_user();
+
         $this->load->view('user/index', $data);
     }
 
     public function add() {
-        if (!$this->CM->checkpermissiontype($this->module, 'index', $this->user_type))
+        if (!$this->CM->checkpermissiontype($this->module, 'add', $this->user_type))
             redirect('error/accessdeny');
 
         $data['id'] = $this->CM->getMaxID('user');
@@ -69,8 +73,10 @@ class User extends MY_Controller {
 
 
         $this->load->library('form_validation');
+        $this->load->helper('security');
+        // $this->form_validation->set_rules('phone', 'name', 'email', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email|callback_email_check');
 
-        $this->form_validation->set_rules('phone', 'name', 'email', 'required');
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('user/form', $data);
         } else {
@@ -133,7 +139,7 @@ class User extends MY_Controller {
         $data['image'] = $content->image;
         $data['user_type'] = $content->user_type;
         $data['pdepartment'] = $content->pdepartment;
-        $data['division_id'] = $content->division_id;
+        $data['division_id'] = $content->pdepartment;
         $data['jonal_id'] = $content->jonal_id;
 
         $password = $content->password;
@@ -141,7 +147,9 @@ class User extends MY_Controller {
 
 
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('email', 'password', 'required');
+        // $this->form_validation->set_rules('email', 'password', 'required');
+         $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email|callback_email_check');
+
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('user/eform', $data);
         } else {
@@ -151,7 +159,7 @@ class User extends MY_Controller {
             $datas['email'] = $this->input->post('email');
             $datas['user_type'] = $this->input->post('user_type');
             $datas['pdepartment'] = $this->input->post('pdepartment');
-            $datas['division_id'] = $this->input->post('division_id');
+            $datas['division_id'] = $this->input->post('pdepartment');
             $datas['jonal_id'] = $this->input->post('jonal_id');
             $datas['entryby'] = $this->session->userdata('uid');
 
@@ -197,16 +205,18 @@ class User extends MY_Controller {
     }
 
     public function delete($id) {
+        
         if (!$this->CM->checkpermissiontype($this->module, 'delete', $this->user_type))
             redirect('error/accessdeny');
-
-        if ($this->CM->delete_db('user', $id)) {
-            $msg = "Operation Successfull!!";
-            $this->session->set_flashdata('success', $msg);
-        } else {
-            $msg = "There is an error, Please try again!!";
-            $this->session->set_flashdata('error', $msg);
+        
+        if ($this->user_type==1) {
+            $this->CM->delete('user', array('id' => $id));
+        }else{
+            $this->CM->delete_db('user', $id);
         }
+
+        $msg = "Operation Successfull!!";
+        $this->session->set_flashdata('success', $msg);
 
         redirect('user');
     }
@@ -257,9 +267,6 @@ class User extends MY_Controller {
     public function permission($user_type) {
         if (!$this->CM->checkpermissiontype($this->module, 'permission', $this->user_type))
             redirect('error/accessdeny');
-        
-//        if (!$this->CM->checkpermission($this->module, 'delete', $this->uid))
-//            redirect('error/accessdeny');
 
         $data['plist'] = $this->CM->getAll('permission_content');
         $data['user_type'] = $user_type;
@@ -269,10 +276,6 @@ class User extends MY_Controller {
     }
 
     public function permissionset() {
-
-        // echo '<pre>';
-        // print_r($_POST);
-        // exit();
 
         $module = $this->input->post('module_name');
 
@@ -298,7 +301,23 @@ class User extends MY_Controller {
             $this->CM->insert("user_permission", $datas);
         }
 
-        redirect('user');
+        redirect('settings/user_role/index');
+    }
+
+    /* Callback function */
+    
+   
+
+    function email_check($email){
+        $this->load->model('userauth_model');
+
+        $result = $this->userauth_model->check_email($email);
+        if ( ! $result)
+        {
+            $this->form_validation->set_message('email_check', 'Email is already used by another user. Please choose another email address.');
+        }
+                
+        return $result;
     }
 
 }

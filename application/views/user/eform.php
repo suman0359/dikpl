@@ -140,7 +140,7 @@ $this->load->view('common/sidebar');
     <div>
         <select name="user_type" class="form-group form-control" id="user_type">
              <?php foreach ($user_role_list as $user_role) { ?>
-                        <option value="<?php echo $user_role['id'] ?>" <?php if($user_type==$user_role['id']) echo 'selected' ;?> ><?php echo $user_role['role_name']; ?></option>
+                        <option value="<?php echo $user_role['value'] ?>" <?php if($user_type==$user_role['value']) echo 'selected' ;?> ><?php echo $user_role['name']; ?></option>
                 <?php } ?>
         </select>
     </div>

@@ -25,19 +25,22 @@ class Report_model extends CI_Model {
 	return $result->result_array();
     }
 
+    /**
+    * Show Requisitin Book from Requisition Table
+    */
     public function getRequisitionBooks($rid) {
-	$sql = "SELECT 
-                    rb.requisition_id, rb.book_id , rb.quantity, rb.price, rb.line_no  , 
-                    b.id as bookid, b.name
-                    FROM 
-                    requisition_books as rb, books as b
-                    WHERE 
-                    rb.requisition_id = {$rid} 
-                    AND rb.book_id =  b.id  
-                    ORDER BY rb.line_no ASC
-                    ";
-	$result = $this->db->query($sql);
-	return $result->result_array();
+		$sql = "SELECT 
+            trd.requisition_id, trd.book_id , trd.quantity, trd.price, trd.id, b.id as bookid, b.book_name
+            FROM 
+            tbl_requisition_details as trd, books as b
+            WHERE 
+            trd.requisition_id = {$rid} 
+            AND trd.book_id =  b.id  
+            ORDER BY trd.id ASC
+            ";
+		$result = $this->db->query($sql);
+		
+		return $result->result_array();
     }
 
     public function transferReport($sdate, $edate, $did = NULL) {
@@ -177,22 +180,22 @@ class Report_model extends CI_Model {
 		}
 		
 		
-	$result_query = $this->db->query($sql);
-	return $result_query->result_array();
+		$result_query = $this->db->query($sql);
+		return $result_query->result_array();
     }
 
     public function getRequisitionReportForMPO($start_date, $end_date, $user_id = NULL) {
-	$this->db->select("*");
-	$this->db->from('tbl_requisition');
-	if ($user_id != NULL) {
-	    $this->db->where('requisition_by', $user_id);
-	}
-	$this->db->where('date >=', $start_date);
-	$this->db->where('date <=', $end_date);
+		$this->db->select("*");
+		$this->db->from('tbl_requisition');
+		if ($user_id != NULL) {
+		    $this->db->where('requisition_by', $user_id);
+		}
+		$this->db->where('date >=', $start_date);
+		$this->db->where('date <=', $end_date);
 
-	$query_result = $this->db->get();
-	$result = $query_result->result();
-	return $result;
+		$query_result = $this->db->get();
+		$result = $query_result->result();
+		return $result;
     }
 
 }

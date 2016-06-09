@@ -43,6 +43,8 @@ $route['404_override'] = 'home/404';
  
 $route['login'] = 'userauth/login';
 $route['logout'] = 'userauth/logout';
+
+$route['settings/permission/(:num)'] = 'settings/permission/permission_edit/$1';
  
 
 /* End of file routes.php */

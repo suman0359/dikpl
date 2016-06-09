@@ -31,7 +31,7 @@ class Division extends CI_Controller
       
        // $data['id'] = $this->CM->getMaxID('user'); 
      
-        $data['division_user']=$this->CM->getAllWhere('user', array('user_type' => '3'));
+        $data['division_user']=$this->CM->getAllWhere('user', array('user_type' => '4')); // Rezonal Manager = 4, Marketing Manager =3
         
         $data['name'] = "";
         $data['division_head'] = "";
@@ -79,7 +79,7 @@ class Division extends CI_Controller
             redirect('error/accessdeny');
         
         $content = $this->CM->getInfo('division', $id) ; 
-        $data['division_user']=$this->CM->getAllWhere('user', array('user_type' => '3'));
+        $data['division_user']=$this->CM->getAllWhere('user', array('user_type' => '4')); // Rezonal Manager = 4, Marketing Manager =3
        
         
         $data['name'] = $content->name;

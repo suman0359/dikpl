@@ -50,6 +50,8 @@ $this->load->view('common/sidebar');
                     <th id="action_btn_align">Email</th>
                     <th id="action_btn_align">Division</th>
                     <th id="action_btn_align">Jonal </th>
+                    <th id="action_btn_align">District </th>
+                    <th id="action_btn_align">Thana </th>
                     <th id="action_btn_align">Action</th>
                    
                  </tr>
@@ -62,25 +64,35 @@ $this->load->view('common/sidebar');
 		 if($serialNo == FALSE) $serialNo=1;
 		 else $serialNo +=1;
                  foreach ($user_info  as $user){
+
+                  $thana_list = $this->marketing_executive_model->get_all_thana_where_mpo_info($user['user_id']);
+
                  ?>
                  
                  
               <tr id="action_btn_align">
                   <td> <?php echo $serialNo;?></td>
-                  <td> <?php echo $user['user_name'] ?></td>
+                  <td> <?php echo $user['mpo_name'] ?></td>
                   <td> <?php echo $user['address'] ?></td>
                   <td> <?php echo $user['phone'] ?></td>
                   <td> <?php echo $user['email'] ?></td>
 
                   <td> <?php echo $user['division_name'] ?></td>
-                  <td> <?php echo $user['jonal_name'] ?></td>
-              
+                  <td> <?php echo $user['rezonal_name'] ?></td>
+                  <td> <?php echo $user['district_name'] ?></td>
+
+                  <td> <?php if ($thana_list) {
+                            foreach ($thana_list as $value) {
+                            echo "<div style=\"background: #9E9E9E; padding: 3px; margin-bottom: 3px;\">".$value->thana_name."</div>";
+                            }
+                            
+                        } ?>
+                  </td>
                    
                   <td>     
-                            <a class="btn btn-primary btn-flat" href="<?php echo base_url(); ?>maexecutive/edit/<?php echo $user['user_id'] ?>"><i class="fa fa-pencil-square-o" ></i> Edit </a>
-                            <a class="btn btn-primary btn-flat" onclick="return confirm('Do you want to allow him to');" href="<?php echo base_url(); ?>user/permission/<?php echo $user['user_type'] ?>"><i class="fa fa-pencil-square-o" ></i> Permission </a>
-                            <a class="btn btn-danger btn-flat "  onclick="return confirm('Are you sure want to delete');" href="<?php echo base_url(); ?>maexecutive/delete/<?php echo $user['user_id'] ?>"><i class="fa fa-minus-circle"></i> Delete</a>
-                         </div>
+                      <a class="btn btn-primary btn-flat" href="<?php echo base_url(); ?>maexecutive/edit/<?php echo $user['user_id'] ?>"><i class="fa fa-pencil-square-o" ></i> Edit </a>
+                            
+                      <a class="btn btn-danger btn-flat "  onclick="return confirm('Are you sure want to delete');" href="<?php echo base_url(); ?>maexecutive/delete/<?php echo $user['user_id'] ?>"><i class="fa fa-minus-circle"></i> Delete</a>
                     </td>     
                </tr>
               <?php $serialNo++; } ?>

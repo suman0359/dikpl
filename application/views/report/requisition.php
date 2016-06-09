@@ -31,44 +31,6 @@ $this->load->view('common/sidebar');
 
         <div class="searchbar " >
 
-            <!--    <div class="col-md-12 no-print"  >
-            <?php
-            echo form_open();
-            ?>
-                    <label> Start Date 
-                     <input type="text" id="sdate" class="dp  form-control col-md-1" name="sdate" value="<?php echo $sdate; ?>" placeholder="dd-mm-yyyy" required/>
-                         </label>
-                    <label> End Date 
-                      <input type="text" id="edate" class="dp  form-control col-md-1" name="edate" value="<?php echo $edate; ?>" placeholder="DD-MM-YYY" required/>
-                    </label>
-                    <label> 
-                        Division 
-                    <select class="form-control col-md-1" id="chd" name="did">
-                        <option value="all"> All </option>
-                   
-            <?php
-            foreach ($div_list as $div) {
-                ?>
-                            <option value="<?php echo $div['id'] ?>" <?php if ($did == $div['id']) echo' selected="selected" ' ?>  > <?php echo $div['name'] ?>  </option>
-            <?php } ?> 
-                         </select>
-                    </label>
-                     <label> 
-                        Jonal 
-                        <select class="form-control col-md-1" id="jonal_id" name="jid" required>
-                        <option value="all"> All Jonal  </option>
-             
-                         </select>
-                    </label>
-                    
-                    <label>
-                        &nbsp;
-                        <input type="submit" name="sumbit" value="Search" class="btn btn-primary form-control col-md-1" />
-                    </label>
-                    <br/>
-                    <br/>
-            <?php echo form_close(); ?> 
-                </div>-->
 
             <div class="col-md-12 no-print"  >
                 <?php
@@ -157,19 +119,19 @@ $this->load->view('common/sidebar');
 
                 <table class="table table-bordered table-hover" >
                     <tr>
-                        <th >SL</th>
-                        <th>Invoice No</th>
-                        <th >Date </th>
-
-                        <th >Requistion Status </th>
-                        <th >Total Amount </th>
-                        <th > Total Quantity</th>
+                        <th > SL </th>
+                        <th > Invoice No </th>
+                        <th > Date </th>
+                        <th > Total Amount </th>
+                        <th > Total Quantity </th>
                         <th > Comment </th>
-                        <th></th>
+                        <th > Requistion Status </th>
+                        <th > Action </th>
                     </tr>
 
                     <?php
                     foreach ($report_details as $content) {
+                        $requisition_status = $content->requisition_status;
                         ?> 
 
                         <tr>
@@ -177,10 +139,10 @@ $this->load->view('common/sidebar');
 
                             <td> <?php echo $content->invoice_no; ?>  </td>
                             <td> <?php echo $content->date; ?>  </td>
-                            <td> <?php echo $content->requisition_status; ?>  </td>
                             <td> <?php echo $content->total_amount; ?>  </td>
                             <td> <?php echo $content->total_quantity; ?>  </td>
                             <td> <?php echo $content->comment; ?>  </td>
+                            <td> <?php if($requisition_status==1) echo '<a class="btn btn-info" href="#" role="button">Transfer</a>' ?>  </td>
                             <td> <div class="no-print"> <a href="<?php echo site_url() ?>/requisition/view/<?php echo $content->id; ?>" class="btn btn-link"> view </a> </div> </td>
                         </tr>
 
