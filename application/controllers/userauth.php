@@ -41,7 +41,7 @@ class Userauth extends MY_Controller {
                     'user_type' => $checkdata->user_type,
                     'permissiond' => $checkdata->pdepartment,
                     //'image'=$checkdata->image,
-                    'user_type' => $checkdata->user_type,
+//                    'user_type' => $checkdata->user_type,
                     'division_id' => $checkdata->division_id,
                     'jonal_id' => $checkdata->jonal_id,
 		    'district_id' => $checkdata->district_id,
