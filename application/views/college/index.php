@@ -70,27 +70,20 @@ $this->load->view('common/sidebar');
 		$serialNo = $this->uri->segment(3);
                 if($serialNo==FALSE) $serialNo=1;
                 else $serialNo += 1;
-         	foreach ($college_list as $college){
-            $district = $this->CM->getInfo('district', $college['district_id'] );
-          $thana = $this->CM->getInfo('thana', $college['thana_id'] );
-         ?>
+         	
+          foreach ($college_list as $college){ ?>
          
          
       <tr id="action_btn_align">
           <td> <?php echo $serialNo; ?></td>
-          <td> <?php echo $college['name'] ?></td>
-          <td> <?php echo $district->name; ?></td>
-          <td> <?php echo $thana->name; ?></td>
-          <td> <?php 
-          
-         $exc = get_user($college['executive_id']); 
-          echo $exc->name ; 
-             ; 
-            ?></td>
+          <td> <?php echo $college['college_name']; ?></td>
+          <td> <?php echo $college['district_name']; ?></td>
+          <td> <?php echo $college['thana_name']; ?></td>
+          <td> <?php echo $college['mpo_name']; ?></td>
           <td>     
-                <a class="btn btn-primary btn-flat" href="<?php echo base_url(); ?>college/edit/<?php echo $college['id'] ?>">
+                <a class="btn btn-primary btn-flat" href="<?php echo base_url(); ?>college/edit/<?php echo $college['college_id'] ?>">
                 <i class="fa fa-pencil-square-o" ></i> Edit </a>
-                <a class="btn btn-danger btn-flat "  onclick="return confirm('Are you sure want to delete');" href="<?php echo base_url(); ?>college/delete/<?php echo $college['id'] ?>">
+                <a class="btn btn-danger btn-flat "  onclick="return confirm('Are you sure want to delete');" href="<?php echo base_url(); ?>college/delete/<?php echo $college['college_id'] ?>">
                 <i class="fa fa-pencil-square-o" ></i> Delete </a>
           </td>     
        </tr>

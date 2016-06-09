@@ -35,16 +35,17 @@ class Rezonal_model extends CI_Model{
     * Only For Counting Selected Row for Pagination
     * Author : Tasfir Hossain Suman
     */
-    function getTotalRow($table) {
+    function getTotalRow() {
         $user_type = $this->user_type;
-        $sql = "SELECT * FROM $table WHERE status  = 1 ";
-
         if ($user_type==4 || $user_type==5 || $user_type==6) {
-            $sql .= " and div_id=$this->division_id";
+            $this->db->where('div_id', $this->division_id);
         }
 
-        $query = $this->db->query($sql);
-        return $query->num_rows();
+        $this->db->from('jonal');
+        
+        $result = $this->db->get()->num_rows();
+
+        return $result;
     }
 
 }

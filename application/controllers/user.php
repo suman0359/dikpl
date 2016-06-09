@@ -73,8 +73,10 @@ class User extends MY_Controller {
 
 
         $this->load->library('form_validation');
+        $this->load->helper('security');
+        // $this->form_validation->set_rules('phone', 'name', 'email', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email|callback_email_check');
 
-        $this->form_validation->set_rules('phone', 'name', 'email', 'required');
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('user/form', $data);
         } else {
@@ -145,7 +147,9 @@ class User extends MY_Controller {
 
 
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('email', 'password', 'required');
+        // $this->form_validation->set_rules('email', 'password', 'required');
+         $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email|callback_email_check');
+
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('user/eform', $data);
         } else {
@@ -298,6 +302,22 @@ class User extends MY_Controller {
         }
 
         redirect('settings/user_role/index');
+    }
+
+    /* Callback function */
+    
+   
+
+    function email_check($email){
+        $this->load->model('userauth_model');
+
+        $result = $this->userauth_model->check_email($email);
+        if ( ! $result)
+        {
+            $this->form_validation->set_message('email_check', 'Email is already used by another user. Please choose another email address.');
+        }
+                
+        return $result;
     }
 
 }

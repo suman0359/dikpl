@@ -14,7 +14,7 @@ class Home extends MY_Controller {
 
         $datav = "";
         // $this->load->view('home/index', $datav);
-        $this->load->view('welcome_page');
+        $this->load->view('welcome_page_administration');
     }
 
     public function dashboard(){

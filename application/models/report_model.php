@@ -180,22 +180,22 @@ class Report_model extends CI_Model {
 		}
 		
 		
-	$result_query = $this->db->query($sql);
-	return $result_query->result_array();
+		$result_query = $this->db->query($sql);
+		return $result_query->result_array();
     }
 
     public function getRequisitionReportForMPO($start_date, $end_date, $user_id = NULL) {
-	$this->db->select("*");
-	$this->db->from('tbl_requisition');
-	if ($user_id != NULL) {
-	    $this->db->where('requisition_by', $user_id);
-	}
-	$this->db->where('date >=', $start_date);
-	$this->db->where('date <=', $end_date);
+		$this->db->select("*");
+		$this->db->from('tbl_requisition');
+		if ($user_id != NULL) {
+		    $this->db->where('requisition_by', $user_id);
+		}
+		$this->db->where('date >=', $start_date);
+		$this->db->where('date <=', $end_date);
 
-	$query_result = $this->db->get();
-	$result = $query_result->result();
-	return $result;
+		$query_result = $this->db->get();
+		$result = $query_result->result();
+		return $result;
     }
 
 }

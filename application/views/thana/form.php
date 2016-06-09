@@ -138,7 +138,7 @@ $this->load->view('common/sidebar');
         </div>
     </div>
     
-    <div class="col-md-2"><br>
+    <div class="col-md-12"><br>
         <div class="pull-right"> 
 
     <?php 

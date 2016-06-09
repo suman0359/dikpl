@@ -26,7 +26,7 @@ class Jonal extends CI_Controller
         $this->load->model('rezonal_model');
 
 
-        $no_rows= $this->rezonal_model->getTotalRow('jonal');
+        $no_rows= $this->rezonal_model->getTotalRow();
         $this->load->library('pagination');
         $config['base_url'] = base_url().'jonal/index/';
        

@@ -32,23 +32,25 @@ class College extends CI_Controller
     }
 
     public function index(){
+        $this->load->model('college_model');
+                
         if (!$this->CM->checkpermissiontype($this->module, 'index', $this->user_type))
             redirect('error/accessdeny');
 
         $this->load->model('custom_model');
-        //$data['college_list'] = $this->custom_model->selectAllCollege('college', $this->division_id, $this->jonal_id);
 
-    	//$data['college_list']=$this->CM->getTotalALL('college');
-
-        //$data['district_list']=$this->CM->getTotalALL('district');
-        //$data['thana_list']=$this->CM->getTotalALL('thana');
-        // if($this->user_type==5){
-        //     $no_rows= $this->custom_model->getTotalRow('college', $this->division_id, $this->jonal_id);
-        // }elseif ($this->user_type==1) {
-        //     $no_rows= $this->CM->getTotalRow('college');
-        // }
+        if($this->user_type==5) {
+            $thana_id_array = $this->college_model->get_thana_array($this->uid);
+        }else{
+            $thana_id_array=NULL;
+        }
         
         $no_rows= $this->CM->getTotalRow('college');
+
+        if($this->user_type==5){
+            $no_rows = $this->college_model->getTotalRow($thana_id_array);
+        }
+        
         
         $this->load->library('pagination');
         $config['base_url'] = base_url().'college/index/';
@@ -69,35 +71,22 @@ class College extends CI_Controller
         $config['num_tag_close'] = '</li>';
         $config['last_link'] = 'Last';
         $config['first_link'] = 'First';
-        $this->pagination->initialize($config);     
-        
-        // if($this->user_type==1){
-        //     $data['college_list']=$this->CM->getTotalALL('college',$this->uri->segment(3), $config['per_page']);
-        // }elseif ($this->user_type==5) {
-        //     $data['college_list'] = $this->custom_model->selectAllCollege('college', $this->division_id, $this->jonal_id, $config['per_page'], $this->uri->segment(3));
-        // }
-        
-        $data['college_list']=$this->CM->getTotalALL('college',$this->uri->segment(3), $config['per_page']);
+        $this->pagination->initialize($config);    
+
+        $data['college_list']=$this->college_model->get_college_all_list($this->uri->segment(3), $config['per_page'], $thana_id_array);
         
         
     	$this->load->view('college/index', $data);
     }
 
-    public function add()
-    {
-
+    public function add(){
         
       if (!$this->CM->checkpermissiontype($this->module, 'add', $this->user_type))
             redirect('error/accessdeny');
       
-        //$data['id'] = $this->CM->getMaxID('user'); 
-        //$data['department_list']=$this->CM->getAll('department');
-
         $data['district_list']=$this->CM->getAll('district', 'name ASC' );
         $data['division_list']=$this->CM->getAll('division', 'name ASC');
         
-        
-
         $data['name'] = '';
         $data['district_id'] = '';
         $data['thana_id'] = '';
@@ -106,11 +95,7 @@ class College extends CI_Controller
         $data['division_id'] = '';
         $data['jonal_id'] = '';
         $data['executive_id'] = '';
-        
-        
-        
-        
-      
+             
         $this->load->library('form_validation');
 
 
@@ -131,9 +116,7 @@ class College extends CI_Controller
             $datas['executive_id'] = $this->input->post('executive_id');
 
             $datas['status'] = 1;
-            //$datas['entryby']=$this->session->userdata('uid');       
             
-
             $insert = $this->CM->insert('college',$datas) ; 
             if($insert)
             {

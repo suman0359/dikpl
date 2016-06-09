@@ -75,10 +75,10 @@ class Join_model extends CI_Model {
     * Select Jonal Information for Edit 
     */
     public function get_all_district_where_zonal_info($jonal_id) {
-	$sql = "SELECT dis.id as district_id, dis.name as district_name FROM zonal_group as zo inner join district as dis on zo.district_id=dis.id where zo.zonal_id=$jonal_id";
+		$sql = "SELECT dis.id as district_id, dis.name as district_name FROM zonal_group as zo inner join district as dis on zo.district_id=dis.id where zo.zonal_id=$jonal_id";
 
-	$result = $this->db->query($sql);
-	return $result->result();
+		$result = $this->db->query($sql);
+		return $result->result();
     }
 
     /*     * ********** Subject Section ********************* */

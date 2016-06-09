@@ -65,15 +65,13 @@ $this->load->view('common/sidebar');
                 </tr>
 
                 <?php
-		
-		
-		$serialNo = $this->uri->segment(3);
-		if($serialNo==FALSE) $serialNo=1;
-		else $serialNo +=1;
-                foreach ($jonal_list as $jonal) {
-                    $jonal_id = $jonal['jonal_id'];
-                    $district_list = $this->join_model->get_all_district_where_zonal_info($jonal_id);
-                    ?>
+            		$serialNo = $this->uri->segment(3);
+            		if($serialNo==FALSE) $serialNo=1;
+            		else $serialNo +=1;
+                    foreach ($jonal_list as $jonal) {
+                        $jonal_id = $jonal['jonal_id'];
+                        $district_list = $this->join_model->get_all_district_where_zonal_info($jonal_id);
+                ?>
 
                     <tr id="action_btn_align">
                         <td> <?php echo $serialNo; ?></td>
@@ -81,20 +79,19 @@ $this->load->view('common/sidebar');
                         <td> <?php echo $jonal['jonal_head_name'] ?> </td>
                         <td> <?php if ($district_list) {
                             foreach ($district_list as $value) {
-                                // print_r($value);
-                                echo "<div style=\"background: #9E9E9E; padding: 3px; margin-bottom: 3px;\">".$value->district_name."</div>" ;
-                            }
-                            
-                        } ?></td>
-                        <td> <?php echo $jonal['division_name']; ?></td>
+                            echo "<div style=\"background: #9E9E9E; padding: 3px; margin-bottom: 3px;\">".$value->district_name."</div>";
+                            }    
+                        } 
+                        ?>
+                        </td>
+                        <td> <?php echo $jonal['division_name']; ?> </td>
                         <td>     
-                            <a class="btn btn-primary btn-flat" href="<?php echo base_url(); ?>jonal/edit/<?php echo $jonal['jonal_id'] ?>">
+                            <a class="btn btn-primary btn-flat" href="<?php echo base_url(); ?>jonal/edit/<?php echo $jonal['jonal_id']; ?>">
                                 <i class="fa fa-pencil-square-o" ></i> Edit </a>
-                            <a class="btn btn-danger btn-flat "  onclick="return confirm('Are you sure want to delete');" href="<?php echo base_url(); ?>jonal/delete/<?php echo $jonal['jonal_id'] ?>">
+                            <a class="btn btn-danger btn-flat "  onclick="return confirm('Are you sure want to delete');" href="<?php echo base_url(); ?>jonal/delete/<?php echo $jonal['jonal_id']; ?>">
                                 <i class="fa fa-minus-circle"></i> Delete</a>
-                            <a class="btn btn-warning btn-flat" href="<?php echo base_url(); ?>jonal/jonaluser/<?php echo $jonal['jonal_id'] ?>">
+                            <a class="btn btn-warning btn-flat" href="<?php echo base_url(); ?>jonal/jonaluser/<?php echo $jonal['jonal_id']; ?>">
                                 <i class="fa fa-user" ></i> See Jonal User  </a>
-
                         </td>     
                     </tr>
                 <?php $serialNo++; } ?>
