@@ -70,12 +70,7 @@ $this->load->view('common/sidebar');
                     echo $emp->name ; 
                      ?> </td>
                 </tr>
-                <tr>
-                    <td>Request Date :</td>
-                    <td>
-                    <?php echo $requisition_info->date; ?>
-                    </td>
-                </tr>
+                
                 
               
             </table>
@@ -88,6 +83,13 @@ $this->load->view('common/sidebar');
                     
                 </tr>
                 <tr>
+                    <td>Request Date :</td>
+                    <td>
+                    <?php echo $requisition_info->date; ?>
+                    </td>
+                </tr>
+                
+                <tr>
                     <td> Division : </td>
                     <td> 
                     <?php 
@@ -98,23 +100,7 @@ $this->load->view('common/sidebar');
                     </td>
                 </tr>
                
-                <tr>
-                    <td> Jonal  : </td>
-                    <td> 
-                    <?php  $jone=$this->CM->getwhere('jonal',array('id'=>$college->jonal_id)); 
-                                echo $jone->name; 
-                          ?> 
-                    </td>
-                </tr>
-                 <tr>
-                    <td>For College  :</td>
-                    
-                    <td> 
-                   <?php  
-                                echo $college->name; 
-                          ?> 
-                    </td>
-                    
+                
                 
               
             </table>

@@ -37,10 +37,10 @@ $this->load->view('common/sidebar');
                 echo form_open();
                 ?>
                 <label> Start Date 
-                    <input type="text" id="sdate" class="dp  form-control col-md-1" name="start_date" value="<?php echo $sdate; ?>" placeholder="dd-mm-yyyy" required/>
+                    <input type="text" id="sdate" class="dp  form-control col-md-1" name="start_date" value="<?php //echo $sdate; ?>" placeholder="dd-mm-yyyy" required/>
                 </label>
                 <label> End Date 
-                    <input type="text" id="edate" class="dp  form-control col-md-1" name="end_date" value="<?php echo $edate; ?>" placeholder="DD-MM-YYY" required/>
+                    <input type="text" id="edate" class="dp  form-control col-md-1" name="end_date" value="<?php //echo $edate; ?>" placeholder="DD-MM-YYY" required/>
                 </label>
                 
                 <label> Division
@@ -142,7 +142,8 @@ $this->load->view('common/sidebar');
                             <td> <?php echo $content->total_amount; ?>  </td>
                             <td> <?php echo $content->total_quantity; ?>  </td>
                             <td> <?php echo $content->comment; ?>  </td>
-                            <td> <?php if($requisition_status==1) echo '<a class="btn btn-info" href="#" role="button">Transfer</a>' ?>  </td>
+                            <td> <?php if($requisition_status==1) echo '<a class="btn btn-info" href="'?><?php echo "Testing Url"; ?>
+                            <?php echo '" role="button">Transfer</a>'; if($requisition_status==0) echo '<span class="label label-success">Success</span>';?>  </td>
                             <td> <div class="no-print"> <a href="<?php echo site_url() ?>/requisition/view/<?php echo $content->id; ?>" class="btn btn-link"> view </a> </div> </td>
                         </tr>
 

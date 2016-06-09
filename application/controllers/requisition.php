@@ -217,6 +217,18 @@ class Requisition extends MY_Controller{
            
               $this->load->view('requisition/printpreview',$data);    
         }
+
+    public function book_transfer($id=NULL){
+      $data['requisition_info']=$this->CM->getwhere('tbl_requisition',array('id'=>$id));
+              $data['book_list']=$this->RM->getRequisitionBooks($id); 
+             
+              
+            if(empty ($id) || empty ($data['purchase_info'])){
+              //  redirect('report/report_item');
+            }
+            
+      $this->load->view('requisition/book_transfer_form', $data, FALSE);
+    }
        
 }
 
