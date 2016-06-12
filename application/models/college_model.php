@@ -12,7 +12,10 @@ class College_model extends CI_Model{
         $this->db->select('college.id as college_id, college.name as college_name, district.name as district_name, thana.name as thana_name, user.name as mpo_name');
         $this->db->from('college');
 
-        $this->db->limit($limit, $from);
+        if($limit!=NULL){
+            $this->db->limit($limit, $from);
+        }
+        
         $this->db->order_by('college.id', 'DESC');
 
         if($this->user_type==5 && $where!=NULL){
