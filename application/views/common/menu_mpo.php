@@ -85,6 +85,11 @@ $user_type = $this->session->userdata('user_type');
             <i class="fa fa-bar-chart-o"></i> <span>Reports  </span>
         </a>
     </li>
+    
+      <li>
+        <a href="<?php echo base_url(); ?>expense/add_expense"><i class="fa fa-money" aria-hidden="true"></i> Expense</a>
+    </li>
+
 
 
 

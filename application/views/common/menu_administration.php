@@ -137,9 +137,6 @@ $user_type = $this->session->userdata('user_type');
         <a href="<?php echo base_url(); ?>"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>Distribution</a>
     </li>
     
-    <li>
-        <a href="<?php echo base_url(); ?>expense/add_expense"><i class="fa fa-money" aria-hidden="true"></i> Expense</a>
-    </li>
-
+  
 
 </ul>
