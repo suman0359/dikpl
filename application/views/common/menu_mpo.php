@@ -80,12 +80,16 @@ $user_type = $this->session->userdata('user_type');
         </a>
     </li>
 
-    <li class="<?php if ($c == 'report') echo "active" ?>">
-        <a href="<?php echo base_url(); ?>report">
+    <li class="<?php if ($c == 'index') echo "active" ?>">
+        <a href="<?php echo base_url(); ?>report/index">
             <i class="fa fa-bar-chart-o"></i> <span>Reports  </span>
         </a>
     </li>
 
-
+    <li class="<?php if ($c == 'book_stock') echo "active" ?>">
+        <a href="<?php echo base_url(); ?>report/book_stock">
+            <i class="fa fa-bar-chart-o"></i> <span> Stock Book </span>
+        </a>
+    </li>
 
 </ul>

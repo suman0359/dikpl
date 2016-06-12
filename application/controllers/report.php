@@ -473,6 +473,11 @@ class Report extends MY_Controller {
 
 	$this->load->view('report/distribution_report_search', $data);
     }
+
+    public function book_stock(){
+    	$data['book_list'] = $this->RM->book_stock_list_of_mpo($this->uid);
+    	$this->load->view('report/stock_book_report', $data);
+    }
     
 
 }

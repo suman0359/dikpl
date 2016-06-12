@@ -2,6 +2,11 @@
 
 class Report_model extends CI_Model {
 
+	public function __construct(){
+        parent::__construct();
+        $this->user_type = $this->session->userdata('user_type');
+    }
+
     public function requisitionReport($sdate, $edate, $jid = NULL) {
 
 	@$sql = "
@@ -196,6 +201,13 @@ class Report_model extends CI_Model {
 		$query_result = $this->db->get();
 		$result = $query_result->result();
 		return $result;
+    }
+
+    public function book_stock_list_of_mpo($mpo_id){
+    	$sql = "SELECT bo.id as book_id, bo.book_name as book_name, sum(reqd.quantity) as book_quantity FROM tbl_requisition as req  inner join tbl_requisition_details as reqd on reqd.requisition_id=req.id inner join books as bo on bo.id=reqd.book_id WHERE req.requisition_by=28 group by reqd.book_id";
+
+    	$result_query = $this->db->query($sql);
+		return $result_query->result_array();
     }
 
 }

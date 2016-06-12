@@ -4,7 +4,8 @@ $this->load->view('common/header');
 $this->load->view('common/sidebar');
 //$this->load->view('common/control_panel');
 ?>
-<?php $companyname = $this->session->userdata('companyname'); ?>
+
+<?php $name = $this->session->userdata("username"); $companyname = $this->session->userdata('companyname'); ?>
 
 <!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side">
@@ -203,11 +204,11 @@ $this->load->view('common/sidebar');
 
                                 </tr>
                                 <tr class="voucher_bottom_left">
-                                    <td>Name: .................................................... </td>
+                                    <td>Name : <span style="border-bottom: 0.14em dotted #000; min-width: 175px; display: inline-block;"><?php echo $name; ?></span></td>
 
                                 </tr>
                                 <tr class="voucher_bottom_left">
-                                    <td>Date: ...................................................... </td>
+                                    <td>Date : <span style="border-bottom: 0.14em dotted #000; min-width: 180px; display: inline-block;"><?php echo date("d-m-Y"); ?></span> </td>
 
                                 </tr>
 
@@ -227,8 +228,9 @@ $this->load->view('common/sidebar');
 
             <div class=" text-center no-print"> 
                 <a href="JavaScript:history.back(-1)" class="btn btn-warning"> Back </a>
-                <?php if (($requisition_info->requisition_status != '1') AND ( $this->session->userdata('user_type') == '1')) { ?>
-                    <a href="<?php echo base_url() ?>index.php/purchase/add/<?php echo $requisition_info->id ?>" class="btn btn-success"> Make it Chalan  </a>
+
+                <?php if (($requisition_info->requisition_status != '0') AND ( $this->session->userdata('user_type') == '1')) { ?>
+                    <a href="<?php echo base_url() ?>index.php/purchase/add/<?php echo $requisition_info->id ?>" class="btn btn-success"> Transfer Book  </a>
                 <?php } ?>
             </div>
 
@@ -263,32 +265,13 @@ $this->load->view('common/sidebar');
             $('.voucher_item_area').trigger('change');
 
             $('.voucher_item_area').on('change', function () {
-                // var quantity = $("tbody .voucher_total .total_price").text();
-
-                // var quantity = $("tbody .tt").html();
-
-                var qqq = $("tbody").find(".voucher_item .tt").html();
-                // console.log(qqq);
-
-                var total = 0; 
-                $('table tbody tr td.tt').each(function () {
-                    if ($('.voucher_item .tt', this).length) {
-                        total += parseFloat($(this).find('.voucher_item .tt:eq(1)').text());
-                        console.log(total);
-                    }
+                var total_price = 0;
+                 $('tbody tr td.tt').each(function(){
+                    var book_price = $(this).text();
+                    var book_price = parseInt(book_price);
+                    total_price += book_price;
                 });
-                // console.log(total);
-
-                // var price = $(this).closest("td").parent(this).find(".price").html();
-                // var tt = $(this).closest("td").parent(this).find(".tt").html();
-
-                // var total = quantity * price;
-
-                // $(this).closest("td").parent(this).find(".tt").text(total);
-
-                // var check = $(this).closest("tr").parents(this).find(".total_price").html();
-
-                // console.log(quantity);
+                 $("tbody tr.voucher_total td.total_price").text(total_price);
             })
 
         </script>

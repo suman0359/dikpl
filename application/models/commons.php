@@ -345,7 +345,7 @@ class Commons extends CI_Model {
     function getcollegebooks($cid) {
 
         $sql = "
-                 SELECT b.id, b.book_code, b.book_name, cb.college_id, cb.book_id, cb.quantity
+                 SELECT b.id, b.book_name, cb.college_id, cb.book_id, cb.quantity
                  FROM books b, inventory_college cb 
                  WHERE 
                  cb.college_id = '{$cid}' 
