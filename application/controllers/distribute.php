@@ -180,7 +180,44 @@ class Distribute  extends MY_Controller{
              
             
         }
-       
+
+    /**
+    * Distribut book 
+    * Author : Tasfir Hossain Suman
+    */
+    
+    public function distribute_book($college_id=NULL){
+      /**
+      * Colege Name Modal 
+      * Author By : Tasfir Hossain Suman
+      */
+
+      // if($college_id==NULL || $college_id==0 || $college_id ==''){
+      //   $this->load->view('View File', $data, FALSE);
+      // }
+
+
+      $this->load->model('college_model');
+      if($this->user_type==5) {
+            $thana_id_array = $this->college_model->get_thana_array($this->_uid);
+        }else{
+            $thana_id_array=NULL;
+        }
+
+      $data['college_list'] = $this->college_model->get_college_all_list('', '', $thana_id_array);
+      $data['department_list'] = $this->CM->getAll('department', 'name ASC') ;
+      
+      $data['book_list'] = $this->RM->book_stock_list_of_mpo($this->_uid);
+
+      $data['college_id'] = $college_id ;
+
+      if($college_id!=NULL) { 
+          $data['college'] = $this->CM->getinfo('college', $college_id) ; 
+          // $data['allbooks'] = $this->CM->getcollegebooks($college_id) ;
+      }
+
+      $this->load->view('distribute/distribute_book_form', $data); 
+    }
         
        
 }
