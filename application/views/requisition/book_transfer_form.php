@@ -268,7 +268,16 @@ $this->load->view('common/sidebar');
                 // var quantity = $("tbody .tt").html();
 
                 var qqq = $("tbody").find(".voucher_item .tt").html();
-                console.log(qqq);
+                // console.log(qqq);
+
+                var total = 0; 
+                $('table tbody tr td.tt').each(function () {
+                    if ($('.voucher_item .tt', this).length) {
+                        total += parseFloat($(this).find('.voucher_item .tt:eq(1)').text());
+                        console.log(total);
+                    }
+                });
+                // console.log(total);
 
                 // var price = $(this).closest("td").parent(this).find(".price").html();
                 // var tt = $(this).closest("td").parent(this).find(".tt").html();

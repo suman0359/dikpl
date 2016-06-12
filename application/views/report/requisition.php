@@ -142,7 +142,7 @@ $this->load->view('common/sidebar');
                             <td> <?php echo $content->total_amount; ?>  </td>
                             <td> <?php echo $content->total_quantity; ?>  </td>
                             <td> <?php echo $content->comment; ?>  </td>
-                            <td> <?php if($requisition_status==1) echo '<a class="btn btn-info" href="'?><?php echo "Testing Url"; ?>
+                            <td> <?php if($requisition_status==1) echo '<a class="btn btn-info" href="'?><?php echo base_url(); ?>requisition/book_transfer/<?php echo $content->id; ?>
                             <?php echo '" role="button">Transfer</a>'; if($requisition_status==0) echo '<span class="label label-success">Success</span>';?>  </td>
                             <td> <div class="no-print"> <a href="<?php echo site_url() ?>/requisition/view/<?php echo $content->id; ?>" class="btn btn-link"> view </a> </div> </td>
                         </tr>
