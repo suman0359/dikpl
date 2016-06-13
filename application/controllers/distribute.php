@@ -205,6 +205,12 @@ class Distribute  extends MY_Controller{
         }
 
       $data['college_list'] = $this->college_model->get_college_all_list('', '', $thana_id_array);
+      
+      $data['teacher_list'] = $this->CM->getAllWhere('teachers', array('college_id'=>$college_id));
+      // echo "<pre>";
+      // print_r($data['teacher_list']);
+      // exit();
+      
       $data['department_list'] = $this->CM->getAll('department', 'name ASC') ;
       
       $data['book_list'] = $this->RM->book_stock_list_of_mpo($this->_uid);

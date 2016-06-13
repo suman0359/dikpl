@@ -44,11 +44,13 @@ $this->load->view('common/sidebar');
                         </tr>
                         <?php
                         foreach ($book_list as $book) {
+                            echo "<pre>";
+                            print_r($book);
                             ?>
                             <tr>
                                 <td> <?php echo $book['book_name'] ?> </td>
                                 <td> <?php echo $book['book_quantity'] ?> </td>
-                                <td> <a href="JavaScript:void(0)" class="btn btn-xs btn-success pull-right add_book_row" onclick="return additemrow(<?php echo $book['book_id'] ?>)" item-id="<?php echo $book['book_id'] ?>" > add </a> </td>
+                                <td> <a href="JavaScript:void(0)" class="btn btn-xs btn-success pull-right add_book_row" onclick="return additemrow(<?php echo $book['book_id'] ?>)" item-id="<?php echo $book['book_id'] ?>" ><?php echo $book['book_id'] ?> add </a> </td>
                             </tr>
 
                         <?php } ?>
@@ -89,34 +91,48 @@ $this->load->view('common/sidebar');
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label">School/Collage</label> <br/>
+                    <label class="control-label">School/College</label> <br/>
                     <input type="hidden" name="college_id" id="college_id_value" value="<?php echo $college_id ?>" />
 
                     <h4> <label for="college_name" class="label label-info label-lg"><?php echo $college->name; ?></label> </h4>
 
-                    <a class="btn btn-xs btn-primary  "  data-target="#college_list" data-toggle="modal" href="JavaScript:void(0)">Change College</a>
+                    <!-- <a class="btn btn-xs btn-primary  "  data-target="#college_list" data-toggle="modal" href="JavaScript:void(0)">Change College</a> -->
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label">Department</label>
-                    <?php
-                    $class = 'class="form-control  required" required  id="department_id" ';
-                    $sup_data = array("" => "Select Department ");
-                    foreach ($department_list as $sup) {
-                        $sup_data[$sup['id']] = $sup['name'];
-                    }
-                    echo form_dropdown('department_id', $sup_data, '', $class);
-                    ?>
-
+                    <label>School/College </label>
+                    <div>
+                        <?php
+                        $class = 'class="form-control " id="college_id" ';
+                        $collages[''] = 'Select a College';
+                        foreach ($college_list as $collage) {
+                            $collages[$collage['college_id']] = $collage['college_name'];
+                        }
+                        echo form_dropdown('collage_id', $collages, $college_id, $class);
+                        ?>
+                    </div>
                 </div>
 
+                
                 <div class="control-group">
                     <label>Teacher </label>
                     <div>
-                        <select name="teacher_id" class="form-group form-control" id="teacher_id">
-                            <option value="0" >select  Teacher </option>
+                       
+                            <?php 
+                            
+                            $class = 'class="form-control " id="teacher_id" ';
 
-                        </select>
+                            $teachers_list[''] = 'Select a Teacher';
+
+                            foreach ($teacher_list as $teacher) {
+                                $teachers_list[$teacher['id']] = $teacher['name'];
+                                
+                            }
+
+                            echo form_dropdown('teacher_id', $teachers_list, '', $class);
+
+                            ?>
+                        
                     </div>
                 </div>
 
@@ -135,88 +151,8 @@ $this->load->view('common/sidebar');
 
 
 
-    <!-- start  add the row --> 
-
-    <div class="modal fade" id="college_list" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-
-                    <h4 class="modal-title" id="myModalLabel">  Select a College First </h4>
-                </div>
-                <div class="modal-body ">
-                    Select a College  
-                    <?php
-                    $class = 'class="form-control " id="collage_id" ';
-                    $collages[''] = 'Select a College';
-                    $serialNo = 1;
-                    foreach ($college_list as $collage) {
-                        $collages[$collage['college_id']] = $serialNo . ". " . $collage['college_name'];
-                        $serialNo++;
-                    }
-                    echo form_dropdown('collage_id', $collages, $college_id, $class);
-                    ?>
-                    <br/> 
-                    <br/> 
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
-
-
-
     <script>
         $(document).ready(function () {
-
-<?php if (!$college_id) { ?>
-                $("#college_list").modal(
-                        {
-                            backdrop: 'static',
-                            keyboard: false
-                        }
-                );
-<?php } ?>
-
-            $("body").on('change', '#collage_id', function () {
-                var cid = $(this).val();
-                var url = "<?php echo base_url() ?>distribute/distribute_book/" + cid;
-                window.location.href = url;
-            });
-
-
-
-            $("#term").autocomplete({
-                source: '<?php echo base_url(); ?>index.php/distribute/suggation',
-                minLength: 1,
-                select: function (event, ui)
-                {
-                    var item = $("#item").val(ui.item.value.name);
-                    additemrow(ui.item.value);
-                }
-            });
-
-            $("#term").focus(function () {
-                $("#term").val('');
-            });
-
-
-            $("#term").keypress(function (event) {
-
-                if (event.which == 13) {
-                    var id = $(this).val();
-
-                    additemrow(id);
-
-                } else
-                {
-                    // auto complete 
-                }
-
-            });
 
 
             $('#sandbox-container input').datepicker({
@@ -243,18 +179,21 @@ $this->load->view('common/sidebar');
 
         //Teacher Select 
 
-        $(".main-mid-area").on('change', '#college_id', function () {
+        jQuery(".main-mid-area").bind('load, change', '#college_id', function () {
 
-            var college_id = document.getElementById("college_id_value");
-            console.log(college_id);
+            var college_id = document.getElementById("college_id");
+            
             var college_id = college_id.value;
-            var department_id = $(this).val();
+                        
             $.ajax({
                 url: "<?php echo base_url() ?>index.php/home/getteacher/" + college_id,
                 beforeSend: function (xhr) {
                     xhr.overrideMimeType("text/plain; charset=x-user-defined");
                     $("#teacher_id").html("<option>Loading .... </option>");
-
+                    var url = "<?php echo base_url() ?>distribute/distribute_book/"+college_id;
+                    // window.location.replace(url);
+                    // window.location.hash.replace(url);
+                    window.history.pushState('obj', 'newtitle', url);
                 }
             })
             .done(function (data) {
@@ -262,6 +201,9 @@ $this->load->view('common/sidebar');
                 $("#teacher_id").html("<option value=''>Select a Teacher </option>");
                 data = JSON.parse(data);
                 $.each(data, function (key, val) {
+                    
+                        
+                    
                     $("#teacher_id").append("<option value='" + val.id + "'>" + val.name + "</option>");
 
                 });

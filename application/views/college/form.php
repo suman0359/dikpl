@@ -158,6 +158,14 @@ $this->load->view('common/sidebar');
         </div>
     </div>
 
+    <!-- Select Plugin Call for College -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#district_id").select2();
+            $("#thana_id").select2();
+        });
+    </script>
+
 <style type="text/css">
     
     .ms-options-wrap,

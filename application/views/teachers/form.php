@@ -127,7 +127,14 @@ $this->load->view('common/sidebar');
         </div>
     </div>
 
-
+    <!-- Select Plugin Call for College -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#department_id").select2();
+            $("#college_id").select2();
+        });
+    </script>
+    
     <div class="col-md-10">
         <div class="form-group">
        

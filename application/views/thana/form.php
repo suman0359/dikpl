@@ -101,7 +101,7 @@ $this->load->view('common/sidebar');
 
             <label>District Name </label>
             <div>
-                <select name="district_id" class="form-group form-control">
+                <select name="district_id" id="district_id" class="form-group form-control">
                     <option value="0" >select Option</option>
                     <?php foreach ($district_list as $district) { ?>
 
@@ -112,6 +112,14 @@ $this->load->view('common/sidebar');
 <?php } ?>
                 </select>
             </div>
+
+            <!-- Select Plugin Call for College -->
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $("#district_id").select2();
+                });
+            </script>
+
         </div>
     </div>
 
