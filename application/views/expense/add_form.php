@@ -30,27 +30,10 @@ $this->load->view('common/sidebar');
 	<?php
 	echo form_open('');
 	?>
-	
-	
-	<div class="row">
-	    <div class="col-md-12">
-		<div class="pull-right">
-		<div class="form-group">
-		    <label>Expense Type</label>
-		    <select class="form-control" id="expense_type_id" name="expense_type_id" >
-			<option value="all">Select One Option</option>
-			<option value="First">First Option</option>
-			<option value="Second">Second Option</option>
-			<option value="Third">Third Option</option>
-		    </select>
-		</div>
-		</div>
-	    </div>
-	</div>
-	
-	
-	<div class="row">
-	    <div class="col-md-2 col-sm-3">
+
+
+	<div class="row" id="without_motorbike">
+	    <div class="col-md-3 col-sm-3">
 		<div class="form-group">
 		    <label> যাতায়াত  খরচ </label>
 		    <?php
@@ -66,7 +49,7 @@ $this->load->view('common/sidebar');
 		</div>
 	    </div>
 
-	    <div class="col-md-2 col-sm-3">
+	    <div class="col-md-3 col-sm-3">
 		<div class="form-group">
 		    <label for="">মোবাইল খরচ</label>
 		    <?php
@@ -82,7 +65,7 @@ $this->load->view('common/sidebar');
 		</div>
 	    </div> 
 
-	    <div class="col-md-2 col-sm-3">
+	    <div class="col-md-3 col-sm-3">
 		<div class="form-group">
 		    <label for="">আপ্যয়ন খরচ </label>
 		    <?php
@@ -98,7 +81,7 @@ $this->load->view('common/sidebar');
 		</div>
 	    </div> 
 
-	    <div class="col-md-2 col-sm-3">
+	    <div class="col-md-3 col-sm-3">
 		<div class="form-group">
 		    <label for="">প্যাকেট উত্তোলন </label>
 		    <?php
@@ -114,7 +97,7 @@ $this->load->view('common/sidebar');
 		</div>
 	    </div> 
 
-	    <div class="col-md-2 col-sm-3">
+	    <div class="col-md-4 col-sm-3">
 		<div class="form-group">
 		    <label for="">অন্যান্য খরচ </label>
 		    <?php
@@ -130,7 +113,7 @@ $this->load->view('common/sidebar');
 		</div>
 	    </div>
 
-	    <div class="col-md-2 col-sm-3">
+	    <div class="col-md-4 col-sm-3">
 		<div class="form-group">
 		    <label for="">মোট</label>
 		    <?php
@@ -143,9 +126,21 @@ $this->load->view('common/sidebar');
 		    ?>
 		</div>
 	    </div>
-	</div>
 
-	<div class="row">
+	    <div class="col-md-4">
+		<div class="form-group">
+		    <label>Expense Type</label>
+		    <select class="form-control" id="expense_type" name="expense_type" >
+			<option value="1">মোটর সাইকেল ছাড়া </option>
+			<option value="2">কোম্পানির মোটর সাইকেল </option>
+			<option value="3">নিজের মোটর সাইকেল </option>
+		    </select>
+		</div>
+	    </div>
+
+	</div><hr>
+
+	<div class="row display_none" id="company_motorbike">
 
 	    <div class="col-md-2 col-sm-3">
 		<div class="form-group">
@@ -245,7 +240,7 @@ $this->load->view('common/sidebar');
 
 	</div>
 
-	<div class="row">
+	<div class="row display_none" id="personal_motorbike">
 
 	    <div class="col-md-3 col-sm-4">
 		<div class="form-group">
@@ -330,7 +325,31 @@ $this->load->view('common/sidebar');
                 autoclose: true
 
             });
+
+            $(".main-mid-area").on('change', '#expense_type', function () {
+                var x = document.getElementById("expense_type").value;
+                var x = parseInt(x);
+		console.log(x);
+                if (x == 1) {//x = without_motorbike
+                    $("#company_motorbike").removeClass("display_block");
+                    $("#personal_motorbike").removeClass("display_block");
+                    $("#company_motorbike").addClass("display_none");
+                    $("#personal_motorbike").addClass("display_none");
+                } else if (x == 2) {// x = company_motorbike
+                    $("#company_motorbike").addClass("display_block");
+		    $("#company_motorbike").removeClass("display_none");
+		    $("#personal_motorbike").addClass("display_none");
+                    $("#personal_motorbike").removeClass("display_block");
+                } else if (x == 3) {//x = personal_motorbike
+                    $("#personal_motorbike").addClass("display_block");
+		    $("#company_motorbike").addClass("display_none");
+                    $("#company_motorbike").removeClass("display_block");
+		    $("#personal_motorbike").removeClass("display_none");
+                    
+                }
+            });
         })
+
     </script>
     <?php $this->load->view('common/footer') ?>
 
