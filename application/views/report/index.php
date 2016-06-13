@@ -53,6 +53,12 @@ $this->load->view('common/sidebar');
 		Donation Distribution  Report </a>
 	</div>
 	
+	<div class="col-md-3 col-sm-4 home-icon" > 
+	    <a class=" btn-primary   btn-lg btn-block text-center " href="<?php echo base_url(); ?>report/daily_expense_report"> 
+		<i class="fa fa-user fa-3x"></i>  <br/>
+		Expense Report </a>
+	</div>
+	
 
 	<?php if ($this->session->userdata('user_type') == 1) { ?> 
 

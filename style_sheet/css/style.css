@@ -201,6 +201,13 @@ border: 2px solid #e6e6e3;
     padding: 15px !important;
 }
 
+.display_none{
+  display: none;
+}
+.display_block{
+  display: block;
+}
+
 @media (min-width: 768px) {
     
        .home_menu ul 
