@@ -59,13 +59,16 @@ class Thana extends CI_Controller
         $data['division_list']=$this->CM->getAll('division', 'name ASC');
         $data['subject_user']=$this->CM->getAllWhere('user', array('user_type' => '3'));
         $data['district_list'] = $this->CM->getALL('district');
-        $data['name'] = "";
 
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('name', 'required');
-        if ($this->form_validation->run() == FALSE)
-        {
+        if ($this->form_validation->run() == FALSE){
+            
+            $data['name'] = "";
+            $data['jonal_id'] = '';
+            $data['executive_id'] = '';
+            
             $this->load->view('thana/form', $data); 
         }
         else

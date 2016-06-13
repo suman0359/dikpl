@@ -78,7 +78,7 @@ $this->load->view('common/sidebar');
             </div>
 
 
-           <div class="col-md-3">
+            <div class="col-md-3">
 
                 <div class="control-group">
                     <label class="control-label">Date</label>
@@ -149,9 +149,9 @@ $this->load->view('common/sidebar');
                     <?php
                     $class = 'class="form-control " id="collage_id" ';
                     $collages[''] = 'Select a College';
-                    $serialNo=1;
+                    $serialNo = 1;
                     foreach ($college_list as $collage) {
-                        $collages[$collage['college_id']] = $serialNo.". ".$collage['college_name'];
+                        $collages[$collage['college_id']] = $serialNo . ". " . $collage['college_name'];
                         $serialNo++;
                     }
                     echo form_dropdown('collage_id', $collages, $college_id, $class);
@@ -172,14 +172,14 @@ $this->load->view('common/sidebar');
     <script>
         $(document).ready(function () {
 
-        <?php if (!$college_id) { ?>
-                        $("#college_list").modal(
-                                {
-                                    backdrop: 'static',
-                                    keyboard: false
-                                }
-                        );
-        <?php } ?>
+<?php if (!$college_id) { ?>
+                $("#college_list").modal(
+                        {
+                            backdrop: 'static',
+                            keyboard: false
+                        }
+                );
+<?php } ?>
 
             $("body").on('change', '#collage_id', function () {
                 var cid = $(this).val();
@@ -242,33 +242,34 @@ $this->load->view('common/sidebar');
 
 
         //Teacher Select 
-            
-                $(".main-mid-area").on('change', '#department_id', function () {
-                
-                    var college_id = document.getElementById("college_id_value");
-                    var college_id = college_id.value;
-                    var department_id = $(this).val();
-                    $.ajax({
-                        url: "<?php echo base_url() ?>index.php/home/getteacherbycollegeanddepartment/" + college_id + "/" + department_id,
-                        beforeSend: function (xhr) {
-                            xhr.overrideMimeType("text/plain; charset=x-user-defined");
-                            $("#teacher_id").html("<option>Loading .... </option>");
 
-                        }
-                    })
-                            .done(function (data) {
+        $(".main-mid-area").on('change', '#college_id', function () {
 
-                                $("#teacher_id").html("<option value=''>Select a Teacher </option>");
-                                data = JSON.parse(data);
-                                $.each(data, function (key, val) {
-                                    $("#teacher_id").append("<option value='" + val.id + "'>" + val.name + "</option>");
+            var college_id = document.getElementById("college_id_value");
+            console.log(college_id);
+            var college_id = college_id.value;
+            var department_id = $(this).val();
+            $.ajax({
+                url: "<?php echo base_url() ?>index.php/home/getteacher/" + college_id,
+                beforeSend: function (xhr) {
+                    xhr.overrideMimeType("text/plain; charset=x-user-defined");
+                    $("#teacher_id").html("<option>Loading .... </option>");
 
-                                });
+                }
+            })
+            .done(function (data) {
 
+                $("#teacher_id").html("<option value=''>Select a Teacher </option>");
+                data = JSON.parse(data);
+                $.each(data, function (key, val) {
+                    $("#teacher_id").append("<option value='" + val.id + "'>" + val.name + "</option>");
 
-                            });
                 });
-        
+
+
+            });
+        });
+
 
 
 
@@ -324,8 +325,7 @@ $this->load->view('common/sidebar');
                                                               <td><input type="number" name="qty[]"   id="qty" min="1" value="1" max="' + book.quantity + '" class="q_' + book.book_id + ' qty form-control "  onclick="toatalquantity()" /></td>\n\
                                                               </tr>');
 
-                        }
-                        else
+                        } else
                         {
                             alert("Item Not Available In Stock By This Id " + id);
                         }

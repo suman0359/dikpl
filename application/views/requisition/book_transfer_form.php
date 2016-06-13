@@ -5,7 +5,8 @@ $this->load->view('common/sidebar');
 //$this->load->view('common/control_panel');
 ?>
 
-<?php $name = $this->session->userdata("username"); $companyname = $this->session->userdata('companyname'); ?>
+<?php $name = $this->session->userdata("username");
+$companyname = $this->session->userdata('companyname'); ?>
 
 <!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side">
@@ -83,7 +84,7 @@ $this->load->view('common/sidebar');
                     <tr>
                         <td>Request Date :</td>
                         <td>
-                            <?php echo $requisition_info->date; ?>
+    <?php echo $requisition_info->date; ?>
                         </td>
                     </tr>
 
@@ -171,7 +172,7 @@ $this->load->view('common/sidebar');
 
 
                 <u>  Sender Comment :  </u> <br />
-                <?php echo $requisition_info->comment; ?>
+    <?php echo $requisition_info->comment; ?>
             </div>
 
 
@@ -221,23 +222,23 @@ $this->load->view('common/sidebar');
             </div >
 
 
-            <?php if ($requisition_info->requisition_status == 0) { ?>
+    <?php if ($requisition_info->requisition_status == 0) { ?>
                 <div class="clearfix"></div>
                 <div class="alert alert-info text-center"> This requisition already accept and send book according on this. </div>
-            <?php } ?>
+    <?php } ?>
 
             <div class=" text-center no-print"> 
                 <a href="JavaScript:history.back(-1)" class="btn btn-warning"> Back </a>
 
                 <?php if (($requisition_info->requisition_status != '0') AND ( $this->session->userdata('user_type') == '1')) { ?>
                     <a href="<?php echo base_url() ?>index.php/purchase/add/<?php echo $requisition_info->id ?>" class="btn btn-success"> Transfer Book  </a>
-                <?php } ?>
+    <?php } ?>
             </div>
 
 
             <!-- End  Working area --> 
 
-        <?php } ?>
+<?php } ?>
 
         <!-- start  add the row --> 
 
@@ -266,12 +267,12 @@ $this->load->view('common/sidebar');
 
             $('.voucher_item_area').on('change', function () {
                 var total_price = 0;
-                 $('tbody tr td.tt').each(function(){
+                $('tbody tr td.tt').each(function () {
                     var book_price = $(this).text();
                     var book_price = parseInt(book_price);
                     total_price += book_price;
                 });
-                 $("tbody tr.voucher_total td.total_price").text(total_price);
+                $("tbody tr.voucher_total td.total_price").text(total_price);
             })
 
         </script>

@@ -86,6 +86,7 @@ class College extends CI_Controller
       
         $data['district_list']=$this->CM->getAll('district', 'name ASC' );
         $data['division_list']=$this->CM->getAll('division', 'name ASC');
+        // $data['college_category_list']=$this->CM->getAll('tbl_college_category', 'name ASC');
         
         $data['name'] = '';
         $data['district_id'] = '';

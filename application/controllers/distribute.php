@@ -8,7 +8,7 @@ class Distribute  extends MY_Controller{
         $this->checklogin() ;
          $this->load->Model('Transfer_model', 'TM') ;
          $this->_uid = $this->session->userdata('uid');
-         
+         $this->user_type = $this->session->userdata('user_type');
     }
     public function index()
     {
@@ -195,7 +195,7 @@ class Distribute  extends MY_Controller{
       // if($college_id==NULL || $college_id==0 || $college_id ==''){
       //   $this->load->view('View File', $data, FALSE);
       // }
-
+      
 
       $this->load->model('college_model');
       if($this->user_type==5) {

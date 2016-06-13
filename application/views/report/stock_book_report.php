@@ -22,61 +22,61 @@ $this->load->view('common/sidebar');
 
 
     <div class="col-md-12 main-mid-area">
-	<!-- <form action="<?php echo base_url() . "report/search_distribution_report/"; ?>" method="POST" >
-	    <div class="col-md-8">
-		<div class="search_bar">
-		    <div class="form-group">
-			<input type="search" name="search" placeholder="Search MPO name" class="form-control">
-		    </div>
-		</div>
-	    </div>
+        <!-- <form action="<?php echo base_url() . "report/search_distribution_report/"; ?>" method="POST" >
+            <div class="col-md-8">
+                <div class="search_bar">
+                    <div class="form-group">
+                        <input type="search" name="search" placeholder="Search MPO name" class="form-control">
+                    </div>
+                </div>
+            </div>
 
-	    <div class="col-md-4">
-			<div class="form-group">
-			    <input type="submit" value="Search" class="btn btn-primary">
-			    <div class="clearfix"></div>
-			</div>
-	    </div>
+            <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="submit" value="Search" class="btn btn-primary">
+                            <div class="clearfix"></div>
+                        </div>
+            </div>
 
-	</form> -->
+        </form> -->
 
         <div class="col-md-12">
 
 
             <table class="table table-bordered table-hover ">
 
-		<tr>
-		    <th style="text-align: center;">#</th>
-		    
-		    <th style="text-align: center">বইয়ের নাম</th>
-		    <th style="text-align: center;">বইয়ের নাম পরিমান</th>
-		    <th style="text-align: center;">বই বিতরণ</th>
-		    
-		</tr>
+                <tr>
+                    <th style="text-align: center;">#</th>
 
-		<tbody>
-		    <?php
-		    $serialNo = 1;
-		    foreach ($book_list as $value) {
-			?>
-    		    <tr>
-	    			<td><?php echo $serialNo; ?></td>
-	    			
-	    			<td><?php echo $value['book_name']; ?></td>
-	    			<td align="center"><?php echo $value['book_quantity']; ?></td>
-	    			<td>
-	    				<a href="<?php echo base_url(); ?>distribute/distribute_book/<?php echo $value['book_id']; ?>" class="btn btn-primary">বই বিতরণ</a>
-	    			</td>
-    		    </tr>
-			<?php
-			$serialNo++;
-		    }
-		    ?>
-		</tbody>
+                    <th style="text-align: center">বইয়ের নাম</th>
+                    <th style="text-align: center;">বইয়ের নাম পরিমান</th>
+                    <th style="text-align: center;">বই বিতরণ</th>
+
+                </tr>
+
+                <tbody>
+                    <?php
+                    $serialNo = 1;
+                    foreach ($book_list as $value) {
+                        ?>
+                        <tr>
+                            <td><?php echo $serialNo; ?></td>
+
+                            <td><?php echo $value['book_name']; ?></td>
+                            <td align="center"><?php echo $value['book_quantity']; ?></td>
+                            <td>
+                                <a href="<?php echo base_url(); ?>distribute/distribute_book/<?php echo $value['book_id']; ?>" class="btn btn-primary">বই বিতরণ</a>
+                            </td>
+                        </tr>
+                        <?php
+                        $serialNo++;
+                    }
+                    ?>
+                </tbody>
             </table> 
         </div>
 
     </div>      
 
     <!-- End  Working area --> 
-<?php $this->load->view('common/footer') ?>
+    <?php $this->load->view('common/footer') ?>

@@ -85,6 +85,8 @@ $this->load->view('common/sidebar');
                 <i class="fa fa-pencil-square-o" ></i> Edit </a>
                 <a class="btn btn-danger btn-flat "  onclick="return confirm('Are you sure want to delete');" href="<?php echo base_url(); ?>college/delete/<?php echo $college['college_id'] ?>">
                 <i class="fa fa-pencil-square-o" ></i> Delete </a>
+
+                <a href="<?php echo base_url(); ?>distribute/distribute_book/<?php echo $college['college_id']; ?>" class="btn btn-primary">বই বিতরণ</a>
           </td>     
        </tr>
       <?php $serialNo++;} ?>

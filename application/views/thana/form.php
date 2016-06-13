@@ -123,7 +123,7 @@ $this->load->view('common/sidebar');
             <div>
             <select name="executive_id" class="form-group form-control" id="executive_id">
             <?php 
-            if($executive_id !== '0'){
+            if($executive_id !== ''){
                 
             $user = $this->CM->getInfo('user', $executive_id); 
 
