@@ -479,5 +479,11 @@ class Report extends MY_Controller {
     	$this->load->view('report/stock_book_report', $data);
     }
     
+    
+    public function daily_expense_report(){
+	
+	$this->load->view('report/daily_expense_report');
+    }
+    
 
 }
