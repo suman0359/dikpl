@@ -208,6 +208,10 @@ class Requisition extends MY_Controller{
         
         public function view($id){
               $data['requisition_info']=$this->CM->getwhere('tbl_requisition',array('id'=>$id));
+              // echo "<pre>";
+              // print_r($data['requisition_info']);
+              // exit();
+              
               $data['book_list']=$this->RM->getRequisitionBooks($id); 
              
               
@@ -219,15 +223,71 @@ class Requisition extends MY_Controller{
         }
 
     public function book_transfer($id=NULL){
-      $data['requisition_info']=$this->CM->getwhere('tbl_requisition',array('id'=>$id));
-              $data['book_list']=$this->RM->getRequisitionBooks($id); 
-             
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('quantity', 'Book Quantity', 'required');
+        $requisition_info = $data['requisition_info']=$this->CM->getwhere('tbl_requisition',array('id'=>$id));
+        if ($this->form_validation->run() == FALSE) {
+          
+          $data['book_list']=$this->RM->getRequisitionBooks($id); 
+         
+          
+          if(empty ($id) || empty ($data['purchase_info'])){
+          //  redirect('report/report_item');
+           }
               
-            if(empty ($id) || empty ($data['purchase_info'])){
-              //  redirect('report/report_item');
+          $this->load->view('requisition/book_transfer_form', $data, FALSE);
+        } else {
+           $quantity                = $this->input->post('quantity');
+           $requisition_details_id  = $this->input->post('requisition_details_id');
+           $book_id                 = $this->input->post('book_id');
+
+          /**
+          * For Update Requisition Table 
+          */
+          $datas['approved_by']           = $this->_uid;
+          $datas['approved_date']         = date('d-m-Y');
+          $datas['requisition_status']    = 0;
+          $datas['total_transfer_book_quantity'] = array_sum($quantity);
+
+          $this->CM->update('tbl_requisition', $datas, $id);
+          /* ----------------------------------------------------------- */
+
+          /**
+          * For Update Requisition Details Table 
+          */
+ 
+          $this->load->model('custom_model');
+          $mpo_id = $requisition_info->requisition_by;
+
+            for ($i=0; $i < count($requisition_details_id); $i++) { 
+              $this->CM->update('tbl_requisition_details', array('transfer_quantity' => $quantity[$i]), $requisition_details_id[$i]);
+
+               /**
+          * For Update or Insert Book Stock for Distribute Table 
+          */
+              $this->custom_model->book_stock_for_distribute($mpo_id, $book_id[$i], $quantity[$i]);
             }
-            
-      $this->load->view('requisition/book_transfer_form', $data, FALSE);
+
+            //INSERT INTO tbl_book_stock_for_distribute (mpo_id, book_id, quantity) VALUES (25, 13, 6) ON DUPLICATE KEY UPDATE  quantity=3
+
+
+          /* ---------------------------------------------------------- */
+
+          redirect($_SERVER['HTTP_REFERER']);
+
+          /**
+          * For Update or Insert Book Stock for Distribute Table 
+          */
+          // $mpo_id = $requisition_info['requisition_by'];
+
+
+          
+          
+
+          /* ---------------------------------------------------------- */
+        }
+        
     }
        
 }

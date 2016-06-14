@@ -89,7 +89,7 @@ $user_type = $this->session->userdata('user_type');
 
 
 <ul class="sidebar-menu"> 
-    <li class="title"> Transection  </li>
+    <li class="title"> Transection/Report  </li>
 
     <?php if ($this->session->userdata('user_type') == '1') { ?>
         <li class="<?php if ($c == 'maexecutive') echo "active" ?>">

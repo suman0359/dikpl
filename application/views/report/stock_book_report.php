@@ -42,7 +42,7 @@ $this->load->view('common/sidebar');
 
         <div class="col-md-12">
 
-
+            <a href="<?php echo base_url(); ?>distribute/distribute_book" class="btn btn-primary pull-right">বই বিতরণ</a>
             <table class="table table-bordered table-hover ">
 
                 <tr>
@@ -50,7 +50,7 @@ $this->load->view('common/sidebar');
 
                     <th style="text-align: center">বইয়ের নাম</th>
                     <th style="text-align: center;">বইয়ের নাম পরিমান</th>
-                    <th style="text-align: center;">বই বিতরণ</th>
+                    
 
                 </tr>
 
@@ -63,10 +63,8 @@ $this->load->view('common/sidebar');
                             <td><?php echo $serialNo; ?></td>
 
                             <td><?php echo $value['book_name']; ?></td>
-                            <td align="center"><?php echo $value['book_quantity']; ?></td>
-                            <td>
-                                <a href="<?php echo base_url(); ?>distribute/distribute_book/<?php echo $value['book_id']; ?>" class="btn btn-primary">বই বিতরণ</a>
-                            </td>
+                            <td align="center"><?php echo $value['quantity']; ?></td>
+                            
                         </tr>
                         <?php
                         $serialNo++;

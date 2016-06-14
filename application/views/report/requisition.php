@@ -120,6 +120,7 @@ $this->load->view('common/sidebar');
                 <table class="table table-bordered table-hover" >
                     <tr>
                         <th > SL </th>
+                        <th > MPO Name </th>
                         <th > Invoice No </th>
                         <th > Date </th>
                         <th > Total Amount </th>
@@ -130,24 +131,38 @@ $this->load->view('common/sidebar');
                     </tr>
 
                     <?php
-                    foreach ($report_details as $content) {
+                    $serialNo=1;
+                    foreach (array_reverse($report_details) as $content) {
                         $requisition_status = $content->requisition_status;
                         ?> 
 
                         <tr>
-                            <td> <?php echo $content->id; ?>  </td>
-
+                            <td> <?php echo $serialNo; //$content->id; ?>  </td>
+                            <td> <?php echo $content->mpo_name; ?> </td>
                             <td> <?php echo $content->invoice_no; ?>  </td>
                             <td> <?php echo $content->date; ?>  </td>
                             <td> <?php echo $content->total_amount; ?>  </td>
                             <td> <?php echo $content->total_quantity; ?>  </td>
                             <td> <?php echo $content->comment; ?>  </td>
-                            <td> <?php if($requisition_status==1) echo '<a class="btn btn-info" href="'?><?php echo base_url(); ?>requisition/book_transfer/<?php echo $content->id; ?>
-                            <?php echo '" role="button">Transfer</a>'; if($requisition_status==0) echo '<span class="label label-success">Success</span>';?>  </td>
-                            <td> <div class="no-print"> <a href="<?php echo site_url() ?>/requisition/view/<?php echo $content->id; ?>" class="btn btn-link"> view </a> </div> </td>
+                            <td> 
+                                <?php 
+                                if($requisition_status==1 && ($this->user_type==1 || $this->user_type==2 || $this->user_type==3)){ ?>
+                                    <a class="btn btn-info" href="<?php echo base_url(); ?>requisition/book_transfer/<?php echo $content->id; ?>" role="button">Transfer</a>
+                                <?php }elseif($requisition_status==1 && $this->user_type==5 ){ ?> 
+                                    <span class="label label-warning">Panding</span>
+                                 <?php } ?>
+
+                                <?php 
+                                if($requisition_status==0){ ?>
+                                    <span class="label label-success">Success</span>
+                                <?php } ?>
+
+                           </td>
+                            <td> <div class="no-print"> <a href="<?php echo site_url() ?>/requisition/view/<?php echo $content->id; ?>" class="btn btn-link"> view </a> </div> 
+                            </td>
                         </tr>
 
-                    <?php } ?> 
+                    <?php $serialNo++; } ?> 
 
 
                 </table> 

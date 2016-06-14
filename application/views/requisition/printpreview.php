@@ -147,20 +147,20 @@ $this->load->view('common/sidebar');
         <td> 
        
                <table class="pull-right" >
-                <tr>
-                    <td>Approve by   </td>
-                    
-                </tr>
-                <tr class="voucher_bottom_left">
-                    <td>Name: .................................................... </td>
-                    
-                </tr>
-                <tr class="voucher_bottom_left">
-                    <td>Date: ...................................................... </td>
-                    
-                </tr>
-              
-            </table>
+                                <tr>
+                                    <td>Approve by   </td>
+
+                                </tr>
+                                <tr class="voucher_bottom_left">
+                                    <td>Name : <span style="border-bottom: 0.14em dotted #000; min-width: 175px; display: inline-block;"><?php $approved_by = $requisition_info->approved_by; $approved_by = $this->CM->getInfo('user', $approved_by); echo @$approved_by->name; ?></span></td>
+
+                                </tr>
+                                <tr class="voucher_bottom_left">
+                                    <td>Date : <span style="border-bottom: 0.14em dotted #000; min-width: 180px; display: inline-block;"><?php echo date("d-m-Y"); ?></span> </td>
+
+                                </tr>
+
+                            </table>
         </td>
                  </tr>
              </table>
@@ -174,16 +174,8 @@ $this->load->view('common/sidebar');
      <div class="alert alert-info text-center"> This requisition already accept and send book according on this. </div>
      <?php } ?>
      
-     <div class=" text-center no-print"> 
-       
-     
-     
-     
+     <div class=" text-center no-print">
          <a href="JavaScript:history.back(-1)" class="btn btn-warning"> Back </a>
-         <?php 
-         if(($requisition_info->requisition_status != '1') AND ($this->session->userdata('user_type')=='1')) { ?>
-         <a href="<?php echo base_url() ?>index.php/purchase/add/<?php echo $requisition_info->id ?>" class="btn btn-success"> Make it Chalan  </a>
-      <?php } ?>
      </div>
      
        

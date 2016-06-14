@@ -35,7 +35,7 @@ class Report_model extends CI_Model {
     */
     public function getRequisitionBooks($rid) {
 		$sql = "SELECT 
-            trd.requisition_id, trd.book_id , trd.quantity, trd.price, trd.id, b.id as bookid, b.book_name
+            trd.id as trd_id, trd.requisition_id, trd.book_id as book_id, trd.quantity, trd.transfer_quantity, trd.price,  b.id as bookid, b.book_name
             FROM 
             tbl_requisition_details as trd, books as b
             WHERE 
@@ -190,7 +190,7 @@ class Report_model extends CI_Model {
     }
 
     public function getRequisitionReportForMPO($start_date, $end_date, $user_id = NULL) {
-		$this->db->select("*");
+		$this->db->select("tbl_requisition.id, tbl_requisition.invoice_no, tbl_requisition.date, tbl_requisition.total_amount, tbl_requisition.total_quantity, tbl_requisition.comment, tbl_requisition.requisition_status, user.name as mpo_name");
 		$this->db->from('tbl_requisition');
 		if ($user_id != NULL) {
 		    $this->db->where('requisition_by', $user_id);
@@ -198,16 +198,25 @@ class Report_model extends CI_Model {
 		$this->db->where('date >=', $start_date);
 		$this->db->where('date <=', $end_date);
 
+		$this->db->join('user', 'user.id=tbl_requisition.requisition_by', 'inner');
+
 		$query_result = $this->db->get();
 		$result = $query_result->result();
 		return $result;
     }
 
     public function book_stock_list_of_mpo($mpo_id){
-    	$sql = "SELECT bo.id as book_id, bo.book_name as book_name, sum(reqd.quantity) as book_quantity FROM tbl_requisition as req  inner join tbl_requisition_details as reqd on reqd.requisition_id=req.id inner join books as bo on bo.id=reqd.book_id WHERE req.requisition_by=28 group by reqd.book_id";
+    	$this->db->select("books.id as book_id, books.book_name, tbl_book_stock_for_distribute.quantity");
+    	$this->db->from('tbl_book_stock_for_distribute');
+    	$this->db->where('mpo_id', $mpo_id);
 
-    	$result_query = $this->db->query($sql);
-		return $result_query->result_array();
+    	$this->db->join('books', 'books.id=tbl_book_stock_for_distribute.book_id', 'inner');
+    	$this->db->join('user', 'user.id=tbl_book_stock_for_distribute.mpo_id', 'inner');
+
+    	$query_result = $this->db->get();
+    	$result = $query_result->result_array();
+    	return $result;
+
     }
 
 }

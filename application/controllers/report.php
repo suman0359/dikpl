@@ -220,7 +220,10 @@ class Report extends MY_Controller {
 	    $requisition_by = NULL;
 	}
 	$data['report_details'] = $this->RM->getRequisitionReportForMPO($start_date, $end_date, $requisition_by);
-
+	// echo "<pre>";
+	// print_r($data['report_details']);
+	// exit();
+	
 
 	$this->load->view('report/requisition', $data);
     }

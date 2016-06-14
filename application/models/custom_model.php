@@ -67,5 +67,11 @@ class Custom_model extends CI_Model{
         return $result->result_array();
     }
     
+
+    public function book_stock_for_distribute($mpo_id, $book_id, $quantity){
+        $sql = "INSERT INTO tbl_book_stock_for_distribute (mpo_id, book_id, quantity) VALUES ($mpo_id, $book_id, $quantity) ON DUPLICATE KEY UPDATE  quantity=quantity+$quantity";
+
+        $result = $this->db->query($sql);
+    }
         
 }

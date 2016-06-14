@@ -49,7 +49,7 @@ $companyname = $this->session->userdata('companyname'); ?>
             ?>
 
             <div class="col-md-12 margin_padding voucher_memo_area">
-
+            <p> <?php echo validation_errors(); ?> </p>
                 <h3>Requisition Transfer Form</h3>  
                 <table width="100%"> 
                     <tr>
@@ -124,6 +124,7 @@ $companyname = $this->session->userdata('companyname'); ?>
                         <td> Total </td>
 
                     </tr>
+                    <?php echo form_open(); ?>
                     <?php
                     $i = 1;
                     $total_price = 0;
@@ -137,7 +138,7 @@ $companyname = $this->session->userdata('companyname'); ?>
                             <td  align="center"><?php
                                 $form_input = array(
                                     'type' => 'number',
-                                    'name' => 'quantity',
+                                    'name' => 'quantity[]',
                                     'size' => '5',
                                     'value' => $book['quantity'],
                                     'class' => 'text-center quantity form-control',
@@ -145,6 +146,8 @@ $companyname = $this->session->userdata('companyname'); ?>
                                     'min' => '0'
                                 );
 
+                                echo form_hidden('book_id[]', $book['book_id']);
+                                echo form_hidden('requisition_details_id[]', $book['trd_id']);
                                 echo form_input($form_input);
                                 ?></td>
                             <td class="price"><?php echo $book['price']; ?></td>
@@ -161,12 +164,12 @@ $companyname = $this->session->userdata('companyname'); ?>
                         <td></td>
                         <td align="right">Total Quantity</td>
                         <td align="center"><?php echo $total_quantity; ?></td>
-                        <td align="center"><?php echo $total_quantity; ?></td>
+                        <td class="total_transfer_quantity" align="center"><?php echo $total_quantity; ?></td>
                         <td align="right">Total Price</td>
                         <td class="total_price"><?php echo $total_price; ?></td>
 
                     </tr>
-
+                    
 
                 </table>
 
@@ -231,7 +234,15 @@ $companyname = $this->session->userdata('companyname'); ?>
                 <a href="JavaScript:history.back(-1)" class="btn btn-warning"> Back </a>
 
                 <?php if (($requisition_info->requisition_status != '0') AND ( $this->session->userdata('user_type') == '1')) { ?>
-                    <a href="<?php echo base_url() ?>index.php/purchase/add/<?php echo $requisition_info->id ?>" class="btn btn-success"> Transfer Book  </a>
+                    
+
+                    <?php
+                    $form = array(
+                        'name' => 'transfer_book',
+                        'value' => 'Transfer Book',
+                        'class' => 'btn btn-primary'
+                        );
+                     echo form_submit($form); ?>
     <?php } ?>
             </div>
 
@@ -241,7 +252,7 @@ $companyname = $this->session->userdata('companyname'); ?>
 <?php } ?>
 
         <!-- start  add the row --> 
-
+<?php echo form_close(); ?>
         <script>
 
             $('.quantity').on('change', function () {
@@ -266,6 +277,7 @@ $companyname = $this->session->userdata('companyname'); ?>
             $('.voucher_item_area').trigger('change');
 
             $('.voucher_item_area').on('change', function () {
+                // For Total Book Price Calculation 
                 var total_price = 0;
                 $('tbody tr td.tt').each(function () {
                     var book_price = $(this).text();
@@ -273,7 +285,20 @@ $companyname = $this->session->userdata('companyname'); ?>
                     total_price += book_price;
                 });
                 $("tbody tr.voucher_total td.total_price").text(total_price);
+                /**************************************/
+
+                // For Total Book Transfer Quantity
+                var total_transfer_quantity = 0;
+                $('tbody tr .quantity').each(function () {
+                    var quantity = $(this).val();
+                    var quantity = parseInt(quantity);
+                    total_transfer_quantity += quantity;
+                });
+                $("tbody tr.voucher_total td.total_transfer_quantity").text(total_transfer_quantity);
+                /**********************************************/
             })
+
+            
 
         </script>
 

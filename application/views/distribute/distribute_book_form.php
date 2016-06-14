@@ -36,21 +36,24 @@ $this->load->view('common/sidebar');
 
             <div class="col-md-9 ">
                 <div class="slect_book">
-                    <table class="table table-striped"> 
+                    <table id="distribute_book" class="table table-striped"> 
                         <tr class="alert alert-warning">
                             <th>Book  Name</th>
                             <th>Current Stock </th> 
                             <th> </th>
+                            <th> </th>
                         </tr>
                         <?php
                         foreach ($book_list as $book) {
-                            echo "<pre>";
-                            print_r($book);
+                            // echo "<pre>";
+                            // print_r($book);
                             ?>
                             <tr>
-                                <td> <?php echo $book['book_name'] ?> </td>
-                                <td> <?php echo $book['book_quantity'] ?> </td>
+                                <td class="book_name"> <?php echo $book['book_name'] ?> </td>
+                                <td class="book_quantity"> <?php echo $book['quantity'] ?> </td>
                                 <td> <a href="JavaScript:void(0)" class="btn btn-xs btn-success pull-right add_book_row" onclick="return additemrow(<?php echo $book['book_id'] ?>)" item-id="<?php echo $book['book_id'] ?>" ><?php echo $book['book_id'] ?> add </a> </td>
+
+                                <td> <a href="JavaScript:void(0)" id="" class="btn btn-xs btn-success pull-right add_book_row" onclick="return add_item_row(<?php echo $book['book_id'] ?>)" item-id="<?php echo $book['book_id'] ?>" ><?php echo $book['book_id'] ?> add Test </a> </td>
                             </tr>
 
                         <?php } ?>
@@ -212,8 +215,43 @@ $this->load->view('common/sidebar');
             });
         });
 
+        /**
+        * Try to Copying Book Row
+        */
+        $("#distribute_book").on("click", '.add_book_row', function(){
+            var book_name = $(this).closest("tr").children('td.book_name').html();
+            var book_quantity = $(this).closest("tr").children('td.book_quantity').html();
+            var book_id = $(this).attr('item-id');
+            // console.log(book_name);
+            // console.log(book_quantity);
+            // console.log(book_id);
 
+            get_product(book_id, book_name, book_quantity);
+        })
+        /* -------------------------------------------------------- */
 
+        function add_item_row(id){
+            var id = id; // Book ID
+            // console.log(id);
+            // get_product(id);
+        }
+
+        function get_product(id, book_name, book_quantity){
+            var id = id; // Book ID
+            var book_id = parseInt(id);
+            
+            // var book_name book_name;
+
+            $('.tableproduct').append('<tr id="line_' + book_id + '" >\n\
+                                                              <td  ><i   class="remove_item glyphicon glyphicon-minus-sign btn btn-warning btn-xs "  itemid="' + id + '" ></i></td>\n\
+                                                              <td><input name="pid[]" class="pid"  value=" ' + id + ' " type="hidden">' + book_name + '</td>\n\
+                                                              <td>' + "code" + '</td>\n\
+                                                              <td> <input name="price[]" class=" "  value="' + "rate" + '" type="hidden" > ' + "rate" + 'TK </td>\n\
+                                                               <td><input name="" class="pid"  value="" type="hidden">' + book_quantity + '</td>\n\
+                                                              <td><input type="number" name="qty[]"   id="qty" min="1" value="1" max="' + book_quantity + '" class="q_' + book_id + ' qty form-control "  onclick="toatalquantity()" /></td>\n\
+                                                              </tr>');
+
+        }
 
 
 

@@ -43,7 +43,7 @@ $this->load->view('common/sidebar');
 
                             <th></th>
                             <th>Book  Name</th>
-                            <th>Book Code</th>
+                            
                             <th>Book Price</th>
                             <th>Quantity</th>
 
@@ -55,7 +55,7 @@ $this->load->view('common/sidebar');
                                 <tr id="line_<?php echo $book['book_id'] ?>" > 
                                     <td  ><i   class="remove_item glyphicon glyphicon-minus-sign btn btn-warning btn-xs "  itemid="<?php echo $book['book_id'] ?>" ></i></td>
                                     <td><input name="pid[]" class=" "  value="<?php echo $book['book_id'] ?>" type="hidden" ><?php echo $book['book_name'] ?></td> 
-                                    <td> <?php echo $book['book_code'] ?> </td> 
+                                    
                                     <td><input name="price[]" class=" "  value="<?php echo $book['price'] ?>" type="hidden" >  <?php echo $book['price'] ?> </td> 
                                     <td> <input type="number" name="qty[]"   id="qty" min="1" value="1" class="q_<?php echo $book['book_id'] ?> qty form-control "  onChange="call_all()" /></td>
                                 </tr>
