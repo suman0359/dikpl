@@ -122,9 +122,7 @@ class Report_model extends CI_Model {
     }
 
     public function distributeReport($sdate, $edate, $cid = NULL) {
-echo "<pre>";
-print_r($edate);
-exit();
+
 
 	@$sql = "
           SELECT 
