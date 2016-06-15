@@ -242,7 +242,7 @@ class Distribute  extends MY_Controller{
             $pur_info['entryby']=$this->_uid;   
             
             $purchase_date= strtotime( $this->input->post('date'));  
-            $pur_info['distribute_date']=   date('Y-m-d', $purchase_date); 
+            $pur_info['distribute_date']=   date('d-m-Y'); 
             
             
             
