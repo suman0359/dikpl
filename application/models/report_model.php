@@ -133,9 +133,9 @@ class Report_model extends CI_Model {
 		    $sql .="di.distribute_date >= '$sdate' and di.distribute_date  <= '$edate'";
 		}
 		
-		if ($sdate==NULL) {
+		if ($sdate==NULL || $edate) {
 		    $date = date("d-m-Y");
-		    $sql .="di.distribute_date >= '$date' and di.distribute_date  <= '$date'";
+		    $sql .="di.distribute_date = '$date'";
 		}
 		
 		 if ($division_id!=NULL) {
