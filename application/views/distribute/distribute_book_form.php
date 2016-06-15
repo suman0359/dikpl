@@ -51,8 +51,7 @@ $this->load->view('common/sidebar');
                             <tr>
                                 <td class="book_name"> <?php echo $book['book_name'] ?> </td>
                                 <td class="book_quantity"> <?php echo $book['quantity'] ?> </td>
-                                <td> <a href="JavaScript:void(0)" class="btn btn-xs btn-success pull-right add_book_row" onclick="return additemrow(<?php echo $book['book_id'] ?>)" item-id="<?php echo $book['book_id'] ?>" ><?php echo $book['book_id'] ?> add </a> </td>
-
+                                
                                 <td> <a href="JavaScript:void(0)" id="" class="btn btn-xs btn-success pull-right add_book_row" onclick="return add_item_row(<?php echo $book['book_id'] ?>)" item-id="<?php echo $book['book_id'] ?>" ><?php echo $book['book_id'] ?> add Test </a> </td>
                             </tr>
 
@@ -137,6 +136,20 @@ $this->load->view('common/sidebar');
                             ?>
                         
                     </div>
+                </div>
+
+                <div class="control-group ">
+                    <label class="control-label">Comments</label>
+
+                    <?php
+                    $form_textarea = array(
+                        'name' => 'comments',
+                        'class' => 'form-control ',
+                        'value' => ' ',
+                        'rows' => '3'
+                    );
+                    echo form_textarea($form_textarea)
+                    ?>
                 </div>
 
             </div>
@@ -239,10 +252,33 @@ $this->load->view('common/sidebar');
         function get_product(id, book_name, book_quantity){
             var id = id; // Book ID
             var book_id = parseInt(id);
+            var book_quantity = parseInt(book_quantity);
             
-            // var book_name book_name;
+            var flag = true;
+            $(".pid").each(function (index) {
+                // console.log( $( this ).val() );
+                var d = parseInt($(this).val());
 
-            $('.tableproduct').append('<tr id="line_' + book_id + '" >\n\
+                // alert(id+"-"+d) ;
+                if (id == d)
+                {
+                    var cv = parseInt($(".q_" + id).val());
+                    var qq = $(".q_" + id).val();
+                    // console.log(qq);
+
+                    if(book_quantity <= qq){
+                        alert("you can't add more then quantity");
+                    }else{
+                        $(".q_" + id).val(cv + 1);
+                    }
+
+                    flag = false;
+                }
+            });
+
+            if (flag) {
+
+                $('.tableproduct').append('<tr id="line_' + book_id + '" >\n\
                                                               <td  ><i   class="remove_item glyphicon glyphicon-minus-sign btn btn-warning btn-xs "  itemid="' + id + '" ></i></td>\n\
                                                               <td><input name="pid[]" class="pid"  value=" ' + id + ' " type="hidden">' + book_name + '</td>\n\
                                                               <td>' + "code" + '</td>\n\
@@ -250,6 +286,7 @@ $this->load->view('common/sidebar');
                                                                <td><input name="" class="pid"  value="" type="hidden">' + book_quantity + '</td>\n\
                                                               <td><input type="number" name="qty[]"   id="qty" min="1" value="1" max="' + book_quantity + '" class="q_' + book_id + ' qty form-control "  onclick="toatalquantity()" /></td>\n\
                                                               </tr>');
+        }
 
         }
 
@@ -276,6 +313,7 @@ $this->load->view('common/sidebar');
             $(".pid").each(function (index) {
                 // console.log( $( this ).val() );
                 var d = parseInt($(this).val());
+                console.log(d);
                 // alert(id+"-"+d) ;
                 if (id == d)
                 {

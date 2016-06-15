@@ -104,7 +104,7 @@ $this->load->view('common/sidebar');
                     foreach ($department_list as $sup) {
                         $sup_data[$sup['id']] = $sup['name'];
                     }
-                    echo form_dropdown('department_id', $sup_data, $sid, $class);
+                    echo form_dropdown('department_id', $sup_data, '', $class);
                     ?>
 
                 </div>
@@ -300,8 +300,8 @@ $this->load->view('common/sidebar');
         function getproduct(id)
         {
 
-            var cid = $("#college_id").val();
-
+            var cid = $("#college_id_value").val();
+            console.log(cid);
             var pid = parseInt(id);
 
             var flag = true;

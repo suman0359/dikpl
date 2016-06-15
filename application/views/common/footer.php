@@ -31,7 +31,9 @@
 <!-- AdminLTE for demo purposes -->
 <!--<script src="<?php echo base_url(); ?>style_sheet/js/AdminLTE/demo.js" type="text/javascript"></script>-->
 <script src="<?php echo base_url(); ?>style_sheet/js/multiselect.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/select/select2.min.js" type="text/javascript"></script>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script> -->
 
 
 </body>

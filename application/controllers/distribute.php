@@ -196,33 +196,111 @@ class Distribute  extends MY_Controller{
       //   $this->load->view('View File', $data, FALSE);
       // }
       
-
-      $this->load->model('college_model');
-      if($this->user_type==5) {
-            $thana_id_array = $this->college_model->get_thana_array($this->_uid);
-        }else{
-            $thana_id_array=NULL;
-        }
-
-      $data['college_list'] = $this->college_model->get_college_all_list('', '', $thana_id_array);
       
-      $data['teacher_list'] = $this->CM->getAllWhere('teachers', array('college_id'=>$college_id));
-      // echo "<pre>";
-      // print_r($data['teacher_list']);
-      // exit();
+
+      /* -------------------------------------------------------- */
+      $this->load->library('form_validation');
+
+          $this->form_validation->set_rules('pid', 'Book', 'required');
+          if ($this->form_validation->run() == FALSE)
+          {
+            $this->load->model('college_model');
+            if($this->user_type==5) {
+                  $thana_id_array = $this->college_model->get_thana_array($this->_uid);
+              }else{
+                  $thana_id_array=NULL;
+              }
+
+            $data['college_list'] = $this->college_model->get_college_all_list('', '', $thana_id_array);
+            
+            $data['teacher_list'] = $this->CM->getAllWhere('teachers', array('college_id'=>$college_id));
+            
+            $data['department_list'] = $this->CM->getAll('department', 'name ASC') ;
+            
+            $data['book_list'] = $this->RM->book_stock_list_of_mpo($this->_uid);
+
+            $data['college_id'] = $college_id ;
+
+            if($college_id!=NULL) { 
+                $data['college'] = $this->CM->getinfo('college', $college_id) ; 
+                // $data['allbooks'] = $this->CM->getcollegebooks($college_id) ;
+            }
+
+            $this->load->view('distribute/distribute_book_form', $data); 
+          }
+          else{
+                // transfer  table start 
+            // echo "<pre>";
+            // print_r($_POST);
+            // exit();
+            $this->db->trans_start();
+            $pur_info['college_id']= $this->input->post('college_id') ;
+            $pur_info['teacher_id']=  $this->input->post('teacher_id');
+            // $pur_info['department_id']=  $this->input->post('department_id');
+            $pur_info['comments']=  $this->input->post('comments');
+            $pur_info['status']= 1;
+            $pur_info['entryby']=$this->_uid;   
+            
+            $purchase_date= strtotime( $this->input->post('date'));  
+            $pur_info['distribute_date']=   date('Y-m-d', $purchase_date); 
+            
+            
+            
+            $pid=  $this->input->post('pid');
+            $cost=  $this->input->post('price');
+            $quantity=  $this->input->post('qty');
+                                       
+            $d_id=$this->CM->insert('tbl_distribute',$pur_info);
+
+            $order=count($pid);
+            if(!empty($d_id))
+                {
+                    for($i=0;$i<$order;$i++)
+                    {
+                        $product_id=$pid[$i];
+                        $book_info=$this->CM->getwhere('books',array('id'=>$product_id));
+                        $datas['distribute_id']=$d_id; //purchase item table start
+                        $datas['book_id']=$pid[$i];
+                        
+                        
+                        $datas['price']=$cost[$i];
+                        $datas['quantity']=$quantity[$i];
+                        
+                        $datas['line_no']=$i;
+                        $datas['status']=1;
+                        $this->CM->insert('tbl_distribute_books',$datas);
+                        
+                         // Update College  inventory 
+                        // get College current book info
+                        $current_c_b = $this->CM->getwhere('tbl_book_stock_for_distribute', array('mpo_id'=>$this->_uid, 'book_id' => $product_id )) ;
+                        //var_dump($current_c_b) ;
+                        $dataud['quantity'] = $current_c_b->quantity - $quantity[$i]  ; 
+                        $this->CM->update('tbl_book_stock_for_distribute', $dataud, $current_c_b->id) ;
+                            
+                         
+                    }
+                }
+
+            $this->db->trans_complete(); 
+             
+            if($this->db->trans_status()=== TRUE)
+               {
+                   $msg = "Operation Successfull!!";
+                   $this->session->set_flashdata('success', $msg); 
+                   redirect('report/book_stock');
+               }
+               else 
+               {
+                   echo $msg = "There is an error, Please try again!!";
+                   $this->session->set_flashdata('error', $msg); 
+               }
+
+         }    
+
+      /* -------------------------------------------------------- */
       
-      $data['department_list'] = $this->CM->getAll('department', 'name ASC') ;
+
       
-      $data['book_list'] = $this->RM->book_stock_list_of_mpo($this->_uid);
-
-      $data['college_id'] = $college_id ;
-
-      if($college_id!=NULL) { 
-          $data['college'] = $this->CM->getinfo('college', $college_id) ; 
-          // $data['allbooks'] = $this->CM->getcollegebooks($college_id) ;
-      }
-
-      $this->load->view('distribute/distribute_book_form', $data); 
     }
         
        
