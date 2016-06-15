@@ -208,6 +208,12 @@ border: 2px solid #e6e6e3;
   display: block;
 }
 
+.form-group .required:after, 
+.control-group .required:after,
+.control-group label.required:after {
+  content:"*";color:red;
+}
+
 @media (min-width: 768px) {
     
        .home_menu ul 

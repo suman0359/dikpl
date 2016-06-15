@@ -326,7 +326,10 @@ class Report extends MY_Controller {
 	    $data['college_info'] = $this->CM->getInfo('college', $cid);
 	};
 
-
+	// echo "<pre>";
+	// print_r($data);
+	// exit();
+	
 	$data['content_list'] = $this->RM->distributeReport($data['sdate'], $data['edate'], $cid);
 
 //        echo '<pre>';

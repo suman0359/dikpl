@@ -92,17 +92,9 @@ $this->load->view('common/sidebar');
                     </div>
                 </div>
 
-                <div class="control-group">
-                    <label class="control-label">School/College</label> <br/>
-                    <input type="hidden" name="college_id" id="college_id_value" value="<?php echo $college_id ?>" />
-
-                    <h4> <label for="college_name" class="label label-info label-lg"><?php echo $college->name; ?></label> </h4>
-
-                    <!-- <a class="btn btn-xs btn-primary  "  data-target="#college_list" data-toggle="modal" href="JavaScript:void(0)">Change College</a> -->
-                </div>
 
                 <div class="control-group">
-                    <label>School/College </label>
+                    <label class="required">School/College </label>
                     <div>
                         <?php
                         $class = 'class="form-control " id="college_id" ';
@@ -110,7 +102,7 @@ $this->load->view('common/sidebar');
                         foreach ($college_list as $collage) {
                             $collages[$collage['college_id']] = $collage['college_name'];
                         }
-                        echo form_dropdown('collage_id', $collages, $college_id, $class);
+                        echo form_dropdown('college_id', $collages, $college_id, $class);
                         ?>
                     </div>
                 </div>
@@ -168,39 +160,13 @@ $this->load->view('common/sidebar');
 
 
     <script>
-        $(document).ready(function () {
-
-
-            $('#sandbox-container input').datepicker({
-                KeyboardNavigation: false,
-                todayHighlight: true,
-                format: 'dd-mm-yyyy',
-                autoclose: true
-            });
-
-            $("#add").click(function () {
-                var row = "<tr class='frow'>" + $(".frow").html() + "</tr>";
-                $(".tableproduct tr:last-child").last().after(row);
-            });
-
-
-            $("#remove").click(function () {
-                $(".tableproduct tr:last-child").last().remove();
-
-            });
-
-        });
-
-
 
         //Teacher Select 
 
-        jQuery(".main-mid-area").bind('load, change', '#college_id', function () {
+        $(".main-mid-area").on('change', '#college_id', function () {
 
-            var college_id = document.getElementById("college_id");
-            
-            var college_id = college_id.value;
-                        
+            var college_id = document.getElementById("college_id").value;
+                                    
             $.ajax({
                 url: "<?php echo base_url() ?>index.php/home/getteacher/" + college_id,
                 beforeSend: function (xhr) {
@@ -235,19 +201,10 @@ $this->load->view('common/sidebar');
             var book_name = $(this).closest("tr").children('td.book_name').html();
             var book_quantity = $(this).closest("tr").children('td.book_quantity').html();
             var book_id = $(this).attr('item-id');
-            // console.log(book_name);
-            // console.log(book_quantity);
-            // console.log(book_id);
 
             get_product(book_id, book_name, book_quantity);
         })
         /* -------------------------------------------------------- */
-
-        function add_item_row(id){
-            var id = id; // Book ID
-            // console.log(id);
-            // get_product(id);
-        }
 
         function get_product(id, book_name, book_quantity){
             var id = id; // Book ID
@@ -292,65 +249,7 @@ $this->load->view('common/sidebar');
 
 
 
-        function additemrow(id)
-        {
-            var id = id;
-            getproduct(id);
 
-
-        }
-
-
-        function getproduct(id)
-        {
-
-            var cid = $("#college_id").val();
-
-            var pid = parseInt(id);
-
-            var flag = true;
-
-            $(".pid").each(function (index) {
-                // console.log( $( this ).val() );
-                var d = parseInt($(this).val());
-                console.log(d);
-                // alert(id+"-"+d) ;
-                if (id == d)
-                {
-                    var cv = parseInt($(".q_" + id).val());
-
-                    $(".q_" + id).val(cv + 1);
-
-                    flag = false;
-                }
-            });
-
-            if (flag) {
-                $.ajax({
-                    type: "GET",
-                    url: "<?php echo base_url(); ?>distribute/getproduct/" + 4 + "/" + 2,
-                    dataType: "json",
-                    success: function (book) {
-                        if (book != "")
-                        {
-
-                            $('.tableproduct').append('<tr id="line_' + book.book_id + '" >\n\
-                                                              <td  ><i   class="remove_item glyphicon glyphicon-minus-sign btn btn-warning btn-xs "  itemid="' + book.book_id + '" ></i></td>\n\
-                                                              <td><input name="pid[]" class="pid"  value=" ' + book.book_id + ' " type="hidden">' + book.book_name + '</td>\n\
-                                                              <td>' + book.book_code + '</td>\n\
-                                                              <td> <input name="price[]" class=" "  value="' + book.rate + '" type="hidden" > ' + book.rate + 'TK </td>\n\
-                                                               <td><input name="" class="pid"  value="" type="hidden">' + book.quantity + '</td>\n\
-                                                              <td><input type="number" name="qty[]"   id="qty" min="1" value="1" max="' + book.quantity + '" class="q_' + book.book_id + ' qty form-control "  onclick="toatalquantity()" /></td>\n\
-                                                              </tr>');
-
-                        } else
-                        {
-                            alert("Item Not Available In Stock By This Id " + id);
-                        }
-                    }
-                });
-            }
-        }
 
         $(document.body).on('click', '.remove_item', function () {
             var id = $(this).attr("itemid");
@@ -360,27 +259,6 @@ $this->load->view('common/sidebar');
         });
 
 
-
-
-
-
-        $('.table').on("change", toatalquantity);
-
-        function toatalquantity() {
-
-            var sum = parseInt(0);
-            // or $( 'input[name^="ingredient"]' )
-            $('input[name^="qty[]"]').each(function (i, e) {
-                var v = parseInt($(e).val());
-
-                if (!isNaN(v))
-                    sum += v;
-
-            });
-
-            //alert(sum) ; 
-            $(".t_qty").val(sum);
-        }
 
 
     </script>

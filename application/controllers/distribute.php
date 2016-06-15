@@ -23,9 +23,6 @@ class Distribute  extends MY_Controller{
          $jid = $this->session->userdata('jonal_id') ;
          $data['colage_list'] = $this->CM->getAllWhere('college', array('jonal_id'=>$jid), 'name ASC') ; 
          
-         
-
-         
          if($jid==0)
          {
              redirect ('error/accessdeny'); 
@@ -202,6 +199,7 @@ class Distribute  extends MY_Controller{
       $this->load->library('form_validation');
 
           $this->form_validation->set_rules('pid', 'Book', 'required');
+          $this->form_validation->set_rules('college_id', 'College Name', 'required');
           if ($this->form_validation->run() == FALSE)
           {
             $this->load->model('college_model');
@@ -230,9 +228,6 @@ class Distribute  extends MY_Controller{
           }
           else{
                 // transfer  table start 
-            // echo "<pre>";
-            // print_r($_POST);
-            // exit();
             $this->db->trans_start();
             $pur_info['college_id']= $this->input->post('college_id') ;
             $pur_info['teacher_id']=  $this->input->post('teacher_id');
@@ -242,8 +237,11 @@ class Distribute  extends MY_Controller{
             $pur_info['entryby']=$this->_uid;   
             
             $purchase_date= strtotime( $this->input->post('date'));  
-            $pur_info['distribute_date']=   date('Y-m-d', $purchase_date); 
+            $pur_info['distribute_date']=   date('d-m-Y'); 
             
+            echo "<pre>";
+            print_r($pur_info);
+            exit();
             
             
             $pid=  $this->input->post('pid');
@@ -287,7 +285,7 @@ class Distribute  extends MY_Controller{
                {
                    $msg = "Operation Successfull!!";
                    $this->session->set_flashdata('success', $msg); 
-                   redirect('report/book_stock');
+                   redirect('report/distribute');
                }
                else 
                {
