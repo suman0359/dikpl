@@ -286,8 +286,8 @@ class Report extends MY_Controller {
     public function distribute() {
 
 	$data = array();
-	$data['sdate'] = date("Y-m-d");
-	$data['edate'] = date("Y-m-d");
+	$data['sdate'] = date("d-m-Y");
+	$data['edate'] = date("d-m-Y");
 	$data['division_id'] = 'all';
 	$data['jonal_id'] = 'all';
 	$data['college_id'] = 'all';
@@ -297,7 +297,7 @@ class Report extends MY_Controller {
 	$data['division_list'] = $this->CM->getAll('division');
 	
 	if($this->input->post()){
-	     $data['sdate'] = $this->input->post('sdate');
+	    $data['sdate'] = $this->input->post('sdate');
 	    $data['edate'] = $this->input->post('edate');
 	    $data['division_id'] = $this->input->post('division_id');
 	    $data['jonal_id'] = $this->input->post('jonal_id');

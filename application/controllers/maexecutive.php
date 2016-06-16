@@ -32,7 +32,7 @@ class Maexecutive extends CI_Controller
          $no_rows= $this->marketing_executive_model->count_get_all_marketing_promotion_officer_info('user');
         $this->load->library('pagination');
         $config['base_url'] = base_url().'maexecutive/index/';
-       
+       print_r($no_rows);
         $config['total_rows'] = $no_rows ;
         $config['per_page'] = 15;
         $config['full_tag_open'] = '<div class=" text-center"><ul class=" list-inline list-unstyled " id="listpagiction">';

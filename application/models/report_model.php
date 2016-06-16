@@ -232,6 +232,7 @@ class Report_model extends CI_Model {
     	$this->db->select("books.id as book_id, books.book_name, tbl_book_stock_for_distribute.quantity");
     	$this->db->from('tbl_book_stock_for_distribute');
     	$this->db->where('mpo_id', $mpo_id);
+    	$this->db->where('quantity !=', 0);
 
     	$this->db->join('books', 'books.id=tbl_book_stock_for_distribute.book_id', 'inner');
     	$this->db->join('user', 'user.id=tbl_book_stock_for_distribute.mpo_id', 'inner');

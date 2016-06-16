@@ -21,15 +21,17 @@ class Marketing_executive_model extends CI_Model{
     public function count_get_all_marketing_promotion_officer_info(){
         $user_type = $this->user_type;
 
-        $sql = "SELECT * FROM user WHERE status  = 1 AND user_type =5";
+        $this->db->select("*");
+        $this->db->from('user');
+        $this->db->where('user_type', 5);
 
         if ($user_type==4 || $user_type==5 || $user_type==6) {
-            $sql .= " and div_id=$this->division_id";
+            $this->db->where('div_id', $this->division_id);
         }
 
-        $query = $this->db->query($sql);
-        return $query->num_rows();
-    
+        $result = $this->db->get()->num_rows();
+
+        return $result;        
     }
 
     /**
