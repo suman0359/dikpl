@@ -238,12 +238,7 @@ class Distribute  extends MY_Controller{
             
             $purchase_date= strtotime( $this->input->post('date'));  
             $pur_info['distribute_date']=   date('d-m-Y'); 
-            
-            echo "<pre>";
-            print_r($pur_info);
-            exit();
-            
-            
+                        
             $pid=  $this->input->post('pid');
             $cost=  $this->input->post('price');
             $quantity=  $this->input->post('qty');

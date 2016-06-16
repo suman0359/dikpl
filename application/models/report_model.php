@@ -121,32 +121,52 @@ class Report_model extends CI_Model {
 	return $result->result_array();
     }
 
-    public function distributeReport($sdate, $edate, $cid = NULL) {
-echo "<pre>";
-print_r($edate);
-exit();
 
-	@$sql = "
-          SELECT 
-          d.id as did, d.distribute_time , d.distribute_date ,  d.entryby , d.comments, d.college_id, d.teacher_id, 
-          c.id, c.name as cname, c.address as caddress, t.name as tname, t.id , 
-          u.name as empname, u.id , dep.name as depname, d.department_id, 
-          (SELECT SUM(quantity) FROM distribute_books WHERE distribute_id = d.id ) as bookqty
-          FROM user as u, jonal as  j,  teachers as t , distribute as d, department as dep, college as c
-          WHERE 
-          d.distribute_date <=  '{$edate}' AND   d.distribute_date >= '{$sdate}'   AND dep.id = d.department_id     ";
-	if ($cid != NULL) {
-	    $sql .= " AND  d.college_id = '{$cid}'  ";
-	}
-	$sql .= " AND d.college_id  = c.id AND  d.entryby  = u.id
-                    AND d.college_id = c.id AND d.teacher_id = t.id 
-                    GROUP BY d.id
-                ";
+    /*
+    * This Method is for Distribution Report 
+    * Author : Faruk & Tasfir
+    */
 
-	// SELECT department.name, distribute.department_id FROM department, distribute WHERE department.id = distribute.department_id
-	//echo $sql ;  
-	$result = $this->db->query($sql);
-	return $result->result_array();
+    public function distributeReport($sdate, $edate, $division_id=NULL, $jonal_id=NULL, $college_id=NULL) {
+	
+	$sql = "SELECT  di.distribute_date, c.name as college_name, di.comments "
+		. "FROM "
+		. "tbl_distribute as di INNER JOIN college as c ON di.college_id = c.id "
+		. "WHERE ";
+	
+		if ($sdate!=NULL AND $edate!=NULL) {
+		    $sql .="di.distribute_date >= '$sdate' and di.distribute_date  <= '$edate'";
+		}
+
+		if ($sdate!=NULL AND $edate==NULL) {
+			$date = date("d-m-Y");
+		    $sql .="di.distribute_date >= '$sdate' and di.distribute_date  <= '$date'";
+		}
+		
+		if ($sdate==NULL) {
+		    $date = date("d-m-Y");
+		    $sql .="di.distribute_date >= '$date' and di.distribute_date  <= '$date'";
+		}
+		
+		 if ($division_id!=NULL) {
+		    $sql .="AND do.division_id = '{$division_id}'";
+		}
+		
+		
+		if ($jonal_id!=NULL) {
+		    $sql .="AND do.jonal_id = '{$jonal_id}'";
+		}
+		
+		 if ($college_id!=NULL) {
+		    $sql .="AND do.college_id = '{$college_id}'";
+		}
+		
+		$result_query = $this->db->query($sql);
+		 $result=$result_query->result_array();
+
+		 return $result;
+		 
+		
     }
 
     public function donation_requisition($start_date=NULL, $end_date=NULL, $division_id=NULL, $jonal_id=NULL, $district_id=NULL, $thana_id=NULL, $college_id=NULL) {
@@ -212,6 +232,7 @@ exit();
     	$this->db->select("books.id as book_id, books.book_name, tbl_book_stock_for_distribute.quantity");
     	$this->db->from('tbl_book_stock_for_distribute');
     	$this->db->where('mpo_id', $mpo_id);
+    	$this->db->where('quantity !=', 0);
 
     	$this->db->join('books', 'books.id=tbl_book_stock_for_distribute.book_id', 'inner');
     	$this->db->join('user', 'user.id=tbl_book_stock_for_distribute.mpo_id', 'inner');

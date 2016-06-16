@@ -37,10 +37,10 @@ $this->load->view('common/sidebar');
                 echo form_open();
                 ?>
                 <label> Start Date 
-                    <input type="text" id="sdate" class="dp  form-control col-md-1" name="start_date" value="<?php //echo $sdate; ?>" placeholder="dd-mm-yyyy" required/>
+                    <input type="text" id="sdate" class="dp  form-control col-md-1" name="start_date" value="<?php //echo $sdate; ?>" placeholder="YYYY-MM-DD"/>
                 </label>
                 <label> End Date 
-                    <input type="text" id="edate" class="dp  form-control col-md-1" name="end_date" value="<?php //echo $edate; ?>" placeholder="DD-MM-YYY" required/>
+                    <input type="text" id="edate" class="dp  form-control col-md-1" name="end_date" value="<?php //echo $edate; ?>" placeholder="YYYY-MM-DD" />
                 </label>
                 
                 <label> Division
