@@ -328,7 +328,6 @@ class Report extends MY_Controller {
 
 
 	$data['content_list'] = $this->RM->distributeReport($data['sdate'], $data['edate'], $division_id, $jonal_id, $college_id);
-
 	$this->load->view('report/distribute', $data);
     }
 

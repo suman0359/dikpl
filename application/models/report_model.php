@@ -122,6 +122,11 @@ class Report_model extends CI_Model {
     }
 
 
+    /*
+    * This Method is for Distribution Report 
+    * Author : Faruk & Tasfir
+    */
+
     public function distributeReport($sdate, $edate, $division_id=NULL, $jonal_id=NULL, $college_id=NULL) {
 	
 	$sql = "SELECT  di.distribute_date, c.name as college_name, di.comments "
@@ -132,17 +137,22 @@ class Report_model extends CI_Model {
 		if ($sdate!=NULL AND $edate!=NULL) {
 		    $sql .="di.distribute_date >= '$sdate' and di.distribute_date  <= '$edate'";
 		}
+
+		if ($sdate!=NULL AND $edate==NULL) {
+			$date = date("d-m-Y");
+		    $sql .="di.distribute_date >= '$sdate' and di.distribute_date  <= '$date'";
+		}
 		
-		if ($sdate==NULL || $edate) {
+		if ($sdate==NULL) {
 		    $date = date("d-m-Y");
-		    $sql .="di.distribute_date = '$date'";
+		    $sql .="di.distribute_date >= '$date' and di.distribute_date  <= '$date'";
 		}
 		
 		 if ($division_id!=NULL) {
 		    $sql .="AND do.division_id = '{$division_id}'";
 		}
 		
-	
+		
 		if ($jonal_id!=NULL) {
 		    $sql .="AND do.jonal_id = '{$jonal_id}'";
 		}
