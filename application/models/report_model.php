@@ -123,9 +123,11 @@ class Report_model extends CI_Model {
 
     public function distributeReport($sdate, $edate, $division_id=NULL, $jonal_id=NULL, $college_id=NULL) {
 	
-	$sql = "SELECT  di.distribute_date, c.name as college_name, di.comments "
+	$sql = "SELECT  di.id, u.name as user_name, di.distribute_date, c.name as college_name, t.name as teacher_name, di.comments "
 		. "FROM "
 		. "tbl_distribute as di INNER JOIN college as c ON di.college_id = c.id "
+		. "INNER JOIN user as u ON u.id=di.entryby "
+		. "LEFT JOIN teachers as t ON  t.id=di.teacher_id  "
 		. "WHERE ";
 	
 		if ($sdate!=NULL AND $edate!=NULL) {

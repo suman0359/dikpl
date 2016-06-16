@@ -115,9 +115,12 @@ $this->load->view('common/sidebar');
     	    <thead>
     		<tr>
     		    <th  style="text-align: center">#</th>
+		    <th  style="text-align: center">MPO Name</th>
     		    <th  style="text-align: center">Date</th>
     		    <th style="text-align: center">College Name </th>
+		    <th  style="text-align: center">Teacher Name</th>
 		    <th  style="text-align: center">Comments</th>
+		    <th  style="text-align: center">Action</th>
     		</tr>
     	    </thead>
     	    <tbody>
@@ -127,9 +130,12 @@ $this->load->view('common/sidebar');
 			?>
 			<tr  style="text-align: center">
 			    <td><?php echo $serialNo; ?></td>
+			    <td><?php echo $value['user_name']; ?></td>
 			    <td><?php echo $value['distribute_date']; ?></td>
 			    <td><?php echo $value['college_name']; ?></td>
+			    <td><?php echo $value['teacher_name']; ?></td>
 			    <td><?php echo $value['comments']; ?></td>
+			    <td> <div class="no-print"> <a href="<?php  echo base_url() ?>distribute/view/<?php echo $value['id']; ?>" class="btn btn-link"> view </a> </div></td>
 			</tr>
 			<?php
 			$serialNo++;
