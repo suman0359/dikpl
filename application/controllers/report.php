@@ -284,58 +284,51 @@ class Report extends MY_Controller {
     }
 
     public function distribute() {
-	if (!$this->CM->checkpermissiontype($this->module, 'distribute', $this->user_type))
-	    redirect('error/accessdeny');
 
+	$data = array();
 	$data['sdate'] = date("Y-m-d");
 	$data['edate'] = date("Y-m-d");
-	$data['did'] = 'all';
-	$data['jid'] = 'all';
-	$data['cid'] = 'all';
+	$data['division_id'] = 'all';
+	$data['jonal_id'] = 'all';
+	$data['college_id'] = 'all';
+	
 	$data['content_list'] = array();
 	$data['division_info'] = array();
-	$data['div_list'] = $this->CM->getAll('division');
-
-	if ($this->input->post()) {
-	    $data['sdate'] = $this->input->post('sdate');
-	    $data['edate'] = $this->input->post('edate');
-	    $data['did'] = $this->input->post('did');
-	    $data['jid'] = $this->input->post('jid');
-	    $data['cid'] = $this->input->post('cid');
-	}
-
-	if ($data['did'] == 'all') {
-	    $did = NULL;
-	} else {
-	    $did = $data['did'];
-	    $data['division_info'] = $this->CM->getInfo('division', $did);
-	};
-
-
-	if ($data['jid'] == 'all') {
-	    $jid = NULL;
-	} else {
-	    $jid = $data['jid'];
-	    $data['jonal_info'] = $this->CM->getInfo('jonal', $jid);
-	};
-
-	if ($data['cid'] == 'all') {
-	    $cid = NULL;
-	} else {
-	    $cid = $data['cid'];
-	    $data['college_info'] = $this->CM->getInfo('college', $cid);
-	};
-
-	// echo "<pre>";
-	// print_r($data);
-	// exit();
+	$data['division_list'] = $this->CM->getAll('division');
 	
-	$data['content_list'] = $this->RM->distributeReport($data['sdate'], $data['edate'], $cid);
+	if($this->input->post()){
+	     $data['sdate'] = $this->input->post('sdate');
+	    $data['edate'] = $this->input->post('edate');
+	    $data['division_id'] = $this->input->post('division_id');
+	    $data['jonal_id'] = $this->input->post('jonal_id');
+	    $data['college_id'] = $this->input->post('college_id');
+	}
+	
+	if ($data['division_id'] == 'all') {
+	    $division_id = NULL;
+	} else {
+	    $division_id = $data['division_id'];
+	    $data['division_info'] = $this->CM->getInfo('division', $division_id);
+	};
 
-//        echo '<pre>';
-//        print_r($data);
-//        exit();
 
+	if ($data['jonal_id'] == 'all') {
+	    $jonal_id = NULL;
+	} else {
+	    $jonal_id = $data['jonal_id'];
+	    $data['jonal_info'] = $this->CM->getInfo('jonal', $jonal_id);
+	};
+
+	if ($data['college_id'] == 'all') {
+	    $college_id = NULL;
+	} else {
+	    $college_id = $data['college_id'];
+	    $data['college_info'] = $this->CM->getInfo('college', $college_id);
+	};
+
+
+
+	$data['content_list'] = $this->RM->distributeReport($data['sdate'], $data['edate'], $division_id, $jonal_id, $college_id);
 	$this->load->view('report/distribute', $data);
     }
 
