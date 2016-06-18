@@ -158,7 +158,7 @@ $this->load->view('common/sidebar');
                                 <?php } ?>
 
                            </td>
-                            <td> <div class="no-print"> <a href="<?php echo site_url() ?>requisition/view/<?php echo $content->id; ?>" class="btn btn-link"> view </a> </div> 
+                            <td> <div class="no-print"> <a href="<?php echo base_url() ?>requisition/view/<?php echo $content->id; ?>" class="btn btn-link"> view </a> </div> 
                             </td>
                         </tr>
 

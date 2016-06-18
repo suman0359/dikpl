@@ -298,7 +298,7 @@ class Distribute  extends MY_Controller{
     
     public function view($id){
 	
-	$data['requisition_info']=$this->CM->getwhere('tbl_requisition',array('id'=>$id));
+	$data['distribution_info']=$this->CM->getwhere('tbl_distribute',array('id'=>$id));
               // echo "<pre>";
               // print_r($data['requisition_info']);
               // exit();
