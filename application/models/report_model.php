@@ -151,16 +151,21 @@ class Report_model extends CI_Model {
 		}
 		
 		 if ($division_id!=NULL) {
-		    $sql .="AND do.division_id = '{$division_id}'";
+		    $sql .="AND di.division_id = '{$division_id}'";
 		}
 		
 		
 		if ($jonal_id!=NULL) {
-		    $sql .="AND do.jonal_id = '{$jonal_id}'";
+		    $sql .="AND di.jonal_id = '{$jonal_id}'";
 		}
 		
 		 if ($college_id!=NULL) {
-		    $sql .="AND do.college_id = '{$college_id}'";
+		    $sql .="AND di.college_id = '{$college_id}'";
+		}
+
+		// User wise Data Show
+		if($this->user_type==5){
+			$sql .=" AND di.entryby='{$this->uid}'";
 		}
 		
 		$result_query = $this->db->query($sql);
@@ -168,7 +173,6 @@ class Report_model extends CI_Model {
 
 		 return $result;
 		 
-		
     }
 
     public function donation_requisition($start_date=NULL, $end_date=NULL, $division_id=NULL, $jonal_id=NULL, $district_id=NULL, $thana_id=NULL, $college_id=NULL) {

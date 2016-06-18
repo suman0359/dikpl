@@ -52,7 +52,7 @@ $this->load->view('common/sidebar');
                                 <td class="book_name"> <?php echo $book['book_name'] ?> </td>
                                 <td class="book_quantity"> <?php echo $book['quantity'] ?> </td>
                                 
-                                <td> <a href="JavaScript:void(0)" id="" class="btn btn-xs btn-success pull-right add_book_row" onclick="return add_item_row(<?php echo $book['book_id'] ?>)" item-id="<?php echo $book['book_id'] ?>" ><?php echo $book['book_id'] ?> add Test </a> </td>
+                                <td> <a href="JavaScript:void(0)" id="" class="btn btn-xs btn-success pull-right add_book_row" item-id="<?php echo $book['book_id'] ?>" ><?php echo $book['book_id'] ?> add Test </a> </td>
                             </tr>
 
                         <?php } ?>
@@ -206,6 +206,19 @@ $this->load->view('common/sidebar');
         })
         /* -------------------------------------------------------- */
 
+        /**
+        * Try to On key up check the current stock with transfer quantity
+        */
+        $("#plateVolumes").on("keyup", '.qty', function(){
+            var transfer_qty = $(this).val();
+            var qty_pid = $(this).closest("tr").children("td.book_quantity").text();
+            if(qty_pid<=transfer_qty){
+                alert("you can't add more then quantity");
+                $(this).val(qty_pid);
+            }
+        });
+        /* -------------------------------------------------------- */
+
         function get_product(id, book_name, book_quantity){
             var id = id; // Book ID
             var book_id = parseInt(id);
@@ -240,8 +253,8 @@ $this->load->view('common/sidebar');
                                                               <td><input name="pid[]" class="pid"  value=" ' + id + ' " type="hidden">' + book_name + '</td>\n\
                                                               <td>' + "code" + '</td>\n\
                                                               <td> <input name="price[]" class=" "  value="' + "rate" + '" type="hidden" > ' + "rate" + 'TK </td>\n\
-                                                               <td><input name="" class="pid"  value="" type="hidden">' + book_quantity + '</td>\n\
-                                                              <td><input type="number" name="qty[]"   id="qty" min="1" value="1" max="' + book_quantity + '" class="q_' + book_id + ' qty form-control "  onclick="toatalquantity()" /></td>\n\
+                                                               <td class="book_quantity"><input name="" class="pid"  value="" type="hidden">' + book_quantity + '</td>\n\
+                                                              <td><input type="number" name="qty[]"   id="qty" min="1" value="1" max="' + book_quantity + '" class="q_' + book_id + ' qty form-control "  /></td>\n\
                                                               </tr>');
         }
 

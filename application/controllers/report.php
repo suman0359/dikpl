@@ -297,11 +297,21 @@ class Report extends MY_Controller {
 	$data['division_list'] = $this->CM->getAll('division');
 	
 	if($this->input->post()){
-	    $data['sdate'] = $this->input->post('sdate');
-	    $data['edate'] = $this->input->post('edate');
 	    $data['division_id'] = $this->input->post('division_id');
 	    $data['jonal_id'] = $this->input->post('jonal_id');
 	    $data['college_id'] = $this->input->post('college_id');
+	}
+
+	if($this->input->post('sdate')==''){
+		$data['sdate'] = date("d-m-Y");
+	}else{
+		$data['sdate'] = $this->input->post('sdate');
+	}
+
+	if($this->input->post('edate')==''){
+		$data['edate'] = date("d-m-Y");
+	}else{
+		$data['edate'] = $this->input->post('edate');
 	}
 	
 	if ($data['division_id'] == 'all') {
@@ -327,8 +337,9 @@ class Report extends MY_Controller {
 	};
 
 
-	$data['content_list'] = $this->RM->distributeReport($data['sdate'], $data['edate'], $division_id, $jonal_id, $college_id);
-	$this->load->view('report/distribute', $data);
+
+		$data['content_list'] = $this->RM->distributeReport($data['sdate'], $data['edate'], $division_id, $jonal_id, $college_id);
+		$this->load->view('report/distribute', $data);
     }
 
     public function donation_requisition() {

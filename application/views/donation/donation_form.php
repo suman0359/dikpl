@@ -28,7 +28,7 @@ $this->load->view('common/sidebar');
 		প্রতিষ্ঠানের নাম 
 
 		<select class="form-control col-md-1" id="college_id" name="college_id" required>
-		    <option value="all"> সব প্রতিষ্ঠান   </option>
+		    <option value="all"> সিলেক্ট প্রতিষ্ঠান   </option>
 		    <?php foreach ($college_list as $value) { ?>
     		    <option <?php if ($college_id == $value['id']) echo "selected" ?> value="<?php echo $value['id']; ?>"> <?php echo $value['name']; ?></option>
 		    <?php } ?>
@@ -39,7 +39,7 @@ $this->load->view('common/sidebar');
 	    <label> 
 		শিক্ষকের নাম 
 		<select class="form-control col-md-1" id="teacher_id" name="teacher_id" required>
-		    <option value="all"> সব শিক্ষক   </option>
+		    <option value="all"> সিলেক্ট শিক্ষক   </option>
 		    <?php if ($teacher_id != "") { ?>
     		    <option selected="" value="<?php echo $teacher_id->id; ?>"><?php echo $teacher_id->name; ?></option>
 		    <?php } ?>
@@ -50,7 +50,7 @@ $this->load->view('common/sidebar');
 	    <label> 
 		বিষয়ের নাম 
 		<select class="form-control col-md-1" id="department_id" name="department_id" required>
-		    <option value="all"> সব বিষয়   </option>
+		    <option value="all"> সিলেক্ট বিষয়   </option>
 		    <?php if ($department_id != "") { ?>
     		    <option selected="" value="<?php echo $department_id->id; ?>"><?php echo $department_id->name; ?></option>
 		    <?php } ?>
@@ -61,7 +61,7 @@ $this->load->view('common/sidebar');
 	    <label> 
 		শ্রেনীর নাম 
 		<select class="form-control col-md-1" id="class_id" name="class_id" required>
-		    <option value="all"> সব শ্রেণী  </option>
+		    <option value="all"> সিলেক্ট শ্রেণী  </option>
 		    <?php foreach ($class_list as $value) { ?>
     		    <option <?php if ($class_id == $value['id']) echo 'selected' ?> value="<?php echo $value['id']; ?>"> <?php echo $value['name']; ?></option>
 		    <?php } ?>
@@ -85,7 +85,7 @@ $this->load->view('common/sidebar');
 	    <label> 
 		বইয়ের নাম 
 		<select class="form-control col-md-1" id="book_id" name="book_id" required>
-		    <option value="all"> সব বই  </option>
+		    <option value="all"> সিলেক্ট বই  </option>
 		    <?php if ($book_id != "") { ?>
     		    <option selected="" value="<?php echo $book_id->id; ?>"><?php echo $book_id->book_name; ?></option>
 		    <?php } ?>
@@ -106,6 +106,11 @@ $this->load->view('common/sidebar');
 
     <script>
         $(document).ready(function () {
+            // Select Search Option     
+            $("#college_id").select2();
+            $("#teacher_id").select2();
+
+            /* ---------------------------------------------------------- */
             $(".main-mid-area").on('change', '#college_id', function () {
                 var college_id = $(this).val();
                 console.log(college_id);

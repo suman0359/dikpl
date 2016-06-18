@@ -33,14 +33,14 @@ $this->load->view('common/sidebar');
 	    <div class="col-md-2 col-sm-3 col-xs-4">
 		<div class="form-group">
 		    <label for="Start Date" class="control-label">Start Date</label>
-		    <input type="text" class="datepicker form-control" id="sdate" name="sdate" placeholder="dd-mm-yyyy"   />
+		    <input type="text" class="datepicker form-control" id="sdate" name="sdate" placeholder="dd-mm-yyyy" value="<?php echo $sdate; ?>"  />
 		</div>
 	    </div>
 
 	    <div class="col-md-2 col-sm-3 col-xs-4">
 		<div class="form-group">
 		    <label for="End Date" class="control-label">End Date</label>
-		    <input type="text" class="datepicker form-control" id="edate" name="edate" placeholder="dd-mm-yyyy"  />
+		    <input type="text" class="datepicker form-control" id="edate" name="edate" placeholder="dd-mm-yyyy" value="<?php echo $edate; ?>" />
 		</div>
 	    </div>
 

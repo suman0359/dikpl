@@ -33,7 +33,7 @@ class Donation extends MY_Controller {
 	$this->load->library('form_validation');
 	$this->form_validation->set_rules('college_id', 'class_id', 'money_amount', 'required');
 	if ($this->form_validation->run() == FALSE) {
-	    $this->load->view('report/donation', $data);
+	    $this->load->view('donation/donation_form', $data);
 	} else {
 	    $datas = array();
 	    $datas['college_id'] = $this->input->post('college_id');
