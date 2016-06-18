@@ -38,11 +38,11 @@ $this->load->view('common/sidebar');
 		    <label> যাতায়াত  খরচ </label>
 		    <?php
 		    $form_input = array(
-			'name' => 'journey_cost',
-			'class' => 'form-control ',
-//                'value' => $name, 
-			'required' => 'required',
-			'placeholder' => 'যাতায়াত  খরচ'
+			'name' 			=> 'journey_cost',
+			'class' 		=> 'form-control',
+            'value' 		=> $journey_cost, 
+			'required' 		=> 'required',
+			'placeholder' 	=> 'যাতায়াত  খরচ'
 		    );
 		    echo form_input($form_input);
 		    ?>
@@ -54,11 +54,11 @@ $this->load->view('common/sidebar');
 		    <label for="">মোবাইল খরচ</label>
 		    <?php
 		    $form_input = array(
-			'name' => 'mobile_cost',
-			'class' => 'form-control ',
-//                'value' => $name, 
-			'required' => 'required',
-			'placeholder' => 'মোবাইল খরচ'
+			'name' 			=> 'mobile_cost',
+			'class' 		=> 'form-control ',
+            'value' 		=> $mobile_cost, 
+			'required' 		=> 'required',
+			'placeholder' 	=> 'মোবাইল খরচ'
 		    );
 		    echo form_input($form_input);
 		    ?>
@@ -69,12 +69,12 @@ $this->load->view('common/sidebar');
 		<div class="form-group">
 		    <label for="">আপ্যয়ন খরচ </label>
 		    <?php
-		    $form_input = array(
-			'name' => 'entertainment_cost',
-			'class' => 'form-control ',
-//                'value' => $name, 
-			'required' => 'required',
-			'placeholder' => 'আপ্যয়ন খরচ '
+		    $form_input 	= array(
+			'name' 			=> 'entertainment_cost',
+			'class' 		=> 'form-control ',
+            'value' 		=> $entertainment_cost, 
+			'required' 		=> 'required',
+			'placeholder' 	=> 'আপ্যয়ন খরচ '
 		    );
 		    echo form_input($form_input);
 		    ?>
@@ -85,12 +85,12 @@ $this->load->view('common/sidebar');
 		<div class="form-group">
 		    <label for="">প্যাকেট উত্তোলন </label>
 		    <?php
-		    $form_input = array(
-			'name' => 'packet_lift',
-			'class' => 'form-control ',
-//                'value' => $name, 
-			'required' => 'required',
-			'placeholder' => 'প্যাকেট উত্তোলন ',
+		    $form_input 	= array(
+			'name' 			=> 'packet_lift',
+			'class' 		=> 'form-control ',
+            'value' 		=> $packet_lift, 
+			'required' 		=> 'required',
+			'placeholder' 	=> 'প্যাকেট উত্তোলন ',
 		    );
 		    echo form_input($form_input);
 		    ?>
@@ -101,12 +101,12 @@ $this->load->view('common/sidebar');
 		<div class="form-group">
 		    <label for="">অন্যান্য খরচ </label>
 		    <?php
-		    $form_input = array(
-			'name' => 'other_cost',
-			'class' => 'form-control ',
-//                'value' => $name, 
-			'required' => 'required',
-			'placeholder' => 'অন্যান্য খরচ '
+		    $form_input 	= array(
+			'name' 			=> 'others_cost',
+			'class' 		=> 'form-control ',
+            'value' 		=> $others_cost, 
+			'required' 		=> 'required',
+			'placeholder' 	=> 'অন্যান্য খরচ '
 		    );
 		    echo form_input($form_input);
 		    ?>
@@ -117,10 +117,10 @@ $this->load->view('common/sidebar');
 		<div class="form-group">
 		    <label for="">মোট</label>
 		    <?php
-		    $form_input = array(
-			'name' => 'total',
-			'class' => 'form-control ',
-//                'value' => $name, 
+		    $form_input 	= array(
+			'name' 			=> 'total_cost',
+			'class' 		=> 'form-control ',
+            'value' 		=> $total_cost, 
 		    );
 		    echo form_input($form_input);
 		    ?>
@@ -146,12 +146,12 @@ $this->load->view('common/sidebar');
 		<div class="form-group">
 		    <label>  যাত্রা শুরুর কি: মি: </label>
 		    <?php
-		    $form_input = array(
-			'name' => 'start_journey',
-			'class' => 'form-control ',
-//                'value' => $name, 
-			'required' => 'required',
-			'placeholder' => ' যাত্রা শুরু কি: মি:'
+		    $form_input 	= array(
+			'name' 			=> 'start_journey_km',
+			'class' 		=> 'form-control ',
+            'value' 		=> $start_journey_km, 
+			'required' 		=> 'required',
+			'placeholder' 	=> ' যাত্রা শুরু কি: মি:'
 		    );
 		    echo form_input($form_input);
 		    ?>
@@ -162,12 +162,12 @@ $this->load->view('common/sidebar');
 		<div class="form-group">
 		    <label for="">যাত্রা শেষের কি: মি: </label>
 		    <?php
-		    $form_input = array(
-			'name' => 'end_journey',
-			'class' => 'form-control ',
-//                'value' => $name, 
-			'required' => 'required',
-			'placeholder' => 'যাত্রা শেষের কি: মি: '
+		    $form_input 	= array(
+			'name' 			=> 'end_journey_km',
+			'class' 		=> 'form-control ',
+            'value' 		=> $end_journey_km, 
+			'required' 		=> 'required',
+			'placeholder' 	=> 'যাত্রা শেষের কি: মি: '
 		    );
 		    echo form_input($form_input);
 		    ?>
@@ -178,12 +178,12 @@ $this->load->view('common/sidebar');
 		<div class="form-group">
 		    <label for="">মোট ব্যবহত কি: মি: </label>
 		    <?php
-		    $form_input = array(
-			'name' => 'total_journey_time',
-			'class' => 'form-control ',
-//                'value' => $name, 
-			'required' => 'required',
-			'placeholder' => 'মোট ব্যবহত কি: মি: '
+		    $form_input 	= array(
+			'name' 			=> 'total_journey_km',
+			'class' 		=> 'form-control ',
+            'value' 		=> $total_journey_km, 
+			'required' 		=> 'required',
+			'placeholder' 	=> 'মোট ব্যবহত কি: মি: '
 		    );
 		    echo form_input($form_input);
 		    ?>
@@ -194,12 +194,12 @@ $this->load->view('common/sidebar');
 		<div class="form-group">
 		    <label for="">ব্যক্তিগত ব্যবহার</label>
 		    <?php
-		    $form_input = array(
-			'name' => 'personal_use',
-			'class' => 'form-control ',
-//                'value' => $name, 
-			'required' => 'required',
-			'placeholder' => 'ব্যক্তিগত ব্যবহার',
+		    $form_input 	= array(
+			'name' 			=> 'personal_use_km',
+			'class' 		=> 'form-control ',
+            'value' 		=> $personal_use_km, 
+			'required' 		=> 'required',
+			'placeholder' 	=> 'ব্যক্তিগত ব্যবহার',
 		    );
 		    echo form_input($form_input);
 		    ?>
@@ -210,12 +210,12 @@ $this->load->view('common/sidebar');
 		<div class="form-group">
 		    <label for="">অফিস  কাজে ব্যবহার</label>
 		    <?php
-		    $form_input = array(
-			'name' => 'office_work',
-			'class' => 'form-control ',
-//                'value' => $name, 
-			'required' => 'required',
-			'placeholder' => 'অফিসের কাজে ব্যবহার'
+		    $form_input 	= array(
+			'name' 			=> 'office_use_km',
+			'class' 		=> 'form-control ',
+            'value' 		=> $office_use_km, 
+			'required' 		=> 'required',
+			'placeholder' 	=> 'অফিসের কাজে ব্যবহার'
 		    );
 		    echo form_input($form_input);
 		    ?>
@@ -226,12 +226,12 @@ $this->load->view('common/sidebar');
 		<div class="form-group">
 		    <label for="">কি: মি: রেট </label>
 		    <?php
-		    $form_input = array(
-			'name' => 'kilomitter_rate',
-			'class' => 'form-control ',
-//                'value' => $name, 
-			'required' => 'required',
-			'placeholder' => 'কি: মি: রেট '
+		    $form_input 	= array(
+			'name' 			=> 'kilomitter_rate',
+			'class' 		=> 'form-control ',
+            'value' 		=> $kilomitter_rate, 
+			'required' 		=> 'required',
+			'placeholder' 	=> 'কি: মি: রেট '
 		    );
 		    echo form_input($form_input);
 		    ?>
@@ -247,13 +247,13 @@ $this->load->view('common/sidebar');
 
 		    <label for="">তারিখ </label>
 		    <?php
-		    $form_input = array(
-			'name' => 'date',
-			'type' => 'text',
-			'class' => 'datepicker form-control ',
-//                'value' => $name, 
-			'required' => 'required',
-			'placeholder' => 'yyyy-mm-dd'
+		    $form_input 	= array(
+			'name' 			=> 'journey_date',
+			'type' 			=> 'text',
+			'class' 		=> 'datepicker form-control ',
+            'value' 		=> $journey_date, 
+			'required' 		=> 'required',
+			'placeholder' 	=> 'yyyy-mm-dd'
 		    );
 		    echo form_input($form_input);
 		    ?>
@@ -264,12 +264,12 @@ $this->load->view('common/sidebar');
 		<div class="form-group">
 		    <label for="">ব্যবহত কি: মি: </label>
 		    <?php
-		    $form_input = array(
-			'name' => 'use_kilomitter',
-			'class' => 'form-control ',
-//                'value' => $name, 
-			'required' => 'required',
-			'placeholder' => 'ব্যবহত কি: মি: '
+		    $form_input 	= array(
+			'name' 			=> 'total_journey_km',
+			'class' 		=> 'form-control ',
+            'value' 		=> $total_journey_km, 
+			'required' 		=> 'required',
+			'placeholder' 	=> 'ব্যবহত কি: মি: '
 		    );
 		    echo form_input($form_input);
 		    ?>
@@ -280,12 +280,12 @@ $this->load->view('common/sidebar');
 		<div class="form-group">
 		    <label for="">যাতায়াত  খরচ </label>
 		    <?php
-		    $form_input = array(
-			'name' => 'journey_cost',
-			'class' => 'form-control ',
-//                'value' => $name, 
-			'required' => 'required',
-			'placeholder' => 'যাতায়াত  খরচ ',
+		    $form_input 	= array(
+			'name' 			=> 'journey_cost',
+			'class' 		=> 'form-control ',
+            'value' 		=> $journey_cost, 
+			'required' 		=> 'required',
+			'placeholder' 	=> 'যাতায়াত  খরচ ',
 		    );
 		    echo form_input($form_input);
 		    ?>
