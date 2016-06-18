@@ -80,6 +80,7 @@ class Maexecutive extends CI_Controller
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('name','Name', 'required');
+        $this->form_validation->set_rules('email','Email Address', 'required|callback_email_check');
         $this->form_validation->set_rules('password','Password', 'required');
         if ($this->form_validation->run() == FALSE)
         {
@@ -358,4 +359,16 @@ class Maexecutive extends CI_Controller
         
              redirect('user'); 
         }
+
+    function email_check($email){
+        $this->load->model('userauth_model');
+
+        $result = $this->userauth_model->check_email($email);
+        if ( ! $result)
+        {
+            $this->form_validation->set_message('email_check', 'Email is already used by another user. Please choose another email address.');
+        }
+                
+        return $result;
+    }
 }   
