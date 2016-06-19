@@ -169,37 +169,19 @@ class Teachers extends CI_Controller {
 
         $search = $this->input->post('search');
 
-        //$data['college_list']=$this->CM->getwhere('college', array('name' => $search), $order = NULL);
-        $data['teachers_list']=$this->CM->getTotalALL('teachers');
-        //$data['thana_list']=$this->CM->getTotalALL('thana');
+        $this->load->model('teacher_model');
 
-        $no_rows= $this->CM->getTotalRow('college');
-        $this->load->library('pagination');
-        $config['base_url'] = base_url().'college/index/';
-       
-        $config['total_rows'] = $no_rows ;
-        $config['per_page'] = 15;
-        $config['full_tag_open'] = '<div class=" text-center"><ul class=" list-inline list-unstyled " id="listpagiction">';
-        $config['full_tag_close'] = '</ul></div>';
-        $config['prev_link'] = '&lt; Prev';
-        $config['prev_tag_open'] = '<li class="link_pagination">';
-        $config['prev_tag_close'] = '</li>';
-        $config['next_link'] = 'Next &gt;';
-        $config['next_tag_open'] = '<li class="link_pagination">';
-        $config['next_tag_close'] = '</li>';
-        $config['cur_tag_open'] = '<li class="active_pagiction"><a href="#">';
-        $config['cur_tag_close'] = '</a></li>';
-        $config['num_tag_open'] = '<li class="link_pagination">';
-        $config['num_tag_close'] = '</li>';
-        $config['last_link'] = 'Last';
-        $config['first_link'] = 'First';
-        $this->pagination->initialize($config);     
-        $table = 'teachers';
-        $data['teachers_list']=$this->CM->search($table, $search);
+        if($this->user_type==5) {
+            $thana_id_array = $this->teacher_model->get_thana_array($this->uid);
+        }else{
+            $thana_id_array=NULL;
+        }
 
-        // echo "<pre>";
-        // print_r($data['college_list']);
-        // exit();
+        $college_id_array=$this->teacher_model->get_college_array($thana_id_array);
+            
+        $data['teachers_list']=$this->teacher_model->search($college_id_array, $search);
+
+        $data['search'] = $search;
         
         $this->load->view('teachers/search', $data);
     }

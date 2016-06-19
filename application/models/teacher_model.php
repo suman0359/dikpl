@@ -84,4 +84,22 @@ class Teacher_model extends CI_Model{
 
         return $result;
     }
+
+    public function search($college_id_array, $search){
+        $this->db->select('teachers.id as teacher_id, teachers.name as teacher_name, teachers.designation, teachers.phone, department.name as department_name, college.name as college_name');
+        $this->db->from('teachers');
+
+        $this->db->like('teachers.name', trim($search));
+        $this->db->order_by('teachers.id', 'DESC');
+
+        if($this->user_type==5 && $college_id_array!=NULL){
+            $this->db->where_in('teachers.college_id', $college_id_array);
+        }
+
+        $this->db->join('department', 'department.id=teachers.dep_id', 'left');
+        $this->db->join('college', 'college.id=teachers.college_id', 'left');
+        // $this->db->join('user', 'user.id=teachers.executive_id', 'left');
+
+        return $this->db->get()->result_array();
+    }
 }
