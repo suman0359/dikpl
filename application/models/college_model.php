@@ -58,4 +58,29 @@ class College_model extends CI_Model{
 
         return $result;
     }
+
+    public function search($thana_id_array, $search){
+
+        $this->db->select('college.id as college_id, college.name as college_name, district.name as district_name, thana.name as thana_name, user.name as mpo_name');
+        $this->db->from('college');
+
+        $this->db->like('college.name', $search);
+        // $this->db->or_like('district.name', $search);
+        // $this->db->or_like('thana.name', $search);
+        // $this->db->or_like('user.name', $search);
+
+        
+        $this->db->order_by('college.id', 'DESC');
+
+        if($this->user_type==5 && $thana_id_array!=NULL){
+            $this->db->where_in('college.thana_id', $thana_id_array);
+        }
+
+        $this->db->join('district', 'district.id=college.district_id', 'left');
+        $this->db->join('thana', 'thana.id=college.thana_id', 'left');
+        $this->db->join('user', 'user.id=college.executive_id', 'left');
+
+        return $this->db->get()->result_array();
+
+    }
 }

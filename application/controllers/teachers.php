@@ -23,10 +23,26 @@ class Teachers extends CI_Controller {
     public function index(){
         if (!$this->CM->checkpermissiontype($this->module, 'index', $this->user_type))
             redirect('error/accessdeny');
+        $this->load->model('teacher_model');
 
-        $data['teachers_list'] = $this->CM->getTotalALL('teachers');
+        if($this->user_type==5) {
+            $thana_id_array = $this->teacher_model->get_thana_array($this->uid);
+        }else{
+            $thana_id_array=NULL;
+        }
 
-        $no_rows = $this->CM->getTotalRow('teachers');
+        $college_id_array=$this->teacher_model->get_college_array($thana_id_array);
+        
+
+        if($this->user_type==5){
+            $no_rows = $this->teacher_model->getTotalRow($college_id_array);
+        }else{
+            $no_rows= $this->CM->getTotalRow('teachers');
+        }
+
+        // $data['teachers_list'] = $this->CM->getTotalALL('teachers');
+
+
         $this->load->library('pagination');
         $config['base_url'] = base_url() . 'teachers/index/';
 
@@ -48,8 +64,7 @@ class Teachers extends CI_Controller {
         $config['first_link'] = 'First';
         $this->pagination->initialize($config);
 
-        $data['teachers_list'] = $this->CM->getTotalALL('teachers', $this->uri->segment(3), $config['per_page']);
-
+        $data['teachers_list']=$this->teacher_model->get_teacher_all_list_by_college($this->uri->segment(3), $config['per_page'], $college_id_array);
 
         $this->load->view('teachers/index', $data);
     }
