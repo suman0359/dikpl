@@ -67,11 +67,11 @@ $user_type = $this->session->userdata('user_type');
         </li>
 
 
-        <li class="<?php if ($c == 'distribute') echo "active" ?>">
-            <a href="<?php echo base_url(); ?>distribute/add">
+        <!-- <li class="<?php //if ($c == 'distribute') echo "active" ?>">
+            <a href="<?php //echo base_url(); ?>distribute/add">
                 <i class="fa  fa-folder-open-o"></i> <span> Distribute Books  </span>
             </a>
-        </li>
+        </li> -->
     <?php } ?>
 
     <li class="<?php if ($c == 'donation') echo "active" ?>">

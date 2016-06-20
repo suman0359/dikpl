@@ -33,14 +33,14 @@ $this->load->view('common/sidebar');
 	    <div class="col-md-3 col-sm-3 col-xs-4">
 		<div class="form-group">
 		    <label for="Start Date" class="control-label">Start Date</label>
-		    <input type="text" class="datepicker form-control" id="sdate" name="sdate" placeholder="yyyy-mm-dd"   />
+		    <input type="text" class="datepicker form-control" id="sdate" name="sdate" placeholder="dd-mm-yyyy"   />
 		</div>
 	    </div>
 
 	    <div class="col-md-3 col-sm-3 col-xs-4">
 		<div class="form-group">
 		    <label for="End Date" class="control-label">End Date</label>
-		    <input type="text" class="datepicker form-control" id="edate" name="edate" placeholder="yyyy-mm-dd"  />
+		    <input type="text" class="datepicker form-control" id="edate" name="edate" placeholder="dd-mm-yyyy"  />
 		</div>
 	    </div>
 
@@ -130,62 +130,65 @@ $this->load->view('common/sidebar');
 	<?php if (!empty($content_list)) { ?> 
     	<div class="clearfix"></div>
     	<br><br>
-    	<table class="table table-bordered table-hover">
-    	    <thead>
-    		<tr>
-    		    <th  style="text-align: center">#</th>
-    		    <th  style="text-align: center">তারিখ</th>
-    		    <th style="text-align: center">এমপিও এর নাম </th>
-    		    <th  style="text-align: center">প্রতিষ্ঠানের নাম</th>
-    		    <th  style="text-align: center">শিক্ষকের নাম</th>
-    		    <th  style="text-align: center">বিষয়ের নাম</th>
-    		    <th  style="text-align: center">শ্রেনীর নাম</th>
-    		    <th  style="text-align: center">ছাত্র ছাত্রীর সংখ্যা</th>
-    		    <th  style="text-align: center">সম্ভাব্য বই চলবে</th>
-    		    <th  style="text-align: center">বইয়ের নাম</th>
-    		    <th  style="text-align: center">টাকার পরিমান</th>
-		    <th  style="text-align: center">Status</th>
-    		    <th  style="text-align: center">Action</th>
 
+    	<table class="table table-bordered table-hover ">
 
-    		</tr>
-    	    </thead>
-    	    <tbody>
-		    <?php
-		    $serialNo = 1;
-		    foreach ($content_list as $value) {
-			?>
-			<tr  style="text-align: center">
-			    <td><?php echo $serialNo; ?></td>
-			    <td><?php echo $value['date']; ?></td>
-			    <td><?php echo $value['user_name']; ?></td>
-			    <td><?php echo $value['college_name']; ?></td>
-			    <td><?php echo $value['teacher_name']; ?></td>
-			    <td><?php echo $value['department_name']; ?></td>
-			    <td><?php echo $value['class_name']; ?></td>
-			    <td><?php echo $value['student_quantity']; ?></td>
-			    <td><?php echo $value['possible_book']; ?></td>
-			    <td><?php echo $value['book_name']; ?></td>
-			    <td><?php echo $value['money_amount']; ?></td>
-			    <td>
-				<?php if($value['requisition_status']== 0) echo '<span class="label label-warning">Pending</span>';?>
-				<?php if($value['requisition_status']== 1) echo '<span class="label label-success">Accepted</span>';?>
-				<?php if($value['requisition_status']== 2) echo '<span class="label label-danger">Decline</span>';?>
-				</td>
-				
-			    <td>
-				<a href="<?php echo base_url();?>report/view_details/<?php echo $value['id']?>" class="btn btn-primary btn-flat"><i class="fa fa-plus-square gap"></i> View All</a>
-<!--				<a href="#" class="btn btn-primary btn-flat"><i class="fa fa-pencil-square-o" ></i> Accept Req.</a>
-				<a href="#" class="btn btn-primary btn-flat"><i class="fa fa-ban" aria-hidden="true"></i>  Decline Req.</a>-->
-			    </td>
-			</tr>
-			<?php
-			$serialNo++;
-		    }
-		    ?>
-    	    </tbody>
+                <tr>
+                    <th style="text-align: center;">#</th>
+                    <th style="text-align: center;">তারিখ </th>
+                    <?php if ($user_role == 1) { ?>
+                        <th style="text-align: center">এমপিও এর নাম</th>
+                    <?php } ?>
+                    <th style="text-align: center">যাতায়াত খরচ</th>
+                    <th style="text-align: center">মোবাইল খরচ</th>
+                    <th style="text-align: center">আপ্যয়ন খরচ</th>
+                    <th style="text-align: center">প্যাকেট উত্তোলন</th>
+                    <th style="text-align: center">অন্যান্য খরচ</th>
+                    
+                    <th style="text-align: center;">Expense Type</th>
+                    <th  style="background: #ccc;" style="text-align: center">যাত্রা শুরুর কি: মি:</th>
+                    <th  style="background: #ccc;" style="text-align: center;">যাত্রা শেষের কি: মি:</th>
+                    <th  style="background: #ccc;" style="text-align: center;">মোট ব্যবহত কি: মি:</th>
+                    <th  style="background: #ccc;" style="text-align: center;">ব্যক্তিগত ব্যবহার</th>
+                    <th  style="background: #ccc;" style="text-align: center;">অফিস কাজে ব্যবহার</th>
+                    <th  style="background: #ccc;" style="text-align: center;">কি: মি: রেট</th>
+                    <th style="text-align: center;">মোট</th>
+                </tr>
 
-    	</table>
+                <tbody>
+                    <?php
+                    $serialNo = 1;
+                    foreach ($content_list as $value) {
+                        ?>
+                        <tr align="center">
+                            <td><?php echo $serialNo; ?></td>
+                            <td><?php echo $value['date']; ?></td>
+                            <?php if ($user_role == 1) { ?>
+                                <td><?php echo $value['name']; ?></td>
+                            <?php } ?>
+                            <td><?php echo $value['journey_cost']; ?></td>
+                            <td><?php echo $value['mobile_cost']; ?></td>
+                            <td><?php echo $value['entertainment_cost']; ?></td>
+                            <td><?php echo $value['packet_lift']; ?></td>
+                            <td><?php echo $value['others_cost']; ?></td>
+                            
+                            <td <?php if($value['expense_type']==1) echo "style='background: #ccc;'"; ?> ><?php if($value['expense_type']==1) echo 'মোটর সাইকেল ছাড়া'; if($value['expense_type']==2) echo 'কোম্পানির মোটর সাইকেল'; if($value['expense_type']==3) echo 'নিজের মোটর সাইকেল'; ?></td>
+                            <td style="background: #ccc;"><?php echo $value['start_journey_km']; ?></td>
+                            <td style="background: #ccc;"><?php echo $value['end_journey_km']; ?></td>
+                            <td style="background: #ccc;"><?php echo $value['total_journey_km']; ?></td>
+                            <td style="background: #ccc;"><?php echo $value['personal_use_km']; ?></td>
+                            <td style="background: #ccc;"><?php echo $value['office_use_km']; ?></td>
+                            <td style="background: #ccc;"><?php echo $value['kilomitter_rate']; ?></td>
+                            <td><?php echo $value['total_cost']; ?></td>
+                        </tr>
+                        <?php
+                        $serialNo++;
+                    }
+                    ?>
+                </tbody>
+            </table> 
+
+    	
 	<?php } else { ?>
     	<br/> 
     	<br/> 
@@ -206,7 +209,7 @@ $this->load->view('common/sidebar');
             $('.datepicker').datepicker({
                 KeyboardNavigation: false,
                 todayHighlight: true,
-                format: 'yyyy-mm-dd',
+                format: 'dd-mm-yyyy',
                 autoclose: true
 
             });

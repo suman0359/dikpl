@@ -84,7 +84,7 @@ class Expense extends MY_Controller{
 
 			// $data['journey_cost'] 		= $this->input->post('journey_cost2');
 
-			$data['date']				= date('m-d-Y');
+			$data['date']				= date('d-m-Y');
 			$data['entry_by']			= $this->uid;
 
 			

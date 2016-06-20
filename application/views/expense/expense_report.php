@@ -22,89 +22,89 @@ $this->load->view('common/sidebar');
 
 
     <div class="col-md-12 main-mid-area">
-	<form action="<?php echo base_url() . "report/search_distribution_report/"; ?>" method="POST" >
-	    <div class="col-md-8">
-		<div class="search_bar">
-		    <div class="form-group">
-			<input type="search" name="search" placeholder="Search MPO name" class="form-control">
-		    </div>
-		</div>
-	    </div>
+        <form action="<?php echo base_url() . "report/search_distribution_report/"; ?>" method="POST" >
+            <div class="col-md-8">
+                <div class="search_bar">
+                    <div class="form-group">
+                        <input type="search" name="search" placeholder="Search MPO name" class="form-control">
+                    </div>
+                </div>
+            </div>
 
-	    <div class="col-md-4">
-		<div class="form-group">
-		    <input type="submit" value="Search" class="btn btn-primary">
-<!--		    <div class="pull-right"> 
-			<a href="<?php echo base_url() ?>report/requisition_report" class="btn btn-info pull-right" > <i class="fa fa-plus-square gap">  </i> View All</a> 
-		    </div>-->
-		    <div class="clearfix"></div>
-		</div>
-	    </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input type="submit" value="Search" class="btn btn-primary">
+                    <!--		    <div class="pull-right"> 
+                                            <a href="<?php echo base_url() ?>report/requisition_report" class="btn btn-info pull-right" > <i class="fa fa-plus-square gap">  </i> View All</a> 
+                                        </div>-->
+                    <div class="clearfix"></div>
+                </div>
+            </div>
 
-	</form>
+        </form>
 
         <div class="col-md-12">
 
 
             <table class="table table-bordered table-hover ">
 
-		<tr>
-		    <th style="text-align: center;">#</th>
-		    <th style="text-align: center;">তারিখ </th>
-		    <?php if ($user_role == 1) { ?>
-    		    <th style="text-align: center">যাতায়াত খরচ</th>
-		    <?php } ?>
-		    <th style="text-align: center">যাতায়াত খরচ</th>
-		    <th style="text-align: center">মোবাইল খরচ</th>
-		    <th style="text-align: center">আপ্যয়ন খরচ</th>
-		    <th style="text-align: center">প্যাকেট উত্তোলন</th>
-    		    <th style="text-align: center">অন্যান্য খরচ</th>
-		    <th style="text-align: center;">মোট</th>
-		    <th style="text-align: center;">Expense Type</th>
-		    <th style="text-align: center">যাত্রা শুরুর কি: মি:</th>
-		    <th style="text-align: center;">যাত্রা শেষের কি: মি:</th>
-		    <th style="text-align: center;">মোট ব্যবহত কি: মি:</th>
-		    <th style="text-align: center;">ব্যক্তিগত ব্যবহার</th>
-		    <th style="text-align: center;">অফিস কাজে ব্যবহার</th>
-		    <th style="text-align: center;">কি: মি: রেট</th>
-		</tr>
+                <tr>
+                    <th style="text-align: center;">#</th>
+                    <th style="text-align: center;">তারিখ </th>
+                    <?php if ($user_role == 1) { ?>
+                        <th style="text-align: center">যাতায়াত খরচ</th>
+                    <?php } ?>
+                    <th style="text-align: center">যাতায়াত খরচ</th>
+                    <th style="text-align: center">মোবাইল খরচ</th>
+                    <th style="text-align: center">আপ্যয়ন খরচ</th>
+                    <th style="text-align: center">প্যাকেট উত্তোলন</th>
+                    <th style="text-align: center">অন্যান্য খরচ</th>
+                    <th style="text-align: center;">মোট</th>
+                    <th style="text-align: center;">Expense Type</th>
+                    <th style="text-align: center">যাত্রা শুরুর কি: মি:</th>
+                    <th style="text-align: center;">যাত্রা শেষের কি: মি:</th>
+                    <th style="text-align: center;">মোট ব্যবহত কি: মি:</th>
+                    <th style="text-align: center;">ব্যক্তিগত ব্যবহার</th>
+                    <th style="text-align: center;">অফিস কাজে ব্যবহার</th>
+                    <th style="text-align: center;">কি: মি: রেট</th>
+                </tr>
 
-		<tbody>
-		    <?php
-		    $serialNo = 1;
-		    foreach ($expense_list as $value) {
-			?>
-    		    <tr align="center">
-    			<td><?php echo $serialNo; ?></td>
-    			<td><?php echo $value['date']; ?></td>
-    <?php if ($user_role == 1) { ?>
-				<td><?php echo $value['entry_by']; ?></td>
-    <?php } ?>
-    			<td><?php echo $value['journey_cost']; ?></td>
-    			<td><?php echo $value['mobile_cost']; ?></td>
-    			<td><?php echo $value['entertainment_cost']; ?></td>
-    			<td><?php echo $value['packet_lift']; ?></td>
-    			<td><?php echo $value['others_cost']; ?></td>
-    			<td><?php echo $value['total_cost']; ?></td>
-    			<td><?php echo $value['expense_type']; ?></td>
-    			<td><?php echo $value['start_journey_km']; ?></td>
-    			<td><?php echo $value['end_journey_km']; ?></td>
-				<td><?php echo $value['total_journey_km']; ?></td>
-				<td><?php echo $value['personal_use_km']; ?></td>
-				<td><?php echo $value['office_use_km']; ?></td>
-				<td><?php echo $value['kilomitter_rate']; ?></td>
-    			
-    		    </tr>
-			<?php
-			$serialNo++;
-		    }
-		    ?>
-		</tbody>
+                <tbody>
+                    <?php
+                    $serialNo = 1;
+                    foreach ($expense_list as $value) {
+                        ?>
+                        <tr align="center">
+                            <td><?php echo $serialNo; ?></td>
+                            <td><?php echo $value['date']; ?></td>
+                            <?php if ($user_role == 1) { ?>
+                                <td><?php echo $value['entry_by']; ?></td>
+                            <?php } ?>
+                            <td><?php echo $value['journey_cost']; ?></td>
+                            <td><?php echo $value['mobile_cost']; ?></td>
+                            <td><?php echo $value['entertainment_cost']; ?></td>
+                            <td><?php echo $value['packet_lift']; ?></td>
+                            <td><?php echo $value['others_cost']; ?></td>
+                            <td><?php echo $value['total_cost']; ?></td>
+                            <td><?php echo $value['expense_type']; ?></td>
+                            <td><?php echo $value['start_journey_km']; ?></td>
+                            <td><?php echo $value['end_journey_km']; ?></td>
+                            <td><?php echo $value['total_journey_km']; ?></td>
+                            <td><?php echo $value['personal_use_km']; ?></td>
+                            <td><?php echo $value['office_use_km']; ?></td>
+                            <td><?php echo $value['kilomitter_rate']; ?></td>
+
+                        </tr>
+                        <?php
+                        $serialNo++;
+                    }
+                    ?>
+                </tbody>
             </table> 
         </div>
 
     </div>   
 
-    
+
     <!-- End  Working area --> 
-<?php $this->load->view('common/footer') ?>
+    <?php $this->load->view('common/footer') ?>
