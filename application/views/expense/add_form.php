@@ -34,20 +34,20 @@ $this->load->view('common/sidebar');
 
 	<div class="row" id="without_motorbike">
 	    <div class="col-md-3 col-sm-3">
-		<div class="form-group">
-		    <label> যাতায়াত  খরচ </label>
-		    <?php
-		    $form_input = array(
-			'name' 			=> 'journey_cost',
-			'id' 			=> 'journey_cost',
-			'class' 		=> 'form-control',
-            'value' 		=> $journey_cost, 
-			'required' 		=> 'required',
-			'placeholder' 	=> 'যাতায়াত  খরচ'
-		    );
-		    echo form_input($form_input);
-		    ?>
-		</div>
+			<div class="form-group">
+			    <label> যাতায়াত  খরচ </label>
+			    <?php
+			    $form_input = array(
+				'name' 			=> 'journey_cost',
+				'id' 			=> 'journey_cost',
+				'class' 		=> 'form-control',
+	            'value' 		=> $journey_cost, 
+				'required' 		=> 'required',
+				'placeholder' 	=> 'যাতায়াত  খরচ'
+			    );
+			    echo form_input($form_input);
+			    ?>
+			</div>
 	    </div>
 
 	    <div class="col-md-3 col-sm-3">
@@ -157,7 +157,6 @@ $this->load->view('common/sidebar');
 			'id' 			=> 'start_journey_km',
 			'class' 		=> 'form-control ',
             'value' 		=> $start_journey_km, 
-			'required' 		=> 'required',
 			'placeholder' 	=> ' যাত্রা শুরু কি: মি:'
 		    );
 		    echo form_input($form_input);
@@ -174,7 +173,6 @@ $this->load->view('common/sidebar');
 			'id' 			=> 'end_journey_km',
 			'class' 		=> 'form-control ',
             'value' 		=> $end_journey_km, 
-			'required' 		=> 'required',
 			'placeholder' 	=> 'যাত্রা শেষের কি: মি: '
 		    );
 		    echo form_input($form_input);
@@ -191,7 +189,6 @@ $this->load->view('common/sidebar');
 			'id' 			=> 'total_journey_km',
 			'class' 		=> 'form-control ',
             'value' 		=> $total_journey_km, 
-			'required' 		=> 'required',
 			'placeholder' 	=> 'মোট ব্যবহত কি: মি: '
 		    );
 		    echo form_input($form_input);
@@ -208,7 +205,6 @@ $this->load->view('common/sidebar');
 			'id' 			=> 'personal_use_km',
 			'class' 		=> 'form-control ',
             'value' 		=> $personal_use_km, 
-			'required' 		=> 'required',
 			'placeholder' 	=> 'ব্যক্তিগত ব্যবহার',
 		    );
 		    echo form_input($form_input);
@@ -225,7 +221,6 @@ $this->load->view('common/sidebar');
 			'id' 			=> 'office_use_km',
 			'class' 		=> 'form-control ',
             'value' 		=> $office_use_km, 
-			'required' 		=> 'required',
 			'placeholder' 	=> 'অফিসের কাজে ব্যবহার'
 		    );
 		    echo form_input($form_input);
@@ -242,7 +237,6 @@ $this->load->view('common/sidebar');
 			'id' 			=> 'kilomitter_rate',
 			'class' 		=> 'form-control ',
             'value' 		=> $kilomitter_rate, 
-			'required' 		=> 'required',
 			'placeholder' 	=> 'কি: মি: রেট '
 		    );
 		    echo form_input($form_input);
@@ -265,7 +259,6 @@ $this->load->view('common/sidebar');
 			'type' 			=> 'text',
 			'class' 		=> 'datepicker form-control ',
             'value' 		=> $journey_date, 
-			'required' 		=> 'required',
 			'placeholder' 	=> 'yyyy-mm-dd'
 		    );
 		    echo form_input($form_input);
@@ -282,7 +275,6 @@ $this->load->view('common/sidebar');
 			'id' 			=> 'total_journey_km',
 			'class' 		=> 'form-control ',
             'value' 		=> $total_journey_km, 
-			'required' 		=> 'required',
 			'placeholder' 	=> 'ব্যবহত কি: মি: '
 		    );
 		    echo form_input($form_input);
@@ -295,11 +287,10 @@ $this->load->view('common/sidebar');
 		    <label for="">যাতায়াত  খরচ </label>
 		    <?php
 		    $form_input 	= array(
-			'name' 			=> 'journey_cost',
-			'id' 			=> 'journey_cost',
+			'name' 			=> 'journey_cost2',
+			'id' 			=> 'journey_cost2',
 			'class' 		=> 'form-control ',
-            'value' 		=> $journey_cost, 
-			'required' 		=> 'required',
+            'value' 		=> $journey_cost2, 
 			'placeholder' 	=> 'যাতায়াত  খরচ ',
 		    );
 		    echo form_input($form_input);

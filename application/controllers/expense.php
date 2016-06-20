@@ -25,9 +25,12 @@ class Expense extends MY_Controller{
     public function add_expense(){
 		$this->load->library('form_validation');
 		$this->load->helper('form');
+// echo "<pre>";
+// print_r($_POST);
+// exit();
 
-		$this->form_validation->set_rules('journey_cost', 'Journey Cost', 'trim|required');
-		$this->form_validation->set_rules('mobile_cost', 'Mobile Cost', 'trim|required');
+		$this->form_validation->set_rules('journey_cost', 'Journey Cost', 'required');
+		$this->form_validation->set_rules('mobile_cost', 'Mobile Cost', 'required');
 		$this->form_validation->set_rules('entertainment_cost', 'Entertainment Cost', 'trim|required');
 		$this->form_validation->set_rules('packet_lift', 'Packet Lift', 'trim|required');
 		$this->form_validation->set_rules('expense_type', 'Expense Type', 'trim|required');
@@ -60,6 +63,8 @@ class Expense extends MY_Controller{
 			$data['kilomitter_rate'] 	= '';
 			$data['journey_date'] 		= '';
 
+			$data['journey_cost2'] 		= '';
+
 			$this->load->view('expense/add_form', $data);
 		} else {
 			$data['journey_cost'] 		= $this->input->post('journey_cost');
@@ -76,6 +81,8 @@ class Expense extends MY_Controller{
 			$data['office_use_km'] 		= $this->input->post('office_use_km');
 			$data['kilomitter_rate'] 	= $this->input->post('kilomitter_rate');
 			$data['journey_date'] 		= $this->input->post('journey_date');
+
+			// $data['journey_cost'] 		= $this->input->post('journey_cost2');
 
 			$data['date']				= date('m-d-Y');
 			$data['entry_by']			= $this->uid;
