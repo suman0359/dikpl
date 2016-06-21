@@ -91,37 +91,14 @@ $user_type = $this->session->userdata('user_type');
 <ul class="sidebar-menu"> 
     <li class="title"> Transection/Report  </li>
 
-    <?php if ($this->session->userdata('user_type') == '1') { ?>
+   
         <li class="<?php if ($c == 'maexecutive') echo "active" ?>">
             <a href="<?php echo base_url(); ?>maexecutive">
                 <i class="fa fa-user"></i> <span>Marketing Executive </span>
             </a>
         </li>     
-        <li class="<?php if ($c == 'purchase') echo "active" ?>">
-            <a href="<?php echo base_url(); ?>purchase/add">
-                <i class="fa fa-truck"></i> <span> Challan  Book  </span>
-            </a>
-        </li>
-    <?php } else { ?>
-        <li class="<?php if ($c == 'requisition') echo "active" ?>">
-            <a href="<?php echo base_url(); ?>requisition/add">
-                <i class="fa fa-paper-plane"></i> <span> requisition  </span>
-            </a>
-        </li>
-
-
-        <!-- <li class="<?php //if ($c == 'distribute') echo "active" ?>">
-            <a href="<?php //echo base_url(); ?>distribute/add">
-                <i class="fa  fa-folder-open-o"></i> <span> Distribute Books  </span>
-            </a>
-        </li> -->
-    <?php } ?>
-
-    <li class="<?php if ($c == 'donation') echo "active" ?>">
-        <a href="<?php echo base_url(); ?>donation/add">
-            <i class="fa fa-paypal"></i> <span>Donation  </span>
-        </a>
-    </li>
+       
+    
 
     <li class="<?php if ($c == 'report') echo "active" ?>">
         <a href="<?php echo base_url(); ?>report">
@@ -134,7 +111,7 @@ $user_type = $this->session->userdata('user_type');
     </li>
     
     <li>
-        <a href="<?php echo base_url(); ?>"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>Distribution</a>
+        <a href="<?php echo base_url(); ?>distribution/index"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>Distribution</a>
     </li>
     
   
