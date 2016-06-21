@@ -71,30 +71,20 @@ $this->load->view('common/sidebar');
                 
 
                 
-                foreach ($teachers_list as $teachers) {
-                    $department = $this->CM->getInfo('department', $teachers['dep_id']);
-                    $college = $this->CM->getInfo('college', $teachers['college_id']);
-                    ?>
+                foreach ($teachers_list as $teachers) { ?>
 
 
                     <tr id="action_btn_align">
-                        <td> <?php echo $teachers['id'] ?></td>
-                        <td> <?php echo $teachers['name'] ?></td>
-                        <td> <?php echo $teachers['phone'] ?></td>
-                        <td> <?php
-                if (isset($department->name)) {
-                    echo $department->name;
-                }
-                    ?></td>
-                        <td> <?php
-                            if (isset($college->name)) {
-                                echo $college->name;
-                            }
-                            ?></td>
+                        <td> <?php echo $teachers['teacher_id']; ?></td>
+                        <td> <?php echo $teachers['teacher_name']; ?></td>
+                        <td> <?php echo $teachers['phone']; ?></td>
+                        <td> <?php echo $teachers['department_name']; ?></td>
+                        <td> <?php echo $teachers['college_name']; ?></td>
                         <td>     
-                            <a class="btn btn-primary btn-flat" href="<?php echo base_url(); ?>teachers/edit/<?php echo $teachers['id'] ?>">
+                            <a class="btn btn-primary btn-flat" href="<?php echo base_url(); ?>teachers/edit/<?php echo $teachers['teacher_id'] ?>">
                                 <i class="fa fa-pencil-square-o" ></i> Edit </a>
-
+                            <a class="btn btn-danger btn-flat "  onclick="return confirm('Are you sure want to delete');" href="<?php echo base_url(); ?>teachers/delete/<?php echo $teachers['teacher_id'] ?>">
+                                <i class="fa fa-pencil-square-o" ></i> Delete </a>
                         </td>     
                     </tr>
 <?php } ?>

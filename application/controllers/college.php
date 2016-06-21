@@ -37,7 +37,6 @@ class College extends CI_Controller
         if (!$this->CM->checkpermissiontype($this->module, 'index', $this->user_type))
             redirect('error/accessdeny');
 
-        $this->load->model('custom_model');
 
         if($this->user_type==5) {
             $thana_id_array = $this->college_model->get_thana_array($this->uid);
@@ -45,10 +44,11 @@ class College extends CI_Controller
             $thana_id_array=NULL;
         }
         
-        $no_rows= $this->CM->getTotalRow('college');
 
         if($this->user_type==5){
             $no_rows = $this->college_model->getTotalRow($thana_id_array);
+        }else{
+            $no_rows= $this->CM->getTotalRow('college');
         }
         
         
@@ -214,36 +214,29 @@ class College extends CI_Controller
     public function search(){
         if (!$this->CM->checkpermissiontype($this->module, 'index', $this->user_type))
             redirect('error/accessdeny');
+        $this->load->model('college_model');
+        $this->load->helper('text');
 
         $search = $this->input->post('search');
 
-        $no_rows= $this->CM->getTotalRow('college', $search);
+        if($this->user_type==5) {
+            $thana_id_array = $this->college_model->get_thana_array($this->uid);
+        }else{
+            $thana_id_array=NULL;
+        }
 
-        $this->load->library('pagination');
-        $config['base_url'] = base_url().'college/index/';
-       
-        $config['total_rows'] = $no_rows ;
-        $config['per_page'] = 15;
-        $config['full_tag_open'] = '<div class=" text-center"><ul class=" list-inline list-unstyled " id="listpagiction">';
-        $config['full_tag_close'] = '</ul></div>';
-        $config['prev_link'] = '&lt; Prev';
-        $config['prev_tag_open'] = '<li class="link_pagination">';
-        $config['prev_tag_close'] = '</li>';
-        $config['next_link'] = 'Next &gt;';
-        $config['next_tag_open'] = '<li class="link_pagination">';
-        $config['next_tag_close'] = '</li>';
-        $config['cur_tag_open'] = '<li class="active_pagiction"><a href="#">';
-        $config['cur_tag_close'] = '</a></li>';
-        $config['num_tag_open'] = '<li class="link_pagination">';
-        $config['num_tag_close'] = '</li>';
-        $config['last_link'] = 'Last';
-        $config['first_link'] = 'First';
-
-        $this->pagination->initialize($config);     
-        $data['college_list']=$this->CM->search('college', $search);
+        // echo "<pre>";
+        // print_r($thana_id_array);
+        // exit();
+        
+               
+        $data['college_list']=$this->college_model->search($thana_id_array, $search);
         $data['search'] = $search;
         // echo "<pre>";
         // print_r($data['college_list']);
+        // exit();
+        // echo "<pre>";
+        // print_r($this->db->last_query());
         // exit();
         
         $this->load->view('college/search', $data);

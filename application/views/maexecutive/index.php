@@ -93,6 +93,9 @@ $this->load->view('common/sidebar');
                       <a class="btn btn-primary btn-flat" href="<?php echo base_url(); ?>maexecutive/edit/<?php echo $user['user_id'] ?>"><i class="fa fa-pencil-square-o" ></i> Edit </a>
                             
                       <a class="btn btn-danger btn-flat "  onclick="return confirm('Are you sure want to delete');" href="<?php echo base_url(); ?>maexecutive/delete/<?php echo $user['user_id'] ?>"><i class="fa fa-minus-circle"></i> Delete</a>
+
+                      <a class="btn btn-primary btn-flat" href="<?php echo base_url(); ?>report/book_stock/<?php echo $user['user_id'] ?>"><i class="fa fa-pencil-square-o" ></i> Book Stock </a>
+
                     </td>     
                </tr>
               <?php $serialNo++; } ?>

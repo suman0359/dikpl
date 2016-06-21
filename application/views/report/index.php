@@ -29,12 +29,6 @@ $this->load->view('common/sidebar');
 	</div>
 
 
-
-
-
-
-
-
 	<div class="col-md-3 col-sm-4 home-icon" > 
 	    <a class=" btn-primary   btn-lg btn-block text-center " href="<?php echo base_url(); ?>report/distribute"> 
 		<i class="fa fa-user fa-3x"></i>  <br/>
@@ -54,7 +48,7 @@ $this->load->view('common/sidebar');
 	</div>
 	
 	<div class="col-md-3 col-sm-4 home-icon" > 
-	    <a class=" btn-primary   btn-lg btn-block text-center " href="<?php echo base_url(); ?>report/daily_expense_report"> 
+	    <a class=" btn-primary btn-lg btn-block text-center" href="<?php echo base_url(); if($this->user_type!=5) echo "report/daily_expense_report"; else echo "expense/index";?>"> 
 		<i class="fa fa-user fa-3x"></i>  <br/>
 		Expense Report </a>
 	</div>

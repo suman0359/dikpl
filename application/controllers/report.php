@@ -483,15 +483,70 @@ class Report extends MY_Controller {
 	$this->load->view('report/distribution_report_search', $data);
     }
 
-    public function book_stock(){
+    public function book_stock($mpo_id=NULL){
+    	if($mpo_id!=NULL && ($this->user_type==1 || $this->user_type==2 || $this->user_type==3)){
+    		$this->uid=$mpo_id;
+    	}
     	$data['book_list'] = $this->RM->book_stock_list_of_mpo($this->uid);
     	$this->load->view('report/stock_book_report', $data);
     }
     
-    
+    /**
+    * Daily Expense Report 
+    */
     public function daily_expense_report(){
-	
-	$this->load->view('report/daily_expense_report');
+    	$this->load->model('expense_model');
+    	$data = array();
+		$data['start_date'] = date("d-m-Y");
+		$data['end_date'] = date("d-m-Y");
+		$data['division_id'] = 'all';
+		$data['jonal_id'] = 'all';
+		$data['district_id'] = 'all';
+		$data['thana_id'] = 'all';
+		$data['college_id'] = 'all';
+
+		$data['user_role'] = $this->user_type;
+
+		$data['division_list'] = $this->CM->getAll('division');
+
+		if ($data['division_id'] == 'all') {
+	    $division_id = NULL;
+		} else {
+		    $division_id = $data['division_id'];
+		    $data['division_info'] = $this->CM->getInfo('division', $division_id);
+		}
+
+		if ($data['jonal_id'] == 'all') {
+		    $jonal_id = NULL;
+		} else {
+		    $jonal_id = $data['jonal_id'];
+		    $data['jonal_info'] = $this->CM->getInfo('jonal', $jonal_id);
+		}
+
+		if ($data['district_id'] == 'all') {
+		    $district_id = NULL;
+		} else {
+		    $district_id = $data['district_id'];
+		    $data['district_info'] = $this->CM->getInfo('district', $district_id);
+		}
+
+		if ($data['thana_id'] == 'all') {
+		    $thana_id = NULL;
+		} else {
+		    $thana_id = $data['thana_id'];
+		    $data['thana_info'] = $this->CM->getInfo('thana', $thana_id);
+		}
+
+		if ($data['college_id'] == 'all') {
+		    $college_id = NULL;
+		} else {
+		    $college_id = $data['college_id'];
+		    $data['college_info'] = $this->CM->getInfo('college', $college_id);
+		}
+
+		$data['content_list'] = $this->expense_model->daily_expense_report($data['start_date'], $data['end_date'], $division_id, $jonal_id, $district_id, $thana_id, $college_id);
+
+		$this->load->view('report/daily_expense_report', $data);
     }
     
 

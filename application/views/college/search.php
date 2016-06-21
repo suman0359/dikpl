@@ -79,33 +79,24 @@ $this->load->view('common/sidebar');
          <?php 
        		
          $i=1;
-         	foreach ($college_list as $key => $college){
-            $district = $this->CM->getInfo('district', $college['district_id'] );
-          $thana = $this->CM->getInfo('thana', $college['thana_id'] );
-         ?>
+         	foreach ($college_list as $key => $college){ ?>
          
          
       <tr id="action_btn_align">
-          <td> <?php echo $college['id'] ?></td>
-          <td> <?php 
-          $this->load->helper('text');
-          echo highlight_phrase($college['name'], "$search", '<span style="color:#36960E;">', '</span>');
+          <td> <?php echo "$i.".$college['college_id'] ?></td>
+          <td> <?php           
+          echo highlight_phrase($college['college_name'], "$search", '<span style="color:#36960E;">', '</span>');
 
            ?></td>
-          <td> <?php echo $district->name; ?></td>
-          <td> <?php echo $thana->name; ?></td>
-          <td> <?php 
-          
-         $exc = get_user($college['executive_id']);
-          echo $exc->name ; 
-             ; 
-            ?></td>
+          <td> <?php echo highlight_phrase($college['district_name'], "$search", '<span style="color:#36960E;">', '</span>');  ?></td>
+          <td> <?php echo highlight_phrase($college['thana_name'], "$search", '<span style="color:#36960E;">', '</span>');?></td>
+          <td> <?php echo highlight_phrase($college['mpo_name'], "$search", '<span style="color:#36960E;">', '</span>');?></td>
           <td>     
-                <a class="btn btn-primary btn-flat" href="<?php echo base_url(); ?>college/edit/<?php echo $college['id'] ?>">
+                <a class="btn btn-primary btn-flat" href="<?php echo base_url(); ?>college/edit/<?php echo $college['college_id'] ?>">
                 <i class="fa fa-pencil-square-o" ></i> Edit </a>
-                <a class="btn btn-danger btn-flat "  onclick="return confirm('Are you sure want to delete');" href="<?php echo base_url(); ?>college/delete/<?php echo $college['id'] ?>">
+                <a class="btn btn-danger btn-flat "  onclick="return confirm('Are you sure want to delete');" href="<?php echo base_url(); ?>college/delete/<?php echo $college['college_id'] ?>">
                 <i class="fa fa-pencil-square-o" ></i> Delete </a>
-                <a href="<?php echo base_url(); ?>distribute/distribute_book/<?php echo $college['id']; ?>" class="btn btn-primary">বই বিতরণ</a>
+                <a href="<?php echo base_url(); ?>distribute/distribute_book/<?php echo $college['college_id']; ?>" class="btn btn-primary">বই বিতরণ</a>
           </td>     
        </tr>
       <?php $i++; } ?>
