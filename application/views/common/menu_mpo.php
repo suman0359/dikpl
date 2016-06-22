@@ -51,7 +51,7 @@ $user_type = $this->session->userdata('user_type');
     
         <li class="<?php if ($c == 'requisition') echo "active" ?>">
             <a href="<?php echo base_url(); ?>requisition/add">
-                <i class="fa fa-paper-plane"></i> <span> requisition  </span>
+                <i class="fa fa-paper-plane"></i> <span> Book Requisition  </span>
             </a>
         </li>
 
@@ -65,7 +65,7 @@ $user_type = $this->session->userdata('user_type');
 
     <li class="<?php if ($c == 'donation') echo "active" ?>">
         <a href="<?php echo base_url(); ?>donation/add">
-            <i class="fa fa-paypal"></i> <span>Donation  </span>
+            <i class="fa fa-paypal"></i> <span>Donation Requisition </span>
         </a>
     </li>
 
@@ -83,6 +83,12 @@ $user_type = $this->session->userdata('user_type');
     <li class="<?php if ($c == 'book_stock') echo "active" ?>">
         <a href="<?php echo base_url(); ?>report/book_stock">
             <i class="fa fa-bar-chart-o"></i> <span> Stock Book </span>
+        </a>
+    </li>
+    
+    <li class="<?php if ($c == 'donation_stock') echo "active" ?>">
+        <a href="<?php echo base_url(); ?>report/donation_stock">
+            <i class="fa fa-bar-chart-o"></i> <span> Stock Donation </span>
         </a>
     </li>
 

@@ -22,61 +22,46 @@ $this->load->view('common/sidebar');
 
 
     <div class="col-md-12 home-page">
-	<div class="col-md-3 col-sm-4 home-icon" > 
-	    <a class=" btn-primary   btn-lg btn-block text-center " href="<?php echo base_url(); ?>report/requisition"> 
-		<i class="fa fa-user fa-3x"></i>  <br/>
-		Book Requisition Request  </a>
-	</div>
+		<div class="col-md-3 col-sm-4 home-icon" > 
+		    <a class=" btn-primary   btn-lg btn-block text-center " href="<?php echo base_url(); ?>report/requisition"> 
+			<i class="fa fa-user fa-3x"></i>  <br/>
+			Book Requisition Request  </a>
+		</div>
 
 
-	<div class="col-md-3 col-sm-4 home-icon" > 
-	    <a class=" btn-primary   btn-lg btn-block text-center " href="<?php echo base_url(); ?>report/distribute"> 
-		<i class="fa fa-user fa-3x"></i>  <br/>
-		Book Distribution Report </a>
-	</div>
+		<div class="col-md-3 col-sm-4 home-icon" > 
+		    <a class=" btn-primary   btn-lg btn-block text-center " href="<?php echo base_url(); ?>report/distribute"> 
+			<i class="fa fa-user fa-3x"></i>  <br/>
+			Book Distribution Report </a>
+		</div>
 	
-	<div class="col-md-3 col-sm-4 home-icon" > 
-	    <a class=" btn-primary   btn-lg btn-block text-center " href="<?php echo base_url(); ?>report/donation_requisition"> 
-		<i class="fa fa-user fa-3x"></i>  <br/>
-		Donation Requisition Request</a>
-	</div>
+		<div class="col-md-3 col-sm-4 home-icon" > 
+		    <a class=" btn-primary   btn-lg btn-block text-center " href="<?php echo base_url(); ?>report/donation_requisition"> 
+			<i class="fa fa-user fa-3x"></i>  <br/>
+			Donation Requisition Request</a>
+		</div>
 	
-	<div class="col-md-3 col-sm-4 home-icon" > 
-	    <a class=" btn-primary   btn-lg btn-block text-center " href="<?php echo base_url(); ?>report/show_report"> 
-		<i class="fa fa-user fa-3x"></i>  <br/>
-		Donation Distribution  Report </a>
-	</div>
-	
-	<div class="col-md-3 col-sm-4 home-icon" > 
-	    <a class=" btn-primary btn-lg btn-block text-center" href="<?php echo base_url(); if($this->user_type!=5) echo "report/daily_expense_report"; else echo "expense/index";?>"> 
-		<i class="fa fa-user fa-3x"></i>  <br/>
-		Expense Report </a>
+		<div class="col-md-3 col-sm-4 home-icon" > 
+		    <a class=" btn-primary   btn-lg btn-block text-center " href="<?php echo base_url(); ?>report/show_report"> 
+			<i class="fa fa-user fa-3x"></i>  <br/>
+			Donation Distribution  Report </a>
+		</div>
 	</div>
 	
 
 	<?php if ($this->session->userdata('user_type') == 1) { ?> 
 
-<!--    	<div class="col-md-3 col-sm-4 home-icon" > 
-    	    <a class=" btn-primary   btn-lg btn-block text-center " href="<?php echo base_url(); ?>report/transfer"> 
-    		<i class="fa fa-user fa-3x"></i>  <br/>
-    		Shipment   Report </a>
-    	</div>
-
-
-
-    	<div class="col-md-3 col-sm-4 home-icon" > 
-    	    <a class=" btn-primary   btn-lg btn-block text-center " href="<?php echo base_url(); ?>report/collegeinventory"> 
-    		<i class="fa fa-user fa-3x"></i>  <br/>
-    		College Inventory </a>
-    	</div>-->
 
 	<?php } ?>
 
 	<div class="clearfix"></div>
-
-
+	<div class="col-md-12 home-page">
+		<div class="col-md-3 col-sm-4 home-icon" > 
+		    <a class=" btn-primary btn-lg btn-block text-center" href="<?php echo base_url(); if($this->user_type!=5) echo "report/daily_expense_report"; else echo "expense/index";?>"> 
+			<i class="fa fa-user fa-3x"></i>  <br/>
+			Expense Report </a>
+		</div>
     </div>
-
 
     <?php
     $this->load->view('common/footer');
@@ -86,6 +71,7 @@ $this->load->view('common/sidebar');
 
 
 
+	
 
 
 

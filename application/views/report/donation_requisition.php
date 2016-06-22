@@ -50,7 +50,7 @@ $this->load->view('common/sidebar');
 		    <select class="form-control" id="division_id" name="division_id" required="">
 			<option value="all">All Division</option>
 			<?php foreach ($division_list as $value) { ?>
-                            <option value="<?php echo $value['id']; ?>"> <?php echo $value['name']; ?></option>>
+    			<option value="<?php echo $value['id']; ?>"> <?php echo $value['name']; ?></option>>
 			<?php } ?>
 		    </select>
 		</div>
@@ -97,13 +97,13 @@ $this->load->view('common/sidebar');
 
 	    <!-- Select Plugin Call for College -->
 	    <script type="text/javascript">
-		$(document).ready(function () {
-		    $("#division_id").select2();
-		    $("#jonal_id").select2();
-		    $("#district_id").select2();
-		    $("#thana_id").select2();
-		    $("#college_id").select2();
-		});
+                $(document).ready(function () {
+                    $("#division_id").select2();
+                    $("#jonal_id").select2();
+                    $("#district_id").select2();
+                    $("#thana_id").select2();
+                    $("#college_id").select2();
+                });
 	    </script>
 
 	    <!-- ******************************** -->
@@ -144,7 +144,7 @@ $this->load->view('common/sidebar');
     		    <th  style="text-align: center">সম্ভাব্য বই চলবে</th>
     		    <th  style="text-align: center">বইয়ের নাম</th>
     		    <th  style="text-align: center">টাকার পরিমান</th>
-		    <th  style="text-align: center">Status</th>
+    		    <th  style="text-align: center">Requistion Status</th>
     		    <th  style="text-align: center">Action</th>
 
 
@@ -167,17 +167,33 @@ $this->load->view('common/sidebar');
 			    <td><?php echo $value['possible_book']; ?></td>
 			    <td><?php echo $value['book_name']; ?></td>
 			    <td><?php echo $value['money_amount']; ?></td>
-			    <td>
-				<?php if($value['requisition_status']== 0) echo '<span class="label label-warning">Pending</span>';?>
-				<?php if($value['requisition_status']== 1) echo '<span class="label label-success">Accepted</span>';?>
-				<?php if($value['requisition_status']== 2) echo '<span class="label label-danger">Decline</span>';?>
-				</td>
-				
-			    <td>
-				<a href="<?php echo base_url();?>report/view_details/<?php echo $value['id']?>" class="btn btn-primary btn-flat"><i class="fa fa-plus-square gap"></i> View All</a>
-<!--				<a href="#" class="btn btn-primary btn-flat"><i class="fa fa-pencil-square-o" ></i> Accept Req.</a>
-				<a href="#" class="btn btn-primary btn-flat"><i class="fa fa-ban" aria-hidden="true"></i>  Decline Req.</a>-->
+
+
+			<!--			    <td>
+			    <?php //if ($value['requisition_status'] == 0) echo '<span class="label label-warning">Pending</span>'; ?>
+			    <?php //if ($value['requisition_status'] == 1) echo '<span class="label label-success">Accepted</span>'; ?>
+			    <?php // if ($value['requisition_status'] == 2) echo '<span class="label label-danger">Decline</span>'; ?>
+			</td>-->
+
+			<!--			    <td>
+							<a href="<?php // echo base_url();    ?>report/view_details/<?php echo $value['id'] ?>" class="btn btn-primary btn-flat"><i class="fa fa-plus-square gap"></i> View All</a>
+								<a href="#" class="btn btn-primary btn-flat"><i class="fa fa-pencil-square-o" ></i> Accept Req.</a>
+							<a href="#" class="btn btn-primary btn-flat"><i class="fa fa-ban" aria-hidden="true"></i>  Decline Req.</a>
+						    </td>-->
+
+			    <td> 
+				<?php if ($value['requisition_status'] == 1 && ($this->user_type == 1 || $this->user_type == 2 || $this->user_type == 3)) { ?>
+	    			<a class="btn btn-info" href="<?php echo base_url(); ?>requisition/book_transfer/<?php echo $content->id; ?>" role="button">Transfer</a>
+				<?php } elseif ($value['requisition_status'] == 1 && $this->user_type == 5) { ?> 
+	    			<span class="label label-warning">Panding</span>
+				<?php } ?>
+
+				<?php if ($value['requisition_status'] == 0) { ?>
+	    			<span class="label label-success">Success</span>
+				<?php } ?>
+
 			    </td>
+			    <td> <div class="no-print"> <a href="<?php echo base_url() ?>requisition/donation_requisition_view/<?php echo $value['id']; ?>" class="btn btn-link"> view </a> </div></td>
 			</tr>
 			<?php
 			$serialNo++;
