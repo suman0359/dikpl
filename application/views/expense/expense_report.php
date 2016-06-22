@@ -9,7 +9,7 @@ $this->load->view('common/sidebar');
     <!-- Content Header (Page header) -->
     <section class="content-header" style="margin-top:-10px!important;">
         <h1>
-            Distribution Reports 
+            Expense Reports 
 
         </h1>
         <ol class="breadcrumb">
@@ -22,27 +22,7 @@ $this->load->view('common/sidebar');
 
 
     <div class="col-md-12 main-mid-area">
-        <form action="<?php echo base_url() . "report/search_distribution_report/"; ?>" method="POST" >
-            <div class="col-md-8">
-                <div class="search_bar">
-                    <div class="form-group">
-                        <input type="search" name="search" placeholder="Search MPO name" class="form-control">
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="form-group">
-                    <input type="submit" value="Search" class="btn btn-primary">
-                    <!--		    <div class="pull-right"> 
-                                            <a href="<?php echo base_url() ?>report/requisition_report" class="btn btn-info pull-right" > <i class="fa fa-plus-square gap">  </i> View All</a> 
-                                        </div>-->
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-
-        </form>
-
+        
         <div class="col-md-12">
 
 
