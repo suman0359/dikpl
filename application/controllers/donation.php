@@ -13,15 +13,15 @@ class Donation extends MY_Controller {
     }
 
     public function add() {
-
+	
 //	if (!$this->CM->checkpermissiontype($this->module, 'add', $this->user_type))
-//            redirect('error/accessdeny');
+//       redirect('error/accessdeny');
 
 	$data = array();
 	$data['college_list'] = $this->CM->getAll('college');
 	$data['class_list'] = $this->CM->getAll('tbl_class');
 
-	$data['val'] = "Submit Donation";
+	$data['val'] = "Requisition Submit";
 	$data['college_id'] = "";
 	$data['teacher_id'] = "";
 	$data['department_id'] = "";
@@ -44,13 +44,16 @@ class Donation extends MY_Controller {
 	    $datas['possible_book'] = $this->input->post('possible_book');
 	    $datas['book_id'] = $this->input->post('book_id');
 	    $datas['money_amount'] = $this->input->post('money_amount');
-	    
+
 	    $datas['date'] = date('Y-m-d');
 	    $datas['division_id'] = $this->session->userdata('division_id');
 	    $datas['jonal_id'] = $this->session->userdata('jonal_id');
 	    $datas['district_id'] = $this->session->userdata('district_id');
 	    $datas['thana_id'] = $this->session->userdata('thana_id');
+	    
+	    $datas['status'] = 1;
 
+	    $datas['requisition_status'] = 1;
 	    $datas['requisition_by'] = $this->uid;
 	    $this->db->insert('tbl_donation', $datas);
 	    redirect('donation/index');
@@ -58,20 +61,22 @@ class Donation extends MY_Controller {
     }
 
     public function index() {
-	$data = array();
-	$this->load->model('join_model');
-	$user_role = $this->session->userdata('user_type');
-	$data['user_role'] = $user_role;
-	if ($user_role == 1) {
-	    $data['donation_list'] = $this->join_model->getAllAdminList();
-	} elseif ($user_role != 1) {
-	    $data['donation_list'] = $this->join_model->getAllMpoDonationList($this->uid);
-	}
-	$this->load->view('donation/index', $data);
+//	$data = array();
+//	$this->load->model('join_model');
+//	$user_role = $this->session->userdata('user_type');
+//	$data['user_role'] = $user_role;
+//	if ($user_role == 1) {
+//	    $data['donation_list'] = $this->join_model->getAllAdminList();
+//	} elseif ($user_role != 1) {
+//	    $data['donation_list'] = $this->join_model->getAllMpoDonationList($this->uid);
+//	}
+//	$this->load->view('donation/index', $data);
+	
+	$this->load->view('requisition/report');
     }
 
     public function edit($id) {
-	
+
 
 //	if (!$this->CM->checkpermissiontype($this->module, 'edit', $this->user_type))
 //            redirect('error/accessdeny');
@@ -108,14 +113,14 @@ class Donation extends MY_Controller {
 	    $datas['possible_book'] = $this->input->post('possible_book');
 	    $datas['book_id'] = $this->input->post('book_id');
 	    $datas['money_amount'] = $this->input->post('money_amount');
-	    
+
 	    $datas['date'] = date('Y-m-d');
 	    $datas['division_id'] = $this->session->userdata('division_id');
 	    $datas['jonal_id'] = $this->session->userdata('jonal_id');
 	    $datas['district_id'] = $this->session->userdata('district_id');
 	    $datas['thana_id'] = $this->session->userdata('thana_id');
-	    
-	    
+
+
 
 	    $datas['requisition_by'] = $this->uid;
 
@@ -159,14 +164,30 @@ class Donation extends MY_Controller {
 	} elseif ($user_role != 1) {
 	    $data['donation_list'] = $this->join_model->get_all_search_donation_info($search, $this->uid);
 	}
-	
+
 
 	// $data['jonal_list']=$this->CM->search('jonal', $search);
 
 
 	$this->load->view('donation/search', $data);
     }
-    
+
+    public function donation_requisiton_view($id) {
+//	$data['requisition_info'] = $this->CM->getwhere('tbl_requisition', array('id' => $id));
+//	// echo "<pre>";
+//	// print_r($data['requisition_info']);
+//	// exit();
+//
+//	$data['donation_list'] = $this->RM->getRequisitionDonations($id);
+//
+//
+//	if (empty($id) || empty($data['purchase_info'])) {
+//	    //  redirect('report/report_item');
+//	}
+
+	$this->load->view('donation_requisition/printpreview', $data);
+    }
+
 }
 
 ?>

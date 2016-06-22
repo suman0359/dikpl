@@ -15,8 +15,8 @@ $this->load->view('common/sidebar');
         </h1>
         <ol class="breadcrumb">
             <li><a href="<?php echo base_url() ?>home"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active"><a href="<?php echo base_url() ?>purchase">Purchase</a></li>
-            <li class="active"><a href="<?php echo base_url() ?>purchase/add">Add Purchase</a></li>
+            <li class="active"><a href="<?php echo base_url() ?>requisition">Requisition</a></li>
+            <li class="active"><a href="<?php echo base_url() ?>requisition/add">Add Requisition</a></li>
         </ol>
     </section>
     <br/>
