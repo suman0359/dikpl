@@ -171,21 +171,10 @@ class Donation extends MY_Controller {
 
 	$this->load->view('donation/search', $data);
     }
-
-    public function donation_requisiton_view($id) {
-//	$data['requisition_info'] = $this->CM->getwhere('tbl_requisition', array('id' => $id));
-//	// echo "<pre>";
-//	// print_r($data['requisition_info']);
-//	// exit();
-//
-//	$data['donation_list'] = $this->RM->getRequisitionDonations($id);
-//
-//
-//	if (empty($id) || empty($data['purchase_info'])) {
-//	    //  redirect('report/report_item');
-//	}
-
-	$this->load->view('donation_requisition/printpreview', $data);
+    
+    public function donation_transfer(){
+	
+	$this->load->view('donation/donation_transfer_form');
     }
 
 }
