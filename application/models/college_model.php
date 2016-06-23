@@ -19,6 +19,7 @@ class College_model extends CI_Model{
         $this->db->order_by('college.id', 'DESC');
 
         if($this->user_type==5 && $where!=NULL){
+            $this->db->where('status', 1);
             $this->db->where_in('college.thana_id', $where);
         }else if($this->user_type==5){
             $this->db->limit(0);

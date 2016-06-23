@@ -112,7 +112,7 @@ class Report_model extends CI_Model {
     public function getDistributeBooks($did) {
 	$sql = "SELECT 
                     db.distribute_id, db.book_id , db.quantity, db.price, db.line_no  , 
-                    b.id as bookid, b.book_code, b.book_name
+                    b.id as bookid, b.book_name
                     FROM 
                     distribute_books as db, books as b
                     WHERE 
@@ -193,6 +193,16 @@ class Report_model extends CI_Model {
 	$result = $result_query->result_array();
 
 	return $result;
+    }
+
+    public function distribute_books_report($did){
+    	$this->db->select('tdb.quantity, tdb.price,  books.book_name');
+    	$this->db->from('tbl_distribute_books as tdb');
+    	$this->db->where('tdb.distribute_id', $did);
+
+    	$this->db->join('books', 'books.id = tdb.book_id', 'left');
+
+    	return $result = $this->db->get()->result_array();
     }
 
     public function donation_requisition($start_date = NULL, $end_date = NULL, $division_id = NULL, $jonal_id = NULL, $district_id = NULL, $thana_id = NULL, $college_id = NULL) {
