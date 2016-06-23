@@ -180,8 +180,10 @@ $this->load->view('common/sidebar');
                 <br/> 
                 <br/> 
                 <br/> 
-                <div class="alert alert-danger text-center">
-                    No data Found! 
+                <div class="col-md-12">
+                    <div class="alert alert-danger text-center">
+                        No data Found! 
+                    </div>
                 </div>
 
             <?php } ?>

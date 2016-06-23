@@ -1,5 +1,3 @@
-  
-     
 <?php
 $this->load->view('common/css_link');
 $this->load->view('common/header');
@@ -14,13 +12,15 @@ $this->load->view('common/control_panel');
     <h2 class="alert alert-success text-center">Welcome Book Management !</h2>
     <div class="list-unstyled list-inline home_menu"> 
      <?php
-     $this->user_type = $this->session->userdata('user_type');
-     if($this->user_type <4 ){
-     	$this->load->view('common/menu_administration');	
+     $user_type = $this->session->userdata('user_type');
+     if($user_type <4 ){
+
+        $this->load->view('common/menu_administration');    
      }
 
-     if($this->user_type >3 ){
-     	$this->load->view('common/menu_mpo');	
+     if($user_type >3 ){
+        
+        $this->load->view('common/menu_mpo');   
      }
      
      ?>

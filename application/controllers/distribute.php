@@ -62,10 +62,25 @@ class Distribute  extends MY_Controller{
                 // transfer  table start 
             
             $this->db->trans_start();
-            $pur_info['college_id']= $this->input->post('college_id') ;
-            $pur_info['teacher_id']=  $this->input->post('teacher_id');
-            $pur_info['department_id']=  $this->input->post('department_id');
-            $pur_info['comments']=  $this->input->post('comments');
+
+            if ($this->input->post('college_id')!='') {
+              $pur_info['college_id']=  $this->input->post('college_id');
+            }
+
+            
+            if ($this->input->post('teacher_id')!='') {
+              $pur_info['teacher_id']=  $this->input->post('teacher_id');
+            }
+
+            if ($this->input->post('comments')!='') {
+              $pur_info['comments']=  $this->input->post('comments');
+            }
+
+            // if ($this->input->post('department_id')!='') {
+            //   $pur_info['department_id']=  $this->input->post('department_id');
+            // }
+            
+
             $pur_info['status']= 1;
             $pur_info['entryby']=$this->_uid;   
             
@@ -74,9 +89,9 @@ class Distribute  extends MY_Controller{
             
             
             
-            $pid=  $this->input->post('pid');
-            $cost=  $this->input->post('price');
-            $quantity=  $this->input->post('qty');
+            $pid      =  $this->input->post('pid');
+            $cost     =  $this->input->post('price');
+            $quantity =  $this->input->post('qty');
            
        
                             
@@ -229,10 +244,19 @@ class Distribute  extends MY_Controller{
           else{
                 // transfer  table start 
             $this->db->trans_start();
-            $pur_info['college_id']= $this->input->post('college_id') ;
-            $pur_info['teacher_id']=  $this->input->post('teacher_id');
-            // $pur_info['department_id']=  $this->input->post('department_id');
-            $pur_info['comments']=  $this->input->post('comments');
+
+            if($this->input->post('college_id')!=''){
+              $pur_info['college_id']= $this->input->post('college_id') ;
+            }
+
+            if($this->input->post('teacher_id')!=''){
+              $pur_info['teacher_id']= $this->input->post('teacher_id') ;
+            }
+
+            if($this->input->post('comments')!=''){
+              $pur_info['comments']= $this->input->post('comments') ;
+            }
+
             $pur_info['status']= 1;
             $pur_info['entryby']=$this->_uid;   
             
