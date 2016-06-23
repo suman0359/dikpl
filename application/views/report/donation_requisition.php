@@ -185,7 +185,7 @@ $this->load->view('common/sidebar');
 				<?php if ($value['requisition_status'] == 1 && ($this->user_type == 1 || $this->user_type == 2 || $this->user_type == 3)) { ?>
 
 
-	    			<a class="btn btn-info" href="<?php echo base_url(); ?>requisition/donation_transfer/<?php echo $value['id']; ?>" role="button">Transfer</a>
+	    			<a class="btn btn-info" href="<?php echo base_url(); ?>donation/donation_transfer/<?php echo $value['id']; ?>" role="button">Transfer</a>
 				<?php } elseif ($value['requisition_status'] == 1 && $this->user_type == 5) { ?> 
 	    			<span class="label label-warning">Panding</span>
 				<?php } ?>
