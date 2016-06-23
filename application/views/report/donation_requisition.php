@@ -169,21 +169,23 @@ $this->load->view('common/sidebar');
 			    <td><?php echo $value['money_amount']; ?></td>
 
 
-			<!--			    <td>
+				<!--			    <td>
 			    <?php //if ($value['requisition_status'] == 0) echo '<span class="label label-warning">Pending</span>'; ?>
 			    <?php //if ($value['requisition_status'] == 1) echo '<span class="label label-success">Accepted</span>'; ?>
 			    <?php // if ($value['requisition_status'] == 2) echo '<span class="label label-danger">Decline</span>'; ?>
-			</td>-->
+				</td>-->
 
-			<!--			    <td>
-							<a href="<?php // echo base_url();    ?>report/view_details/<?php echo $value['id'] ?>" class="btn btn-primary btn-flat"><i class="fa fa-plus-square gap"></i> View All</a>
-								<a href="#" class="btn btn-primary btn-flat"><i class="fa fa-pencil-square-o" ></i> Accept Req.</a>
-							<a href="#" class="btn btn-primary btn-flat"><i class="fa fa-ban" aria-hidden="true"></i>  Decline Req.</a>
-						    </td>-->
+				<!--			    <td>
+								<a href="<?php // echo base_url();     ?>report/view_details/<?php echo $value['id'] ?>" class="btn btn-primary btn-flat"><i class="fa fa-plus-square gap"></i> View All</a>
+									<a href="#" class="btn btn-primary btn-flat"><i class="fa fa-pencil-square-o" ></i> Accept Req.</a>
+								<a href="#" class="btn btn-primary btn-flat"><i class="fa fa-ban" aria-hidden="true"></i>  Decline Req.</a>
+							    </td>-->
 
 			    <td> 
 				<?php if ($value['requisition_status'] == 1 && ($this->user_type == 1 || $this->user_type == 2 || $this->user_type == 3)) { ?>
-	    			<a class="btn btn-info" href="<?php echo base_url(); ?>donation/donation_transfer/<?php echo $value['id']; ?>" role="button">Transfer</a>
+
+
+	    			<a class="btn btn-info" href="<?php echo base_url(); ?>requisition/donation_transfer/<?php echo $value['id']; ?>" role="button">Transfer</a>
 				<?php } elseif ($value['requisition_status'] == 1 && $this->user_type == 5) { ?> 
 	    			<span class="label label-warning">Panding</span>
 				<?php } ?>
