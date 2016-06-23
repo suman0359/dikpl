@@ -54,10 +54,22 @@ $user_type = $this->session->userdata('user_type');
                 <i class="fa fa-paper-plane"></i> <span> Book Requisition  </span>
             </a>
         </li>
+	
+	<li class="<?php if ($c == 'requisition') echo "active" ?>">
+            <a href="<?php echo base_url(); ?>distribute/distribute_book">
+                <i class="fa fa-paper-plane"></i> <span> Book Distribution  </span>
+            </a>
+        </li>
 
     <li class="<?php if ($c == 'donation') echo "active" ?>">
         <a href="<?php echo base_url(); ?>donation/add">
             <i class="fa fa-paypal"></i> <span>Donation Requisition </span>
+        </a>
+    </li>
+    
+    <li class="<?php if ($c == 'donation') echo "active" ?>">
+        <a href="<?php echo base_url(); ?>donation/add">
+            <i class="fa fa-paypal"></i> <span>Donation Distribution </span>
         </a>
     </li>
 
