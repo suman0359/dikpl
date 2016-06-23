@@ -60,7 +60,7 @@ $this->load->view('common/sidebar');
             <table >
                 <tr>
                     <td >Id :</td>
-                    <td><?php echo $distribution_info->entryby; ?></td> 
+                    <td><?php echo $distribution_info->id; ?></td> 
                 </tr>
                 <tr>
                     <td>Requested  By :</td>
@@ -85,7 +85,8 @@ $this->load->view('common/sidebar');
                 <tr>
                     <td>Request Date :</td>
                     <td>
-                    <?php echo $distribution_info->distribute_date; ?>
+                    <?php 
+                     echo $distribution_info->distribute_date; ?>
                     </td>
                 </tr>
                 
@@ -93,7 +94,7 @@ $this->load->view('common/sidebar');
                     <td> Division : </td>
                     <td> 
                     <?php 
-                    $college=$this->CM->getwhere('college',array('id'=>$distribution_info->id)); 
+                    $college=$this->CM->getwhere('college',array('id'=>$distribution_info->college_id)); 
                     $div=$this->CM->getwhere('division',array('id'=>$college->division_id)); 
                                 echo $div->name; 
                           ?> 

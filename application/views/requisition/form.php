@@ -77,7 +77,7 @@ $this->load->view('common/sidebar');
                             <option value="">Select Book Name</option>
                             <?php 
                             foreach ($pro_list as $value) { ?>
-                                <option value="<?php echo $value['id']; ?>"><?php echo $value['book_name']; ?></option>
+                                <option value="<?php echo $value['id']; ?>"><?php echo $value['book_name']." | ".$value['writter_name']; ?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -163,7 +163,7 @@ $this->load->view('common/sidebar');
                             <option value="">Select Book Name</option>
                             <?php 
                             foreach ($pro_list as $value) { ?>
-                                <option value="<?php echo $value['id']; ?>"><?php echo $value['book_name']; ?></option>
+                                <option value="<?php echo $value['id']; ?>"><?php echo $value['book_name']." | ".$value['writter_name']; ?></option>
                             <?php } ?>
                         </select>
                     </div>
