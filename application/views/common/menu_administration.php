@@ -94,7 +94,7 @@ $user_type = $this->session->userdata('user_type');
    
         <li class="<?php if ($c == 'maexecutive') echo "active" ?>">
             <a href="<?php echo base_url(); ?>maexecutive">
-                <i class="fa fa-user"></i> <span>Marketing Executive </span>
+                <i class="fa fa-user"></i> <span>Marketing Promotional Officer </span>
             </a>
         </li>     
        
