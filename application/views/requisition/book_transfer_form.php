@@ -136,7 +136,8 @@ $companyname = $this->session->userdata('companyname');
 			    <td><?php echo $i; ?></td>
 			    <td> <?php echo $book['book_name'] ?> </td>
 			    <td align="center"><?php echo $book['quantity']; ?></td>
-			    <td  align="center"><?php
+			    <td  align="center"><?php 
+			    if ($requisition_info->requisition_status != '0'){
 				$form_input = array(
 				    'type' => 'number',
 				    'name' => 'quantity[]',
@@ -150,6 +151,10 @@ $companyname = $this->session->userdata('companyname');
 				echo form_hidden('book_id[]', $book['book_id']);
 				echo form_hidden('requisition_details_id[]', $book['trd_id']);
 				echo form_input($form_input);
+				
+			    }  else {
+				echo $book['quantity'];
+			    }
 				?></td>
 			    <td class="price"><?php echo $book['price']; ?></td>
 			    <td class="tt"><?php echo $total = $book['quantity'] * $book['price']; ?> </td>

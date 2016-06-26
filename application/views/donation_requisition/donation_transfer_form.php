@@ -112,46 +112,125 @@ $companyname = $this->session->userdata('companyname');
 
 
     	<div class="col-md-12 margin_padding ">
-
+<?php echo form_open(); ?>
     	    <table class="table voucher_item_area" >
     		<tr class="active voucher_header">
-    		    <td align="center">ID</td>
-    		    <td align="center">Date</td>
-    		    <td align="center">Division Name</td>
-    		    <td align="center">Jonal Name</td>
-    		    <td align="center">District Name</td>
-    		    <td align="center">Thana Name</td>
-    		    <td align="center">College Name</td>
-    		    <td align="center">Teacher Name</td>
-    		    <td align="center">Department Name</td>
-    		    <td align="center">Class Name</td>
-    		    <td align="center">Student Quantity</td>
-    		    <td align="center">Possible Book</td>
-    		    <td align="center">Book Name</td>
-    		    <td align="center">Money Amount</td>
+    		    <th align="center">ID</th>
+		    <td><?php echo $donation_info['donation_id']; ?></td>
+		    <td></td>
+		    <td></td>
+		</tr>
+		
+		<tr class="voucher_item">
+		    <th align="center">Date</th>
+		    <td> <?php echo $donation_info['donation_date'] ?> </td>
+		    <td></td>
+		    <td></td>
+		</tr>
+		<tr class="voucher_item">
+		    <th align="center">Division Name</th>
+		    <td><?php echo $donation_info['division_name']; ?></td>
+		    <td></td>
+		    <td></td>
+		</tr>
+		<tr class="voucher_item">
+		    <th align="center">College Name</th>
+		    <td><?php echo $donation_info['college_name']; ?></td>
+		    <td></td>
+		    <td></td>
+		</tr>
+		<tr class="voucher_item">
+		    <th align="center">Class Name</th>
+		    <td><?php echo $donation_info['class_name']; ?></td>
+		    <td></td>
+		    <td></td>
+		</tr>
+		<tr class="voucher_item">
+		    <th align="center">Student Quantity</th>
+		    <td><?php echo $donation_info['student_quantity']; ?></td>
+		    <td>Transfer Student Quantity</td>
+		    <td  align="center"><?php
+		    if($donation_info['requisition_status'] != '0'){
+				$form_input = array(
+				    'type' => 'number',
+				    'name' => 'student_quantity[]',
+				    'size' => '5',
+				    'value' => $donation_info['student_quantity'],
+				    'class' => 'text-center student_quantity form-control',
+				    'style' => 'width: 130px',
+				    'min' => '0'
+				);
+		    
 
-    		</tr>
-		    <?php echo form_open(); ?>
-    		<tr class="voucher_item">
-    		    <td><?php echo $donation_info['donation_id']; ?></td>
-    		    <td> <?php echo $donation_info['donation_date'] ?> </td>
-    		    <td align="center"><?php echo $donation_info['division_name']; ?></td>
-    		    <td align="center"><?php echo $donation_info['jonal_name']; ?></td>
-    		    <td align="center"><?php echo $donation_info['district_name']; ?></td>
-    		    <td align="center"><?php echo $donation_info['thana_name']; ?></td>
-    		    <td align="center"><?php echo $donation_info['college_name']; ?></td>
-    		    <td align="center"><?php echo $donation_info['teacher_name']; ?></td>
-    		    <td align="center"><?php echo $donation_info['department_name']; ?></td>
-    		    <td align="center"><?php echo $donation_info['class_name']; ?></td>
-    		    <td align="center"><?php echo $donation_info['student_quantity']; ?></td>
-    		    <td align="center"><?php echo $donation_info['possible_book']; ?></td>
-    		    <td align="center"><?php echo $donation_info['book_name']; ?></td>
-    		    <td align="center"><?php echo $donation_info['money_amount']; ?></td>
+//				echo form_hidden('book_id[]', $book['book_id']);
+//				echo form_hidden('requisition_details_id[]', $book['trd_id']);
+				echo form_input($form_input);
+		    }  else {
+			    echo $donation_info['student_quantity'];
+		    }
+				?>
+		    </td>
+		</tr>
+		<tr class="voucher_item">
+		    <th align="center">Possible Book</th>
+		    <td><?php echo $donation_info['possible_book']; ?></td>
+		    <td>Transfer Possible Book</td>
+		    <td  align="center"><?php
+		    
+		    if ($donation_info['requisition_status'] != '0'){
+				$form_input = array(
+				    'type' => 'number',
+				    'name' => 'possible_book[]',
+				    'size' => '5',
+				    'value' => $donation_info['possible_book'],
+				    'class' => 'text-center possible_book form-control',
+				    'style' => 'width: 130px',
+				    'min' => '0'
+				);
 
+//				echo form_hidden('book_id[]', $book['book_id']);
+//				echo form_hidden('requisition_details_id[]', $book['trd_id']);
+				echo form_input($form_input);
+		    }  else {
+			echo $donation_info['possible_book'];
+		    }
+				?>
+		    </td>
+		</tr>
+		<tr class="voucher_item">
+		    <th align="center">Book Name</th>
+		    <td><?php echo $donation_info['book_name']; ?></td>
+		</tr>
+		
+		<tr class="voucher_item">
+		    <th align="center">Money Amount</th>
+		    <td><?php echo $donation_info['money_amount']; ?></td>
+		    <td>Transfer Money Amount</td>
+		    <td  align="center"><?php
+		    
+		    if ($donation_info['requisition_status'] != '0'){
+				$form_input = array(
+				    'type' => 'number',
+				    'name' => 'money_amount[]',
+				    'size' => '5',
+				    'value' => $donation_info['money_amount'],
+				    'class' => 'text-center money_amount form-control',
+				    'style' => 'width: 130px',
+				    'min' => '0'
+				);
+
+//				echo form_hidden('book_id[]', $book['book_id']);
+//				echo form_hidden('requisition_details_id[]', $book['trd_id']);
+				echo form_input($form_input);
+		    }else{
+			echo $donation_info['money_amount'];
+		    }
+				?>
+		    </td>
     		</tr>
+		    
 
     	    </table>
-
 
     	    <u>  Sender Comment :  </u> <br />
 		<?php echo $donation_info['mpo_name'] ?>
@@ -218,7 +297,7 @@ $companyname = $this->session->userdata('companyname');
 		    <?php
 		    $form = array(
 			'name' => 'transfer_book',
-			'value' => 'Transfer Book',
+			'value' => 'Transfer Donation',
 			'class' => 'btn btn-primary'
 		    );
 		    echo form_submit($form);
@@ -233,54 +312,6 @@ $companyname = $this->session->userdata('companyname');
 
         <!-- start  add the row --> 
 	<?php echo form_close(); ?>
-        <script>
-
-            $('.quantity').on('change', function () {
-
-                var subtotal = 0;
-                var quantity = $(this).val();
-                var price = $(this).closest("td").parent(this).find(".price").html();
-                var tt = $(this).closest("td").parent(this).find(".tt").html();
-                // console.log(quantity);
-                // console.log(price);
-                var total = quantity * price;
-                // document.getElementsByClassName("tt").innerHTML=total;
-                $(this).closest("td").parent(this).find(".tt").text(total);
-                // console.log(tt);
-
-                var check = $(this).closest("tr").parents(this).find(".total_price").html();
-
-
-
-            })
-
-            $('.voucher_item_area').trigger('change');
-
-            $('.voucher_item_area').on('change', function () {
-                // For Total Book Price Calculation 
-                var total_price = 0;
-                $('tbody tr td.tt').each(function () {
-                    var book_price = $(this).text();
-                    var book_price = parseInt(book_price);
-                    total_price += book_price;
-                });
-                $("tbody tr.voucher_total td.total_price").text(total_price);
-                /**************************************/
-
-                // For Total Book Transfer Quantity
-                var total_transfer_quantity = 0;
-                $('tbody tr .quantity').each(function () {
-                    var quantity = $(this).val();
-                    var quantity = parseInt(quantity);
-                    total_transfer_quantity += quantity;
-                });
-                $("tbody tr.voucher_total td.total_transfer_quantity").text(total_transfer_quantity);
-                /**********************************************/
-            })
-
-
-
-        </script>
 
 
 	<?php $this->load->view('common/footer') ?>
