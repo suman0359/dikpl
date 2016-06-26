@@ -7,7 +7,6 @@ class User extends MY_Controller {
 
     public $uid;
     public $module;
-    
 
     public function __construct() {
         parent::__construct();
@@ -59,7 +58,8 @@ class User extends MY_Controller {
 
         $data['id'] = $this->CM->getMaxID('user');
         $data['department_list'] = $this->CM->getAll('division');
-        $data['user_type']="";
+        $data['user_type'] = "";
+        $data['user_role'] = "";
         $data['user_role_list'] = $this->CM->getAll('tbl_user_role');
 
         $data['name'] = "";
@@ -78,6 +78,16 @@ class User extends MY_Controller {
         $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email|callback_email_check');
 
         if ($this->form_validation->run() == FALSE) {
+            if ($this->input->post()) {
+                $data['name'] = $this->input->post('name');
+                $data['phone'] = $this->input->post('phone');
+                $data['address'] = $this->input->post('address');
+                $data['email'] = $this->input->post('email');
+                $data['password'] = md5($this->input->post('password'));
+                $data['user_role'] = $this->input->post('user_type');
+                $data['pdepartment'] = $this->input->post('pdepartment');
+                $data['division_id'] = $this->input->post('division_id');
+            }
             $this->load->view('user/form', $data);
         } else {
 
@@ -148,7 +158,7 @@ class User extends MY_Controller {
 
         $this->load->library('form_validation');
         // $this->form_validation->set_rules('email', 'password', 'required');
-         $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email|callback_email_check');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email|callback_email_check[' . $id . ']');
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('user/eform', $data);
@@ -205,13 +215,13 @@ class User extends MY_Controller {
     }
 
     public function delete($id) {
-        
+
         if (!$this->CM->checkpermissiontype($this->module, 'delete', $this->user_type))
             redirect('error/accessdeny');
-        
-        if ($this->user_type==1) {
+
+        if ($this->user_type == 1) {
             $this->CM->delete('user', array('id' => $id));
-        }else{
+        } else {
             $this->CM->delete_db('user', $id);
         }
 
@@ -297,7 +307,7 @@ class User extends MY_Controller {
             $datas['m_action'] = $act;
             $datas['status'] = 1;
             $datas['entryby'] = $this->session->userdata('uid');
-            $datas['user_type']=$user_type;
+            $datas['user_type'] = $user_type;
             $this->CM->insert("user_permission", $datas);
         }
 
@@ -305,19 +315,22 @@ class User extends MY_Controller {
     }
 
     /* Callback function */
-    
-   
 
-    function email_check($email){
+    function email_check($email, $id) {
         $this->load->model('userauth_model');
+        $this->load->library('form_validation');
 
-        $result = $this->userauth_model->check_email($email);
-        if ( ! $result)
-        {
-            $this->form_validation->set_message('email_check', 'Email is already used by another user. Please choose another email address.');
+        $id = intval($id);
+        $id = (is_int($id) && !0) ? $id : NULL;
+
+        $result = $this->userauth_model->check_email($email, $id);
+
+        if ($result != 0) {
+            $this->form_validation->set_message('email_check', 'The %s field can not be the same' . " $email.... Its Already Exist!");
+            return FALSE;
+        } else {
+            return TRUE;
         }
-                
-        return $result;
     }
 
 }

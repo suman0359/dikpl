@@ -420,6 +420,7 @@
 </div>
 </div>
 <?php
+//echo CI_VERSION;
 $this->load->view('common/footer');
 
 ?>

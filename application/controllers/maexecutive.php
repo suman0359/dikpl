@@ -84,16 +84,28 @@ class Maexecutive extends CI_Controller
         $this->form_validation->set_rules('password','Password', 'required');
         if ($this->form_validation->run() == FALSE)
         {
+          if($this->input->post()){
+            $data['name']      = $this->input->post('name'); 
+            $data['phone']     = $this->input->post('phone'); 
+            $data['address']   = $this->input->post('address'); 
+            $data['email']     = $this->input->post('email') ;
+            $data['password']  = md5($this->input->post('password')) ;
+
+            $data['division_id']  = $this->input->post('division_id');
+            $data['district_id']  = $this->input->post('district_id');
+            $data['jonal_id']     = $this->input->post('jonal_id');
+            
+          }
                 $this->load->view('maexecutive/form', $data); 
         }
         else
         {
             
-            $datas['name'] = $this->input->post('name'); 
-            $datas['phone'] = $this->input->post('phone'); 
-            $datas['address'] = $this->input->post('address'); 
-            $datas['email'] =$this->input->post('email') ;
-            $datas['password'] = md5($this->input->post('password')) ;
+            $datas['name']      = $this->input->post('name'); 
+            $datas['phone']     = $this->input->post('phone'); 
+            $datas['address']   = $this->input->post('address'); 
+            $datas['email']     = $this->input->post('email') ;
+            $datas['password']  = md5($this->input->post('password')) ;
             $datas['user_type'] = '5' ;
             $division_id = $datas['division_id'] =$this->input->post('division_id') ;
             $zonal_id = $datas['jonal_id'] =$this->input->post('jonal_id') ;
@@ -174,7 +186,7 @@ class Maexecutive extends CI_Controller
         
         
         $this->load->library('form_validation');
-        $this->form_validation->set_rules( 'email', 'password','required');
+        $this->form_validation->set_rules( 'email', 'password','required|callback_email_check[' . $id . ']');
         if ($this->form_validation->run() == FALSE){
                 $this->load->view('maexecutive/form', $data); 
         }else{
@@ -360,15 +372,20 @@ class Maexecutive extends CI_Controller
              redirect('user'); 
         }
 
-    function email_check($email){
+    function email_check($email, $id){
         $this->load->model('userauth_model');
+        $this->load->library('form_validation');
 
-        $result = $this->userauth_model->check_email($email);
-        if ( ! $result)
-        {
-            $this->form_validation->set_message('email_check', 'Email is already used by another user. Please choose another email address.');
+        $id = intval($id);
+        $id = (is_int($id) && !0) ? $id : NULL;
+        
+        $result = $this->userauth_model->check_email($email, $id);
+
+        if($result!=0){
+            $this->form_validation->set_message('email_check', 'The %s field can not be the word'. " $email");
+            return FALSE;
+        }else{
+            return TRUE;
         }
-                
-        return $result;
     }
 }   

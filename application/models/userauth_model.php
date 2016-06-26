@@ -36,9 +36,15 @@ class Userauth_model extends CI_Model{
         return $this->db->get('user')->num_rows;
     }
 
-    function check_email($email){
-        $this->db->select('1', FALSE);
+    function check_email($email, $id=NULL){
+        $this->db->select('email', FALSE);
         $this->db->where('LOWER(email)=', strtolower($email));
-        return $this->db->get('user')->num_rows;
+        if($id!=NULL){
+            $this->db->where_not_in('id', $id);
+        }
+
+        $result =  $this->db->get('user')->num_rows;
+        
+        return $result;
     }
 }

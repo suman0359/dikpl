@@ -65,6 +65,7 @@ $this->load->view('common/sidebar');
                 'value' => $email,
                 'type' => 'email',
                 'required' => 'required',
+                'autocomplete' => "off",
                 'placeholder' => 'Name@gmail.com'
             );
             echo form_input($form_input);
@@ -76,46 +77,46 @@ $this->load->view('common/sidebar');
         <div class="form-group">
 
             <label>Password  </label>
-<?php
-$form_input = array(
-    'name' => 'password',
-    'class' => 'form-control ',
-    'value' => '',
-    'required' => 'required',
-    'placeholder' => '********'
-);
-echo form_password($form_input);
-?>
+            <?php
+            $form_input = array(
+                'name' => 'password',
+                'class' => 'form-control ',
+                'value' => '',
+                'required' => 'required',
+                'placeholder' => '********'
+            );
+            echo form_password($form_input);
+            ?>
 
         </div>
 
         <div class="form-group">
 
             <label>Phone  </label>
-<?php
-$form_input = array(
-    'name' => 'phone',
-    'class' => 'form-control ',
-    'value' => $phone,
-    'placeholder' => '01**  ** ** **'
-);
-echo form_input($form_input);
-?>
+            <?php
+            $form_input = array(
+                'name' => 'phone',
+                'class' => 'form-control ',
+                'value' => $phone,
+                'placeholder' => '01**  ** ** **'
+            );
+            echo form_input($form_input);
+            ?>
 
         </div> 
         <div class="form-group">
 
             <label>Image  </label>
-<?php
-$form_input = array(
-    'name' => 'image',
-    'class' => '',
-    'value' => '',
-    'type' => 'file'
-);
-echo form_input($form_input);
-if ($image) {
-    ?>
+            <?php
+            $form_input = array(
+                'name' => 'image',
+                'class' => '',
+                'value' => '',
+                'type' => 'file'
+            );
+            echo form_input($form_input);
+            if ($image) {
+                ?>
 
                 <img src="<?php echo base_url() ?>uploads/<?php echo $image; ?>" style="height:40px; width: 50px; margin-top: 1px;" />
             <?php } ?>
@@ -142,13 +143,19 @@ if ($image) {
 
             <label>User Type </label>
             <div>
-             <select name="user_type" class="form-group form-control">
-                    <option>Setting User Role</option>
-                <?php foreach ($user_role_list as $user_role) { ?>
-                        <option value="<?php echo $user_role['value'] ?>" ><?php echo $user_role['name']; ?></option>
-                <?php } ?>
 
-                </select>
+                <?php
+                $class = 'class="form-control" ';
+
+                $user_type_list = array(NULL => 'Select User Role');
+
+                foreach ($user_role_list as $user_type) {
+                    $user_type_list[$user_type['value']] = $user_type['name'];
+                }
+
+                echo form_dropdown('user_type', $user_type_list, $user_role, $class);
+                ?>
+
             </div>
         </div>
         <div class="form-group">
@@ -156,15 +163,16 @@ if ($image) {
             <label>Allow Division  </label>
             <div>
 
-<?php
-$dname = array("0" => 'All');
-$class = 'class="form-control" ';
-foreach ($department_list as $department) {
-    $dname[$department['id']] = $department['name'];
-}
+                <?php
+                $class = 'class="form-control" ';
 
-echo form_dropdown('division_id', $dname, $pdepartment, $class);
-?>
+                $dname = array("0" => 'All');
+                foreach ($department_list as $department) {
+                    $dname[$department['id']] = $department['name'];
+                }
+
+                echo form_dropdown('division_id', $dname, $division_id, $class);
+                ?>
 
 
 
@@ -175,23 +183,23 @@ echo form_dropdown('division_id', $dname, $pdepartment, $class);
 
         <div class=" text-center">
 
-<?php
-$form_input = array(
-    'name' => 'submit',
-    'class' => 'btn btn-lg btn-success ',
-    'value' => 'Add User'
-);
-echo form_submit($form_input);
-?>
+            <?php
+            $form_input = array(
+                'name' => 'submit',
+                'class' => 'btn btn-lg btn-success ',
+                'value' => 'Add User'
+            );
+            echo form_submit($form_input);
+            ?>
 
         </div>
-            <?php echo form_close() ?> 
+        <?php echo form_close() ?> 
 
 
 
     </div>
     <!-- End  Working area --> 
-            <?php $this->load->view('common/footer') ?>
+    <?php $this->load->view('common/footer') ?>
         
 
 
