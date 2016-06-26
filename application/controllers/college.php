@@ -99,7 +99,6 @@ class College extends CI_Controller {
 	$data['name'] = '';
 	$data['district_id'] = '';
 	$data['thana_id'] = '';
-	$data['address'] = '';
 	$data['district_id'] = '';
 	$data['division_id'] = '';
 	$data['jonal_id'] = '';
@@ -113,13 +112,18 @@ class College extends CI_Controller {
 	    $this->load->view('college/form', $data);
 	} else {
 
-	    $datas['name'] = $this->input->post('name');
-	    $datas['district_id'] = $this->input->post('district_id');
-	    $datas['thana_id'] = $this->input->post('thana_id');
-	    $datas['address'] = $this->input->post('address');
-	    $datas['division_id'] = $this->input->post('division_id');
-	    $datas['jonal_id'] = $this->input->post('jonal_id');
-	    $datas['executive_id'] = $this->input->post('executive_id');
+		if($this->input->post('name')!='')
+	    	$datas['name'] = $this->input->post('name');
+	    if($this->input->post('district_id')!='')
+	    	$datas['district_id'] = $this->input->post('district_id');
+	    if($this->input->post('thana_id')!='')
+	    	$datas['thana_id'] = $this->input->post('thana_id');
+	    if($this->input->post('division_id')!='')
+	    	$datas['division_id'] = $this->input->post('division_id');
+	    if($this->input->post('jonal_id')!='')
+	    	$datas['jonal_id'] = $this->input->post('jonal_id');
+	    if($this->input->post('executive_id')!='')
+	    	$datas['executive_id'] = $this->input->post('executive_id');
 
 	    $datas['status'] = 1;
 
@@ -159,7 +163,6 @@ class College extends CI_Controller {
 	$data['name'] = $content->name;
 	$data['district_id'] = $content->district_id;
 	$data['thana_id'] = $content->thana_id;
-	$data['address'] = $content->address;
 	$data['division_id'] = $content->division_id;
 	$data['jonal_id'] = $content->jonal_id;
 	$data['executive_id'] = $content->executive_id;
@@ -171,13 +174,25 @@ class College extends CI_Controller {
 	if ($this->form_validation->run() == FALSE) {
 	    $this->load->view('college/form', $data);
 	} else {
-	    $datas['name'] = $this->input->post('name');
-	    $datas['district_id'] = $this->input->post('district_id');
-	    $datas['thana_id'] = $this->input->post('thana_id');
-	    $datas['address'] = $this->input->post('address');
-	    $datas['division_id'] = $this->input->post('division_id');
-	    $datas['jonal_id'] = $this->input->post('jonal_id');
-	    $datas['executive_id'] = $this->input->post('executive_id');
+
+		if($this->input->post('name')!='')
+	    	$datas['name'] = $this->input->post('name');
+		
+
+	    if($this->input->post('district_id')!='')
+	    	$datas['district_id'] = $this->input->post('district_id');
+
+	    if($this->input->post('thana_id')!='')
+	    	$datas['thana_id'] = $this->input->post('thana_id');
+
+	    if($this->input->post('division_id')!='')
+	    	$datas['division_id'] = $this->input->post('division_id');
+	    
+	    if($this->input->post('jonal_id')!='')
+	    	$datas['jonal_id'] = $this->input->post('jonal_id');
+
+	    if($this->input->post('executive_id')!='')
+	    	$datas['executive_id'] = $this->input->post('executive_id');
 	    //$datas['entryby']=$this->session->userdata('uid');      
 
 	    $college_category = $this->input->post('college_category');
