@@ -81,12 +81,19 @@ $this->load->view('common/sidebar');
                   <td> <?php echo $user['rezonal_name'] ?></td>
                   <td> <?php echo $user['district_name'] ?></td>
 
-                  <td> <?php if ($thana_list) {
+                  <td>
+                  <?php if($thana_list && count($thana_list)>0){ ?>
+                  <a class="btn btn-primary" role="button" data-toggle="collapse" href="#thana_list_<?php echo $serialNo; ?>" aria-expanded="true" aria-controls="collapseListGroup1"> Collapsible list group </a>
+                  <?php }else{ echo "Not Thana Selected"; }?>
+
+                   <?php if ($thana_list) {
+
+                          echo "<div id="."thana_list_".$serialNo." class=\"panel-collapse collapse\" role=\"tabpanel\" aria-labelledby=\"collapseListGroupHeading1\">";
                             foreach ($thana_list as $value) {
                             echo "<div style=\"background: #9E9E9E; padding: 3px; margin-bottom: 3px;\">".$value->thana_name."</div>";
-                            }
-                            
-                        } ?>
+                            } ?>
+                            </div>
+                        <?php } ?>
                   </td>
                    
                   <td>     
