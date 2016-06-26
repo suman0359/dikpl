@@ -52,7 +52,7 @@ $this->load->view('common/sidebar');
                                 <td class="book_name"> <?php echo $book['book_name'] ?> </td>
                                 <td class="book_quantity"> <?php echo $book['quantity'] ?> </td>
                                 
-                                <td> <a href="JavaScript:void(0)" id="" class="btn btn-xs btn-success pull-right add_book_row" item-id="<?php echo $book['book_id'] ?>" ><?php echo $book['book_id'] ?> add Test </a> </td>
+                                <td> <a href="JavaScript:void(0)" id="" class="btn btn-xs btn-success pull-right add_book_row" item-id="<?php echo $book['book_id'] ?>" >Add Book </a> </td>
                             </tr>
 
                         <?php } ?>
