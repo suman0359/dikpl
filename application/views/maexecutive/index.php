@@ -26,7 +26,7 @@ $this->load->view('common/sidebar');
 
 <!-- Start Working area --> 
 <div class="col-md-12 main-mid-area"> 
-    <h3> Marketing Executive List </h3>
+    <h3> Marketing Promotional Officer List </h3>
    <?php $this->load->view('common/error_show') ?>
    
     <div class="searchbar " >

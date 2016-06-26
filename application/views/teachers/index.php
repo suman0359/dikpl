@@ -61,6 +61,8 @@ $this->load->view('common/sidebar');
                     <th id="action_btn_align">মোবাইল</th>
                     <th id="action_btn_align">বিষয় / বিভাগ</th>
                     <th id="action_btn_align">কলেজের নাম  </th>
+                    <th id="action_btn_align">Division Name </th>
+                    <th id="action_btn_align">Thana Name</th>
                     <th id="action_btn_align">Action</th>
 
                 </tr>
@@ -83,6 +85,8 @@ $this->load->view('common/sidebar');
     		    <td> <?php echo $teachers['phone'] ?></td>
     		    <td> <?php echo $teachers['department_name']; ?></td>
     		    <td> <?php echo $teachers['college_name']; ?></td>
+    		    <td> <?php echo $teachers['district_name']; ?></td>
+    		    <td> <?php echo $teachers['thana_name']; ?></td>
     		    <td>     
     			<a class="btn btn-primary btn-flat" href="<?php echo base_url(); ?>teachers/edit/<?php echo $teachers['teacher_id'] ?>">
                                 <i class="fa fa-pencil-square-o" ></i> Edit </a>

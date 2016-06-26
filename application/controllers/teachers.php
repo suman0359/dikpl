@@ -73,9 +73,10 @@ class Teachers extends CI_Controller {
        if (!$this->CM->checkpermissiontype($this->module, 'add', $this->user_type))
             redirect('error/accessdeny');
 
-
+       
         $data['department_list'] = $this->CM->getAll('department', 'name ASC');
         $data['college_list'] = $this->CM->getAll('college', 'name ASC');
+	$data['district_list']=$this->CM->getAll('district', 'name ASC' );
 
 
         $data['name'] = "";
@@ -83,11 +84,13 @@ class Teachers extends CI_Controller {
         $data['phone'] = "";
         $data['department_id'] = "";
         $data['college_id'] = "";
+	$data['district_id'] = "";
+	$data['thana_id'] = "";
 
         $this->load->library('form_validation');
 
 
-        $this->form_validation->set_rules('name', 'required', 'address', 'college_id', 'department_id');
+        $this->form_validation->set_rules('name', 'required', 'address', 'college_id', 'department_id', 'district_id', 'thana_id');
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('teachers/form', $data);
         } else {
@@ -98,6 +101,8 @@ class Teachers extends CI_Controller {
             $datas['college_id'] = $this->input->post('college_id');
             $datas['dep_id'] = $this->input->post('department_id');
             $datas['address'] = $this->input->post('address');
+	    $datas['district_id'] = $this->input->post('district_id');
+	    $datas['thana_id'] = $this->input->post('thana_id');
 
             $datas['status'] = 1;
             //$datas['entryby']=$this->session->userdata('uid');       
@@ -124,6 +129,7 @@ class Teachers extends CI_Controller {
         $content = $this->CM->getInfo('teachers', $id);
         $data['department_list'] = $this->CM->getAll('department', 'name', 'ASC');
         $data['college_list'] = $this->CM->getAll('college', 'name', 'ASC');
+	$data['district_list']=$this->CM->getAll('district', 'name ASC');
 
         $data['name'] = $content->name;
         $data['designation'] = $content->designation;
@@ -131,6 +137,8 @@ class Teachers extends CI_Controller {
         $data['address'] = $content->address;
         $data['college_id'] = $content->college_id;
         $data['department_id'] = $content->dep_id;
+	$data['district_id'] = $content->district_id;
+        $data['thana_id'] = $content->thana_id;
         //$data['status'] = $content->status;
         // $data['_id'] = $content->district_id;
 
@@ -146,6 +154,8 @@ class Teachers extends CI_Controller {
             $datas['college_id'] = $this->input->post('college_id');
             $datas['dep_id'] = $this->input->post('department_id');
             $datas['address'] = $this->input->post('address');
+	    $datas['district_id'] = $this->input->post('district_id');
+            $datas['thana_id'] = $this->input->post('thana_id');
             //$datas['status'] = $this->input->post('status');
             //$datas['entryby']=$this->session->userdata('uid');       
 
@@ -189,14 +199,16 @@ class Teachers extends CI_Controller {
     public function delete($id) {
         if (!$this->CM->checkpermissiontype($this->module, 'delete', $this->user_type))
             redirect('error/accessdeny');
-
-        if ($this->CM->delete_db('teachers', $id)) {
-            $msg = "Operation Successfull!!";
-            $this->session->set_flashdata('success', $msg);
-        } else {
-            $msg = "There is an error, Please try again!!";
-            $this->session->set_flashdata('error', $msg);
-        }
+	
+	if ($this->user_type==1) {
+            $this->CM->delete('teachers', array('id' => $id));
+	    
+        }else{
+            $this->CM->delete_db('teachers', $id);
+        } 
+	
+	$msg = "Operation Successfull!!";
+        $this->session->set_flashdata('success', $msg);
 
         redirect('teachers');
     }
