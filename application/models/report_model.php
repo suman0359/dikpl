@@ -49,7 +49,7 @@ class Report_model extends CI_Model {
     }
 
     public function getRequisitionDonations($did) {
-	$this->db->select('do.id as donation_id, do.date as donation_date, do.requisition_status, do.student_quantity, do.possible_book, do.money_amount, u.name as mpo_name, co.name as college_name, jo.name as jonal_name, te.name as teacher_name, di.name as division_name, dis.name as district_name, t.name as thana_name, de.name as department_name, cl.name as class_name, bo.book_name');
+	$this->db->select('do.id as donation_id, do.date as donation_date, do.requisition_status, do.student_quantity, do.transfer_student_quantity, do.possible_book, do.transfer_possible_book, do.transfer_money_amount, do.money_amount, u.name as mpo_name, co.name as college_name, jo.name as jonal_name, te.name as teacher_name, di.name as division_name, dis.name as district_name, t.name as thana_name, de.name as department_name, cl.name as class_name, bo.book_name');
 	$this->db->where('do.id', $did);
 	$this->db->where('do.status', 1);
 	$this->db->from('tbl_donation as do');
