@@ -60,50 +60,40 @@ $companyname = $this->session->userdata('companyname');
 
     			<table >
     			    <tr>
-    				<td >Id :</td>
+    				<th >Id :</th>
     				<td><?php echo $donation_info['donation_id']; ?></td>
     			    </tr>
     			    <tr>
-    				<td>Requested  By :</td>
+    				<th>Requested  By :</th>
     				<td> <?php
 					echo $donation_info['mpo_name'];
 					?> 
     				</td>
     			    </tr>
-
-
-
     			</table>
     		    </td>
 
     		    <td> 
     			<table class="pull-right">
+    			    <tr>
+    				<th>Request Date :</th>
+    				<td>
+					<?php echo $donation_info['donation_date']; ?>
+    				</td>
+    			    </tr>
 
-
-
-    		</tr>
-    		<tr>
-    		    <td>Request Date :</td>
-    		    <td>
-			    <?php echo $donation_info['donation_date']; ?>
+    			    <tr>
+    				<th> Division : </th>
+    				<td> 
+					<?php
+					echo $donation_info['division_name'];
+					?> 
+    				</td>
+    			    </tr>
+    			</table>
     		    </td>
+
     		</tr>
-
-    		<tr>
-    		    <td> Division : </td>
-    		    <td> 
-			    <?php
-			    echo $donation_info['division_name'];
-			    ?> 
-    		    </td>
-    		</tr>
-
-
-
-
-    	    </table>
-    	    </td>
-    	    </tr>
     	    </table>
 
     	</div>
@@ -112,78 +102,77 @@ $companyname = $this->session->userdata('companyname');
 
 
     	<div class="col-md-12 margin_padding ">
-<?php echo form_open(); ?>
+		<?php echo form_open(); ?>
     	    <table class="table voucher_item_area" >
     		<tr class="active voucher_header">
     		    <th align="center">ID</th>
-		    <td><?php echo $donation_info['donation_id']; ?></td>
-		    <td></td>
-		    <td></td>
-		</tr>
-		
-		<tr class="voucher_item">
-		    <th align="center">Date</th>
-		    <td> <?php echo $donation_info['donation_date'] ?> </td>
-		    <td></td>
-		    <td></td>
-		</tr>
-		<tr class="voucher_item">
-		    <th align="center">Division Name</th>
-		    <td><?php echo $donation_info['division_name']; ?></td>
-		    <td></td>
-		    <td></td>
-		</tr>
-		<tr class="voucher_item">
-		    <th align="center">College Name</th>
-		    <td><?php echo $donation_info['college_name']; ?></td>
-		    <td></td>
-		    <td></td>
-		</tr>
-		<tr class="voucher_item">
-		    <th align="center">Class Name</th>
-		    <td><?php echo $donation_info['class_name']; ?></td>
-		    <td></td>
-		    <td></td>
-		</tr>
-		<tr class="voucher_item">
-		    <th align="center">Student Quantity</th>
-		    <td><?php echo $donation_info['student_quantity']; ?></td>
-		    <td>Transfer Student Quantity</td>
-		    <td  align="center"><?php
-		    if($donation_info['requisition_status'] != '0'){
+    		    <td><?php echo $donation_info['donation_id']; ?></td>
+    		    <td></td>
+    		    <td></td>
+    		</tr>
+
+    		<tr class="voucher_item">
+    		    <th align="center">Date</th>
+    		    <td> <?php echo $donation_info['donation_date'] ?> </td>
+    		    <td></td>
+    		    <td></td>
+    		</tr>
+    		<tr class="voucher_item">
+    		    <th align="center">Division Name</th>
+    		    <td><?php echo $donation_info['division_name']; ?></td>
+    		    <td></td>
+    		    <td></td>
+    		</tr>
+    		<tr class="voucher_item">
+    		    <th align="center">College Name</th>
+    		    <td><?php echo $donation_info['college_name']; ?></td>
+    		    <td></td>
+    		    <td></td>
+    		</tr>
+    		<tr class="voucher_item">
+    		    <th align="center">Class Name</th>
+    		    <td><?php echo $donation_info['class_name']; ?></td>
+    		    <td></td>
+    		    <td></td>
+    		</tr>
+    		<tr class="voucher_item">
+    		    <th align="center">Student Quantity</th>
+    		    <td><?php echo $donation_info['student_quantity']; ?></td>
+    		    <td>Transfer Student Quantity</td>
+    		    <td  align="center"><?php
+			    if ($donation_info['requisition_status'] != '0') {
 				$form_input = array(
 				    'type' => 'number',
-				    'name' => 'student_quantity[]',
+				    'name' => 'transfer_student_quantity',
 				    'size' => '5',
 				    'value' => $donation_info['student_quantity'],
-				    'class' => 'text-center student_quantity form-control',
+				    'class' => 'text-center transfer_student_quantity form-control',
 				    'style' => 'width: 130px',
 				    'min' => '0'
 				);
-		    
+
 
 //				echo form_hidden('book_id[]', $book['book_id']);
 //				echo form_hidden('requisition_details_id[]', $book['trd_id']);
 				echo form_input($form_input);
-		    }  else {
-			    echo $donation_info['student_quantity'];
-		    }
-				?>
-		    </td>
-		</tr>
-		<tr class="voucher_item">
-		    <th align="center">Possible Book</th>
-		    <td><?php echo $donation_info['possible_book']; ?></td>
-		    <td>Transfer Possible Book</td>
-		    <td  align="center"><?php
-		    
-		    if ($donation_info['requisition_status'] != '0'){
+			    } else {
+				echo $donation_info['transfer_student_quantity'];
+			    }
+			    ?>
+    		    </td>
+    		</tr>
+    		<tr class="voucher_item">
+    		    <th align="center">Possible Book</th>
+    		    <td><?php echo $donation_info['possible_book']; ?></td>
+    		    <td>Transfer Possible Book</td>
+    		    <td  align="center"><?php
+			    if ($donation_info['requisition_status'] != '0') {
 				$form_input = array(
 				    'type' => 'number',
-				    'name' => 'possible_book[]',
+				    'name' => 'transfer_possible_book',
 				    'size' => '5',
 				    'value' => $donation_info['possible_book'],
-				    'class' => 'text-center possible_book form-control',
+				    'class' => 'text-center transfer_possible_book form-control',
 				    'style' => 'width: 130px',
 				    'min' => '0'
 				);
@@ -191,30 +180,29 @@ $companyname = $this->session->userdata('companyname');
 //				echo form_hidden('book_id[]', $book['book_id']);
 //				echo form_hidden('requisition_details_id[]', $book['trd_id']);
 				echo form_input($form_input);
-		    }  else {
-			echo $donation_info['possible_book'];
-		    }
-				?>
-		    </td>
-		</tr>
-		<tr class="voucher_item">
-		    <th align="center">Book Name</th>
-		    <td><?php echo $donation_info['book_name']; ?></td>
-		</tr>
-		
-		<tr class="voucher_item">
-		    <th align="center">Money Amount</th>
-		    <td><?php echo $donation_info['money_amount']; ?></td>
-		    <td>Transfer Money Amount</td>
-		    <td  align="center"><?php
-		    
-		    if ($donation_info['requisition_status'] != '0'){
+			    } else {
+				echo $donation_info['transfer_possible_book'];
+			    }
+			    ?>
+    		    </td>
+    		</tr>
+    		<tr class="voucher_item">
+    		    <th align="center">Book Name</th>
+    		    <td><?php echo $donation_info['book_name']; ?></td>
+    		</tr>
+
+    		<tr class="voucher_item">
+    		    <th align="center">Money Amount</th>
+    		    <td><?php echo $donation_info['money_amount']; ?></td>
+    		    <td>Transfer Money Amount</td>
+    		    <td  align="center"><?php
+			    if ($donation_info['requisition_status'] != '0') {
 				$form_input = array(
 				    'type' => 'number',
-				    'name' => 'money_amount[]',
+				    'name' => 'transfer_money_amount',
 				    'size' => '5',
 				    'value' => $donation_info['money_amount'],
-				    'class' => 'text-center money_amount form-control',
+				    'class' => 'text-center transfer_money_amount form-control',
 				    'style' => 'width: 130px',
 				    'min' => '0'
 				);
@@ -222,13 +210,13 @@ $companyname = $this->session->userdata('companyname');
 //				echo form_hidden('book_id[]', $book['book_id']);
 //				echo form_hidden('requisition_details_id[]', $book['trd_id']);
 				echo form_input($form_input);
-		    }else{
-			echo $donation_info['money_amount'];
-		    }
-				?>
-		    </td>
+			    } else {
+				echo $donation_info['transfer_money_amount'];
+			    }
+			    ?>
+    		    </td>
     		</tr>
-		    
+
 
     	    </table>
 
@@ -244,16 +232,13 @@ $companyname = $this->session->userdata('companyname');
 
     			<table >
     			    <tr>
-    				<td>Check  by </td>
-
+    				<th>Check  by </th>
     			    </tr>
     			    <tr class="voucher_bottom_left">
     				<td>Name: .................................................... </td>
-
     			    </tr>
     			    <tr class="voucher_bottom_left">
     				<td>Date: ...................................................... </td>
-
     			    </tr>
 
     			</table>
@@ -262,12 +247,10 @@ $companyname = $this->session->userdata('companyname');
 
     			<table class="pull-right" >
     			    <tr>
-    				<td>Approve by   </td>
-
+    				<th>Approve by   </th>
     			    </tr>
     			    <tr class="voucher_bottom_left">
     				<td>Name : <span style="border-bottom: 0.14em dotted #000; min-width: 175px; display: inline-block;"><?php echo $donation_info['mpo_name']; ?></span></td>
-
     			    </tr>
     			    <tr class="voucher_bottom_left">
     				<td>Date : <span style="border-bottom: 0.14em dotted #000; min-width: 180px; display: inline-block;"><?php echo date("d-m-Y"); ?></span> </td>

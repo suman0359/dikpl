@@ -183,58 +183,27 @@ class Donation extends MY_Controller {
 	if ($this->form_validation->run() == FALSE) {
 
 	    $data['donation_info'] = $this->RM->getRequisitionDonations($id);
-
 	    $this->load->view('donation_requisition/donation_transfer_form', $data, FALSE);
 	} else {
-	    $student_quantity = $this->input->post('student_quantity');
-	    $possible_book = $this->input->post('possible_book');
-	    $money_amount = $this->input->post('money_amount');
+	    $datas['transfer_student_quantity'] = $this->input->post('transfer_student_quantity');
+	    $datas['transfer_possible_book'] = $this->input->post('transfer_possible_book');
+	    $datas['transfer_money_amount'] = $this->input->post('transfer_money_amount');
 //	    $requisition_details_id = $this->input->post('requisition_details_id');
 //	    $book_id = $this->input->post('book_id');
 
 	    /**
-	     * For Update Requisition Table 
+	     * For Update Donation Table 
 	     */
-	    $datas['approved_by'] = $this->_uid;
+	    
+	    $datas['approved_by'] = $this->uid;
 	    $datas['approved_date'] = date('d-m-Y');
 	    $datas['requisition_status'] = 0;
-	    $datas['total_transfer_book_quantity'] = array_sum($quantity);
-
-//	    $this->CM->update('tbl_requisition', $datas, $id);
-	    /* ----------------------------------------------------------- */
-
-	    /**
-	     * For Update Requisition Details Table 
-	     */
-//	    $this->load->model('custom_model');
-//	    $mpo_id = $requisition_info->requisition_by;
-//
-//	    for ($i = 0; $i < count($requisition_details_id); $i++) {
-//		$this->CM->update('tbl_requisition_details', array('transfer_quantity' => $quantity[$i]), $requisition_details_id[$i]);
-//
-//		/**
-//		 * For Update or Insert Book Stock for Distribute Table 
-//		 */
-//		$this->custom_model->book_stock_for_distribute($mpo_id, $book_id[$i], $quantity[$i]);
-//	    }
-
-	    //INSERT INTO tbl_book_stock_for_distribute (mpo_id, book_id, quantity) VALUES (25, 13, 6) ON DUPLICATE KEY UPDATE  quantity=3
-
-
-	    /* ---------------------------------------------------------- */
+//	    echo '<pre>';
+//	    print_r($datas);
+//	    exit();
+	    $this->CM->update('tbl_donation', $datas, $id);
 
 	    redirect($_SERVER['HTTP_REFERER']);
-
-	    /**
-	     * For Update or Insert Book Stock for Distribute Table 
-	     */
-	    // $mpo_id = $requisition_info['requisition_by'];
-
-
-
-
-
-	    /* ---------------------------------------------------------- */
 	}
 	
     }

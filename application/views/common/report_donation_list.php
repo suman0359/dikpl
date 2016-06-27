@@ -28,10 +28,10 @@
             <td align="center"><?php echo $donation_info['teacher_name']; ?></td>
             <td align="center"><?php echo $donation_info['department_name']; ?></td>
             <td align="center"><?php echo $donation_info['class_name']; ?></td>
-            <td align="center"><?php echo $donation_info['student_quantity']; ?></td>
-            <td align="center"><?php echo $donation_info['possible_book']; ?></td>
+	    <td align="center"><?php if($donation_info['requisition_status'] == 1) echo $donation_info['student_quantity'];  else echo $donation_info['transfer_student_quantity']; ?></td>
+            <td align="center"><?php if($donation_info['requisition_status'] == 1) echo $donation_info['possible_book'];  else echo $donation_info['transfer_possible_book']; ?></td>
             <td align="center"><?php echo $donation_info['book_name']; ?></td>
-            <td align="center"><?php echo $donation_info['money_amount']; ?></td>
+            <td align="center"><?php if($donation_info['requisition_status'] == 1) echo $donation_info['money_amount'];  else echo $donation_info['transfer_money_amount']; ?></td>
 
         </tr>
 
